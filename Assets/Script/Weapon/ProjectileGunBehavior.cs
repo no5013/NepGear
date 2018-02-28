@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PistolBehaviorScript : FrameWeapon
+public class ProjectileGunBehavior : FrameWeapon
 {
 
     //public float damage;
@@ -13,7 +13,7 @@ public class PistolBehaviorScript : FrameWeapon
     public int magazine;
     public float reloadTime;
     public GameObject bullet;
-    public GameObject muzzle;
+    public Transform muzzle;
 
     private float nextFire;
     private int bulletLeft;
@@ -23,7 +23,7 @@ public class PistolBehaviorScript : FrameWeapon
     [SerializeField]
     private Text m_BulletText;
 
-    //private FrameWeaponController fwc;
+    private FrameWeaponController fwc;
 
     // Use this for initialization
     void Start()
@@ -32,7 +32,7 @@ public class PistolBehaviorScript : FrameWeapon
         bulletLeft = magazine;
         isReloading = false;
         gunSound = GetComponent<AudioSource>();
-        //fwc = GetComponentInParent<FrameWeaponController>();
+        fwc = GetComponentInParent<FrameWeaponController>();
     }
 
     // Update is called once per frame
@@ -69,9 +69,7 @@ public class PistolBehaviorScript : FrameWeapon
         gunSound.Play();
         //newBullet = Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
 
-        //fwc.CmdFireProjectile(bullet, muzzle.transform.forward, muzzle.transform.position, muzzle.transform.rotation);
-
-        Debug.Log(newBullet);
+        fwc.CmdFireProjectile(muzzle.forward, muzzle.position, muzzle.rotation);
     }
 
     public override bool CanFire()

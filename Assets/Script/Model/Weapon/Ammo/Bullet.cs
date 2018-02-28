@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : NetworkBehaviour {
 
     public float damage;
     public float speed;
@@ -22,29 +23,27 @@ public class Bullet : MonoBehaviour {
         Debug.Log("First normal of the point that collide: " + other.contacts[0].normal);
     }
 
+    [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
-        if (isServer)
+        Debug.Log("Bullet hit");
+        if (other.tag.Equals("Player"))
         {
-            Debug.Log("Bullet hit");
-            if (other.tag.Equals("Player"))
-            {
-                other.SendMessage("TakeDamage", damage);
+            other.SendMessage("TakeDamage", damage);
 
-            }
-            if (other.tag.Equals("Enemy"))
-            {
-                Debug.Log("Hit Enemy");
-                other.SendMessage("TakeDamage", damage);
-            }
-            Destructible target = other.transform.GetComponent<Destructible>();
+        }
+        if (other.tag.Equals("Enemy"))
+        {
+            Debug.Log("Hit Enemy");
+            other.SendMessage("TakeDamage", damage);
+        }
+        Destructible target = other.transform.GetComponent<Destructible>();
 
-            if (target != null)
-            {
-                target.TakeDamage(10f);
-                Rigidbody r = other.GetComponent<Rigidbody>();
-                r.AddForce(transform.forward * 1000f);
-            }
+        if (target != null)
+        {
+            target.TakeDamage(10f);
+            Rigidbody r = other.GetComponent<Rigidbody>();
+            r.AddForce(transform.forward * 1000f);
         }
         Destroy(this.gameObject);
     }
