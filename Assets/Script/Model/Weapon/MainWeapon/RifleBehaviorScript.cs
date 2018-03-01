@@ -52,12 +52,12 @@ public class RifleBehaviorScript : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletClone = Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
+        /*GameObject bulletClone = Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
         Bullet bulletInstance = bulletClone.GetComponent<Bullet>();
         bulletInstance.damage = damage;
         bulletInstance.speed = speed;
         bulletLeft--;
-        gunSound.Play();
+        gunSound.Play();*/
     }
 
     IEnumerator Reload()
