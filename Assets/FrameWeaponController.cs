@@ -41,8 +41,12 @@ public class FrameWeaponController : NetworkBehaviour {
             if (nextFire < Time.time)
             {
                 //Debug.Log("We're going to fucking fire the motherfucking shot.!");
-                CmdLeftHandShoot(muzzle.transform.position, muzzle.transform.rotation);
-                nextFire = Time.time + 1f / 3;
+                /*CmdLeftHandShoot(muzzle.transform.position, muzzle.transform.rotation);
+                nextFire = Time.time + 1f / 3;*/
+
+                GameObject testBullet;
+                leftHand.Shoot(out testBullet);
+           
             }
         }
         if (ih.fire2 > 0)
@@ -65,6 +69,14 @@ public class FrameWeaponController : NetworkBehaviour {
             NetworkServer.Spawn(newBullet);
             testBullet.GetComponent<MeshRenderer>().enabled = false;
         }
+    }
+
+    [Command]
+    public void CmdFireProjectile(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        ProjectileGunBehavior pg = leftHand as ProjectileGunBehavior;
+        GameObject projectileInstance = Instantiate(pg.bullet, position, rotation);
+        NetworkServer.Spawn(projectileInstance);
     }
 
     /*

@@ -138,7 +138,7 @@ PlayerSettings:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
-  targetPixelDensity: 0
+  targetPixelDensity: 30
   resolutionScalingMode: 0
   applicationIdentifier:
     Android: com.Company.ProductName

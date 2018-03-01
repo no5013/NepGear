@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PistolBehaviorScript : FrameWeapon {
-    
+public class PistolBehaviorScript : FrameWeapon
+{
+
     //public float damage;
     public float range;
     //public float speed;
@@ -22,16 +23,21 @@ public class PistolBehaviorScript : FrameWeapon {
     [SerializeField]
     private Text m_BulletText;
 
+    //private FrameWeaponController fwc;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         nextFire = 0f;
         bulletLeft = magazine;
         isReloading = false;
         gunSound = GetComponent<AudioSource>();
+        //fwc = GetComponentInParent<FrameWeaponController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetButtonUp("Reload") || bulletLeft <= 0)
         {
             StartCoroutine(Reload());
@@ -43,7 +49,7 @@ public class PistolBehaviorScript : FrameWeapon {
             ui.SetBullet(bulletLeft, magazine);
         }*/
 
-        if(m_BulletText != null)
+        if (m_BulletText != null)
         {
             m_BulletText.text = bulletLeft + "/" + magazine;
         }
@@ -61,7 +67,10 @@ public class PistolBehaviorScript : FrameWeapon {
 
         bulletLeft--;
         gunSound.Play();
-        newBullet = Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
+        //newBullet = Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
+
+        //fwc.CmdFireProjectile(bullet, muzzle.transform.forward, muzzle.transform.position, muzzle.transform.rotation);
+
         Debug.Log(newBullet);
     }
 

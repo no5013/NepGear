@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class FrameWeapon : NetworkBehaviour {
+public class FrameWeapon : MonoBehaviour {
 
     // Use this for initialization
     
@@ -12,12 +12,6 @@ public class FrameWeapon : NetworkBehaviour {
     {
         bullet = null;
         Debug.Log("Shoot");
-    }
-
-    [Command]
-    public virtual void CmdShoot()
-    {
-        Debug.Log("CmdShoot");
     }
 
     public virtual bool CanFire()
