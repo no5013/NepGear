@@ -76,6 +76,9 @@ public class FrameWeaponController : NetworkBehaviour {
     {
         ProjectileGunBehavior pg = leftHand as ProjectileGunBehavior;
         GameObject projectileInstance = Instantiate(pg.bullet, position, rotation);
+
+        Vector3 velocity = pg.bulletSpeed * forward;
+        projectileInstance.GetComponent<Rigidbody>().velocity = velocity;
         NetworkServer.Spawn(projectileInstance);
     }
 

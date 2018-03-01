@@ -12,6 +12,7 @@ public class ProjectileGunBehavior : FrameWeapon
     public float fireRate;
     public int magazine;
     public float reloadTime;
+    public float bulletSpeed;
     public GameObject bullet;
     public Transform muzzle;
 

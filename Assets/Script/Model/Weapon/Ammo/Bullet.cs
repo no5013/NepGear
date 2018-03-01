@@ -6,16 +6,10 @@ using UnityEngine.Networking;
 public class Bullet : NetworkBehaviour {
 
     public float damage;
-    public float speed;
     public bool isServer;
 	// Use this for initialization
 	void Start () {
         Destroy(this.gameObject, 5f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
 	}
 
     void OnCollisionEnter(Collision other) {
