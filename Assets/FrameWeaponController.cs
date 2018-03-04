@@ -8,99 +8,151 @@ public class FrameWeaponController : NetworkBehaviour {
     private InputHandler ih;
 
     //Gun component
-    [SerializeField]
-    private FrameWeapon leftHand;
-    [SerializeField]
-    private FrameWeapon rightHand;
+    //[SerializeField] private FrameWeapon leftHand;
+    [SerializeField] private GameObject leftHand;
+    [SerializeField] private Ability leftHandAbility;
+    //[SerializeField] private FrameWeapon rightHand;
+    [SerializeField] private GameObject rightHand;
+    [SerializeField] private Ability rightHandAbility;
+    //public GameObject leftHand;
+    //public Ability leftHandAbility;
+    //public GameObject rightHand;
+    //public Ability rightHandAbility;
 
-    public GameObject bullet;
-    public GameObject muzzle;
-    public float nextFire;
 
-    //private Transform transform;
+    private float leftCooldown = 0;
+    private float leftNextReadyFire = 0;
+    private float leftCoolDownTimeLeft = 0;
+
+    private float rightCooldown = 0;
+    private float rightNextReadyFire = 0;
+    private float rightCoolDownTimeLeft = 0;
+
 
     // Use this for initialization
-    void Start () {
-        ih = GetComponent<InputHandler>();
-        leftHand = GetComponentsInChildren<FrameWeapon>()[0];
-        rightHand = GetComponentsInChildren<FrameWeapon>()[1];
-
-        //transform = GetComponent<Transform>();
+    void Start ()
+    {
+        //Initialize(leftHandAbility, leftHand, rightHandAbility, rightHand);
+        //Initialize(leftHandAbility, leftHand, rightHandAbility, rightHand);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if(!isLocalPlayer)
+
+    public void Initialize(Ability selectedLeftHandAbility, GameObject leftHandWeapon, Ability selectedRightHandAbility, GameObject rightHandWeapon)
+    {
+        if(selectedLeftHandAbility.GetHashCode() == selectedLeftHandAbility.GetHashCode())
         {
-            return;
+            Debug.Log("same ref");
         }
+        ih = GetComponent<InputHandler>();
+        Debug.Log(ih.ToString());
+        leftHandAbility = selectedLeftHandAbility;
+        leftHand = leftHandWeapon;
+        rightHandAbility = selectedRightHandAbility;
+        rightHand = rightHandWeapon;
+
+        leftCooldown = leftHandAbility.aBaseCoolDown;
+        rightCooldown = rightHandAbility.aBaseCoolDown;
+
+        leftHandAbility.Initialize(leftHand);
+        rightHandAbility.Initialize(rightHand);
+    }
+
+    //public void Initialize()
+    //{
+    //    ih = GetComponent<InputHandler>();
+
+    //    leftCooldown = leftHandAbility.aBaseCoolDown;
+    //    rightCooldown = rightHandAbility.aBaseCoolDown;
+
+    //    leftHandAbility.Initialize(leftHand);
+    //    rightHandAbility.Initialize(rightHand);
+    //}
+
+    // Update is called once per frame
+    void Update () {
+        //if(!isLocalPlayer)
+        //{
+        //    return;
+        //}
         if (ih.fire1 > 0)
         {
             //Debug.Log("Called From Server : " + isServer.ToString() + " LeftHandNormal");
             //Debug.Log("Left Hand Fire by server? " + isServer + "Can fire ? " + leftHand.CanFire());
-            if (nextFire < Time.time)
+            if (Time.time > leftNextReadyFire)
             {
                 //Debug.Log("We're going to fucking fire the motherfucking shot.!");
                 /*CmdLeftHandShoot(muzzle.transform.position, muzzle.transform.rotation);
                 nextFire = Time.time + 1f / 3;*/
-
-                GameObject testBullet;
-                leftHand.Shoot(out testBullet);
+                LeftButtonTriggered();
+                //GameObject testBullet;
+                //leftHand.Shoot(out testBullet);
            
             }
         }
         if (ih.fire2 > 0)
         {
-            /*rightHand.Shoot(isServer);
-            CmdRightHandShoot();*/
-        }
-    }
-       
-    [Command]
-    void CmdLeftHandShoot(Vector3 a, Quaternion b)
-    {
-        GameObject testBullet;
-        leftHand.Shoot(out testBullet);
+            if (Time.time > rightNextReadyFire)
+            {
+                //Debug.Log("We're going to fucking fire the motherfucking shot.!");
+                /*CmdLeftHandShoot(muzzle.transform.position, muzzle.transform.rotation);
+                nextFire = Time.time + 1f / 3;*/
+                RightButtonTriggered();
+                //GameObject testBullet;
+                //leftHand.Shoot(out testBullet);
 
-        if (testBullet != null)
-        {
-            GameObject newBullet = Instantiate(testBullet, a, b);
-            newBullet.GetComponent<Bullet>().isServer = true;
-            NetworkServer.Spawn(newBullet);
-            testBullet.GetComponent<MeshRenderer>().enabled = false;
+            }
         }
     }
 
-    [Command]
-    public void CmdFireProjectile(Vector3 forward, Vector3 position, Quaternion rotation)
+    private void LeftButtonTriggered()
     {
-        ProjectileGunBehavior pg = leftHand as ProjectileGunBehavior;
-        GameObject projectileInstance = Instantiate(pg.bullet, position, rotation);
-        NetworkServer.Spawn(projectileInstance);
+        leftNextReadyFire = leftCooldown + Time.time;
+        leftCoolDownTimeLeft = leftCooldown;
+        //darkMask.enabled = true;
+        //coolDownTextDisplay.enabled = true;
+
+        //abilitySource.clip = ability.aSound;
+        //abilitySource.Play();
+        leftHandAbility.TriggerAbility();
+
     }
 
-    /*
-    [ClientRpc]
-    void RpcLeftHandSpawn()
+    private void RightButtonTriggered()
     {
-        Debug.Log("Called From Server : " + isServer.ToString() + " LeftHandRPC");
-        leftHand.Shoot(isServer);
+        rightNextReadyFire = rightCooldown + Time.time;
+        rightCoolDownTimeLeft = rightCooldown;
+        //darkMask.enabled = true;
+        //coolDownTextDisplay.enabled = true;
+
+        //abilitySource.clip = ability.aSound;
+        //abilitySource.Play();
+        rightHandAbility.TriggerAbility();
+
     }
 
-    [Command]
-    void CmdRightHandShoot()
-    {
-        rightHand.Shoot(isServer);
-        RpcRightHandSpawn();
-    }
+    //[Command]
+    //void CmdLeftHandShoot(Vector3 a, Quaternion b)
+    //{
+    //    GameObject testBullet;
+    //    leftHand.Shoot(out testBullet);
 
-    [ClientRpc]
-    void RpcRightHandSpawn()
-    {
-        GameObject bullet = null;
-        rightHand.Shoot(isServer);
-    }
-    */
+    //    if (testBullet != null)
+    //    {
+    //        GameObject newBullet = Instantiate(testBullet, a, b);
+    //        newBullet.GetComponent<Bullet>().isServer = true;
+    //        NetworkServer.Spawn(newBullet);
+    //        testBullet.GetComponent<MeshRenderer>().enabled = false;
+    //    }
+    //}
+
+    //[Command]
+    //public void CmdFireProjectile(Vector3 forward, Vector3 position, Quaternion rotation)
+    //{
+    //    ProjectileGunBehavior pg = leftHand as ProjectileGunBehavior;
+    //    GameObject projectileInstance = Instantiate(pg.bullet, position, rotation);
+    //    NetworkServer.Spawn(projectileInstance);
+    //}
+
+
 
 
 
