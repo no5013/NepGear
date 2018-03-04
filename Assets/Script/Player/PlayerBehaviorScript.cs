@@ -6,6 +6,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 using System;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class ToggleEvent : UnityEvent<bool> { }
 
 public class PlayerBehaviorScript : NetworkBehaviour
 {
@@ -43,6 +47,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public RectTransform healthBar;
 
+    [SerializeField] ToggleEvent onToggleShared;
+    [SerializeField] ToggleEvent onToggleLocal;
+    [SerializeField] ToggleEvent onToggleRemote;
+
+    GameObject mainCamera;
+
     UIManager uiManager;
     InputHandler ih;
 
@@ -59,12 +69,42 @@ public class PlayerBehaviorScript : NetworkBehaviour
         isUltimateActived = false;
         uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
+
+        mainCamera = Camera.main.gameObject;
+
+        EnablePlayer();
     }
 
     public override void OnStartLocalPlayer()
     {
-        GetComponentInChildren<Camera>().enabled = true;
-        GetComponentInChildren<AudioListener>().enabled = true;
+        /*GetComponentInChildren<Camera>().enabled = true;
+        GetComponentInChildren<AudioListener>().enabled = true;*/
+    }
+
+    void DisablePlayer()
+    {
+        if (isLocalPlayer)
+            mainCamera.SetActive(true);
+
+        onToggleShared.Invoke(false);
+
+        if (isLocalPlayer)
+            onToggleLocal.Invoke(false);
+        else
+            onToggleRemote.Invoke(false);
+    }
+
+    void EnablePlayer()
+    {
+        if (isLocalPlayer)
+            mainCamera.SetActive(false);
+
+        onToggleShared.Invoke(true);
+
+        if (isLocalPlayer)
+            onToggleLocal.Invoke(true);
+        else
+            onToggleRemote.Invoke(true);
     }
 
     private void SetFrame(bool isStart = false)
@@ -271,24 +311,20 @@ public class PlayerBehaviorScript : NetworkBehaviour
         return stamina <= 0;
     }
 
+    [Server]
     public void TakeDamage(float damage)
     {
-        if (!isServer)
-        {
-            return;
-        }
-        //Debug.Log("Server Taking Damage");
         hitPoint -= damage;
         if (hitPoint <=0)
         {
             hitPoint = 0;
-            Dead();
+            Die();
         }
     }
 
-    private void Dead()
+    private void Die()
     {
-        Destroy(this.gameObject);
+        DisablePlayer();
     }
 
     void OnChangeHealth (float currentHealth)
