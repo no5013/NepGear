@@ -352,4 +352,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
         //Debug.Log("Change Health" + hitPoint.ToString());
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
     }
+
+    public bool isDead()
+    {
+        return (hitPoint <= 0);
+    }
 }

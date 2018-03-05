@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 
 public class GameManager : NetworkBehaviour {
 
@@ -15,7 +16,7 @@ public class GameManager : NetworkBehaviour {
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
 
-    private PlayerBehaviorScript m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
+    private PlayerBehaviorScript gameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
     [HideInInspector]
     [SyncVar]
@@ -59,13 +60,13 @@ public class GameManager : NetworkBehaviour {
 
 
         // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
-        /*yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(RoundPlaying());
 
         // Once execution has returned here, run the 'RoundEnding' coroutine.
         yield return StartCoroutine(RoundEnding());
 
         // This code is not run until 'RoundEnding' has finished.  At which point, check if there is a winner of the game.
-        if (m_GameWinner != null)
+        /*if (m_GameWinner != null)
         {// If there is a game winner, wait for certain amount or all player confirmed to start a game again
             isFinished = true;
             float leftWaitTime = 15.0f;
@@ -102,6 +103,8 @@ public class GameManager : NetworkBehaviour {
             // Note that this coroutine doesn't yield.  This means that the current version of the GameLoop will end.
             StartCoroutine(GameLoop());
         }*/
+
+        LobbyManager.s_Singleton.ServerReturnToLobby();
     }
 
     private IEnumerator RoundStarting()
@@ -116,7 +119,81 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     void RpcRoundStarting()
     {
+        DisablePlayers();
+        Debug.Log("ROUND STARTING");
+    }
+
+    private IEnumerator RoundPlaying()
+    {
+        //notify clients that the round is now started, they should allow player to move.
+        RpcRoundPlaying();
+
+        // While there is not one tank left...
+        while (!OnePlayerLeft())
+        {
+            // ... return on the next frame.
+            yield return null;
+        }
+    }
+
+    [ClientRpc]
+    void RpcRoundPlaying()
+    {
+        Debug.Log("START");
+        // As soon as the round begins playing let the players control the tanks.
         EnablePlayers();
+    }
+
+    private IEnumerator RoundEnding()
+    {
+        // See if there is a winner now the round is over.
+        gameWinner = GetRoundWinner();
+
+        //notify client they should disable tank control
+        RpcRoundEnding();
+
+        // Wait for the specified length of time until yielding control back to the game loop.
+        yield return m_EndWait;
+    }
+
+    [ClientRpc]
+    private void RpcRoundEnding()
+    {
+        DisablePlayers();
+        Debug.Log("ROUND ENDING");
+    }
+
+    private bool OnePlayerLeft()
+    {
+        // Start the count of tanks left at zero.
+        int numPlayersLeft = 0;
+
+        // Go through all the tanks...
+        for (int i = 0; i < players.Count; i++)
+        {
+            // ... and if they are active, increment the counter.
+            if (!players[i].isDead())
+                numPlayersLeft++;
+        }
+
+        // If there are one or fewer tanks remaining return true, otherwise return false.
+        return numPlayersLeft <= 1;
+    }
+
+    // This function is to find out if there is a winner of the round.
+    // This function is called with the assumption that 1 or fewer tanks are currently active.
+    private PlayerBehaviorScript GetRoundWinner()
+    {
+        // Go through all the players...
+        for (int i = 0; i < players.Count; i++)
+        {
+            // ... and if one of them is active, it is the winner so return it.
+            if (players[i].isDead())
+                return players[i];
+        }
+
+        // If none of the tanks are active it is a draw so return null.
+        return null;
     }
 
     private void EnablePlayers()
