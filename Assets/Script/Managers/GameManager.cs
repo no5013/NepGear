@@ -116,11 +116,7 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     void RpcRoundStarting()
     {
-        //EnablePlayers();
-        DisablePlayers();
-        Debug.Log("TEST");
-        Debug.Log(players.Count);
-        Debug.Log("ROUND STARTO");
+        EnablePlayers();
     }
 
     private void EnablePlayers()
@@ -136,7 +132,6 @@ public class GameManager : NetworkBehaviour {
         for (int i = 0; i < players.Count; i++)
         {
             players[i].DisablePlayer();
-            Debug.Log("SPECIFA");
         }
     }
 

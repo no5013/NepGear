@@ -72,8 +72,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
 
         mainCamera = Camera.main.gameObject;
-
-        EnablePlayer();
     }
 
     public override void OnStartLocalPlayer()
@@ -339,6 +337,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     }
 
     private void Die()
+    {
+        RpcOnDie();
+    }
+
+    [ClientRpc]
+    void RpcOnDie()
     {
         DisablePlayer();
     }
