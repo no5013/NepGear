@@ -13,6 +13,11 @@ public class ToggleEvent : UnityEvent<bool> { }
 
 public class PlayerBehaviorScript : NetworkBehaviour
 {
+
+    [SerializeField] ToggleEvent onToggleShared;
+    [SerializeField] ToggleEvent onToggleLocal;
+    [SerializeField] ToggleEvent onToggleRemote;
+
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
     private Rigidbody rigidbody;
@@ -47,10 +52,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public RectTransform healthBar;
 
-    [SerializeField] ToggleEvent onToggleShared;
-    [SerializeField] ToggleEvent onToggleLocal;
-    [SerializeField] ToggleEvent onToggleRemote;
-
     GameObject mainCamera;
 
     UIManager uiManager;
@@ -79,9 +80,24 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         /*GetComponentInChildren<Camera>().enabled = true;
         GetComponentInChildren<AudioListener>().enabled = true;*/
+        EnablePlayer();
     }
 
-    void DisablePlayer()
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        if (!isServer) //if not hosting, we had the tank to the gamemanger for easy access!
+            GameManager.AddPlayer(gameObject);
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        GameManager.AddPlayer(gameObject);
+    }
+
+    public void DisablePlayer()
     {
         if (isLocalPlayer)
             mainCamera.SetActive(true);
@@ -94,7 +110,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             onToggleRemote.Invoke(false);
     }
 
-    void EnablePlayer()
+    public void EnablePlayer()
     {
         if (isLocalPlayer)
             mainCamera.SetActive(false);
@@ -154,7 +170,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
                 ultimateCharge = 0f;
                 isUltimateActived = false;
                 SetFrame();
-            } 
+            }
         }
         uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
         uiManager.SetUltimate(ultimateCharge, ultimateCharge / frame.GetUltimateMaxCharge());
@@ -195,7 +211,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         float staminaUsed = 0;
 
         if (CrossPlatformInputManager.GetButtonUp("Dash") && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
-        { 
+        {
             m_isDashing = true;
             m_CharacterDashStartPos = characterController.transform.position;
             Vector2 magnitude = new Vector2(horizontal, vertical);
@@ -211,7 +227,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
 
         if (CrossPlatformInputManager.GetButton("Dash") && timePressedKey >= 0.30f && !IsExhausted())
-        { 
+        {
             isRunning = true;
             staminaUsed += 1f;
         }
@@ -220,7 +236,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             isRunning = false;
         }
         if (CrossPlatformInputManager.GetButton("Jump") && !IsExhausted())
-        { 
+        {
             m_Float = true;
             staminaUsed += 1f;
         }
