@@ -26,6 +26,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private float walkSpeed;
     private float runSpeed;
 
+    [SyncVar]
+    public float lifeStock;
+
+    [SerializeField]
+    private float respawnTime = 2f;
+
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
     private float maxHitPoint;
@@ -70,6 +76,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
         isUltimateActived = false;
         uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
+
+        lifeStock = GameManager.instance.playerLifeStock;
 
         mainCamera = Camera.main.gameObject;
     }
@@ -336,8 +344,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
     }
 
+    [Server]
     private void Die()
     {
+        lifeStock--;
         RpcOnDie();
     }
 
@@ -345,7 +355,30 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void RpcOnDie()
     {
         DisablePlayer();
+
+        if (!isOutOfStock())
+        {
+            Invoke("Respawn", respawnTime);
+        }
     }
+
+    void Respawn()
+    {
+        if (isLocalPlayer)
+        {
+            Transform spawn = NetworkManager.singleton.GetStartPosition();
+            transform.position = spawn.position;
+            transform.rotation = spawn.rotation;
+        }
+        ResetPlayerStatus();
+        EnablePlayer();
+    }
+
+    void ResetPlayerStatus()
+    {
+        hitPoint = maxHitPoint;
+        stamina = maxStamina;
+}
 
     void OnChangeHealth (float currentHealth)
     {
@@ -356,5 +389,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public bool isDead()
     {
         return (hitPoint <= 0);
+    }
+
+    public bool isOutOfStock()
+    {
+        return (lifeStock <= 0);
     }
 }

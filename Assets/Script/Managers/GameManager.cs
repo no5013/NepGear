@@ -13,6 +13,8 @@ public class GameManager : NetworkBehaviour {
     public float startDelay = 3f;           // The delay between the start of RoundStarting and RoundPlaying phases.
     public float endDelay = 3f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
+    public float playerLifeStock = 3f;
+
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
 
@@ -172,7 +174,7 @@ public class GameManager : NetworkBehaviour {
         for (int i = 0; i < players.Count; i++)
         {
             // ... and if they are active, increment the counter.
-            if (!players[i].isDead())
+            if (!players[i].isOutOfStock())
                 numPlayersLeft++;
         }
 
@@ -188,7 +190,7 @@ public class GameManager : NetworkBehaviour {
         for (int i = 0; i < players.Count; i++)
         {
             // ... and if one of them is active, it is the winner so return it.
-            if (players[i].isDead())
+            if (!players[i].isOutOfStock())
                 return players[i];
         }
 
