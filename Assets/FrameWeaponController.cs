@@ -10,10 +10,10 @@ public class FrameWeaponController : NetworkBehaviour {
     //Gun component
     //[SerializeField] private FrameWeapon leftHand;
     [SerializeField] private GameObject leftHand;
-    [SerializeField] private Ability leftHandAbility;
+    [SerializeField] private WeaponAbility leftHandAbility;
     //[SerializeField] private FrameWeapon rightHand;
     [SerializeField] private GameObject rightHand;
-    [SerializeField] private Ability rightHandAbility;
+    [SerializeField] private WeaponAbility rightHandAbility;
     //public GameObject leftHand;
     //public Ability leftHandAbility;
     //public GameObject rightHand;
@@ -32,47 +32,32 @@ public class FrameWeaponController : NetworkBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //Initialize(leftHandAbility, leftHand, rightHandAbility, rightHand);
-        //Initialize(leftHandAbility, leftHand, rightHandAbility, rightHand);
+
+        // Remove when complete Char select
+        Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
     }
 
-    public void Initialize(Ability selectedLeftHandAbility, GameObject leftHandWeapon, Ability selectedRightHandAbility, GameObject rightHandWeapon)
+    public void Initialize(WeaponAbility selectedLeftHandAbility, GameObject leftHandWeapon, WeaponAbility selectedRightHandAbility, GameObject rightHandWeapon)
     {
-        if(selectedLeftHandAbility.GetHashCode() == selectedLeftHandAbility.GetHashCode())
-        {
-            Debug.Log("same ref");
-        }
         ih = GetComponent<InputHandler>();
-        Debug.Log(ih.ToString());
         leftHandAbility = selectedLeftHandAbility;
         leftHand = leftHandWeapon;
         rightHandAbility = selectedRightHandAbility;
         rightHand = rightHandWeapon;
 
-        leftCooldown = leftHandAbility.aBaseCoolDown;
-        rightCooldown = rightHandAbility.aBaseCoolDown;
+        leftCooldown = leftHandAbility.aFireDelay;
+        rightCooldown = rightHandAbility.aFireDelay;
 
         leftHandAbility.Initialize(leftHand);
         rightHandAbility.Initialize(rightHand);
     }
 
-    //public void Initialize()
-    //{
-    //    ih = GetComponent<InputHandler>();
-
-    //    leftCooldown = leftHandAbility.aBaseCoolDown;
-    //    rightCooldown = rightHandAbility.aBaseCoolDown;
-
-    //    leftHandAbility.Initialize(leftHand);
-    //    rightHandAbility.Initialize(rightHand);
-    //}
-
     // Update is called once per frame
     void Update () {
-        //if(!isLocalPlayer)
-        //{
-        //    return;
-        //}
+        if(!isLocalPlayer)
+        {
+            return;
+        }
         if (ih.fire1 > 0)
         {
             //Debug.Log("Called From Server : " + isServer.ToString() + " LeftHandNormal");
@@ -113,7 +98,6 @@ public class FrameWeaponController : NetworkBehaviour {
         //abilitySource.clip = ability.aSound;
         //abilitySource.Play();
         leftHandAbility.TriggerAbility();
-
     }
 
     private void RightButtonTriggered()
@@ -126,35 +110,18 @@ public class FrameWeaponController : NetworkBehaviour {
         //abilitySource.clip = ability.aSound;
         //abilitySource.Play();
         rightHandAbility.TriggerAbility();
-
     }
 
-    //[Command]
-    //void CmdLeftHandShoot(Vector3 a, Quaternion b)
-    //{
-    //    GameObject testBullet;
-    //    leftHand.Shoot(out testBullet);
+    [Command]
+    public void CmdFireProjectile(int spawnableID, float projectileForce, Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        //ProjectileAbility pa = leftHandAbility as ProjectileAbility;
+        GameObject projectile = NetworkManager.singleton.spawnPrefabs[spawnableID];
+        GameObject projectileInstance = Instantiate(projectile, position, rotation);
 
-    //    if (testBullet != null)
-    //    {
-    //        GameObject newBullet = Instantiate(testBullet, a, b);
-    //        newBullet.GetComponent<Bullet>().isServer = true;
-    //        NetworkServer.Spawn(newBullet);
-    //        testBullet.GetComponent<MeshRenderer>().enabled = false;
-    //    }
-    //}
-
-    //[Command]
-    //public void CmdFireProjectile(Vector3 forward, Vector3 position, Quaternion rotation)
-    //{
-    //    ProjectileGunBehavior pg = leftHand as ProjectileGunBehavior;
-    //    GameObject projectileInstance = Instantiate(pg.bullet, position, rotation);
-    //    NetworkServer.Spawn(projectileInstance);
-    //}
-
-
-
-
-
-
+        Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
+        //projectileRigidBody.AddForce(forward * projectileForce);
+        projectileRigidBody.velocity = forward * 5f;
+        NetworkServer.Spawn(projectileRigidBody.gameObject);
+    }
 }

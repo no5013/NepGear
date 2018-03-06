@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Bullet : NetworkBehaviour {
 
     public float damage;
-    public float speed;
+
 	// Use this for initialization
 	void Start () {
         Destroy(this.gameObject, 5f);

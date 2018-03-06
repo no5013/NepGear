@@ -46,23 +46,21 @@ public class PlayerBehaviorScript : NetworkBehaviour
     UIManager uiManager;
     InputHandler ih;
 
+    [SerializeField] private Character charFrame;
+
     protected void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        firstPersonController = GetComponent<FirstPersonController>();
-        ih = GetComponent<InputHandler>();
-        GetComponentInChildren<Camera>().enabled = true;
-        //SetFrame(true);
-        currentLerpTime = 0f;
-        timePressedKey = 0f;
-        m_Float = false;
-        isUltimateActived = false;
-        uiManager = FindObjectOfType<UIManager>();
-        healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
+
+        //Remove When Character Select is done
+        Initialize(charFrame);
     }
 
     public void Initialize(Character frame)
     {
+        characterController = GetComponent<CharacterController>();
+        firstPersonController = GetComponent<FirstPersonController>();
+        ih = GetComponent<InputHandler>();
+
         walkSpeed = frame.startingSpeed;
         runSpeed = frame.startingSpeed * 1.5f;
         maxHitPoint = frame.maxHitPoint;
@@ -74,6 +72,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
         hitPoint = maxHitPoint;
         stamina = maxStamina;
         ultimate = frame.ultimate;
+
+        currentLerpTime = 0f;
+        timePressedKey = 0f;
+        m_Float = false;
+        isUltimateActived = false;
+        uiManager = FindObjectOfType<UIManager>();
+        healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
     }
 
     public override void OnStartLocalPlayer()
@@ -85,10 +90,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     protected void Update()
     {
-        //if (!isLocalPlayer)
-        //{
-        //    return;
-        //}
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         if (CrossPlatformInputManager.GetButton("Dash"))
         {
             timePressedKey += Time.deltaTime;
@@ -119,10 +124,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     }
     private void FixedUpdate()
     {
-        //if (!isLocalPlayer)
-        //{
-        //    return;
-        //}
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         GetInput();
         if (characterController.isGrounded && !IsDashing() && !IsRunning())
         {
@@ -214,9 +219,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
         float perc = currentLerpTime / lerpTime;
         perc = perc * perc * (3f - 2f * perc);
-        Debug.Log(m_CharacterDashStartPos.ToString());
-        Debug.Log(m_CharacterDashEndPos.ToString());
-        Debug.Log(perc);
         characterController.transform.position = Vector3.Lerp(m_CharacterDashStartPos, m_CharacterDashEndPos, perc);
         firstPersonController.SendMessage("UpdateCameraPosition", 1f);
         if (perc > 0.98f)

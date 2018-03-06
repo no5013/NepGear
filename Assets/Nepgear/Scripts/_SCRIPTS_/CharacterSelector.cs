@@ -8,7 +8,7 @@ public class CharacterSelector : MonoBehaviour {
 
     public GameObject player;
     public Character[] characters;
-    public Ability[] weapons;
+    public WeaponAbility[] weapons;
     public GameObject[] weaponsPrefab;
     public Vector3 playerSpawnPosition = new Vector3(1, 1, 1);
 
@@ -58,23 +58,32 @@ public class CharacterSelector : MonoBehaviour {
         {
             return;
         }
+        // Instantiate Gun Object and Player Object
         GameObject leftWeapon = Instantiate(selectedCharacter.leftWeaponPrefab);
         GameObject rightWeapon = Instantiate(selectedCharacter.rightWeaponPrefab);
         GameObject spawnPlayer = Instantiate(player, playerSpawnPosition, Quaternion.identity) as GameObject;
 
+        // Set Child to Camera
         leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
         rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+
+        // VR
+        /*leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<LeftController>().transform;
+        rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<RightController>().transform;*/
+
+        // Set Local Position
         leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
         rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
 
+        // Get Reference
         FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
         PlayerBehaviorScript pbs = spawnPlayer.GetComponent<PlayerBehaviorScript>();
         FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
 
+        // Initialize
         pbs.Initialize(selectedCharacter);
         fwc.Initialize(Instantiate(selectedCharacter.leftWeapon), leftWeapon, Instantiate(selectedCharacter.rightWeapon), rightWeapon);
         
-
         characterSelectPanel.SetActive(false);
     }
 
@@ -96,7 +105,7 @@ public class CharacterSelector : MonoBehaviour {
             }
             else
             {
-                foreach (Ability weapon in weapons)
+                foreach (WeaponAbility weapon in weapons)
                 {
                     Dropdown.OptionData option = new Dropdown.OptionData();
                     option.text = weapon.aName;

@@ -70,10 +70,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            //if (!isLocalPlayer)
-            //{
-            //    return;
-            //}
+            if (!isLocalPlayer)
+            {
+                return;
+            }
             RotateView();
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -103,10 +103,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
-            //if (!isLocalPlayer)
-            //{
-            //    return;
-            //}
+            if (!isLocalPlayer)
+            {
+                return;
+            }
             if (!player.IsDashing())
             {
                 float speed;

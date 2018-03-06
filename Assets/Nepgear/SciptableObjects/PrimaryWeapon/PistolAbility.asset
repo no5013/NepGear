@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Name: PistolAbility
   m_EditorClassIdentifier: 
   aName: Pistol
-  aBaseCoolDown: 1
-  projectileForce: 250
+  aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
+  aMagazine: 12
+  aFireDelay: 0.5
+  projectileForce: 1000
   projectile: {fileID: 54312555963903118, guid: 8e45d4f09446fbd4abeb9a2ab59a4639,
     type: 2}
+  reloadTime: 2

@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/LobbyScene.unity
+    path: Assets/Nepgear/Scenes/LobbyScene.unity
     guid: fab5bf30642877f45a84ad5b889017d0
   - enabled: 1
-    path: Assets/Scene/MultiplayerScene.unity
+    path: Assets/Nepgear/Scenes/MultiplayerScene.unity
     guid: 8566e2c3ac610c2499c051df65f74fc6
