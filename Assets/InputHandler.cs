@@ -14,22 +14,13 @@ public class InputHandler : NetworkBehaviour {
 
     public float dash;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
+        //if (!isLocalPlayer)
+        //{
+        //    return;
+        //}
         HandleInput();
         UpdateStates();
     }
