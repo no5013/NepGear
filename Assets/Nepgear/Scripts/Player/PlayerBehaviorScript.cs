@@ -6,15 +6,30 @@ using UnityStandardAssets.Characters.FirstPerson;
 using System;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class ToggleEvent : UnityEvent<bool> { }
 
 public class PlayerBehaviorScript : NetworkBehaviour
 {
+
+    [SerializeField] ToggleEvent onToggleShared;
+    [SerializeField] ToggleEvent onToggleLocal;
+    [SerializeField] ToggleEvent onToggleRemote;
+
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
     private Rigidbody rigidbody;
 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
+
+    [SyncVar]
+    public float lifeStock;
+
+    [SerializeField]
+    private float respawnTime = 2f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -42,6 +57,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private bool isUltimateActived;
 
     public RectTransform healthBar;
+
+    GameObject mainCamera;
 
     UIManager uiManager;
     InputHandler ih;
@@ -79,12 +96,57 @@ public class PlayerBehaviorScript : NetworkBehaviour
         isUltimateActived = false;
         uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
+
+        lifeStock = GameManager.instance.playerLifeStock;
+
+        mainCamera = Camera.main.gameObject;
     }
 
     public override void OnStartLocalPlayer()
     {
-        GetComponentInChildren<Camera>().enabled = true;
-        GetComponentInChildren<AudioListener>().enabled = true;
+        /*GetComponentInChildren<Camera>().enabled = true;
+        GetComponentInChildren<AudioListener>().enabled = true;*/
+        //EnablePlayer();
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        if (!isServer) //if not hosting, we had the tank to the gamemanger for easy access!
+            GameManager.AddPlayer(gameObject);
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        GameManager.AddPlayer(gameObject);
+    }
+
+    public void DisablePlayer()
+    {
+        if (isLocalPlayer)
+            mainCamera.SetActive(true);
+
+        onToggleShared.Invoke(false);
+
+        if (isLocalPlayer)
+            onToggleLocal.Invoke(false);
+        else
+            onToggleRemote.Invoke(false);
+    }
+
+    public void EnablePlayer()
+    {
+        if (isLocalPlayer)
+            mainCamera.SetActive(false);
+
+        onToggleShared.Invoke(true);
+
+        if (isLocalPlayer)
+            onToggleLocal.Invoke(true);
+        else
+            onToggleRemote.Invoke(true);
     }
 
 
@@ -116,8 +178,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
                 ultimateActiveDuration = 0f;
                 ultimateCharge = 0f;
                 isUltimateActived = false;
-            
-            } 
+
+            }
         }
         uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
         uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
@@ -158,7 +220,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         float staminaUsed = 0;
 
         if (CrossPlatformInputManager.GetButtonUp("Dash") && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
-        { 
+        {
             m_isDashing = true;
             m_CharacterDashStartPos = characterController.transform.position;
             Vector2 magnitude = new Vector2(horizontal, vertical);
@@ -174,7 +236,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
 
         if (CrossPlatformInputManager.GetButton("Dash") && timePressedKey >= 0.30f && !IsExhausted())
-        { 
+        {
             isRunning = true;
             staminaUsed += 1f;
         }
@@ -183,7 +245,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             isRunning = false;
         }
         if (CrossPlatformInputManager.GetButton("Jump") && !IsExhausted())
-        { 
+        {
             m_Float = true;
             staminaUsed += 1f;
         }
@@ -269,29 +331,66 @@ public class PlayerBehaviorScript : NetworkBehaviour
         return stamina <= 0;
     }
 
+    [Server]
     public void TakeDamage(float damage)
     {
-        if (!isServer)
-        {
-            return;
-        }
-        //Debug.Log("Server Taking Damage");
         hitPoint -= damage;
         if (hitPoint <=0)
         {
             hitPoint = 0;
-            Dead();
+            Die();
         }
     }
 
-    private void Dead()
+    [Server]
+    private void Die()
     {
-        Destroy(this.gameObject);
+        lifeStock--;
+        RpcOnDie();
     }
+
+    [ClientRpc]
+    void RpcOnDie()
+    {
+        DisablePlayer();
+
+        if (!isOutOfStock())
+        {
+            Debug.Log("RESPAWN");
+            Invoke("Respawn", respawnTime);
+        }
+    }
+
+    void Respawn()
+    {
+        if (isLocalPlayer)
+        {
+            Transform spawn = NetworkManager.singleton.GetStartPosition();
+            transform.position = spawn.position;
+            transform.rotation = spawn.rotation;
+        }
+        ResetPlayerStatus();
+        EnablePlayer();
+    }
+
+    void ResetPlayerStatus()
+    {
+        hitPoint = maxHitPoint;
+        stamina = maxStamina;
+}
 
     void OnChangeHealth (float currentHealth)
     {
-        //Debug.Log("Change Health" + hitPoint.ToString());
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    }
+
+    public bool isDead()
+    {
+        return (hitPoint <= 0);
+    }
+
+    public bool isOutOfStock()
+    {
+        return (lifeStock <= 0);
     }
 }
