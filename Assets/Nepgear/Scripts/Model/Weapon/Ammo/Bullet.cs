@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class Bullet : NetworkBehaviour {
 
+    public string bulletId;
+
     public float damage;
 
 	// Use this for initialization

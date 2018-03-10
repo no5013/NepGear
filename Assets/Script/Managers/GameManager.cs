@@ -15,6 +15,8 @@ public class GameManager : NetworkBehaviour {
 
     public float playerLifeStock = 3f;
 
+    public ResourcesManager resourceManager;
+
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
 
@@ -24,15 +26,18 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
-    [ServerCallback]
     private void Start()
     {
-        // Create the delays so they only have to be made once.
-        m_StartWait = new WaitForSeconds(startDelay);
-        m_EndWait = new WaitForSeconds(endDelay);
+        resourceManager.Init();
+        if (isServer)
+        {
+            // Create the delays so they only have to be made once.
+            m_StartWait = new WaitForSeconds(startDelay);
+            m_EndWait = new WaitForSeconds(endDelay);
 
-        // Once the tanks have been created and the camera is using them as targets, start the game.
-        StartCoroutine(GameLoop());
+            // Once the tanks have been created and the camera is using them as targets, start the game.
+            StartCoroutine(GameLoop());
+        }
     }
 
     void Awake()
