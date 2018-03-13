@@ -19,6 +19,12 @@ public class FrameWeaponController : NetworkBehaviour {
     //public GameObject rightHand;
     //public Ability rightHandAbility;
 
+    [SyncVar]
+    public string leftWeaponID;
+    [SyncVar]
+    public string rightWeaponID;
+
+    public WeaponResourcesManager wrm;
 
     private float leftCooldown = 0;
     private float leftNextReadyFire = 0;
@@ -29,32 +35,34 @@ public class FrameWeaponController : NetworkBehaviour {
     private float rightCoolDownTimeLeft = 0;
 
 
+
     // Use this for initialization
     void Start ()
     {
+        wrm.Init();
 
         // Remove when complete Char select
         //Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
 
         ih = GetComponent<InputHandler>();
-        Initialize2(Instantiate(leftHandAbility), Instantiate(rightHandAbility));
+        Initialize(Instantiate(wrm.GetWeapon(leftWeaponID)), Instantiate(wrm.GetWeapon(rightWeaponID)));
     }
 
-    public void Initialize(WeaponAbility selectedLeftHandAbility, GameObject leftHandWeapon, WeaponAbility selectedRightHandAbility, GameObject rightHandWeapon)
-    {
-        leftHandAbility = selectedLeftHandAbility;
-        leftHand = leftHandWeapon;
-        rightHandAbility = selectedRightHandAbility;
-        rightHand = rightHandWeapon;
+    //public void Initialize(WeaponAbility selectedLeftHandAbility, GameObject leftHandWeapon, WeaponAbility selectedRightHandAbility, GameObject rightHandWeapon)
+    //{
+    //    leftHandAbility = selectedLeftHandAbility;
+    //    leftHand = leftHandWeapon;
+    //    rightHandAbility = selectedRightHandAbility;
+    //    rightHand = rightHandWeapon;
 
-        leftCooldown = leftHandAbility.aFireDelay;
-        rightCooldown = rightHandAbility.aFireDelay;
+    //    leftCooldown = leftHandAbility.aFireDelay;
+    //    rightCooldown = rightHandAbility.aFireDelay;
 
-        leftHandAbility.Initialize(leftHand);
-        rightHandAbility.Initialize(rightHand);
-    }
+    //    leftHandAbility.Initialize(leftHand);
+    //    rightHandAbility.Initialize(rightHand);
+    //}
 
-    public void Initialize2(WeaponAbility selectedLeftHandAbility,WeaponAbility selectedRightHandAbility)
+    public void Initialize(WeaponAbility selectedLeftHandAbility,WeaponAbility selectedRightHandAbility)
     {
         //// Set Child to Camera
         GameObject leftWeapon = Instantiate(selectedLeftHandAbility.gunPrefab);
@@ -75,6 +83,16 @@ public class FrameWeaponController : NetworkBehaviour {
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
+    }
+
+    public void SetLeftAbility(WeaponAbility la)
+    {
+        leftHandAbility = la;
+    }
+
+    public void SetRightAbility(WeaponAbility ra)
+    {
+        rightHandAbility = ra;
     }
 
     // Update is called once per frame

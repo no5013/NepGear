@@ -332,7 +332,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.37273, Culture=neutral,
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.34495, Culture=neutral,
       PublicKeyToken=null
   onToggleLocal:
     m_PersistentCalls:
@@ -359,12 +359,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.37273, Culture=neutral,
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.34495, Culture=neutral,
       PublicKeyToken=null
   onToggleRemote:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.37273, Culture=neutral,
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.34495, Culture=neutral,
       PublicKeyToken=null
   walkSpeed: 0
   runSpeed: 0
@@ -377,6 +377,8 @@ MonoBehaviour:
   ultimateCharge: 0
   floatSpeed: 0
   healthBar: {fileID: 224264977491852076}
+  frm: {fileID: 11400000, guid: cdf4fb610c328ae4bbf41de10512c673, type: 2}
+  characterID: 
   charFrame: {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
 --- !u!114 &114071095267407414
 MonoBehaviour:
@@ -470,9 +472,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftHand: {fileID: 0}
-  leftHandAbility: {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
+  leftHandAbility: {fileID: 0}
   rightHand: {fileID: 0}
-  rightHandAbility: {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
+  rightHandAbility: {fileID: 0}
+  leftWeaponID: 
+  rightWeaponID: 
+  wrm: {fileID: 11400000, guid: 00ceb45553be72a4f827e8ade42d5177, type: 2}
 --- !u!114 &114611102672728104
 MonoBehaviour:
   m_ObjectHideFlags: 1

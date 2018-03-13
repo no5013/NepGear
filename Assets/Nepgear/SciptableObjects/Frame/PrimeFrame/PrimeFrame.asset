@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Name: PrimeFrame
   m_EditorClassIdentifier: 
   characterName: Prime
+  characterID: F2
   maxHitPoint: 999
   maxStamina: 999
   maxUltimate: 999
   startingSpeed: 10
+  characterPrefab: {fileID: 1511154638448052, guid: c65451f247fabdc4cac9e6145264059e,
+    type: 2}
   ultimate: {fileID: 0}
   leftWeapon: {fileID: 0}
+  leftWeaponID: 
   rightWeapon: {fileID: 0}
+  rightWeaponID: 

@@ -111,11 +111,11 @@ namespace Prototype.NetworkLobby
         {
             if(isServer)
             {
-                lobbyPlayer.RpcSetCharacter(selectedCharacterRef, selectedLeftWeaponRef, selectedRightWeaponRef);
+                lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
             }
             else
             {
-                lobbyPlayer.CmdSetCharacter(selectedCharacterRef, selectedLeftWeaponRef, selectedRightWeaponRef);
+                lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
             }
             //// Instantiate Gun Object and Player Object
             //GameObject leftWeapon = Instantiate(selectedCharacter.leftWeaponPrefab);
@@ -153,9 +153,8 @@ namespace Prototype.NetworkLobby
 
         private void Initialize()
         {
-            characters = LobbyManager.s_Singleton.characters;
-            weapons = LobbyManager.s_Singleton.weapons;
-            weaponsPrefab = LobbyManager.s_Singleton.weaponPrefabs;
+            characters = LobbyManager.s_Singleton.frm.frames;
+            weapons = LobbyManager.s_Singleton.wrm.weaponAbilities;
             dropdowns = GetComponentsInChildren<Dropdown>();
             for (int i = 0; i < dropdowns.Length; i++)
             {
@@ -183,9 +182,8 @@ namespace Prototype.NetworkLobby
 
             selectedCharacterRef = 0;
             selectedLeftWeaponRef = 0;
-            //selectedCharacter.leftWeaponPrefab = weaponsPrefab[0];
             selectedRightWeaponRef = 0;
-            //selectedCharacter.rightWeaponPrefab = weaponsPrefab[0];
+
 
             characterText.text = characters[selectedCharacterRef].characterName;
             leftWeaponText.text = weapons[selectedLeftWeaponRef].aName;

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class WeaponAbility : ScriptableObject {
 
     public string aName = "New Ability";
+    public string aID;
     //public Sprite aSprite;
     public AudioClip aGunSound;
     public int aMagazine;

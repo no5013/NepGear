@@ -7,7 +7,7 @@ public class PlayerLobbyHook : Prototype.NetworkLobby.LobbyHook
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
         Debug.Log("TEST ON LOBBY SERVER SCENE LOADED");
-
+        
         if (lobbyPlayer == null)
             return;
 

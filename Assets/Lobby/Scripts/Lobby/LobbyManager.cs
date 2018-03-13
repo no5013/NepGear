@@ -40,11 +40,8 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
-        public Character[] characters;
-        public GameObject[] weaponPrefabs;
-        public WeaponAbility[] weapons;
-
-
+        public WeaponResourcesManager wrm;
+        public FrameResourcesManager frm;
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -61,12 +58,15 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
-        private Dictionary<int, Character> currentPlayers;
+        private Dictionary<int, string[]> currentPlayers;
+
 
         void Start()
         {
             s_Singleton = this;
-            currentPlayers = new Dictionary<int, Character>();
+            currentPlayers = new Dictionary<int, string[]>();
+            wrm.Init();
+            frm.Init();
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
 
@@ -264,23 +264,22 @@ namespace Prototype.NetworkLobby
 
         public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
         {
-            // Maybe let Lobby keep weapon prefab index too to spawn it and keep the weapon index in the character instead
-            // IN CASE I don't have time here the thing
-            // 1 : have weapon prefab keep here in lobby
-            // 2 : keep the prefab index inside the character
-            // 3 : spawn prefab on it set parent like the comment code in char selector
-            // 4 : FIN????
-
             // There should be some problem because I set char selector to be a Network Behavior but there no Network identity on it (not that i need it)
             // any other thing else should work...
 
-            Character character = currentPlayers[conn.connectionId];
-            Debug.Log(character.ToString());
-            Debug.Log(character.leftWeaponRef);
-            Debug.Log(character.rightWeaponRef);
+            string[] characterInfo = currentPlayers[conn.connectionId];
+
+            Debug.Log(characterInfo[0]);
+            Debug.Log(characterInfo[1]);
+            Debug.Log(characterInfo[2]);
             //// Instantiate Gun Object and Player Object
 
-            GameObject spawnPlayer = Instantiate(gamePlayerPrefab, new Vector3(1, 1, 1), Quaternion.identity) as GameObject;
+            //1.) Get what frame id player select
+            //2.) Get scriptable object from frame id
+            //3.) Get player prefab from character scripable object
+
+            Character character = frm.GetCharacter(characterInfo[0]);
+            GameObject spawnPlayer = Instantiate(character.characterPrefab, new Vector3(1, 1, 1), Quaternion.identity) as GameObject;
 
             /*//// Set Child to Camera
             GameObject leftWeapon = Instantiate(weaponPrefabs[character.leftWeaponRef]);
@@ -301,10 +300,15 @@ namespace Prototype.NetworkLobby
             FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
             PlayerBehaviorScript pbs = spawnPlayer.GetComponent<PlayerBehaviorScript>();
             FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
+            pbs.characterID = characterInfo[0];
+            fwc.leftWeaponID = characterInfo[1];
+            fwc.rightWeaponID = characterInfo[2];
 
             //// Initialize
             //pbs.Initialize(character);
-            //fwc.Initialize(Instantiate(character.leftWeapon), leftWeapon, Instantiate(character.rightWeapon), rightWeapon);
+            //pbs.SetFrame(character);
+            //fwc.SetLeftAbility(Instantiate(weapons[character.leftWeaponRef]));
+            //fwc.SetRightAbility(Instantiate(weapons[character.rightWeaponRef]));
 
             return spawnPlayer;
             //return base.OnLobbyServerCreateGamePlayer(conn, playerControllerId);
@@ -344,11 +348,12 @@ namespace Prototype.NetworkLobby
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
-            Character character = characters[0];
-            character.leftWeaponRef = 0;
-            character.leftWeapon = weapons[character.leftWeaponRef];
-            character.rightWeaponRef = 0;
-            character.rightWeapon = weapons[character.rightWeaponRef];
+            string[] character = { "F1", "W1", "W1" };
+            //Character character = characters[0];
+            //character.leftWeaponRef = 0;
+            //character.leftWeapon = weapons[character.leftWeaponRef];
+            //character.rightWeaponRef = 0;
+            //character.rightWeapon = weapons[character.rightWeaponRef];
             if (!currentPlayers.ContainsKey(conn.connectionId))
             {
                 currentPlayers.Add(conn.connectionId, character);
@@ -373,13 +378,14 @@ namespace Prototype.NetworkLobby
             return obj;
         }
 
-        public void ServerSetCharacter(NetworkConnection conn, int characterRef, int leftWeaponRef, int rightWeaponRef)
+        public void ServerSetCharacter(NetworkConnection conn, string characterID, string leftWeaponID, string rightWeaponID)
         {
-            Character character = characters[characterRef];
-            character.leftWeapon = weapons[leftWeaponRef];
-            character.leftWeaponRef = leftWeaponRef;
-            character.rightWeapon = weapons[rightWeaponRef];
-            character.rightWeaponRef = rightWeaponRef;
+            string[] character = { characterID, leftWeaponID, rightWeaponID };
+            //Character character = characters[characterRef];
+            //character.leftWeapon = weapons[leftWeaponRef];
+            //character.leftWeaponRef = leftWeaponRef;
+            //character.rightWeapon = weapons[rightWeaponRef];
+            //character.rightWeaponRef = rightWeaponRef;
 
             if(currentPlayers.ContainsKey(conn.connectionId))
             {

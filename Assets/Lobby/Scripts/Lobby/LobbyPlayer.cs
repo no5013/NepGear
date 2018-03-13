@@ -291,16 +291,16 @@ namespace Prototype.NetworkLobby
         }
 
         [ClientRpc]
-        public void RpcSetCharacter(int characterRef, int leftWeaponRef, int rightWeaponRef)
+        public void RpcSetCharacter(string characterID, string leftWeaponID, string rightWeaponID)
         {
-            CmdSetCharacter(characterRef, leftWeaponRef, rightWeaponRef);
+            CmdSetCharacter(characterID, leftWeaponID, rightWeaponID);
         }
 
         [Command]
-        public void CmdSetCharacter(int characterRef, int leftWeaponRef, int rightWeaponRef)
+        public void CmdSetCharacter(string characterID, string leftWeaponID, string rightWeaponID)
         {
             Debug.Log("SET CHARACTER");
-            LobbyManager.s_Singleton.ServerSetCharacter(GetComponent<NetworkIdentity>().connectionToClient, characterRef, leftWeaponRef, rightWeaponRef);
+            LobbyManager.s_Singleton.ServerSetCharacter(GetComponent<NetworkIdentity>().connectionToClient, characterID, leftWeaponID, rightWeaponID);
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)

@@ -62,6 +62,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     UIManager uiManager;
     InputHandler ih;
+    public FrameResourcesManager frm;
+
+    [SyncVar]
+    public string characterID;
 
     [SerializeField] private Character charFrame;
 
@@ -69,8 +73,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
 
         //Remove When Character Select is done
-
-        Initialize(charFrame);
+        frm.Init();
+        Initialize(frm.GetCharacter(characterID));
 
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
@@ -100,6 +104,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
 
         lifeStock = 3;
+    }
+
+    public void SetFrame(Character frame)
+    {
+        charFrame = frame;
     }
 
     public override void OnStartLocalPlayer()

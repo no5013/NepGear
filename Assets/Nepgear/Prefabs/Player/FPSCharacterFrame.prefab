@@ -1764,8 +1764,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed387674c0c8344e58608412fb8ada4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onToggleShared:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.34339, Culture=neutral,
+      PublicKeyToken=null
+  onToggleLocal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.34339, Culture=neutral,
+      PublicKeyToken=null
+  onToggleRemote:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.34339, Culture=neutral,
+      PublicKeyToken=null
   walkSpeed: 0
   runSpeed: 0
+  lifeStock: 0
+  respawnTime: 2
   hitPoint: 0
   maxHitPoint: 100
   stamina: 100
@@ -1773,6 +1790,8 @@ MonoBehaviour:
   ultimateCharge: 0
   floatSpeed: 0
   healthBar: {fileID: 224458635895263578}
+  frm: {fileID: 11400000, guid: cdf4fb610c328ae4bbf41de10512c673, type: 2}
+  characterID: 
   charFrame: {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
 --- !u!114 &114635783658488668
 MonoBehaviour:
@@ -1833,6 +1852,9 @@ MonoBehaviour:
   leftHandAbility: {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
   rightHand: {fileID: 1252730295784500}
   rightHandAbility: {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
+  leftWeaponID: 
+  rightWeaponID: 
+  wrm: {fileID: 11400000, guid: 00ceb45553be72a4f827e8ade42d5177, type: 2}
 --- !u!114 &114755613281126338
 MonoBehaviour:
   m_ObjectHideFlags: 1
