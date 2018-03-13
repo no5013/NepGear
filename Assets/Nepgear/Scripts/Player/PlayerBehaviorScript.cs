@@ -69,7 +69,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
 
         //Remove When Character Select is done
-        Initialize(charFrame);
+        //Initialize(charFrame);
     }
 
     public void Initialize(Character frame)
@@ -113,7 +113,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         base.OnStartClient();
 
-        if (!isServer) //if not hosting, we had the tank to the gamemanger for easy access!
+        if (!isServer)
             GameManager.AddPlayer(gameObject);
     }
 

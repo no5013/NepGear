@@ -4,120 +4,198 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class CharacterSelector : MonoBehaviour {
-
-    public GameObject player;
-    public Character[] characters;
-    public WeaponAbility[] weapons;
-    public GameObject[] weaponsPrefab;
-    public Vector3 playerSpawnPosition = new Vector3(1, 1, 1);
-
-    public GameObject characterSelectPanel;
-
-    private Character selectedCharacter;
-    private Dropdown[] dropdowns;
-
-    void Start()
+namespace Prototype.NetworkLobby
+{
+    public class CharacterSelector : NetworkBehaviour
     {
-        Initialize();
-    }
 
-    public void OnCharacterSelect(int characterChoice)
-    {
-        selectedCharacter = characters[characterChoice];
-        //GameObject spawnPlayer = Instantiate(player, playerSpawnPosition, Quaternion.identity) as GameObject;
-        //FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
+        //public LobbyManager lobbyManager;
 
-        //PlayerBehaviorScript pbs = player.GetComponent<PlayerBehaviorScript>();
-        //pbs.Initialize(selectedCharacter);
-    }
+        public GameObject player;
+        [SerializeField] private Character[] characters;
+        [SerializeField] private WeaponAbility[] weapons;
+        [SerializeField] private GameObject[] weaponsPrefab;
+        public Vector3 playerSpawnPosition = new Vector3(1, 1, 1);
 
-    public void OnLeftHandWeaponSelect(int weaponChoice)
-    {
-        if (!selectedCharacter)
+        public GameObject characterSelectPanel;
+
+        private int selectedCharacterRef;
+        private int selectedLeftWeaponRef;
+        private int selectedRightWeaponRef;
+
+        public LobbyPlayer lobbyPlayer;
+
+        public RectTransform lobbyPanel;
+
+        public Text characterText;
+        public Text leftWeaponText;
+        public Text rightWeaponText;
+        private Dropdown[] dropdowns;
+
+
+        void Start()
         {
-            return;
+            Initialize();
         }
-        selectedCharacter.leftWeapon = weapons[weaponChoice];
-        selectedCharacter.leftWeaponPrefab = weaponsPrefab[weaponChoice];
-    }
 
-    public void OnRightHandWeaponSelect(int weaponChoice)
-    {
-        if (!selectedCharacter)
+        public void OnCharacterSelect(int characterChoice)
         {
-            return;
-        }
-        selectedCharacter.rightWeapon = weapons[weaponChoice];
-        selectedCharacter.rightWeaponPrefab = weaponsPrefab[weaponChoice];
-    }
-
-    public void OnConfirmCharacter()
-    {
-        if(!selectedCharacter || !selectedCharacter.leftWeapon || !selectedCharacter.rightWeapon)
-        {
-            return;
-        }
-        // Instantiate Gun Object and Player Object
-        GameObject leftWeapon = Instantiate(selectedCharacter.leftWeaponPrefab);
-        GameObject rightWeapon = Instantiate(selectedCharacter.rightWeaponPrefab);
-        GameObject spawnPlayer = Instantiate(player, playerSpawnPosition, Quaternion.identity) as GameObject;
-
-        // Set Child to Camera
-        leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
-        rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
-
-        // VR
-        /*leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<LeftController>().transform;
-        rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<RightController>().transform;*/
-
-        // Set Local Position
-        leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
-        rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
-
-        // Get Reference
-        FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
-        PlayerBehaviorScript pbs = spawnPlayer.GetComponent<PlayerBehaviorScript>();
-        FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
-
-        // Initialize
-        pbs.Initialize(selectedCharacter);
-        fwc.Initialize(Instantiate(selectedCharacter.leftWeapon), leftWeapon, Instantiate(selectedCharacter.rightWeapon), rightWeapon);
-        
-        characterSelectPanel.SetActive(false);
-    }
-
-    private void Initialize()
-    {
-        dropdowns = characterSelectPanel.GetComponentsInChildren<Dropdown>();
-        for (int i = 0; i < dropdowns.Length; i++)
-        {
-            dropdowns[i].ClearOptions();
-            List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
-            if (i == 0)
+            if(characterChoice > 0)
             {
-                foreach (Character character in characters)
+                selectedCharacterRef++;
+                if (selectedCharacterRef >= characters.Length)
                 {
-                    Dropdown.OptionData option = new Dropdown.OptionData();
-                    option.text = character.characterName;
-                    options.Add(option);
+                    selectedCharacterRef = 0;
                 }
             }
             else
             {
-                foreach (WeaponAbility weapon in weapons)
+                selectedCharacterRef--;
+                if(selectedCharacterRef < 0)
                 {
-                    Dropdown.OptionData option = new Dropdown.OptionData();
-                    option.text = weapon.aName;
-                    options.Add(option);
+                    selectedCharacterRef = characters.Length - 1;
                 }
             }
-            dropdowns[i].AddOptions(options);
+            characterText.text = characters[selectedCharacterRef].characterName;
+            //selectedCharacter = characters[characterChoice];
         }
-        selectedCharacter = characters[0];
-        selectedCharacter.leftWeapon = weapons[0];
-        selectedCharacter.leftWeaponPrefab = weaponsPrefab[0];
-        selectedCharacter.rightWeapon = weapons[0];
-        selectedCharacter.rightWeaponPrefab = weaponsPrefab[0];
+
+        public void OnLeftHandWeaponSelect(int weaponChoice)
+        {
+            if(weaponChoice > 0)
+            {
+                selectedLeftWeaponRef++;
+                if (selectedLeftWeaponRef >= weapons.Length)
+                {
+                    selectedLeftWeaponRef = 0;
+                }
+
+            }
+            else
+            {
+                selectedLeftWeaponRef--;
+                if(selectedLeftWeaponRef < 0)
+                {
+                    selectedLeftWeaponRef = weapons.Length - 1;
+                }
+            }
+            leftWeaponText.text = weapons[selectedLeftWeaponRef].aName;
+            //selectedCharacter.leftWeapon = weapons[weaponChoice];
+
+            //selectedCharacter.leftWeaponPrefab = weaponsPrefab[weaponChoice];
+        }
+
+        public void OnRightHandWeaponSelect(int weaponChoice)
+        {
+            if (weaponChoice > 0)
+            {
+                selectedRightWeaponRef++;
+                if (selectedRightWeaponRef >= weapons.Length)
+                {
+                    selectedRightWeaponRef = 0;
+                }
+            }
+            
+            else
+            {
+                selectedRightWeaponRef--;
+                if (selectedRightWeaponRef < 0)
+                {
+                    selectedRightWeaponRef = weapons.Length - 1;
+                }
+            }
+            rightWeaponText.text = weapons[selectedRightWeaponRef].aName;
+        }
+
+        public void OnConfirmCharacter()
+        {
+            if(isServer)
+            {
+                lobbyPlayer.RpcSetCharacter(selectedCharacterRef, selectedLeftWeaponRef, selectedRightWeaponRef);
+            }
+            else
+            {
+                lobbyPlayer.CmdSetCharacter(selectedCharacterRef, selectedLeftWeaponRef, selectedRightWeaponRef);
+            }
+            //// Instantiate Gun Object and Player Object
+            //GameObject leftWeapon = Instantiate(selectedCharacter.leftWeaponPrefab);
+            //GameObject rightWeapon = Instantiate(selectedCharacter.rightWeaponPrefab);
+            //GameObject spawnPlayer = Instantiate(player, playerSpawnPosition, Quaternion.identity) as GameObject;
+
+            //// Set Child to Camera
+            //leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+            //rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+
+            //// VR
+            //leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<LeftController>().transform;
+            //rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<RightController>().transform;
+
+            //// Set Local Position
+            //leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
+            //rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
+
+            //// Get Reference
+            //FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
+            //PlayerBehaviorScript pbs = spawnPlayer.GetComponent<PlayerBehaviorScript>();
+            //FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
+
+            //// Initialize
+            //pbs.Initialize(selectedCharacter);
+            //fwc.Initialize(Instantiate(selectedCharacter.leftWeapon), leftWeapon, Instantiate(selectedCharacter.rightWeapon), rightWeapon);
+
+            //characterSelectPanel.SetActive(false);
+            //if (isServer)
+            //    lobbyManager.RpcSetCharacter(selectedCharacter);
+            //else
+            //    lobbyManager.CmdSetCharacter(selectedCharacter);
+            LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
+        }
+
+        private void Initialize()
+        {
+            characters = LobbyManager.s_Singleton.characters;
+            weapons = LobbyManager.s_Singleton.weapons;
+            weaponsPrefab = LobbyManager.s_Singleton.weaponPrefabs;
+            dropdowns = GetComponentsInChildren<Dropdown>();
+            for (int i = 0; i < dropdowns.Length; i++)
+            {
+                dropdowns[i].ClearOptions();
+                List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+                Dropdown.OptionData option = new Dropdown.OptionData();
+                if (i == 0)
+                {
+                    foreach (Character character in characters)
+                    {
+                        option.text = character.characterName;
+                        options.Add(option);
+                    }
+                }
+                else
+                {
+                    foreach (WeaponAbility weapon in weapons)
+                    {
+                        option.text = weapon.aName;
+                        options.Add(option);
+                    }
+                }
+                dropdowns[i].AddOptions(options);
+            }
+
+            selectedCharacterRef = 0;
+            selectedLeftWeaponRef = 0;
+            //selectedCharacter.leftWeaponPrefab = weaponsPrefab[0];
+            selectedRightWeaponRef = 0;
+            //selectedCharacter.rightWeaponPrefab = weaponsPrefab[0];
+
+            characterText.text = characters[selectedCharacterRef].characterName;
+            leftWeaponText.text = weapons[selectedLeftWeaponRef].aName;
+            rightWeaponText.text = weapons[selectedRightWeaponRef].aName;
+            //Text[] texts = GetComponentsInChildren<Text>();
+            //texts[0].text = characters[selectedCharacterRef].characterName;
+            //texts[1].text = selectedCharacter.leftWeapon.aName;
+            //texts[2].text = selectedCharacter.rightWeapon.aName;
+
+        }
     }
+
 }

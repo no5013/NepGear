@@ -41,7 +41,6 @@ namespace Prototype.NetworkLobby
         //static Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         //static Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
-
         public override void OnClientEnterLobby()
         {
             base.OnClientEnterLobby();
@@ -291,6 +290,18 @@ namespace Prototype.NetworkLobby
             playerName = name;
         }
 
+        [ClientRpc]
+        public void RpcSetCharacter(int characterRef, int leftWeaponRef, int rightWeaponRef)
+        {
+            CmdSetCharacter(characterRef, leftWeaponRef, rightWeaponRef);
+        }
+
+        [Command]
+        public void CmdSetCharacter(int characterRef, int leftWeaponRef, int rightWeaponRef)
+        {
+            LobbyManager.s_Singleton.ServerSetCharacter(GetComponent<NetworkIdentity>().connectionToClient, characterRef, leftWeaponRef, rightWeaponRef);
+        }
+
         //Cleanup thing when get destroy (which happen when client kick or disconnect)
         public void OnDestroy()
         {
@@ -310,6 +321,19 @@ namespace Prototype.NetworkLobby
                     break;
                 }
             }
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+            if (this.GetType() != other.GetType())
+                return false;
+            LobbyPlayer o = (LobbyPlayer) other;
+            if (o.GetInstanceID() != this.GetInstanceID())
+                return false;
+            else return true;
+            //return base.Equals(other);
         }
     }
 }

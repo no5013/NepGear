@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 namespace Prototype.NetworkLobby
 {
@@ -49,6 +50,15 @@ namespace Prototype.NetworkLobby
             addButtonRow.transform.SetAsLastSibling();
 
             PlayerListModified();
+        }
+        public LobbyPlayer FindLocalPlayer()
+        {
+            foreach(LobbyPlayer lp in _players)
+            {
+                if (lp.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer)
+                    return lp;
+            }
+            return null;
         }
 
         public void RemovePlayer(LobbyPlayer player)

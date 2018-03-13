@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
-
+using System.Collections.Generic;
 
 namespace Prototype.NetworkLobby
 {
@@ -26,6 +26,7 @@ namespace Prototype.NetworkLobby
 
         public RectTransform mainMenuPanel;
         public RectTransform lobbyPanel;
+        public RectTransform characterPanel;
 
         public LobbyInfoPanel infoPanel;
         public LobbyCountdownPanel countdownPanel;
@@ -34,9 +35,16 @@ namespace Prototype.NetworkLobby
         protected RectTransform currentPanel;
 
         public Button backButton;
+        public Button editButton;
 
         public Text statusInfo;
         public Text hostInfo;
+
+        public Character[] characters;
+        public GameObject[] weaponPrefabs;
+        public WeaponAbility[] weapons;
+
+
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -53,13 +61,17 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+        private Dictionary<int, Character> currentPlayers;
+
         void Start()
         {
             s_Singleton = this;
+            currentPlayers = new Dictionary<int, Character>();
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
 
             backButton.gameObject.SetActive(false);
+            editButton.gameObject.SetActive(false);
             GetComponent<Canvas>().enabled = true;
 
             DontDestroyOnLoad(gameObject);
@@ -131,13 +143,20 @@ namespace Prototype.NetworkLobby
 
             currentPanel = newPanel;
 
+            if (currentPanel == characterPanel)
+            {
+                LobbyPlayer localPlayer = LobbyPlayerList._instance.FindLocalPlayer();
+                characterPanel.gameObject.GetComponent<CharacterSelector>().lobbyPlayer = LobbyPlayerList._instance.FindLocalPlayer();
+            }
             if (currentPanel != mainMenuPanel)
             {
                 backButton.gameObject.SetActive(true);
+                editButton.gameObject.SetActive(true);
             }
             else
             {
                 backButton.gameObject.SetActive(false);
+                editButton.gameObject.SetActive(false);
                 SetServerInfo("Offline", "None");
                 _isMatchmaking = false;
             }
@@ -162,6 +181,11 @@ namespace Prototype.NetworkLobby
         {
             backDelegate();
 			topPanel.isInGame = false;
+        }
+        public void OnCharacterEditButton()
+        {
+            ChangeTo(characterPanel);
+            backDelegate = SimpleBackClbk;
         }
 
         // ----------------- Server management
@@ -221,9 +245,6 @@ namespace Prototype.NetworkLobby
             conn.Send(MsgKicked, new KickMsg());
         }
 
-
-
-
         public void KickedMessageHandler(NetworkMessage netMsg)
         {
             infoPanel.Display("Kicked by Server", "Close", null);
@@ -241,7 +262,52 @@ namespace Prototype.NetworkLobby
             SetServerInfo("Hosting", networkAddress);
         }
 
-		public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
+        public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId)
+        {
+            // Maybe let Lobby keep weapon prefab index too to spawn it and keep the weapon index in the character instead
+            // IN CASE I don't have time here the thing
+            // 1 : have weapon prefab keep here in lobby
+            // 2 : keep the prefab index inside the character
+            // 3 : spawn prefab on it set parent like the comment code in char selector
+            // 4 : FIN????
+
+            // There should be some problem because I set char selector to be a Network Behavior but there no Network identity on it (not that i need it)
+            // any other thing else should work...
+
+            Character character = currentPlayers[conn.connectionId];
+            Debug.Log(character.ToString());
+            Debug.Log(character.leftWeaponRef);
+            Debug.Log(character.rightWeaponRef);
+            //// Instantiate Gun Object and Player Object
+            GameObject leftWeapon = Instantiate(weaponPrefabs[character.leftWeaponRef]);
+            GameObject rightWeapon = Instantiate(weaponPrefabs[character.rightWeaponRef]);
+            GameObject spawnPlayer = Instantiate(gamePlayerPrefab, new Vector3(1, 1, 1), Quaternion.identity) as GameObject;
+
+            //// Set Child to Camera
+            leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+            rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+
+            //// VR
+            //leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<LeftController>().transform;
+            //rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<RightController>().transform;
+
+            //// Set Local Position
+            leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
+            rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
+
+            //// Get Reference
+            FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
+            PlayerBehaviorScript pbs = spawnPlayer.GetComponent<PlayerBehaviorScript>();
+            FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
+
+            //// Initialize
+            pbs.Initialize(character);
+            fwc.Initialize(Instantiate(character.leftWeapon), leftWeapon, Instantiate(character.rightWeapon), rightWeapon);
+            return spawnPlayer;
+            //return base.OnLobbyServerCreateGamePlayer(conn, playerControllerId);
+        }
+
+        public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
 		{
 			base.OnMatchCreate(success, extendedInfo, matchInfo);
             _currentMatchID = (System.UInt64)matchInfo.networkId;
@@ -275,8 +341,17 @@ namespace Prototype.NetworkLobby
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
-            GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
+            Character character = characters[0];
+            character.leftWeaponRef = 0;
+            character.leftWeapon = weapons[character.leftWeaponRef];
+            character.rightWeaponRef = 0;
+            character.rightWeapon = weapons[character.rightWeaponRef];
+            if (!currentPlayers.ContainsKey(conn.connectionId))
+            {
+                currentPlayers.Add(conn.connectionId, character);
+            }
 
+            GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
@@ -293,6 +368,20 @@ namespace Prototype.NetworkLobby
             }
 
             return obj;
+        }
+
+        public void ServerSetCharacter(NetworkConnection conn, int characterRef, int leftWeaponRef, int rightWeaponRef)
+        {
+            Character character = characters[characterRef];
+            character.leftWeapon = weapons[leftWeaponRef];
+            character.leftWeaponRef = leftWeaponRef;
+            character.rightWeapon = weapons[rightWeaponRef];
+            character.rightWeaponRef = rightWeaponRef;
+
+            if(currentPlayers.ContainsKey(conn.connectionId))
+            {
+                currentPlayers[conn.connectionId] = character;
+            }
         }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
@@ -384,6 +473,12 @@ namespace Prototype.NetworkLobby
                 }
             }
 
+            /*Character Select should be executed before ServerChangeScene
+            Having Character Select Manager with countdown (Send signal to that script to let it start its work)
+            When Character Select Get Confirm from both player send signal back to lobby manager to start the server
+            Still don't clear about On hook but will manage somehow.
+             */
+            //ChangeTo(characterSelectPanel);
             ServerChangeScene(playScene);
         }
 

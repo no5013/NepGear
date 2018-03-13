@@ -14,9 +14,11 @@ public class Character : ScriptableObject
 
     public UltimateAbility ultimate;
     [HideInInspector] public WeaponAbility leftWeapon;
-    [HideInInspector] public GameObject leftWeaponPrefab;
+    [HideInInspector] public int leftWeaponRef;
+    //[HideInInspector] public GameObject leftWeaponPrefab;
     [HideInInspector] public WeaponAbility rightWeapon;
-    [HideInInspector] public GameObject rightWeaponPrefab;
+    [HideInInspector] public int rightWeaponRef;
+    //[HideInInspector] public GameObject rightWeaponPrefab;
 
 
 }

@@ -34,7 +34,7 @@ public class FrameWeaponController : NetworkBehaviour {
     {
 
         // Remove when complete Char select
-        Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
+        //Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
     }
 
     public void Initialize(WeaponAbility selectedLeftHandAbility, GameObject leftHandWeapon, WeaponAbility selectedRightHandAbility, GameObject rightHandWeapon)

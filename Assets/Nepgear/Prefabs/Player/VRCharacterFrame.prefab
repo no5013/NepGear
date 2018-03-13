@@ -1346,8 +1346,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed387674c0c8344e58608412fb8ada4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onToggleShared:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.37841, Culture=neutral,
+      PublicKeyToken=null
+  onToggleLocal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.37841, Culture=neutral,
+      PublicKeyToken=null
+  onToggleRemote:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.37841, Culture=neutral,
+      PublicKeyToken=null
   walkSpeed: 0
   runSpeed: 0
+  lifeStock: 0
+  respawnTime: 2
   hitPoint: 0
   maxHitPoint: 100
   stamina: 100
@@ -1355,6 +1372,7 @@ MonoBehaviour:
   ultimateCharge: 0
   floatSpeed: 0
   healthBar: {fileID: 224731335314267946}
+  charFrame: {fileID: 0}
 --- !u!124 &124948064197660296
 Behaviour:
   m_ObjectHideFlags: 1
