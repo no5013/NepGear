@@ -38,7 +38,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             cloneBullet.AddForce(bulletSpawn.transform.forward * projectileForce);*/
             bulletLeft--;
             soundSource.Play();
-            fwc.CmdFireProjectile(0, projectileForce, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+            fwc.CmdFireProjectile("p1", projectileForce, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
         }
         else
         {

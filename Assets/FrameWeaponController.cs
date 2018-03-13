@@ -113,10 +113,11 @@ public class FrameWeaponController : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdFireProjectile(int spawnableID, float projectileForce, Vector3 forward, Vector3 position, Quaternion rotation)
+    public void CmdFireProjectile(string projectileId, float projectileForce, Vector3 forward, Vector3 position, Quaternion rotation)
     {
         //ProjectileAbility pa = leftHandAbility as ProjectileAbility;
-        GameObject projectile = NetworkManager.singleton.spawnPrefabs[spawnableID];
+        //GameObject projectile = NetworkManager.singleton.spawnPrefabs[spawnableID];
+        GameObject projectile = GameManager.instance.resourceManager.GetWeapon(projectileId);
         GameObject projectileInstance = Instantiate(projectile, position, rotation);
 
         Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
