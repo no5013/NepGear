@@ -35,11 +35,13 @@ public class FrameWeaponController : NetworkBehaviour {
 
         // Remove when complete Char select
         //Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
+
+        ih = GetComponent<InputHandler>();
+        Initialize2(Instantiate(leftHandAbility), Instantiate(rightHandAbility));
     }
 
     public void Initialize(WeaponAbility selectedLeftHandAbility, GameObject leftHandWeapon, WeaponAbility selectedRightHandAbility, GameObject rightHandWeapon)
     {
-        ih = GetComponent<InputHandler>();
         leftHandAbility = selectedLeftHandAbility;
         leftHand = leftHandWeapon;
         rightHandAbility = selectedRightHandAbility;
@@ -50,6 +52,29 @@ public class FrameWeaponController : NetworkBehaviour {
 
         leftHandAbility.Initialize(leftHand);
         rightHandAbility.Initialize(rightHand);
+    }
+
+    public void Initialize2(WeaponAbility selectedLeftHandAbility,WeaponAbility selectedRightHandAbility)
+    {
+        //// Set Child to Camera
+        GameObject leftWeapon = Instantiate(selectedLeftHandAbility.gunPrefab);
+        GameObject rightWeapon = Instantiate(selectedRightHandAbility.gunPrefab);
+
+        leftWeapon.transform.parent = GetComponentInChildren<Camera>().transform;
+        rightWeapon.transform.parent = GetComponentInChildren<Camera>().transform;
+
+        //// Set Local Position
+        leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
+        rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
+
+        leftHandAbility = selectedLeftHandAbility;
+        rightHandAbility = selectedRightHandAbility;
+
+        leftCooldown = leftHandAbility.aFireDelay;
+        rightCooldown = rightHandAbility.aFireDelay;
+
+        leftHandAbility.Initialize(leftWeapon);
+        rightHandAbility.Initialize(rightWeapon);
     }
 
     // Update is called once per frame

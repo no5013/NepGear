@@ -69,15 +69,17 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
 
         //Remove When Character Select is done
-        //Initialize(charFrame);
+
+        Initialize(charFrame);
+
+        characterController = GetComponent<CharacterController>();
+        firstPersonController = GetComponent<FirstPersonController>();
+        ih = GetComponent<InputHandler>();
+        mainCamera = Camera.main.gameObject;
     }
 
     public void Initialize(Character frame)
     {
-        characterController = GetComponent<CharacterController>();
-        firstPersonController = GetComponent<FirstPersonController>();
-        ih = GetComponent<InputHandler>();
-
         walkSpeed = frame.startingSpeed;
         runSpeed = frame.startingSpeed * 1.5f;
         maxHitPoint = frame.maxHitPoint;
@@ -97,9 +99,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
 
-        lifeStock = GameManager.instance.playerLifeStock;
-
-        mainCamera = Camera.main.gameObject;
+        lifeStock = 3;
     }
 
     public override void OnStartLocalPlayer()
@@ -181,8 +181,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
             }
         }
-        uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
-        uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
+
+        //uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
+        //uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
     }
     private void FixedUpdate()
     {
@@ -206,6 +207,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             boostChargeTime = Time.time + 1f;
         }
+
         if (ultimateCharge <= ultimate.maxCharge)
         {
             ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
@@ -215,9 +217,15 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private void GetInput()
     {
         //        bool walking = true;
-        float horizontal = ih.horizontal;
-        float vertical = ih.vertical;
+        float horizontal = 0;
+        float vertical = 0;
         float staminaUsed = 0;
+
+        if(ih != null)
+        {
+            horizontal = ih.horizontal;
+            vertical = ih.vertical;
+        }
 
         if (CrossPlatformInputManager.GetButtonUp("Dash") && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
         {

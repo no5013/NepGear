@@ -279,21 +279,23 @@ namespace Prototype.NetworkLobby
             Debug.Log(character.leftWeaponRef);
             Debug.Log(character.rightWeaponRef);
             //// Instantiate Gun Object and Player Object
-            GameObject leftWeapon = Instantiate(weaponPrefabs[character.leftWeaponRef]);
-            GameObject rightWeapon = Instantiate(weaponPrefabs[character.rightWeaponRef]);
+
             GameObject spawnPlayer = Instantiate(gamePlayerPrefab, new Vector3(1, 1, 1), Quaternion.identity) as GameObject;
 
-            //// Set Child to Camera
+            /*//// Set Child to Camera
+            GameObject leftWeapon = Instantiate(weaponPrefabs[character.leftWeaponRef]);
+            GameObject rightWeapon = Instantiate(weaponPrefabs[character.rightWeaponRef]);
+
             leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
             rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+
+            //// Set Local Position
+            leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
+            rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);*/
 
             //// VR
             //leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<LeftController>().transform;
             //rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<RightController>().transform;
-
-            //// Set Local Position
-            leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
-            rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
 
             //// Get Reference
             FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
@@ -301,8 +303,9 @@ namespace Prototype.NetworkLobby
             FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
 
             //// Initialize
-            pbs.Initialize(character);
-            fwc.Initialize(Instantiate(character.leftWeapon), leftWeapon, Instantiate(character.rightWeapon), rightWeapon);
+            //pbs.Initialize(character);
+            //fwc.Initialize(Instantiate(character.leftWeapon), leftWeapon, Instantiate(character.rightWeapon), rightWeapon);
+
             return spawnPlayer;
             //return base.OnLobbyServerCreateGamePlayer(conn, playerControllerId);
         }

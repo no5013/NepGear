@@ -15,6 +15,7 @@ MonoBehaviour:
   aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
   aMagazine: 12
   aFireDelay: 0.5
+  gunPrefab: {fileID: 1234929971947354, guid: c4c80d668b6dbd441a2ebb3ce035cdc6, type: 2}
   projectileForce: 1000
   projectile: {fileID: 54312555963903118, guid: 8e45d4f09446fbd4abeb9a2ab59a4639,
     type: 2}

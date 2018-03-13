@@ -10,6 +10,8 @@ public abstract class WeaponAbility : ScriptableObject {
     public int aMagazine;
     public float aFireDelay;
 
+    public GameObject gunPrefab;
+
     public abstract void Initialize(GameObject obj);
     public abstract void TriggerAbility();
     public abstract void TriggerReload();

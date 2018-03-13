@@ -654,3 +654,6 @@ MonoBehaviour:
   projectile: {fileID: 0}
   bulletSpawn: {fileID: 4428444836777286}
   projectileForce: 250
+  magazine: 0
+  reloadTime: 0
+  gunSound: {fileID: 0}

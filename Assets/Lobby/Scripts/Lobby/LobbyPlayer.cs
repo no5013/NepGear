@@ -299,6 +299,7 @@ namespace Prototype.NetworkLobby
         [Command]
         public void CmdSetCharacter(int characterRef, int leftWeaponRef, int rightWeaponRef)
         {
+            Debug.Log("SET CHARACTER");
             LobbyManager.s_Singleton.ServerSetCharacter(GetComponent<NetworkIdentity>().connectionToClient, characterRef, leftWeaponRef, rightWeaponRef);
         }
 
