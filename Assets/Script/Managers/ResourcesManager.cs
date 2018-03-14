@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [CreateAssetMenu(menuName = "Single Instance/Resources")]
 public class ResourcesManager : ScriptableObject
@@ -26,6 +27,7 @@ public class ResourcesManager : ScriptableObject
             }
             else
             {
+                ClientScene.RegisterPrefab(projectiles[i]);
                 p_dict.Add(pg.bulletId, i);
             }
         }
