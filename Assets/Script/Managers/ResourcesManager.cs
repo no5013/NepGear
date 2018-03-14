@@ -6,32 +6,88 @@ using UnityEngine;
 public class ResourcesManager : ScriptableObject
 {
 
-    public GameObject[] gameObjects;
-    public Dictionary<string, int> dict = new Dictionary<string, int>();
+    public GameObject[] projectiles;
+    public Dictionary<string, int> p_dict = new Dictionary<string, int>();
+
+    public WeaponAbility[] weaponAbilities;
+    public Dictionary<string, int> w_dict = new Dictionary<string, int>();
+
+    public Character[] frames;
+    public Dictionary<string, int> f_dict = new Dictionary<string, int>();
 
     public void Init()
     {
-        for (int i = 0; i < gameObjects.Length; i++)
+        for (int i = 0; i < projectiles.Length; i++)
         {
-            Bullet pg = gameObjects[i].GetComponent<Bullet>();
-            if (dict.ContainsKey(pg.bulletId))
+            Bullet pg = projectiles[i].GetComponent<Bullet>();
+            if (p_dict.ContainsKey(pg.bulletId))
             {
 
             }
             else
             {
-                dict.Add(pg.bulletId, i);
+                p_dict.Add(pg.bulletId, i);
+            }
+        }
+
+        for (int i = 0; i < projectiles.Length; i++)
+        {
+            WeaponAbility wa = weaponAbilities[i];
+            if (p_dict.ContainsKey(wa.aID))
+            {
+
+            }
+            else
+            {
+                p_dict.Add(wa.aID, i);
+            }
+        }
+
+        for (int i = 0; i < frames.Length; i++)
+        {
+            Character frame = frames[i];
+            if (f_dict.ContainsKey(frame.characterID))
+            {
+
+            }
+            else
+            {
+                f_dict.Add(frame.characterID, i);
             }
         }
     }
 
-    public GameObject GetWeapon(string id)
+    public GameObject GetProjectile(string id)
     {
         GameObject retVal = null;
         int index = -1;
-        if(dict.TryGetValue(id, out index))
+        if(p_dict.TryGetValue(id, out index))
         {
-            retVal = gameObjects[index];
+            retVal = projectiles[index];
+        }
+
+        return retVal;
+    }
+
+    public WeaponAbility GetWeapon(string id)
+    {
+        WeaponAbility retVal = null;
+        int index = -1;
+        if (w_dict.TryGetValue(id, out index))
+        {
+            retVal = weaponAbilities[index];
+        }
+
+        return retVal;
+    }
+
+    public Character GetCharacter(string id)
+    {
+        Character retVal = null;
+        int index = -1;
+        if (f_dict.TryGetValue(id, out index))
+        {
+            retVal = frames[index];
         }
 
         return retVal;

@@ -160,7 +160,7 @@ public class FrameWeaponController : NetworkBehaviour {
     {
         //ProjectileAbility pa = leftHandAbility as ProjectileAbility;
         //GameObject projectile = NetworkManager.singleton.spawnPrefabs[spawnableID];
-        GameObject projectile = GameManager.instance.resourceManager.GetWeapon(projectileId);
+        GameObject projectile = GameManager.instance.resourceManager.GetProjectile(projectileId);
         GameObject projectileInstance = Instantiate(projectile, position, rotation);
 
         Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();

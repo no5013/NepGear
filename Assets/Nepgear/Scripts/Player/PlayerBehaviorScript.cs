@@ -33,6 +33,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
+
     [HideInInspector] public float maxHitPoint;
     [HideInInspector] public float stamina;
     [HideInInspector] public float maxStamina;
@@ -62,7 +63,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     UIManager uiManager;
     InputHandler ih;
-    public FrameResourcesManager frm;
 
     [SyncVar]
     public string characterID;
@@ -73,8 +73,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
 
         //Remove When Character Select is done
-        frm.Init();
-        Initialize(frm.GetCharacter(characterID));
+        SetFrame(GameManager.instance.resourceManager.frames[0]);
+        lifeStock = 3;
 
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
@@ -86,6 +86,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         walkSpeed = frame.startingSpeed;
         runSpeed = frame.startingSpeed * 1.5f;
+
         maxHitPoint = frame.maxHitPoint;
         maxStamina = frame.maxStamina;
         ultimateCharge = 0f;
@@ -102,13 +103,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
         isUltimateActived = false;
         uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
-
-        lifeStock = 3;
     }
 
     public void SetFrame(Character frame)
     {
-        charFrame = frame;
+        charFrame = Instantiate(frame);
+        Initialize(charFrame);
     }
 
     public override void OnStartLocalPlayer()
@@ -191,8 +191,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
             }
         }
 
-        //uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
-        //uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
+        uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
+        uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
     }
     private void FixedUpdate()
     {
@@ -205,7 +205,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             if (stamina < maxStamina && boostChargeTime < Time.time)
             {
-                stamina += (stamina) * Time.fixedDeltaTime;
+                stamina += Math.Abs(stamina+10) * Time.fixedDeltaTime;
                 if (stamina > maxStamina)
                 {
                     stamina = maxStamina;

@@ -11,5 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0df093047fe0b42b6a2b4d23310327, type: 3}
   m_Name: Resources Manager
   m_EditorClassIdentifier: 
-  gameObjects:
+  projectiles:
   - {fileID: 1415093533719792, guid: 8e45d4f09446fbd4abeb9a2ab59a4639, type: 2}
+  weaponAbilities:
+  - {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
+  frames:
+  - {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
+  - {fileID: 11400000, guid: ba303d22d5b906c42b76ca3973f89bf9, type: 2}
