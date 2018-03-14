@@ -71,9 +71,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     protected void Start()
     {
-
-        //Remove When Character Select is done
-        SetFrame(GameManager.instance.resourceManager.frames[0]);
+        SetFrame(Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID));
         lifeStock = 3;
 
         characterController = GetComponent<CharacterController>();

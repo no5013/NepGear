@@ -60,11 +60,15 @@ namespace Prototype.NetworkLobby
 
         private Dictionary<int, string[]> currentPlayers;
 
+        public ResourcesManager resourcesManager;
+
 
         void Start()
         {
             s_Singleton = this;
             currentPlayers = new Dictionary<int, string[]>();
+            resourcesManager.Init();
+
             wrm.Init();
             frm.Init();
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();

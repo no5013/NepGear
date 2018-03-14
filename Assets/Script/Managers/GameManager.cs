@@ -15,8 +15,6 @@ public class GameManager : NetworkBehaviour {
 
     public float playerLifeStock = 3f;
 
-    public ResourcesManager resourceManager;
-
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
 
@@ -28,7 +26,6 @@ public class GameManager : NetworkBehaviour {
 
     private void Start()
     {
-        resourceManager.Init();
         if (isServer)
         {
             // Create the delays so they only have to be made once.
