@@ -68,8 +68,8 @@ public class FrameWeaponController : NetworkBehaviour {
         GameObject leftWeapon = Instantiate(selectedLeftHandAbility.gunPrefab);
         GameObject rightWeapon = Instantiate(selectedRightHandAbility.gunPrefab);
 
-        leftWeapon.transform.parent = GetComponentInChildren<Camera>().transform;
-        rightWeapon.transform.parent = GetComponentInChildren<Camera>().transform;
+        leftWeapon.transform.parent = GetComponentInChildren<LeftController>().transform;
+        rightWeapon.transform.parent = GetComponentInChildren<RightController>().transform;
 
         //// Set Local Position
         leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);

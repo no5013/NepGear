@@ -109,13 +109,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
         Initialize(charFrame);
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        /*GetComponentInChildren<Camera>().enabled = true;
-        GetComponentInChildren<AudioListener>().enabled = true;*/
-        //EnablePlayer();
-    }
-
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -171,7 +164,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             timePressedKey = 0f;
         }
-        // Dash can only be used in Update
+
         if (m_isDashing)
         {
             Dash();
@@ -275,17 +268,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
             ultimateCharge = 0f;
             uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
         }
-        //       if (Input.GetKey(KeyCode.Space))
-        //       {
-        //           Debug.Log("Float!!!!!!");
-        //           m_Float = true;
-        //      }
-        //       else
-        //       {
-        //           m_Float = false;
-        //       }
         stamina -= staminaUsed;
     }
+
     private void Dash()
     {
         m_isDashing = true;
@@ -304,43 +289,45 @@ public class PlayerBehaviorScript : NetworkBehaviour
             currentLerpTime = 0f;
         }
     }
+
     public bool IsDashing()
     {
         return m_isDashing;
     }
+
     public float GetWalkSpeed()
     {
         return walkSpeed;
     }
+
     public float GetRunSpeed()
     {
         return runSpeed;
     }
+
     public bool Floating()
     {
         return m_Float;
     }
+
     public float GetFloatSpeed()
     {
         return floatSpeed;
     }
+
     public bool IsRunning()
     {
         return isRunning;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Unpassable Object"))
         {
             m_isDashing = false;
         }
-        //else if (other.tag.Equals("Bullet"))
-        //{
-        //    hitPoint -= other.gameObject.GetComponent<Bullet>().GetDamage();
-        //    uiManager.SetHitpoint(hitPoint, hitPoint/maxHitPoint);
-        //    Destroy(other.gameObject);
-        //}
     }
+
     public bool IsExhausted()
     {
         return stamina <= 0;
@@ -371,7 +358,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
         if (!isOutOfStock())
         {
-            Debug.Log("RESPAWN");
             Invoke("Respawn", respawnTime);
         }
     }
@@ -397,6 +383,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void OnChangeHealth (float currentHealth)
     {
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+        if (isLocalPlayer)
+        {
+            //uiManager.SetHitpoint(currentHealth, currentHealth * 1.0f / maxHitPoint * 1.0f);
+        }
     }
 
     public bool isDead()
