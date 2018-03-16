@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Resources Manager
   m_EditorClassIdentifier: 
   projectiles:
-  - {fileID: 1415093533719792, guid: 8e45d4f09446fbd4abeb9a2ab59a4639, type: 2}
+  - {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
   weaponAbilities:
   - {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
   frames:

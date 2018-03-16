@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileShootTriggerable : MonoBehaviour {
 
-    [HideInInspector] public Rigidbody projectile;
+    [HideInInspector] public Projectile projectile;
     public Transform bulletSpawn;
     [HideInInspector] public float projectileForce;
     [HideInInspector] public int magazine;
@@ -34,8 +34,6 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         }
         if(CanFire())
         {
-            /*Rigidbody cloneBullet = Instantiate(projectile, bulletSpawn.position, transform.rotation) as Rigidbody;
-            cloneBullet.AddForce(bulletSpawn.transform.forward * projectileForce);*/
             bulletLeft--;
             soundSource.Play();
             fwc.CmdFireProjectile("p1", projectileForce, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);

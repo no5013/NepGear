@@ -5,16 +5,15 @@ using UnityEngine.Networking;
 
 public class Bullet : NetworkBehaviour {
 
-    public string bulletId;
-
-    public float damage;
+    [SyncVar] [HideInInspector] public float damage;
+    [SyncVar] [HideInInspector] public float force;
+    [SyncVar] [HideInInspector] public float aliveTime;
 
 	// Use this for initialization
 	void Start () {
-        Destroy(this.gameObject, 5f);
+        Destroy(this.gameObject, aliveTime);
 	}
 	
-
     void OnCollisionEnter(Collision other) {
         Debug.Log("Points colliding: " + other.contacts.Length);
         Debug.Log("First normal of the point that collide: " + other.contacts[0].normal);
@@ -38,9 +37,9 @@ public class Bullet : NetworkBehaviour {
 
         if (target != null)
         {
-            target.TakeDamage(10f);
+            target.TakeDamage(damage);
             Rigidbody r = other.GetComponent<Rigidbody>();
-            r.AddForce(transform.forward * 1000f);
+            r.AddForce(transform.forward * force);
         }
         Destroy(this.gameObject);
     }

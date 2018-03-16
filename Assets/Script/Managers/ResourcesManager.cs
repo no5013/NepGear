@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class ResourcesManager : ScriptableObject
 {
 
-    public GameObject[] projectiles;
+    public Projectile[] projectiles;
     public Dictionary<string, int> p_dict = new Dictionary<string, int>();
 
     public WeaponAbility[] weaponAbilities;
@@ -20,15 +20,15 @@ public class ResourcesManager : ScriptableObject
     {
         for (int i = 0; i < projectiles.Length; i++)
         {
-            Bullet pg = projectiles[i].GetComponent<Bullet>();
-            if (p_dict.ContainsKey(pg.bulletId))
+            Projectile p = projectiles[i];
+            if (p_dict.ContainsKey(p.projectileId))
             {
 
             }
             else
             {
-                ClientScene.RegisterPrefab(projectiles[i]);
-                p_dict.Add(pg.bulletId, i);
+                ClientScene.RegisterPrefab(p.projectilePrefab);
+                p_dict.Add(p.projectileId, i);
             }
         }
 
@@ -59,9 +59,9 @@ public class ResourcesManager : ScriptableObject
         }
     }
 
-    public GameObject GetProjectile(string id)
+    public Projectile GetProjectile(string id)
     {
-        GameObject retVal = null;
+        Projectile retVal = null;
         int index = -1;
         if(p_dict.TryGetValue(id, out index))
         {

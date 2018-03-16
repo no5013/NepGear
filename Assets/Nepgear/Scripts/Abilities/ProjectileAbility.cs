@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProjectileAbility : WeaponAbility
 {
     public float projectileForce;
-    public Rigidbody projectile;
+    public Projectile projectile;
     public float reloadTime;
 
     private ProjectileShootTriggerable gun;
