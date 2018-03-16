@@ -8,7 +8,7 @@ public class Projectile : ScriptableObject {
 
     public float damage;
     public float force;
-    public float aliveTime;
+    public float lifeTime;
 
     public GameObject projectilePrefab;
 }

@@ -166,7 +166,7 @@ public class FrameWeaponController : NetworkBehaviour {
 
         Bullet b = projectileInstance.GetComponent<Bullet>();
         b.damage = projectile.damage;
-        b.aliveTime = projectile.aliveTime;
+        b.lifeTime = projectile.lifeTime;
         b.force = projectile.force;
 
         NetworkServer.Spawn(projectileRigidBody.gameObject);

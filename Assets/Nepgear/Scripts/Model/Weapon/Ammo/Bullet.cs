@@ -7,11 +7,11 @@ public class Bullet : NetworkBehaviour {
 
     [SyncVar] [HideInInspector] public float damage;
     [SyncVar] [HideInInspector] public float force;
-    [SyncVar] [HideInInspector] public float aliveTime;
+    [SyncVar] [HideInInspector] public float lifeTime;
 
 	// Use this for initialization
 	void Start () {
-        Destroy(this.gameObject, aliveTime);
+        Destroy(this.gameObject, lifeTime);
 	}
 	
     void OnCollisionEnter(Collision other) {

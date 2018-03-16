@@ -50,6 +50,22 @@ public class GameManager : NetworkBehaviour {
         players.Add(newPlayer);
     }
 
+    public void RemovePlayer(GameObject player)
+    {
+        PlayerBehaviorScript toRemove = null;
+        foreach (var tmp in players)
+        {
+            if (tmp == player.GetComponent<PlayerBehaviorScript>())
+            {
+                toRemove = tmp;
+                break;
+            }
+        }
+
+        if (toRemove != null)
+            players.Remove(toRemove);
+    }
+
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()
     {

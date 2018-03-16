@@ -117,10 +117,15 @@ public class PlayerBehaviorScript : NetworkBehaviour
             GameManager.AddPlayer(gameObject);
     }
 
+    public override void OnNetworkDestroy()
+    {
+        GameManager.instance.RemovePlayer(gameObject);
+    }
+
     public override void OnStartServer()
     {
-        base.OnStartServer();
         GameManager.AddPlayer(gameObject);
+        base.OnStartServer();
     }
 
     public void DisablePlayer()

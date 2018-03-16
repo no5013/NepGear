@@ -14,6 +14,6 @@ MonoBehaviour:
   projectileId: p1
   damage: 20
   force: 1000
-  aliveTime: 5
+  lifeTime: 5
   projectilePrefab: {fileID: 1415093533719792, guid: 8e45d4f09446fbd4abeb9a2ab59a4639,
     type: 2}
