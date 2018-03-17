@@ -40,9 +40,6 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
-        public WeaponResourcesManager wrm;
-        public FrameResourcesManager frm;
-
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
@@ -68,9 +65,6 @@ namespace Prototype.NetworkLobby
             s_Singleton = this;
             currentPlayers = new Dictionary<int, string[]>();
             resourcesManager.Init();
-
-            wrm.Init();
-            frm.Init();
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
 
@@ -282,7 +276,7 @@ namespace Prototype.NetworkLobby
             //2.) Get scriptable object from frame id
             //3.) Get player prefab from character scripable object
 
-            Character character = frm.GetCharacter(characterInfo[0]);
+            Character character = resourcesManager.GetCharacter(characterInfo[0]);
             GameObject spawnPlayer = Instantiate(character.characterPrefab, new Vector3(1, 1, 1), Quaternion.identity) as GameObject;
 
             /*//// Set Child to Camera

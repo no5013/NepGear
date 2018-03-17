@@ -153,8 +153,9 @@ namespace Prototype.NetworkLobby
 
         private void Initialize()
         {
-            characters = LobbyManager.s_Singleton.frm.frames;
-            weapons = LobbyManager.s_Singleton.wrm.weaponAbilities;
+            characters = LobbyManager.s_Singleton.resourcesManager.frames;
+            weapons = LobbyManager.s_Singleton.resourcesManager.weaponAbilities;
+
             dropdowns = GetComponentsInChildren<Dropdown>();
             for (int i = 0; i < dropdowns.Length; i++)
             {
