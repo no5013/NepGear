@@ -17,7 +17,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
- ************************************************************************************/
+************************************************************************************/
 
 using UnityEngine;
 using System.Collections;
@@ -25,48 +25,35 @@ using System.Collections;
 /// <summary>
 /// Simple helper script that conditionally enables rendering of a controller if it is connected.
 /// </summary>
-public class OVRTrackedRemote : MonoBehaviour
+public class OVRGearVrController : MonoBehaviour
 {
 	/// <summary>
-	/// The root GameObject that represents the GearVr Controller model.
+	/// The root GameObject that should be conditionally enabled depending on controller connection status.
 	/// </summary>
-	public GameObject m_modelGearVrController;
-
-	/// <summary>
-	/// The root GameObject that represents the Oculus Go Controller model.
-	/// </summary>
-	public GameObject m_modelOculusGoController;
+    public GameObject m_model;
 
 	/// <summary>
 	/// The controller that determines whether or not to enable rendering of the controller model.
 	/// </summary>
-	public OVRInput.Controller m_controller;
+    public OVRInput.Controller m_controller;
 
-	private bool m_isOculusGo;
-	private bool m_prevControllerConnected = false;
-	private bool m_prevControllerConnectedCached = false;
+    private bool m_prevControllerConnected = false;
+    private bool m_prevControllerConnectedCached = false;
 
-	void Start()
-	{
-		m_isOculusGo = (OVRPlugin.productName == "Oculus Go");
-	}
+    void Update()
+    {
+        bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
 
-	void Update()
-	{
-		bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
+        if ((controllerConnected != m_prevControllerConnected) || !m_prevControllerConnectedCached)
+        {
+            m_model.SetActive(controllerConnected);
+            m_prevControllerConnected = controllerConnected;
+            m_prevControllerConnectedCached = true;
+        }
 
-		if ((controllerConnected != m_prevControllerConnected) || !m_prevControllerConnectedCached)
-		{
-			m_modelOculusGoController.SetActive(controllerConnected && m_isOculusGo);
-			m_modelGearVrController.SetActive(controllerConnected && !m_isOculusGo);
-
-			m_prevControllerConnected = controllerConnected;
-			m_prevControllerConnectedCached = true;
-		}
-
-		if (!controllerConnected)
-		{
-			return;
-		}
-	}
+        if (!controllerConnected)
+        {
+            return;
+        }
+    }
 }

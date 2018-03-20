@@ -2,14 +2,14 @@
 
 Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
-Licensed under the Oculus VR Rift SDK License Version 3.4.1 (the "License");
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
 which is provided at the time of installation or download, or which
 otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
 
-https://developer.oculus.com/licenses/sdk-3.4.1
+http://www.oculus.com/licenses/LICENSE-3.3
 
 Unless required by applicable law or agreed to in writing, the Oculus VR SDK
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,6 +23,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using VR = UnityEngine.VR;
 
 /// <summary>
 /// Manages an Oculus Rift head-mounted display (HMD).
@@ -97,11 +98,8 @@ public class OVRDisplay
 	/// </summary>
 	public void RecenterPose()
 	{
-#if UNITY_2017_2_OR_NEWER
-        UnityEngine.XR.InputTracking.Recenter();
-#else
-		UnityEngine.VR.InputTracking.Recenter();
-#endif
+        VR.InputTracking.Recenter();
+
 		if (RecenteredPose != null)
 		{
 			RecenteredPose();
@@ -168,11 +166,7 @@ public class OVRDisplay
 	/// <summary>
 	/// Gets the resolution and field of view for the given eye.
 	/// </summary>
-#if UNITY_2017_2_OR_NEWER
-    public EyeRenderDesc GetEyeRenderDesc(UnityEngine.XR.XRNode eye)
-#else
-	public EyeRenderDesc GetEyeRenderDesc(UnityEngine.VR.VRNode eye)
-#endif
+    public EyeRenderDesc GetEyeRenderDesc(VR.VRNode eye)
 	{
 		return eyeDescs[(int)eye];
 	}
@@ -234,45 +228,13 @@ public class OVRDisplay
 		}
 	}
 
-	/// <summary>
-	/// Gets the list of available display frequencies supported by this hardware.
-	/// </summary>
-	public float[] displayFrequenciesAvailable
-	{
-		get { return OVRPlugin.systemDisplayFrequenciesAvailable; }
-	}
-
-	/// <summary>
-	/// Gets and sets the current display frequency.
-	/// </summary>
-	public float displayFrequency
-	{
-		get
-		{
-			return OVRPlugin.systemDisplayFrequency;
-		}
-		set
-		{
-			OVRPlugin.systemDisplayFrequency = value;
-		}
-	}
-
 	private void UpdateTextures()
 	{
-#if UNITY_2017_2_OR_NEWER
-		ConfigureEyeDesc(UnityEngine.XR.XRNode.LeftEye);
-        ConfigureEyeDesc(UnityEngine.XR.XRNode.RightEye);
-#else
-		ConfigureEyeDesc(UnityEngine.VR.VRNode.LeftEye);
-		ConfigureEyeDesc(UnityEngine.VR.VRNode.RightEye);
-#endif
+		ConfigureEyeDesc(VR.VRNode.LeftEye);
+        ConfigureEyeDesc(VR.VRNode.RightEye);
 	}
 
-#if UNITY_2017_2_OR_NEWER
-    private void ConfigureEyeDesc(UnityEngine.XR.XRNode eye)
-#else
-	private void ConfigureEyeDesc(UnityEngine.VR.VRNode eye)
-#endif
+    private void ConfigureEyeDesc(VR.VRNode eye)
 	{
 		if (!OVRManager.isHmdPresent)
 			return;

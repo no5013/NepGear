@@ -2,14 +2,14 @@
 
 Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
-Licensed under the Oculus VR Rift SDK License Version 3.4.1 (the "License");
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
 which is provided at the time of installation or download, or which
 otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
 
-https://developer.oculus.com/licenses/sdk-3.4.1
+http://www.oculus.com/licenses/LICENSE-3.3
 
 Unless required by applicable law or agreed to in writing, the Oculus VR SDK
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -249,7 +249,7 @@ public class OVRLint : EditorWindow
 	{
 		if (QualitySettings.anisotropicFiltering != AnisotropicFiltering.Enable)
 		{
-			AddFix("Optimize Aniso", "Anisotropic filtering is recommended for optimal image sharpness and GPU performance.", delegate(UnityEngine.Object obj, bool last, int selected) 
+			AddFix("Optimize Aniso", "Anisotropic filtering is recommended for optimal quality and performance.", delegate(UnityEngine.Object obj, bool last, int selected) 
 			{
 				QualitySettings.anisotropicFiltering = AnisotropicFiltering.Enable;
 			}, null, "Fix");
@@ -305,6 +305,7 @@ public class OVRLint : EditorWindow
 			}, null, "Fix");
 		}
 
+#if UNITY_5_5_OR_NEWER
 		BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;
 		var tier = UnityEngine.Rendering.GraphicsTier.Tier1;
 		var tierSettings = UnityEditor.Rendering.EditorGraphicsSettings.GetTierSettings(target, tier);
@@ -318,7 +319,20 @@ public class OVRLint : EditorWindow
 				UnityEditor.Rendering.EditorGraphicsSettings.SetTierSettings(target, tier, tierSettings);
 			}, null, "Use Forward");
 		}
+#else
+		if (PlayerSettings.renderingPath == RenderingPath.DeferredShading ||
+		    PlayerSettings.renderingPath == RenderingPath.DeferredLighting ||
+		    PlayerSettings.mobileRenderingPath == RenderingPath.DeferredShading ||
+		    PlayerSettings.mobileRenderingPath == RenderingPath.DeferredLighting)
+		{
+		    AddFix ("Optimize Rendering Path", "For CPU performance, please do not use deferred shading.", delegate(UnityEngine.Object obj, bool last, int selected) 
+		    {
+				PlayerSettings.renderingPath = PlayerSettings.mobileRenderingPath = RenderingPath.Forward;
+			}, null, "Use Forward");
+		}
+#endif
 
+#if UNITY_5_5_OR_NEWER
 		if (PlayerSettings.stereoRenderingPath == StereoRenderingPath.MultiPass)
 		{
 		    AddFix ("Optimize Stereo Rendering", "For CPU performance, please enable single-pass or instanced stereo rendering.", delegate(UnityEngine.Object obj, bool last, int selected) 
@@ -326,6 +340,15 @@ public class OVRLint : EditorWindow
 				PlayerSettings.stereoRenderingPath = StereoRenderingPath.Instancing;
 			}, null, "Fix");
 		}
+#elif UNITY_5_4_OR_NEWER
+		if (!PlayerSettings.singlePassStereoRendering)
+		{
+			AddFix ("Optimize Stereo Rendering", "For CPU performance, please enable single-pass or instanced stereo rendering.", delegate(UnityEngine.Object obj, bool last, int selected) 
+			{
+				PlayerSettings.singlePassStereoRendering = true;
+			}, null, "Enable Single-Pass");
+		}
+#endif
 
 		if (LightmapSettings.lightmaps.Length > 0 && LightmapSettings.lightmapsMode != LightmapsMode.NonDirectional)
 		{
@@ -335,6 +358,7 @@ public class OVRLint : EditorWindow
 			}, null, "Switch Lightmap Mode");
 		}
 
+#if UNITY_5_4_OR_NEWER
 		if (Lightmapping.realtimeGI)
 		{
 			AddFix ("Optimize Realtime GI", "For GPU performance, please don't use real-time global illumination. (Set Lightmapping.realtimeGI = false.)", delegate(UnityEngine.Object obj, bool last, int selected) 
@@ -342,15 +366,13 @@ public class OVRLint : EditorWindow
 				Lightmapping.realtimeGI = false;
 			}, null, "Disable Realtime GI");
 		}
+#endif
 
 		var lights = GameObject.FindObjectsOfType<Light> ();
 		for (int i = 0; i < lights.Length; ++i) 
 		{
-#if UNITY_2017_3_OR_NEWER
-			if (lights [i].type != LightType.Directional && !lights [i].bakingOutput.isBaked && IsLightBaked(lights[i]))
-#else
+#if UNITY_5_4_OR_NEWER
 			if (lights [i].type != LightType.Directional && !lights [i].isBaked && IsLightBaked(lights[i]))
-#endif
 			{
 				AddFix ("Optimize Light Baking", "For GPU performance, please bake lightmaps to avoid realtime lighting cost.", delegate(UnityEngine.Object obj, bool last, int selected) 
 				{
@@ -360,6 +382,7 @@ public class OVRLint : EditorWindow
 					}
 				}, lights[i], "Bake Lightmaps");
 			}
+#endif
 
 			if (lights [i].shadows != LightShadows.None && !IsLightBaked(lights[i]))
 			{
@@ -430,6 +453,7 @@ public class OVRLint : EditorWindow
 			}, null, "Fix");
 		}
 
+#if UNITY_5_4_OR_NEWER
 		if (Physics.defaultSolverIterations > 8)
 		{
 		    AddFix ("Optimize Solver Iterations", "For CPU performance, please don't use excessive solver iteration counts.", delegate(UnityEngine.Object obj, bool last, int selected)
@@ -437,6 +461,7 @@ public class OVRLint : EditorWindow
 				Physics.defaultSolverIterations = 8;
 			}, null, "Fix");
 		}
+#endif
 
 		var colliders = GameObject.FindObjectsOfType<Collider> ();
 		for (int i = 0; i < colliders.Length; ++i) 
@@ -532,19 +557,11 @@ public class OVRLint : EditorWindow
 			}, null, "Fix");
 		}
 
-#if UNITY_2017_2_OR_NEWER
-		if (UnityEngine.XR.XRSettings.eyeTextureResolutionScale > 1.5)
-#else
 		if (UnityEngine.VR.VRSettings.renderScale > 1.5)
-#endif
 		{
 			AddFix ("Optimize Render Scale", "For GPU performance, please don't use render scale over 1.5.", delegate(UnityEngine.Object obj, bool last, int selected)
 			{
-#if UNITY_2017_2_OR_NEWER
-				UnityEngine.XR.XRSettings.eyeTextureResolutionScale = 1.5f;
-#else
 				UnityEngine.VR.VRSettings.renderScale = 1.5f;
-#endif
 			}, null, "Fix");
 		}
 	}
@@ -587,6 +604,7 @@ public class OVRLint : EditorWindow
 			}
 		}
 
+#if UNITY_5_5_OR_NEWER
 		ScriptingImplementation backend = PlayerSettings.GetScriptingBackend(UnityEditor.BuildTargetGroup.Android);
 		if (backend != UnityEditor.ScriptingImplementation.IL2CPP)
 		{
@@ -595,6 +613,16 @@ public class OVRLint : EditorWindow
 				PlayerSettings.SetScriptingBackend(UnityEditor.BuildTargetGroup.Android, UnityEditor.ScriptingImplementation.IL2CPP);
 			}, null, "Fix");
 		}
+#else
+		ScriptingImplementation backend = (ScriptingImplementation)PlayerSettings.GetPropertyInt("ScriptingBackend", UnityEditor.BuildTargetGroup.Android);
+		if (backend != UnityEditor.ScriptingImplementation.IL2CPP)
+		{
+			AddFix ("Optimize Scripting Backend", "For CPU performance, please use IL2CPP.", delegate(UnityEngine.Object obj, bool last, int selected)
+			{
+				PlayerSettings.SetPropertyInt("ScriptingBackend", (int)UnityEditor.ScriptingImplementation.IL2CPP, UnityEditor.BuildTargetGroup.Android);
+			}, null, "Fix");
+		}
+#endif
 
 		var monoBehaviours = GameObject.FindObjectsOfType<MonoBehaviour> ();
 		System.Type effectBaseType = System.Type.GetType ("UnityStandardAssets.ImageEffects.PostEffectsBase");
@@ -708,7 +736,15 @@ public class OVRLint : EditorWindow
 	
 	static bool IsLightBaked(Light light)
     {
-		return light.lightmapBakeType == LightmapBakeType.Baked; 
+    	#if UNITY_5_6_OR_NEWER
+    		return light.lightmapBakeType == LightmapBakeType.Baked; 
+    	#elif UNITY_5_5_OR_NEWER
+    		return light.lightmappingMode == LightmappingMode.Baked; 
+    	#else
+			SerializedObject serialObj = new SerializedObject(light); 
+			SerializedProperty lightmapProp = serialObj.FindProperty("m_Lightmapping");
+			return (LightmapType)lightmapProp.intValue == LightmapType.Baked;
+    	#endif
     }
     
     static void SetAudioPreload( AudioClip clip, bool preload, bool refreshImmediately)

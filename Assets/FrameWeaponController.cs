@@ -71,9 +71,11 @@ public class FrameWeaponController : NetworkBehaviour {
         leftWeapon.transform.parent = GetComponentInChildren<LeftController>().transform;
         rightWeapon.transform.parent = GetComponentInChildren<RightController>().transform;
 
-        //// Set Local Position
-        leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
-        rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
+        leftWeapon.transform.localPosition = Vector3.zero;
+        rightWeapon.transform.localPosition = Vector3.zero;
+
+        leftWeapon.transform.localRotation = Quaternion.identity;
+        rightWeapon.transform.localRotation = Quaternion.identity;
 
         leftHandAbility = selectedLeftHandAbility;
         rightHandAbility = selectedRightHandAbility;

@@ -2,14 +2,14 @@
 
 Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
-Licensed under the Oculus VR Rift SDK License Version 3.4.1 (the "License");
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
 which is provided at the time of installation or download, or which
 otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
 
-https://developer.oculus.com/licenses/sdk-3.4.1
+http://www.oculus.com/licenses/LICENSE-3.3
 
 Unless required by applicable law or agreed to in writing, the Oculus VR SDK
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -307,11 +307,8 @@ public static class OVRInput
 
 			if ((connectedControllerTypes & controller.controllerType) != 0)
 			{
-				RawButton rawButtonMask = RawButton.Any & ~RawButton.Back;
-				RawTouch rawTouchMask = RawTouch.Any;
-
-				if (Get(rawButtonMask, controller.controllerType)
-					|| Get(rawTouchMask, controller.controllerType))
+				if (Get(RawButton.Any, controller.controllerType)
+					|| Get(RawTouch.Any, controller.controllerType))
 				{
 					activeControllerType = controller.controllerType;
 				}
@@ -1572,6 +1569,7 @@ public static class OVRInput
 		public virtual Controller Update()
 		{
 			OVRPlugin.ControllerState4 state = OVRPlugin.GetControllerState4((uint)controllerType);
+            //Debug.Log("MalibuManaged - " + (state.Touches & (uint)RawTouch.LTouchpad) + " " + state.LTouchpad.x + " " + state.LTouchpad.y + " " + state.RTouchpad.x + " " + state.RTouchpad.y);
 
 			if (state.LIndexTrigger >= AXIS_AS_BUTTON_THRESHOLD)
 				state.Buttons |= (uint)RawButton.LIndexTrigger;
@@ -2379,7 +2377,6 @@ public static class OVRInput
 		}
 
 		private bool joystickDetected = false;
-		private bool joystickCheckInitialized = false;
 		private float joystickCheckInterval = 1.0f;
 		private float joystickCheckTime = 0.0f;
 
@@ -2391,22 +2388,15 @@ public static class OVRInput
 		private bool ShouldUpdate()
 		{
 			// Use Unity's joystick detection as a quick way to determine joystick availability.
-			if (!joystickCheckInitialized || ((Time.realtimeSinceStartup - joystickCheckTime) > joystickCheckInterval))
+			if ((Time.realtimeSinceStartup - joystickCheckTime) > joystickCheckInterval)
 			{
-				joystickCheckInitialized = true;
 				joystickCheckTime = Time.realtimeSinceStartup;
 				joystickDetected = false;
 				var joystickNames = UnityEngine.Input.GetJoystickNames();
 
 				for (int i = 0; i < joystickNames.Length; i++)
 				{
-					if (joystickNames[i] != String.Empty
-						// workaround issues with Unity's input system
-						&& joystickNames[i].IndexOf("<0x", System.StringComparison.OrdinalIgnoreCase) == -1
-						&& joystickNames[i] != "manufacturer: Oculus HMD"
-						&& joystickNames[i] != "Oculus HMD"
-						&& joystickNames[i] != "Oculus Tracked Remote - Right"
-						&& joystickNames[i] != "Oculus Tracked Remote - Left" )
+					if (joystickNames[i] != String.Empty)
 					{
 						joystickDetected = true;
 						break;
