@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Main Weapon
   - Sub Weapon
+  - Spawn_A
+  - Spawn_B
   layers:
   - Default
   - TransparentFX

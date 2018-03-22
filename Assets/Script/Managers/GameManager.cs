@@ -24,6 +24,9 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
+    public Transform[] spawnPoint_A;
+    public Transform[] spawnPoint_B;
+
     private void Start()
     {
         if (isServer)
@@ -31,6 +34,8 @@ public class GameManager : NetworkBehaviour {
             // Create the delays so they only have to be made once.
             m_StartWait = new WaitForSeconds(startDelay);
             m_EndWait = new WaitForSeconds(endDelay);
+
+            RpcMapSetup();
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine(GameLoop());
@@ -232,8 +237,13 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    [ClientRpc]
+    private void RpcMapSetup()
+    {
+        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
+        spawnPoint_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
+
+        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
+        spawnPoint_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+    }
 }
