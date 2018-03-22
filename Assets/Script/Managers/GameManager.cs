@@ -145,6 +145,7 @@ public class GameManager : NetworkBehaviour {
     void RpcRoundStarting()
     {
         DisablePlayers();
+        RpcResetPlayers();
         Debug.Log("ROUND STARTING");
     }
 
@@ -158,6 +159,25 @@ public class GameManager : NetworkBehaviour {
         {
             // ... return on the next frame.
             yield return null;
+        }
+    }
+
+    private void RpcResetPlayers()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            Transform spawnPoint;
+            if (i % 2 == 0)
+            {
+                spawnPoint = spawnPoint_A[0];
+            }
+            else
+            {
+                spawnPoint = spawnPoint_B[0];
+            }
+
+            players[i].transform.position = spawnPoint.position;
+            players[i].transform.rotation = spawnPoint.rotation;
         }
     }
 
