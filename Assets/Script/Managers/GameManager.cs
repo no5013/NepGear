@@ -145,7 +145,7 @@ public class GameManager : NetworkBehaviour {
     void RpcRoundStarting()
     {
         DisablePlayers();
-        RpcResetPlayers();
+        ResetPlayers();
         Debug.Log("ROUND STARTING");
     }
 
@@ -162,12 +162,13 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
-    private void RpcResetPlayers()
+    private void ResetPlayers()
     {
         for (int i = 0; i < players.Count; i++)
         {
+            Debug.Log("WTF" + players.Count);
             Transform spawnPoint;
-            if (i % 2 == 0)
+            if (players[i].team.Equals("A"))
             {
                 spawnPoint = spawnPoint_A[0];
             }

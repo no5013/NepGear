@@ -67,6 +67,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public string characterID;
 
+    [SyncVar]
+    public string team;
+
     [SerializeField] private Character charFrame;
 
     protected void Start()
@@ -122,11 +125,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         GameManager.instance.RemovePlayer(gameObject);
     }
 
-    public override void OnStartServer()
+    /*public override void OnStartServer()
     {
         GameManager.AddPlayer(gameObject);
         base.OnStartServer();
-    }
+    }*/
 
     public void DisablePlayer()
     {
