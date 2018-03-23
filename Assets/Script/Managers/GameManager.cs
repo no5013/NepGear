@@ -27,19 +27,17 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
-    public Transform[] spawnPoint_A;
-    public Transform[] spawnPoint_B;
-
+    public Transform[] spawnPoints_A;
+    public Transform[] spawnPoints_B;
 
     private void Start()
     {
+        MapSetup();
         if (isServer)
         {
             // Create the delays so they only have to be made once.
             m_StartWait = new WaitForSeconds(startDelay);
             m_EndWait = new WaitForSeconds(endDelay);
-
-            RpcMapSetup();
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine(GameLoop());
@@ -120,15 +118,18 @@ public class GameManager : NetworkBehaviour {
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()
     {
+        
+
         while (players.Count < 2)
             yield return null;
 
         //wait to be sure that all are ready to start
         yield return new WaitForSeconds(2.0f);
 
+        //yield return StartCoroutine(RoundSetup());
+
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(RoundStarting());
-
 
         // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
         yield return StartCoroutine(RoundPlaying());
@@ -178,6 +179,13 @@ public class GameManager : NetworkBehaviour {
         LobbyManager.s_Singleton.ServerReturnToLobby();
     }
 
+    private IEnumerator RoundSetup()
+    {
+        RpcMapSetup();
+
+        yield return null;
+    }
+
     private IEnumerator RoundStarting()
     {
         //we notify all clients that the round is starting
@@ -212,15 +220,14 @@ public class GameManager : NetworkBehaviour {
     {
         for (int i = 0; i < players.Count; i++)
         {
-            Debug.Log("WTF" + players.Count);
             Transform spawnPoint;
             if (players[i].team.Equals("A"))
             {
-                spawnPoint = spawnPoint_A[0];
+                spawnPoint = spawnPoints_A[0];
             }
             else
             {
-                spawnPoint = spawnPoint_B[0];
+                spawnPoint = spawnPoints_B[0];
             }
 
             players[i].transform.position = spawnPoint.position;
@@ -305,12 +312,23 @@ public class GameManager : NetworkBehaviour {
     }
 
     [ClientRpc]
-    private void RpcMapSetup()
+    void RpcMapSetup()
     {
         GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
-        spawnPoint_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
+        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
 
         GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
-        spawnPoint_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+    }
+
+    void MapSetup()
+    {
+        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
+        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
+
+        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
+        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+
+        Debug.Log("MAP SETUP");
     }
 }
