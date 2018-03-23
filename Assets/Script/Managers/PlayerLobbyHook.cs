@@ -13,8 +13,7 @@ public class PlayerLobbyHook : Prototype.NetworkLobby.LobbyHook
 
         if (lp != null)
         {
-            gamePlayer.GetComponent<PlayerBehaviorScript>().team = "A";
-            GameManager.AddPlayer(gamePlayer);
+            GameManager.AddPlayerAutoTeam(gamePlayer);
         }
     }
 }

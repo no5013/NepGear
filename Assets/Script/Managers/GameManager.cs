@@ -10,6 +10,9 @@ public class GameManager : NetworkBehaviour {
 
     static public List<PlayerBehaviorScript> players = new List<PlayerBehaviorScript>();
 
+    static public List<PlayerBehaviorScript> players_A = new List<PlayerBehaviorScript>();
+    static public List<PlayerBehaviorScript> players_B = new List<PlayerBehaviorScript>();
+
     public float startDelay = 3f;           // The delay between the start of RoundStarting and RoundPlaying phases.
     public float endDelay = 3f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
@@ -26,6 +29,7 @@ public class GameManager : NetworkBehaviour {
 
     public Transform[] spawnPoint_A;
     public Transform[] spawnPoint_B;
+
 
     private void Start()
     {
@@ -47,12 +51,54 @@ public class GameManager : NetworkBehaviour {
         instance = this;
     }
 
-    static public void AddPlayer(GameObject player)
+    static public void AddPlayer(GameObject player, string team)
     {
         Debug.Log("ADD PLAYER");
 
         PlayerBehaviorScript newPlayer = player.GetComponent<PlayerBehaviorScript>();
+        newPlayer.team = team;
+
         players.Add(newPlayer);
+
+        if (team.Equals("A"))
+        {
+            players_A.Add(newPlayer);
+        }
+        else
+        {
+            players_B.Add(newPlayer);
+        }
+    }
+
+    static public void AddPlayerAutoTeam(GameObject player)
+    {
+        PlayerBehaviorScript newPlayer = player.GetComponent<PlayerBehaviorScript>();
+
+        string recommendedTeam = RecommendTeam();
+        newPlayer.team = recommendedTeam;
+
+        players.Add(newPlayer);
+
+        if (recommendedTeam.Equals("A"))
+        {
+            players_A.Add(newPlayer);
+        }
+        else
+        {
+            players_B.Add(newPlayer);
+        }
+    }
+
+    static public string RecommendTeam()
+    {
+        if(players_A.Count > players_B.Count)
+        {
+            return "B";
+        }
+        else
+        {
+            return "A";
+        }
     }
 
     public void RemovePlayer(GameObject player)

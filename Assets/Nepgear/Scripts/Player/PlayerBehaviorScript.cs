@@ -117,7 +117,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         base.OnStartClient();
 
         if (!isServer)
-            GameManager.AddPlayer(gameObject);
+            GameManager.AddPlayer(gameObject, team);
     }
 
     public override void OnNetworkDestroy()
