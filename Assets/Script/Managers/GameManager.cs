@@ -328,7 +328,5 @@ public class GameManager : NetworkBehaviour {
 
         GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
         spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
-
-        Debug.Log("MAP SETUP");
     }
 }
