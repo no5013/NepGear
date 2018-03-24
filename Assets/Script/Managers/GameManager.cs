@@ -10,6 +10,9 @@ public class GameManager : NetworkBehaviour {
 
     static public List<PlayerBehaviorScript> players = new List<PlayerBehaviorScript>();
 
+    static public List<PlayerBehaviorScript> players_A = new List<PlayerBehaviorScript>();
+    static public List<PlayerBehaviorScript> players_B = new List<PlayerBehaviorScript>();
+
     public float startDelay = 3f;           // The delay between the start of RoundStarting and RoundPlaying phases.
     public float endDelay = 3f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
@@ -24,8 +27,12 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
+    public Transform[] spawnPoints_A;
+    public Transform[] spawnPoints_B;
+
     private void Start()
     {
+        MapSetup();
         if (isServer)
         {
             // Create the delays so they only have to be made once.
@@ -42,12 +49,54 @@ public class GameManager : NetworkBehaviour {
         instance = this;
     }
 
-    static public void AddPlayer(GameObject player)
+    static public void AddPlayer(GameObject player, string team)
     {
         Debug.Log("ADD PLAYER");
 
         PlayerBehaviorScript newPlayer = player.GetComponent<PlayerBehaviorScript>();
+        newPlayer.team = team;
+
         players.Add(newPlayer);
+
+        if (team.Equals("A"))
+        {
+            players_A.Add(newPlayer);
+        }
+        else
+        {
+            players_B.Add(newPlayer);
+        }
+    }
+
+    static public void AddPlayerAutoTeam(GameObject player)
+    {
+        PlayerBehaviorScript newPlayer = player.GetComponent<PlayerBehaviorScript>();
+
+        string recommendedTeam = RecommendTeam();
+        newPlayer.team = recommendedTeam;
+
+        players.Add(newPlayer);
+
+        if (recommendedTeam.Equals("A"))
+        {
+            players_A.Add(newPlayer);
+        }
+        else
+        {
+            players_B.Add(newPlayer);
+        }
+    }
+
+    static public string RecommendTeam()
+    {
+        if(players_A.Count > players_B.Count)
+        {
+            return "B";
+        }
+        else
+        {
+            return "A";
+        }
     }
 
     public void RemovePlayer(GameObject player)
@@ -69,15 +118,18 @@ public class GameManager : NetworkBehaviour {
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()
     {
+        
+
         while (players.Count < 2)
             yield return null;
 
         //wait to be sure that all are ready to start
         yield return new WaitForSeconds(2.0f);
 
+        //yield return StartCoroutine(RoundSetup());
+
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(RoundStarting());
-
 
         // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
         yield return StartCoroutine(RoundPlaying());
@@ -127,6 +179,13 @@ public class GameManager : NetworkBehaviour {
         LobbyManager.s_Singleton.ServerReturnToLobby();
     }
 
+    private IEnumerator RoundSetup()
+    {
+        RpcMapSetup();
+
+        yield return null;
+    }
+
     private IEnumerator RoundStarting()
     {
         //we notify all clients that the round is starting
@@ -140,6 +199,7 @@ public class GameManager : NetworkBehaviour {
     void RpcRoundStarting()
     {
         DisablePlayers();
+        ResetPlayers();
         Debug.Log("ROUND STARTING");
     }
 
@@ -153,6 +213,25 @@ public class GameManager : NetworkBehaviour {
         {
             // ... return on the next frame.
             yield return null;
+        }
+    }
+
+    private void ResetPlayers()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            Transform spawnPoint;
+            if (players[i].team.Equals("A"))
+            {
+                spawnPoint = spawnPoints_A[0];
+            }
+            else
+            {
+                spawnPoint = spawnPoints_B[0];
+            }
+
+            players[i].transform.position = spawnPoint.position;
+            players[i].transform.rotation = spawnPoint.rotation;
         }
     }
 
@@ -232,8 +311,22 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    [ClientRpc]
+    void RpcMapSetup()
+    {
+        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
+        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
+
+        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
+        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+    }
+
+    void MapSetup()
+    {
+        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
+        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
+
+        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
+        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+    }
 }

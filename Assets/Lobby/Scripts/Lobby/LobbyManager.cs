@@ -59,7 +59,6 @@ namespace Prototype.NetworkLobby
 
         public ResourcesManager resourcesManager;
 
-
         void Start()
         {
             s_Singleton = this;
@@ -486,7 +485,13 @@ namespace Prototype.NetworkLobby
             Still don't clear about On hook but will manage somehow.
              */
             //ChangeTo(characterSelectPanel);
-            ServerChangeScene(playScene);
+
+            MapSelector mapSelector = GetComponentInChildren<MapSelector>();
+
+            if (mapSelector == null)
+                ServerChangeScene(playScene);
+            else
+                ServerChangeScene(mapSelector.GetCurrentMap());
         }
 
         // ----------------- Client callbacks ------------------
@@ -519,5 +524,6 @@ namespace Prototype.NetworkLobby
             ChangeTo(mainMenuPanel);
             infoPanel.Display("Cient error : " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
         }
+
     }
 }

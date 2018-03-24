@@ -224,6 +224,16 @@ namespace Prototype.NetworkLobby
                 
         }
 
+        public void OnNextMapClicked()
+        {
+            CmdNextMapClicked();
+        }
+
+        public void OnPreviousMapClicked()
+        {
+            CmdPreviousMapClicked();
+        }
+
         public void ToggleJoinButton(bool enabled)
         {
             readyButton.gameObject.SetActive(enabled);
@@ -288,6 +298,26 @@ namespace Prototype.NetworkLobby
         public void CmdNameChanged(string name)
         {
             playerName = name;
+        }
+
+        [Command]
+        public void CmdNextMapClicked()
+        {
+            int currentMapIndex = GetComponentInParent<MapSelector>().NextMap();
+            RpcSetCurrentMap(currentMapIndex);
+        }
+
+        [Command]
+        public void CmdPreviousMapClicked()
+        {
+            int currentMapIndex = GetComponentInParent<MapSelector>().PreviousMap();
+            RpcSetCurrentMap(currentMapIndex);
+        }
+
+        [ClientRpc]
+        public void RpcSetCurrentMap(int mapIndex)
+        {
+            GetComponentInParent<MapSelector>().SetShownMap(mapIndex);
         }
 
         [ClientRpc]

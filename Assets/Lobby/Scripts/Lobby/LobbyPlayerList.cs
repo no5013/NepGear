@@ -75,6 +75,20 @@ namespace Prototype.NetworkLobby
                 p.OnPlayerListChanged(i);
                 ++i;
             }
+
+            MapSelector mapSelector = GetComponent<MapSelector>();
+
+            if(mapSelector != null)
+            {
+                if (_players.Count >= LobbyManager.s_Singleton.minPlayers)
+                {
+                    mapSelector.mapSelectionPanel.gameObject.SetActive(true);
+                }
+                else
+                {
+                    mapSelector.mapSelectionPanel.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
