@@ -13,6 +13,8 @@ public class MapSelector : MonoBehaviour {
     
     public int currentMapIndex;
 
+    public RectTransform mapSelectionPanel;
+
 	// Use this for initialization
 
 	void Start () {
@@ -69,4 +71,5 @@ public class MapSelector : MonoBehaviour {
     {
         return maps[currentMapIndex];
     }
+
 }
