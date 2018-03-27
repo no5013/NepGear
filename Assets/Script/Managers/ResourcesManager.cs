@@ -55,7 +55,7 @@ public class ResourcesManager : ScriptableObject
             }
             else
             {
-                ClientScene.RegisterPrefab(frame.characterPrefab);
+                //ClientScene.RegisterPrefab(frame.characterPrefab);
                 f_dict.Add(frame.characterID, i);
             }
         }
@@ -100,6 +100,12 @@ public class ResourcesManager : ScriptableObject
         if (f_dict.TryGetValue(id, out index))
         {
             retVal = frames[index];
+            Debug.Log("FOUND");
+        }
+
+        foreach(string n in f_dict.Keys)
+        {
+            Debug.Log(n);
         }
 
         return retVal;

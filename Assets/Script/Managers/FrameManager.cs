@@ -13,34 +13,18 @@ public class FrameManager : MonoBehaviour {
     public string leftWeaponId;
     public string rightWeaponId;
 
-    public string inputL;
-    public string inputR;
-
-    private Animator animator;
+    public Animator animator;
 
     // Use this for initialization
-    void Start () {
+
+    private void Awake()
+    {
         mountGadgetL = GetComponentInChildren<MountGadgetL>().transform;
         mountGadgetR = GetComponentInChildren<MountGadgetR>().transform;
         animator = GetComponent<Animator>();
 
-        EquipWeaponLeft(leftWeaponId);
-        EquipWeaponRight(rightWeaponId);
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		if(inputL != leftWeaponId)
-        {
-            EquipWeaponLeft(inputL);
-            leftWeaponId = inputL;
-        }
-
-        if (inputR != rightWeaponId)
-        {
-            EquipWeaponRight(inputR);
-            rightWeaponId = inputR;
-        }
+        /*EquipWeaponLeft(leftWeaponId);
+        EquipWeaponRight(rightWeaponId);*/
     }
 
     void EquipWeaponLeft(string weaponId)
@@ -62,6 +46,26 @@ public class FrameManager : MonoBehaviour {
         {
             animator.SetTrigger("Equip");
             rightWeapon = Instantiate(rightWeaponAbility.gunPrefab, mountGadgetR);
+        }
+    }
+
+    public void EquipLeftWeapon(WeaponAbility weaponAbility)
+    {
+        Destroy(leftWeapon);
+        if (weaponAbility != null)
+        {
+            animator.SetTrigger("Equip");
+            leftWeapon = Instantiate(weaponAbility.gunPrefab, mountGadgetL);
+        }
+    }
+
+    public void EquipRightWeapon(WeaponAbility weaponAbility)
+    {
+        Destroy(rightWeapon);
+        if (weaponAbility != null)
+        {
+            animator.SetTrigger("Equip");
+            rightWeapon = Instantiate(weaponAbility.gunPrefab, mountGadgetR);
         }
     }
 }
