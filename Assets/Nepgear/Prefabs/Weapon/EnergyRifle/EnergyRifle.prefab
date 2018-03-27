@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4614833322655836}
   - component: {fileID: 82892741633344178}
-  - component: {fileID: 114709066661492630}
+  - component: {fileID: 114285133296892122}
   m_Layer: 0
   m_Name: EnergyRifle
   m_TagString: Main Weapon
@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4614088139171316}
   m_Layer: 0
-  m_Name: RecoilMechanic
+  m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,7 +640,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114709066661492630
+--- !u!114 &114285133296892122
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -648,14 +648,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1400920246763924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783e45b88c608fc42b33dda702c7de78, type: 3}
+  m_Script: {fileID: 11500000, guid: 9eebef1192b50f740a17bedd27f1fe34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  range: 50
-  speed: 10
-  fireRate: 5
-  magazine: 30
-  reloadTime: 2
-  bullet: {fileID: 1910427815061626, guid: e8ce6ed24ad840946b1254f8bb355f38, type: 2}
-  muzzle: {fileID: 1467063332984298}
+  magazine: 0
+  bulletSpawn: {fileID: 4614088139171316}
+  reloadTime: 0
+  gunSound: {fileID: 0}
+  damage: 0
+  range: 0
+  gunId: 

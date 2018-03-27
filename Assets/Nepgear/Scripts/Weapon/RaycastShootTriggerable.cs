@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileShootTriggerable : MonoBehaviour {
-
-    [HideInInspector] public Projectile projectile;
-    public Transform bulletSpawn;
-    [HideInInspector] public float projectileForce;
+public class RaycastShootTriggerable : MonoBehaviour {
     [HideInInspector] public int magazine;
+    public Transform bulletSpawn;
     [HideInInspector] public float reloadTime;
     [HideInInspector] public AudioClip gunSound;
+    [HideInInspector] public float damage;
+    [HideInInspector] public float range;
+    [HideInInspector] public string gunId;
+    [HideInInspector] public float force;
     private AudioSource soundSource;
 
     private int bulletLeft;
@@ -28,15 +29,15 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
     public void Fire()
     {
-        if(isReloading)
+        if (isReloading)
         {
             return;
         }
-        if(CanFire())
+        if (CanFire())
         {
             bulletLeft--;
             soundSource.Play();
-            fwc.CmdFireProjectile(projectile.projectileId, projectileForce, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+            fwc.CmdFireRaycast(gunId, damage, force, range, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
         }
         else
         {
@@ -51,7 +52,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     {
         return !(isReloading || bulletLeft <= 0);
     }
-    
+
     IEnumerator Reloading()
     {
         isReloading = true;

@@ -173,4 +173,38 @@ public class FrameWeaponController : NetworkBehaviour {
 
         NetworkServer.Spawn(projectileRigidBody.gameObject);
     }
+
+    [Command]
+    public void CmdFireRaycast(string gunId, float damage, float force, float range, Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(position, forward, out hit, range))
+        {
+            if (hit.collider.tag.Equals("Player"))
+            {
+                hit.collider.SendMessage("TakeDamage", damage);
+            }
+            Destructible target = hit.collider.transform.GetComponent<Destructible>();
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+                Rigidbody r = hit.collider.GetComponent<Rigidbody>();
+                //r.AddForce(transform.forward * force);
+            }
+        }
+        
+    }
+
+    //[ClientRpc]
+    //public void RpcRaycastHit(RaycastHit hit, float damage)
+    //{
+    //    if (hit.collider.gameObject.tag == "player")
+    //    {
+    //        Debug.Log("Hit Player");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Hit Smthing");
+    //    }
+    //}
 }
