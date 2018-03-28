@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Oculus/OVRMRCameraFrame"
+﻿Shader "Oculus/OVRMRCameraFrame"
 {
 	Properties
 	{
@@ -55,11 +53,7 @@ Shader "Oculus/OVRMRCameraFrame"
 			v2f vert (appdata v)
 			{
 				v2f o;
-#if UNITY_VERSION >= 540
 				o.vertex = UnityObjectToClipPos(v.vertex);
-#else
-				o.vertex = UnityObjectToClipPos(v.vertex);
-#endif
 				o.vertex *= _Visible;
 				o.texcoord = TRANSFORM_TEX(float2(v.texcoord.x, 1.0-v.texcoord.y), _MainTex);
 				return o;
