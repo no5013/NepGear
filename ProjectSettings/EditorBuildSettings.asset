@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Maps/PracticeField.unity
     guid: 2b414c309de4f6549985ee242edd76cf
+  - enabled: 1
+    path: Assets/Scene/VRLobbyScene.unity
+    guid: 6cf14dffc6f07254f9ec4dada479ff48

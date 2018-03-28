@@ -245,10 +245,14 @@ public class OVRGazePointer : MonoBehaviour {
         }
 
         // rotate the trail-follower to movement direction so we get a nicer particle effect
-        Quaternion trailRotation = trailFollower.rotation;
-        //we're setting the global rotation of the child (positions are in global coordinates), so premultiply the look vector with the parent transform
-        trailRotation.SetLookRotation(transform.rotation * new Vector3(0, 0, 1), (lastPosition - transform.position).normalized);
-        trailFollower.rotation = trailRotation;
+
+        if (trailFollower != null)
+        {
+            Quaternion trailRotation = trailFollower.rotation;
+            //we're setting the global rotation of the child (positions are in global coordinates), so premultiply the look vector with the parent transform
+            trailRotation.SetLookRotation(transform.rotation * new Vector3(0, 0, 1), (lastPosition - transform.position).normalized);
+            trailFollower.rotation = trailRotation;
+        }
 
         // Keep track of cursor movement direction
         positionDelta = transform.position - lastPosition;

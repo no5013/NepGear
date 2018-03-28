@@ -55,7 +55,7 @@ public class ResourcesManager : ScriptableObject
             }
             else
             {
-                //ClientScene.RegisterPrefab(frame.characterPrefab);
+                ClientScene.RegisterPrefab(frame.characterPrefab);
                 f_dict.Add(frame.characterID, i);
             }
         }
