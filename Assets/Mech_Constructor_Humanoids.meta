@@ -1,10 +1,18 @@
 fileFormatVersion: 2
-guid: a052bd1b0accb2e42b4356446e2875bb
+<<<<<<< HEAD
+guid: b5eea09975de0624a993398b5f0736e8
 folderAsset: yes
 timeCreated: 1523615723
 licenseType: Free
 DefaultImporter:
+=======
+guid: d755903129e21704db36be9d9221c533
+folderAsset: yes
+timeCreated: 1520942000
+licenseType: Free
+DefaultImporter:
   externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+>>>>>>> [WIP] movement control
+  userData:
+  assetBundleName:
+  assetBundleVariant:

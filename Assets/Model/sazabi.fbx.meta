@@ -1,0 +1,3152 @@
+fileFormatVersion: 2
+guid: 04e7ac79f0d201e4d974eafa09f48c23
+timeCreated: 1519984315
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box002
+    100004: Box003
+    100006: Box004
+    100008: Box005
+    100010: Box006
+    100012: Box011
+    100014: Box012
+    100016: Box013
+    100018: Box014
+    100020: Box015
+    100022: Box016
+    100024: Box017
+    100026: Box018
+    100028: Box019
+    100030: Box020
+    100032: Box021
+    100034: Box022
+    100036: Box023
+    100038: Box024
+    100040: Box025
+    100042: Box026
+    100044: Box027
+    100046: Box028
+    100048: Box029
+    100050: Box030
+    100052: Camera
+    100054: Circle001
+    100056: Circle002
+    100058: Circle003
+    100060: Circle004
+    100062: Cylinder001
+    100064: Cylinder002
+    100066: Cylinder003
+    100068: Cylinder019
+    100070: Cylinder021
+    100072: Cylinder023
+    100074: Cylinder024
+    100076: Cylinder025
+    100078: Cylinder027
+    100080: Cylinder029
+    100082: Cylinder030
+    100084: Cylinder031
+    100086: Cylinder032
+    100088: Cylinder033
+    100090: Cylinder034
+    100092: Cylinder035
+    100094: Cylinder036
+    100096: Cylinder037
+    100098: Cylinder038
+    100100: Cylinder039
+    100102: Cylinder040
+    100104: Cylinder041
+    100106: Cylinder042
+    100108: Cylinder043
+    100110: Cylinder044
+    100112: Cylinder045
+    100114: Cylinder046
+    100116: Cylinder047
+    100118: Cylinder049
+    100120: Cylinder050
+    100122: Cylinder051
+    100124: Cylinder052
+    100126: Cylinder053
+    100128: Cylinder054
+    100130: Cylinder056
+    100132: Cylinder057
+    100134: Cylinder058
+    100136: Cylinder059
+    100138: Cylinder060
+    100140: Cylinder061
+    100142: Cylinder062
+    100144: Cylinder063
+    100146: Cylinder064
+    100148: Cylinder065
+    100150: Cylinder066
+    100152: Cylinder067
+    100154: Cylinder068
+    100156: Cylinder069
+    100158: Cylinder070
+    100160: Cylinder071
+    100162: Cylinder072
+    100164: Cylinder073
+    100166: Cylinder074
+    100168: Cylinder076
+    100170: Cylinder077
+    100172: Cylinder078
+    100174: Cylinder079
+    100176: Cylinder080
+    100178: Cylinder081
+    100180: Cylinder082
+    100182: Cylinder083
+    100184: Cylinder084
+    100186: Cylinder085
+    100188: Cylinder086
+    100190: Cylinder087
+    100192: Cylinder088
+    100194: Cylinder089
+    100196: Cylinder090
+    100198: Cylinder091
+    100200: Cylinder092
+    100202: Cylinder093
+    100204: Cylinder094
+    100206: Cylinder095
+    100208: Cylinder096
+    100210: Cylinder097
+    100212: Cylinder099
+    100214: Cylinder100
+    100216: Cylinder101
+    100218: Cylinder102
+    100220: Cylinder103
+    100222: Cylinder104
+    100224: Cylinder105
+    100226: Cylinder106
+    100228: Cylinder107
+    100230: Cylinder108
+    100232: Cylinder109
+    100234: Cylinder110
+    100236: Cylinder111
+    100238: Cylinder112
+    100240: Cylinder113
+    100242: Cylinder114
+    100244: Cylinder115
+    100246: Cylinder116
+    100248: Cylinder117
+    100250: Cylinder118
+    100252: Cylinder119
+    100254: Cylinder120
+    100256: Cylinder121
+    100258: Cylinder122
+    100260: Cylinder123
+    100262: Cylinder124
+    100264: Cylinder125
+    100266: Cylinder130
+    100268: Cylinder132
+    100270: Cylinder133
+    100272: Cylinder134
+    100274: Cylinder135
+    100276: Cylinder136
+    100278: Cylinder137
+    100280: Cylinder138
+    100282: Cylinder139
+    100284: Cylinder140
+    100286: Cylinder141
+    100288: Cylinder142
+    100290: Cylinder143
+    100292: Cylinder144
+    100294: Cylinder145
+    100296: Cylinder146
+    100298: Cylinder152
+    100300: Cylinder170
+    100302: Cylinder171
+    100304: Cylinder172
+    100306: Cylinder173
+    100308: Cylinder174
+    100310: Cylinder175
+    100312: Cylinder176
+    100314: Cylinder177
+    100316: Cylinder178
+    100318: Cylinder179
+    100320: Cylinder180
+    100322: Cylinder181
+    100324: Cylinder182
+    100326: Cylinder183
+    100328: Cylinder184
+    100330: Cylinder185
+    100332: Cylinder186
+    100334: Cylinder187
+    100336: Cylinder188
+    100338: Cylinder189
+    100340: Cylinder190
+    100342: Cylinder191
+    100344: Cylinder197
+    100346: Cylinder198
+    100348: Cylinder199
+    100350: Cylinder204
+    100352: Cylinder205
+    100354: Cylinder206
+    100356: Cylinder207
+    100358: Cylinder208
+    100360: Cylinder209
+    100362: Cylinder210
+    100364: Cylinder211
+    100366: Cylinder212
+    100368: Cylinder213
+    100370: Cylinder214
+    100372: Cylinder215
+    100374: Cylinder216
+    100376: Cylinder217
+    100378: Cylinder218
+    100380: Cylinder219
+    100382: Cylinder220
+    100384: Cylinder221
+    100386: Cylinder222
+    100388: Cylinder223
+    100390: Cylinder224
+    100392: Cylinder225
+    100394: Cylinder226
+    100396: Cylinder227
+    100398: Cylinder228
+    100400: Cylinder229
+    100402: Cylinder230
+    100404: Cylinder231
+    100406: Cylinder232
+    100408: Lamp
+    100410: Line001
+    100412: Line002
+    100414: Line003
+    100416: Line004
+    100418: Line005
+    100420: Line006
+    100422: Line007
+    100424: Line008
+    100426: Line009
+    100428: Line010
+    100430: Line011
+    100432: Line012
+    100434: Line016
+    100436: Line017
+    100438: Line031
+    100440: Line039
+    100442: Object001
+    100444: Object002
+    100446: Object003
+    100448: Object005
+    100450: Object006
+    100452: Object007
+    100454: Object008
+    100456: Object009
+    100458: Object010
+    100460: Object011
+    100462: Object012
+    100464: Object013
+    100466: Object014
+    100468: Object015
+    100470: Object016
+    100472: Object017
+    100474: Object018
+    100476: Object019
+    100478: Object020
+    100480: Object021
+    100482: Object022
+    100484: Object023
+    100486: Object024
+    100488: Object025
+    100490: Object026
+    100492: Object031
+    100494: Object032
+    100496: Object033
+    100498: Object035
+    100500: Object036
+    100502: Object037
+    100504: Object038
+    100506: Object039
+    100508: Plane001
+    100510: Plane002
+    100512: Plane003
+    100514: Plane004
+    100516: Plane006
+    100518: Plane007
+    100520: Plane008
+    100522: Plane009
+    100524: Plane010
+    100526: Plane011
+    100528: Plane012
+    100530: Plane013
+    100532: Plane014
+    100534: Plane015
+    100536: Plane016
+    100538: Plane017
+    100540: Plane018
+    100542: Plane019
+    100544: Plane020
+    100546: Plane021
+    100548: Plane022
+    100550: Plane024
+    100552: Plane027
+    100554: Plane028
+    100556: Plane030
+    100558: Plane031
+    100560: Plane032
+    100562: //RootNode
+    100564: Shape001
+    100566: Shape002
+    100568: Shape003
+    100570: Shape004
+    100572: Shape005
+    100574: Shape006
+    100576: Shape007
+    100578: Shape008
+    100580: Shape009
+    100582: Shape010
+    100584: Sphere001
+    100586: Sphere002
+    100588: Sphere003
+    100590: Sphere004
+    100592: Sphere005
+    100594: Sphere006
+    100596: Sphere007
+    100598: Sphere008
+    100600: Sphere009
+    100602: Sphere010
+    100604: Sphere011
+    100606: Sphere012
+    100608: Sphere013
+    400000: Box001
+    400002: Box002
+    400004: Box003
+    400006: Box004
+    400008: Box005
+    400010: Box006
+    400012: Box011
+    400014: Box012
+    400016: Box013
+    400018: Box014
+    400020: Box015
+    400022: Box016
+    400024: Box017
+    400026: Box018
+    400028: Box019
+    400030: Box020
+    400032: Box021
+    400034: Box022
+    400036: Box023
+    400038: Box024
+    400040: Box025
+    400042: Box026
+    400044: Box027
+    400046: Box028
+    400048: Box029
+    400050: Box030
+    400052: Camera
+    400054: Circle001
+    400056: Circle002
+    400058: Circle003
+    400060: Circle004
+    400062: Cylinder001
+    400064: Cylinder002
+    400066: Cylinder003
+    400068: Cylinder019
+    400070: Cylinder021
+    400072: Cylinder023
+    400074: Cylinder024
+    400076: Cylinder025
+    400078: Cylinder027
+    400080: Cylinder029
+    400082: Cylinder030
+    400084: Cylinder031
+    400086: Cylinder032
+    400088: Cylinder033
+    400090: Cylinder034
+    400092: Cylinder035
+    400094: Cylinder036
+    400096: Cylinder037
+    400098: Cylinder038
+    400100: Cylinder039
+    400102: Cylinder040
+    400104: Cylinder041
+    400106: Cylinder042
+    400108: Cylinder043
+    400110: Cylinder044
+    400112: Cylinder045
+    400114: Cylinder046
+    400116: Cylinder047
+    400118: Cylinder049
+    400120: Cylinder050
+    400122: Cylinder051
+    400124: Cylinder052
+    400126: Cylinder053
+    400128: Cylinder054
+    400130: Cylinder056
+    400132: Cylinder057
+    400134: Cylinder058
+    400136: Cylinder059
+    400138: Cylinder060
+    400140: Cylinder061
+    400142: Cylinder062
+    400144: Cylinder063
+    400146: Cylinder064
+    400148: Cylinder065
+    400150: Cylinder066
+    400152: Cylinder067
+    400154: Cylinder068
+    400156: Cylinder069
+    400158: Cylinder070
+    400160: Cylinder071
+    400162: Cylinder072
+    400164: Cylinder073
+    400166: Cylinder074
+    400168: Cylinder076
+    400170: Cylinder077
+    400172: Cylinder078
+    400174: Cylinder079
+    400176: Cylinder080
+    400178: Cylinder081
+    400180: Cylinder082
+    400182: Cylinder083
+    400184: Cylinder084
+    400186: Cylinder085
+    400188: Cylinder086
+    400190: Cylinder087
+    400192: Cylinder088
+    400194: Cylinder089
+    400196: Cylinder090
+    400198: Cylinder091
+    400200: Cylinder092
+    400202: Cylinder093
+    400204: Cylinder094
+    400206: Cylinder095
+    400208: Cylinder096
+    400210: Cylinder097
+    400212: Cylinder099
+    400214: Cylinder100
+    400216: Cylinder101
+    400218: Cylinder102
+    400220: Cylinder103
+    400222: Cylinder104
+    400224: Cylinder105
+    400226: Cylinder106
+    400228: Cylinder107
+    400230: Cylinder108
+    400232: Cylinder109
+    400234: Cylinder110
+    400236: Cylinder111
+    400238: Cylinder112
+    400240: Cylinder113
+    400242: Cylinder114
+    400244: Cylinder115
+    400246: Cylinder116
+    400248: Cylinder117
+    400250: Cylinder118
+    400252: Cylinder119
+    400254: Cylinder120
+    400256: Cylinder121
+    400258: Cylinder122
+    400260: Cylinder123
+    400262: Cylinder124
+    400264: Cylinder125
+    400266: Cylinder130
+    400268: Cylinder132
+    400270: Cylinder133
+    400272: Cylinder134
+    400274: Cylinder135
+    400276: Cylinder136
+    400278: Cylinder137
+    400280: Cylinder138
+    400282: Cylinder139
+    400284: Cylinder140
+    400286: Cylinder141
+    400288: Cylinder142
+    400290: Cylinder143
+    400292: Cylinder144
+    400294: Cylinder145
+    400296: Cylinder146
+    400298: Cylinder152
+    400300: Cylinder170
+    400302: Cylinder171
+    400304: Cylinder172
+    400306: Cylinder173
+    400308: Cylinder174
+    400310: Cylinder175
+    400312: Cylinder176
+    400314: Cylinder177
+    400316: Cylinder178
+    400318: Cylinder179
+    400320: Cylinder180
+    400322: Cylinder181
+    400324: Cylinder182
+    400326: Cylinder183
+    400328: Cylinder184
+    400330: Cylinder185
+    400332: Cylinder186
+    400334: Cylinder187
+    400336: Cylinder188
+    400338: Cylinder189
+    400340: Cylinder190
+    400342: Cylinder191
+    400344: Cylinder197
+    400346: Cylinder198
+    400348: Cylinder199
+    400350: Cylinder204
+    400352: Cylinder205
+    400354: Cylinder206
+    400356: Cylinder207
+    400358: Cylinder208
+    400360: Cylinder209
+    400362: Cylinder210
+    400364: Cylinder211
+    400366: Cylinder212
+    400368: Cylinder213
+    400370: Cylinder214
+    400372: Cylinder215
+    400374: Cylinder216
+    400376: Cylinder217
+    400378: Cylinder218
+    400380: Cylinder219
+    400382: Cylinder220
+    400384: Cylinder221
+    400386: Cylinder222
+    400388: Cylinder223
+    400390: Cylinder224
+    400392: Cylinder225
+    400394: Cylinder226
+    400396: Cylinder227
+    400398: Cylinder228
+    400400: Cylinder229
+    400402: Cylinder230
+    400404: Cylinder231
+    400406: Cylinder232
+    400408: Lamp
+    400410: Line001
+    400412: Line002
+    400414: Line003
+    400416: Line004
+    400418: Line005
+    400420: Line006
+    400422: Line007
+    400424: Line008
+    400426: Line009
+    400428: Line010
+    400430: Line011
+    400432: Line012
+    400434: Line016
+    400436: Line017
+    400438: Line031
+    400440: Line039
+    400442: Object001
+    400444: Object002
+    400446: Object003
+    400448: Object005
+    400450: Object006
+    400452: Object007
+    400454: Object008
+    400456: Object009
+    400458: Object010
+    400460: Object011
+    400462: Object012
+    400464: Object013
+    400466: Object014
+    400468: Object015
+    400470: Object016
+    400472: Object017
+    400474: Object018
+    400476: Object019
+    400478: Object020
+    400480: Object021
+    400482: Object022
+    400484: Object023
+    400486: Object024
+    400488: Object025
+    400490: Object026
+    400492: Object031
+    400494: Object032
+    400496: Object033
+    400498: Object035
+    400500: Object036
+    400502: Object037
+    400504: Object038
+    400506: Object039
+    400508: Plane001
+    400510: Plane002
+    400512: Plane003
+    400514: Plane004
+    400516: Plane006
+    400518: Plane007
+    400520: Plane008
+    400522: Plane009
+    400524: Plane010
+    400526: Plane011
+    400528: Plane012
+    400530: Plane013
+    400532: Plane014
+    400534: Plane015
+    400536: Plane016
+    400538: Plane017
+    400540: Plane018
+    400542: Plane019
+    400544: Plane020
+    400546: Plane021
+    400548: Plane022
+    400550: Plane024
+    400552: Plane027
+    400554: Plane028
+    400556: Plane030
+    400558: Plane031
+    400560: Plane032
+    400562: //RootNode
+    400564: Shape001
+    400566: Shape002
+    400568: Shape003
+    400570: Shape004
+    400572: Shape005
+    400574: Shape006
+    400576: Shape007
+    400578: Shape008
+    400580: Shape009
+    400582: Shape010
+    400584: Sphere001
+    400586: Sphere002
+    400588: Sphere003
+    400590: Sphere004
+    400592: Sphere005
+    400594: Sphere006
+    400596: Sphere007
+    400598: Sphere008
+    400600: Sphere009
+    400602: Sphere010
+    400604: Sphere011
+    400606: Sphere012
+    400608: Sphere013
+    2000000: Camera
+    2100000: 08___Default
+    2100002: 09___Default
+    2100004: Material__2594
+    2100006: wire_135059008
+    2100008: 13___Default
+    2100010: 02___Default
+    2100012: 07___Default
+    2100014: 17___Default
+    2100016: 04___Default
+    2100018: 11___Default
+    2100020: 05___Default
+    2100022: 5
+    2100024: 15___Default
+    2100026: 16___Default
+    2100028: wire_140088225
+    2100030: 10___Default
+    2100032: 14___Default
+    2100034: wire_016016016
+    2100036: wire_229154215
+    2100038: Material__518
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Box011
+    2300014: Box012
+    2300016: Box013
+    2300018: Box014
+    2300020: Box015
+    2300022: Box016
+    2300024: Box017
+    2300026: Box018
+    2300028: Box019
+    2300030: Box020
+    2300032: Box021
+    2300034: Box022
+    2300036: Box023
+    2300038: Box024
+    2300040: Box025
+    2300042: Box026
+    2300044: Box027
+    2300046: Box028
+    2300048: Box029
+    2300050: Box030
+    2300052: Circle001
+    2300054: Circle002
+    2300056: Circle003
+    2300058: Circle004
+    2300060: Cylinder001
+    2300062: Cylinder002
+    2300064: Cylinder003
+    2300066: Cylinder019
+    2300068: Cylinder021
+    2300070: Cylinder023
+    2300072: Cylinder024
+    2300074: Cylinder025
+    2300076: Cylinder027
+    2300078: Cylinder029
+    2300080: Cylinder030
+    2300082: Cylinder031
+    2300084: Cylinder032
+    2300086: Cylinder033
+    2300088: Cylinder034
+    2300090: Cylinder035
+    2300092: Cylinder036
+    2300094: Cylinder037
+    2300096: Cylinder038
+    2300098: Cylinder039
+    2300100: Cylinder040
+    2300102: Cylinder041
+    2300104: Cylinder042
+    2300106: Cylinder043
+    2300108: Cylinder044
+    2300110: Cylinder045
+    2300112: Cylinder046
+    2300114: Cylinder047
+    2300116: Cylinder049
+    2300118: Cylinder050
+    2300120: Cylinder051
+    2300122: Cylinder052
+    2300124: Cylinder053
+    2300126: Cylinder054
+    2300128: Cylinder056
+    2300130: Cylinder057
+    2300132: Cylinder058
+    2300134: Cylinder059
+    2300136: Cylinder060
+    2300138: Cylinder061
+    2300140: Cylinder062
+    2300142: Cylinder063
+    2300144: Cylinder064
+    2300146: Cylinder065
+    2300148: Cylinder066
+    2300150: Cylinder067
+    2300152: Cylinder068
+    2300154: Cylinder069
+    2300156: Cylinder070
+    2300158: Cylinder071
+    2300160: Cylinder072
+    2300162: Cylinder073
+    2300164: Cylinder074
+    2300166: Cylinder076
+    2300168: Cylinder077
+    2300170: Cylinder078
+    2300172: Cylinder079
+    2300174: Cylinder080
+    2300176: Cylinder081
+    2300178: Cylinder082
+    2300180: Cylinder083
+    2300182: Cylinder084
+    2300184: Cylinder085
+    2300186: Cylinder086
+    2300188: Cylinder087
+    2300190: Cylinder088
+    2300192: Cylinder089
+    2300194: Cylinder090
+    2300196: Cylinder091
+    2300198: Cylinder092
+    2300200: Cylinder093
+    2300202: Cylinder094
+    2300204: Cylinder095
+    2300206: Cylinder096
+    2300208: Cylinder097
+    2300210: Cylinder099
+    2300212: Cylinder100
+    2300214: Cylinder101
+    2300216: Cylinder102
+    2300218: Cylinder103
+    2300220: Cylinder104
+    2300222: Cylinder105
+    2300224: Cylinder106
+    2300226: Cylinder107
+    2300228: Cylinder108
+    2300230: Cylinder109
+    2300232: Cylinder110
+    2300234: Cylinder111
+    2300236: Cylinder112
+    2300238: Cylinder113
+    2300240: Cylinder114
+    2300242: Cylinder115
+    2300244: Cylinder116
+    2300246: Cylinder117
+    2300248: Cylinder118
+    2300250: Cylinder119
+    2300252: Cylinder120
+    2300254: Cylinder121
+    2300256: Cylinder122
+    2300258: Cylinder123
+    2300260: Cylinder124
+    2300262: Cylinder125
+    2300264: Cylinder130
+    2300266: Cylinder132
+    2300268: Cylinder133
+    2300270: Cylinder134
+    2300272: Cylinder135
+    2300274: Cylinder136
+    2300276: Cylinder137
+    2300278: Cylinder138
+    2300280: Cylinder139
+    2300282: Cylinder140
+    2300284: Cylinder141
+    2300286: Cylinder142
+    2300288: Cylinder143
+    2300290: Cylinder144
+    2300292: Cylinder145
+    2300294: Cylinder146
+    2300296: Cylinder152
+    2300298: Cylinder170
+    2300300: Cylinder171
+    2300302: Cylinder172
+    2300304: Cylinder173
+    2300306: Cylinder174
+    2300308: Cylinder175
+    2300310: Cylinder176
+    2300312: Cylinder177
+    2300314: Cylinder178
+    2300316: Cylinder179
+    2300318: Cylinder180
+    2300320: Cylinder181
+    2300322: Cylinder182
+    2300324: Cylinder183
+    2300326: Cylinder184
+    2300328: Cylinder185
+    2300330: Cylinder186
+    2300332: Cylinder187
+    2300334: Cylinder188
+    2300336: Cylinder189
+    2300338: Cylinder190
+    2300340: Cylinder191
+    2300342: Cylinder197
+    2300344: Cylinder198
+    2300346: Cylinder199
+    2300348: Cylinder204
+    2300350: Cylinder205
+    2300352: Cylinder206
+    2300354: Cylinder207
+    2300356: Cylinder208
+    2300358: Cylinder209
+    2300360: Cylinder210
+    2300362: Cylinder211
+    2300364: Cylinder212
+    2300366: Cylinder213
+    2300368: Cylinder214
+    2300370: Cylinder215
+    2300372: Cylinder216
+    2300374: Cylinder217
+    2300376: Cylinder218
+    2300378: Cylinder219
+    2300380: Cylinder220
+    2300382: Cylinder221
+    2300384: Cylinder222
+    2300386: Cylinder223
+    2300388: Cylinder224
+    2300390: Cylinder225
+    2300392: Cylinder226
+    2300394: Cylinder227
+    2300396: Cylinder228
+    2300398: Cylinder229
+    2300400: Cylinder230
+    2300402: Cylinder231
+    2300404: Cylinder232
+    2300406: Line001
+    2300408: Line002
+    2300410: Line003
+    2300412: Line004
+    2300414: Line005
+    2300416: Line006
+    2300418: Line007
+    2300420: Line008
+    2300422: Line009
+    2300424: Line010
+    2300426: Line011
+    2300428: Line012
+    2300430: Line016
+    2300432: Line017
+    2300434: Line031
+    2300436: Line039
+    2300438: Object001
+    2300440: Object002
+    2300442: Object003
+    2300444: Object005
+    2300446: Object006
+    2300448: Object007
+    2300450: Object008
+    2300452: Object009
+    2300454: Object010
+    2300456: Object011
+    2300458: Object012
+    2300460: Object013
+    2300462: Object014
+    2300464: Object015
+    2300466: Object016
+    2300468: Object017
+    2300470: Object018
+    2300472: Object019
+    2300474: Object020
+    2300476: Object021
+    2300478: Object022
+    2300480: Object023
+    2300482: Object024
+    2300484: Object025
+    2300486: Object026
+    2300488: Object031
+    2300490: Object032
+    2300492: Object033
+    2300494: Object035
+    2300496: Object036
+    2300498: Object037
+    2300500: Object038
+    2300502: Object039
+    2300504: Plane001
+    2300506: Plane002
+    2300508: Plane003
+    2300510: Plane004
+    2300512: Plane006
+    2300514: Plane007
+    2300516: Plane008
+    2300518: Plane009
+    2300520: Plane010
+    2300522: Plane011
+    2300524: Plane012
+    2300526: Plane013
+    2300528: Plane014
+    2300530: Plane015
+    2300532: Plane016
+    2300534: Plane017
+    2300536: Plane018
+    2300538: Plane019
+    2300540: Plane020
+    2300542: Plane021
+    2300544: Plane022
+    2300546: Plane024
+    2300548: Plane027
+    2300550: Plane028
+    2300552: Plane030
+    2300554: Plane031
+    2300556: Plane032
+    2300558: Shape001
+    2300560: Shape002
+    2300562: Shape003
+    2300564: Shape004
+    2300566: Shape005
+    2300568: Shape006
+    2300570: Shape007
+    2300572: Shape008
+    2300574: Shape009
+    2300576: Shape010
+    2300578: Sphere001
+    2300580: Sphere002
+    2300582: Sphere003
+    2300584: Sphere004
+    2300586: Sphere005
+    2300588: Sphere006
+    2300590: Sphere007
+    2300592: Sphere008
+    2300594: Sphere009
+    2300596: Sphere010
+    2300598: Sphere011
+    2300600: Sphere012
+    2300602: Sphere013
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Box011
+    3300014: Box012
+    3300016: Box013
+    3300018: Box014
+    3300020: Box015
+    3300022: Box016
+    3300024: Box017
+    3300026: Box018
+    3300028: Box019
+    3300030: Box020
+    3300032: Box021
+    3300034: Box022
+    3300036: Box023
+    3300038: Box024
+    3300040: Box025
+    3300042: Box026
+    3300044: Box027
+    3300046: Box028
+    3300048: Box029
+    3300050: Box030
+    3300052: Circle001
+    3300054: Circle002
+    3300056: Circle003
+    3300058: Circle004
+    3300060: Cylinder001
+    3300062: Cylinder002
+    3300064: Cylinder003
+    3300066: Cylinder019
+    3300068: Cylinder021
+    3300070: Cylinder023
+    3300072: Cylinder024
+    3300074: Cylinder025
+    3300076: Cylinder027
+    3300078: Cylinder029
+    3300080: Cylinder030
+    3300082: Cylinder031
+    3300084: Cylinder032
+    3300086: Cylinder033
+    3300088: Cylinder034
+    3300090: Cylinder035
+    3300092: Cylinder036
+    3300094: Cylinder037
+    3300096: Cylinder038
+    3300098: Cylinder039
+    3300100: Cylinder040
+    3300102: Cylinder041
+    3300104: Cylinder042
+    3300106: Cylinder043
+    3300108: Cylinder044
+    3300110: Cylinder045
+    3300112: Cylinder046
+    3300114: Cylinder047
+    3300116: Cylinder049
+    3300118: Cylinder050
+    3300120: Cylinder051
+    3300122: Cylinder052
+    3300124: Cylinder053
+    3300126: Cylinder054
+    3300128: Cylinder056
+    3300130: Cylinder057
+    3300132: Cylinder058
+    3300134: Cylinder059
+    3300136: Cylinder060
+    3300138: Cylinder061
+    3300140: Cylinder062
+    3300142: Cylinder063
+    3300144: Cylinder064
+    3300146: Cylinder065
+    3300148: Cylinder066
+    3300150: Cylinder067
+    3300152: Cylinder068
+    3300154: Cylinder069
+    3300156: Cylinder070
+    3300158: Cylinder071
+    3300160: Cylinder072
+    3300162: Cylinder073
+    3300164: Cylinder074
+    3300166: Cylinder076
+    3300168: Cylinder077
+    3300170: Cylinder078
+    3300172: Cylinder079
+    3300174: Cylinder080
+    3300176: Cylinder081
+    3300178: Cylinder082
+    3300180: Cylinder083
+    3300182: Cylinder084
+    3300184: Cylinder085
+    3300186: Cylinder086
+    3300188: Cylinder087
+    3300190: Cylinder088
+    3300192: Cylinder089
+    3300194: Cylinder090
+    3300196: Cylinder091
+    3300198: Cylinder092
+    3300200: Cylinder093
+    3300202: Cylinder094
+    3300204: Cylinder095
+    3300206: Cylinder096
+    3300208: Cylinder097
+    3300210: Cylinder099
+    3300212: Cylinder100
+    3300214: Cylinder101
+    3300216: Cylinder102
+    3300218: Cylinder103
+    3300220: Cylinder104
+    3300222: Cylinder105
+    3300224: Cylinder106
+    3300226: Cylinder107
+    3300228: Cylinder108
+    3300230: Cylinder109
+    3300232: Cylinder110
+    3300234: Cylinder111
+    3300236: Cylinder112
+    3300238: Cylinder113
+    3300240: Cylinder114
+    3300242: Cylinder115
+    3300244: Cylinder116
+    3300246: Cylinder117
+    3300248: Cylinder118
+    3300250: Cylinder119
+    3300252: Cylinder120
+    3300254: Cylinder121
+    3300256: Cylinder122
+    3300258: Cylinder123
+    3300260: Cylinder124
+    3300262: Cylinder125
+    3300264: Cylinder130
+    3300266: Cylinder132
+    3300268: Cylinder133
+    3300270: Cylinder134
+    3300272: Cylinder135
+    3300274: Cylinder136
+    3300276: Cylinder137
+    3300278: Cylinder138
+    3300280: Cylinder139
+    3300282: Cylinder140
+    3300284: Cylinder141
+    3300286: Cylinder142
+    3300288: Cylinder143
+    3300290: Cylinder144
+    3300292: Cylinder145
+    3300294: Cylinder146
+    3300296: Cylinder152
+    3300298: Cylinder170
+    3300300: Cylinder171
+    3300302: Cylinder172
+    3300304: Cylinder173
+    3300306: Cylinder174
+    3300308: Cylinder175
+    3300310: Cylinder176
+    3300312: Cylinder177
+    3300314: Cylinder178
+    3300316: Cylinder179
+    3300318: Cylinder180
+    3300320: Cylinder181
+    3300322: Cylinder182
+    3300324: Cylinder183
+    3300326: Cylinder184
+    3300328: Cylinder185
+    3300330: Cylinder186
+    3300332: Cylinder187
+    3300334: Cylinder188
+    3300336: Cylinder189
+    3300338: Cylinder190
+    3300340: Cylinder191
+    3300342: Cylinder197
+    3300344: Cylinder198
+    3300346: Cylinder199
+    3300348: Cylinder204
+    3300350: Cylinder205
+    3300352: Cylinder206
+    3300354: Cylinder207
+    3300356: Cylinder208
+    3300358: Cylinder209
+    3300360: Cylinder210
+    3300362: Cylinder211
+    3300364: Cylinder212
+    3300366: Cylinder213
+    3300368: Cylinder214
+    3300370: Cylinder215
+    3300372: Cylinder216
+    3300374: Cylinder217
+    3300376: Cylinder218
+    3300378: Cylinder219
+    3300380: Cylinder220
+    3300382: Cylinder221
+    3300384: Cylinder222
+    3300386: Cylinder223
+    3300388: Cylinder224
+    3300390: Cylinder225
+    3300392: Cylinder226
+    3300394: Cylinder227
+    3300396: Cylinder228
+    3300398: Cylinder229
+    3300400: Cylinder230
+    3300402: Cylinder231
+    3300404: Cylinder232
+    3300406: Line001
+    3300408: Line002
+    3300410: Line003
+    3300412: Line004
+    3300414: Line005
+    3300416: Line006
+    3300418: Line007
+    3300420: Line008
+    3300422: Line009
+    3300424: Line010
+    3300426: Line011
+    3300428: Line012
+    3300430: Line016
+    3300432: Line017
+    3300434: Line031
+    3300436: Line039
+    3300438: Object001
+    3300440: Object002
+    3300442: Object003
+    3300444: Object005
+    3300446: Object006
+    3300448: Object007
+    3300450: Object008
+    3300452: Object009
+    3300454: Object010
+    3300456: Object011
+    3300458: Object012
+    3300460: Object013
+    3300462: Object014
+    3300464: Object015
+    3300466: Object016
+    3300468: Object017
+    3300470: Object018
+    3300472: Object019
+    3300474: Object020
+    3300476: Object021
+    3300478: Object022
+    3300480: Object023
+    3300482: Object024
+    3300484: Object025
+    3300486: Object026
+    3300488: Object031
+    3300490: Object032
+    3300492: Object033
+    3300494: Object035
+    3300496: Object036
+    3300498: Object037
+    3300500: Object038
+    3300502: Object039
+    3300504: Plane001
+    3300506: Plane002
+    3300508: Plane003
+    3300510: Plane004
+    3300512: Plane006
+    3300514: Plane007
+    3300516: Plane008
+    3300518: Plane009
+    3300520: Plane010
+    3300522: Plane011
+    3300524: Plane012
+    3300526: Plane013
+    3300528: Plane014
+    3300530: Plane015
+    3300532: Plane016
+    3300534: Plane017
+    3300536: Plane018
+    3300538: Plane019
+    3300540: Plane020
+    3300542: Plane021
+    3300544: Plane022
+    3300546: Plane024
+    3300548: Plane027
+    3300550: Plane028
+    3300552: Plane030
+    3300554: Plane031
+    3300556: Plane032
+    3300558: Shape001
+    3300560: Shape002
+    3300562: Shape003
+    3300564: Shape004
+    3300566: Shape005
+    3300568: Shape006
+    3300570: Shape007
+    3300572: Shape008
+    3300574: Shape009
+    3300576: Shape010
+    3300578: Sphere001
+    3300580: Sphere002
+    3300582: Sphere003
+    3300584: Sphere004
+    3300586: Sphere005
+    3300588: Sphere006
+    3300590: Sphere007
+    3300592: Sphere008
+    3300594: Sphere009
+    3300596: Sphere010
+    3300598: Sphere011
+    3300600: Sphere012
+    3300602: Sphere013
+    4300000: Cylinder113
+    4300002: Cylinder189
+    4300004: Cylinder041
+    4300006: Object010
+    4300008: Cylinder084
+    4300010: Cylinder224
+    4300012: Cylinder208
+    4300014: Cylinder027
+    4300016: Cylinder211
+    4300018: Cylinder090
+    4300020: Cylinder089
+    4300022: Cylinder174
+    4300024: Cylinder057
+    4300026: Cylinder076
+    4300028: Circle003
+    4300030: Object018
+    4300032: Cylinder062
+    4300034: Cylinder073
+    4300036: Cylinder083
+    4300038: Plane032
+    4300040: Cylinder184
+    4300042: Line006
+    4300044: Cylinder038
+    4300046: Plane019
+    4300048: Cylinder099
+    4300050: Cylinder213
+    4300052: Plane031
+    4300054: Cylinder197
+    4300056: Sphere010
+    4300058: Box003
+    4300060: Line031
+    4300062: Object011
+    4300064: Cylinder215
+    4300066: Cylinder178
+    4300068: Cylinder198
+    4300070: Box014
+    4300072: Line002
+    4300074: Cylinder207
+    4300076: Shape001
+    4300078: Sphere003
+    4300080: Cylinder030
+    4300082: Sphere004
+    4300084: Circle004
+    4300086: Object031
+    4300088: Line010
+    4300090: Plane011
+    4300092: Sphere008
+    4300094: Cylinder223
+    4300096: Box020
+    4300098: Cylinder225
+    4300100: Cylinder001
+    4300102: Plane018
+    4300104: Box015
+    4300106: Object005
+    4300108: Object001
+    4300110: Object015
+    4300112: Cylinder091
+    4300114: Cylinder058
+    4300116: Cylinder077
+    4300118: Shape009
+    4300120: Line011
+    4300122: Cylinder034
+    4300124: Object024
+    4300126: Box012
+    4300128: Cylinder115
+    4300130: Cylinder144
+    4300132: Cylinder125
+    4300134: Box016
+    4300136: Cylinder181
+    4300138: Cylinder105
+    4300140: Cylinder071
+    4300142: Cylinder063
+    4300144: Cylinder134
+    4300146: Cylinder021
+    4300148: Cylinder123
+    4300150: Cylinder146
+    4300152: Cylinder210
+    4300154: Plane008
+    4300156: Cylinder103
+    4300158: Cylinder064
+    4300160: Plane013
+    4300162: Cylinder116
+    4300164: Cylinder227
+    4300166: Cylinder032
+    4300168: Cylinder050
+    4300170: Object037
+    4300172: Cylinder109
+    4300174: Box030
+    4300176: Object023
+    4300178: Cylinder222
+    4300180: Box029
+    4300182: Plane012
+    4300184: Object033
+    4300186: Plane017
+    4300188: Line017
+    4300190: Object035
+    4300192: Cylinder107
+    4300194: Cylinder124
+    4300196: Plane002
+    4300198: Line007
+    4300200: Cylinder023
+    4300202: Cylinder045
+    4300204: Cylinder130
+    4300206: Object006
+    4300208: Sphere011
+    4300210: Cylinder051
+    4300212: Cylinder221
+    4300214: Cylinder142
+    4300216: Cylinder182
+    4300218: Line039
+    4300220: Cylinder085
+    4300222: Cylinder139
+    4300224: Cylinder086
+    4300226: Line003
+    4300228: Cylinder191
+    4300230: Sphere006
+    4300232: Line008
+    4300234: Cylinder082
+    4300236: Object014
+    4300238: Sphere002
+    4300240: Cylinder080
+    4300242: Cylinder173
+    4300244: Cylinder029
+    4300246: Cylinder180
+    4300248: Cylinder101
+    4300250: Box002
+    4300252: Plane003
+    4300254: Object016
+    4300256: Cylinder067
+    4300258: Cylinder140
+    4300260: Cylinder102
+    4300262: Box004
+    4300264: Cylinder175
+    4300266: Shape005
+    4300268: Cylinder040
+    4300270: Cylinder068
+    4300272: Plane009
+    4300274: Object025
+    4300276: Cylinder152
+    4300278: Cylinder186
+    4300280: Cylinder141
+    4300282: Cylinder053
+    4300284: Object012
+    4300286: Cylinder094
+    4300288: Cylinder217
+    4300290: Cylinder061
+    4300292: Box025
+    4300294: Cylinder112
+    4300296: Cylinder204
+    4300298: Cylinder052
+    4300300: Shape002
+    4300302: Cylinder097
+    4300304: Cylinder143
+    4300306: Cylinder132
+    4300308: Line001
+    4300310: Cylinder046
+    4300312: Cylinder185
+    4300314: Plane027
+    4300316: Object007
+    4300318: Cylinder230
+    4300320: Cylinder220
+    4300322: Cylinder044
+    4300324: Cylinder070
+    4300326: Cylinder231
+    4300328: Cylinder049
+    4300330: Cylinder212
+    4300332: Cylinder138
+    4300334: Cylinder065
+    4300336: Line009
+    4300338: Box017
+    4300340: Cylinder111
+    4300342: Cylinder232
+    4300344: Object017
+    4300346: Cylinder177
+    4300348: Cylinder226
+    4300350: Shape010
+    4300352: Cylinder170
+    4300354: Cylinder060
+    4300356: Cylinder219
+    4300358: Box019
+    4300360: Shape006
+    4300362: Cylinder119
+    4300364: Sphere012
+    4300366: Cylinder096
+    4300368: Shape007
+    4300370: Object022
+    4300372: Cylinder122
+    4300374: Object026
+    4300376: Cylinder019
+    4300378: Object002
+    4300380: Circle002
+    4300382: Cylinder110
+    4300384: Cylinder056
+    4300386: Box027
+    4300388: Cylinder135
+    4300390: Line005
+    4300392: Plane028
+    4300394: Sphere005
+    4300396: Cylinder069
+    4300398: Cylinder033
+    4300400: Object013
+    4300402: Sphere013
+    4300404: Box013
+    4300406: Object038
+    4300408: Cylinder081
+    4300410: Cylinder024
+    4300412: Plane010
+    4300414: Cylinder218
+    4300416: Object021
+    4300418: Plane004
+    4300420: Cylinder214
+    4300422: Cylinder104
+    4300424: Cylinder172
+    4300426: Box001
+    4300428: Plane020
+    4300430: Cylinder171
+    4300432: Shape008
+    4300434: Plane015
+    4300436: Cylinder133
+    4300438: Box018
+    4300440: Object003
+    4300442: Cylinder047
+    4300444: Cylinder035
+    4300446: Cylinder043
+    4300448: Cylinder066
+    4300450: Cylinder205
+    4300452: Box022
+    4300454: Line016
+    4300456: Sphere001
+    4300458: Cylinder120
+    4300460: Object009
+    4300462: Cylinder059
+    4300464: Cylinder036
+    4300466: Plane021
+    4300468: Cylinder106
+    4300470: Cylinder088
+    4300472: Cylinder039
+    4300474: Cylinder176
+    4300476: Plane022
+    4300478: Sphere007
+    4300480: Cylinder093
+    4300482: Cylinder108
+    4300484: Cylinder054
+    4300486: Plane030
+    4300488: Cylinder031
+    4300490: Cylinder002
+    4300492: Box026
+    4300494: Box028
+    4300496: Cylinder121
+    4300498: Cylinder228
+    4300500: Cylinder145
+    4300502: Plane006
+    4300504: Box021
+    4300506: Cylinder117
+    4300508: Box005
+    4300510: Object032
+    4300512: Cylinder209
+    4300514: Shape004
+    4300516: Cylinder190
+    4300518: Circle001
+    4300520: Cylinder206
+    4300522: Shape003
+    4300524: Box011
+    4300526: Cylinder078
+    4300528: Cylinder229
+    4300530: Plane007
+    4300532: Object039
+    4300534: Box023
+    4300536: Line012
+    4300538: Cylinder136
+    4300540: Cylinder042
+    4300542: Cylinder074
+    4300544: Object036
+    4300546: Plane016
+    4300548: Cylinder003
+    4300550: Cylinder187
+    4300552: Cylinder087
+    4300554: Sphere009
+    4300556: Cylinder114
+    4300558: Object020
+    4300560: Cylinder216
+    4300562: Cylinder188
+    4300564: Object019
+    4300566: Cylinder095
+    4300568: Object008
+    4300570: Line004
+    4300572: Cylinder072
+    4300574: Cylinder118
+    4300576: Box024
+    4300578: Plane001
+    4300580: Plane014
+    4300582: Cylinder037
+    4300584: Cylinder092
+    4300586: Cylinder079
+    4300588: Cylinder179
+    4300590: Cylinder137
+    4300592: Cylinder183
+    4300594: Cylinder025
+    4300596: Box006
+    4300598: Plane024
+    4300600: Cylinder199
+    4300602: Cylinder100
+    9500000: //RootNode
+    10800000: Lamp
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 1
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton:
+    - name: sazabi(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Box001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box004
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box005
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box006
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box011
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box012
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box013
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box014
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box015
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box016
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box017
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box018
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box019
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box020
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box021
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box022
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box023
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box024
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box025
+      parentName: sazabi(Clone)
+      position: {x: -0, y: -0.000013804393, z: 84.74683}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box026
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box027
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box028
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box029
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Box030
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Camera
+      parentName: sazabi(Clone)
+      position: {x: -7.4811316, y: 5.343665, z: 6.5076394}
+      rotation: {x: 0.0906284, y: 0.8937962, z: -0.20997299, w: 0.38577998}
+      scale: {x: 100, y: 100.00001, z: 99.99999}
+    - name: Circle001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Circle002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Circle003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Circle004
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder019
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder021
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder023
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder024
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder025
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder027
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder029
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder030
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder031
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder032
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder033
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder034
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder035
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder036
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder037
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder038
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder039
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder040
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder041
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder042
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder043
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder044
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder045
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder046
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder047
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder049
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder050
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder051
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder052
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder053
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder054
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder056
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder057
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder058
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder059
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder060
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder061
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder062
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder063
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder064
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder065
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder066
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder067
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder068
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder069
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder070
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder071
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder072
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder073
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder074
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder076
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder077
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder078
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder079
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder080
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder081
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder082
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder083
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder084
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder085
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder086
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder087
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder088
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder089
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder090
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder091
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder092
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder093
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder094
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder095
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder096
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder097
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder099
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder100
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder101
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder102
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder103
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder104
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder105
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder106
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder107
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder108
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder109
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder110
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder111
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder112
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder113
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder114
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder115
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder116
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder117
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder118
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder119
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder120
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder121
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder122
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder123
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder124
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder125
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder130
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder132
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder133
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder134
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder135
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder136
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder137
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder138
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder139
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder140
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder141
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder142
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder143
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder144
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder145
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder146
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder152
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder170
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder171
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder172
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder173
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder174
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder175
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder176
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder177
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder178
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder179
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder180
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder181
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder182
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder183
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder184
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder185
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder186
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder187
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder188
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder189
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder190
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder191
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder197
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder198
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder199
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder204
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder205
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder206
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder207
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder208
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder209
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder210
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder211
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder212
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder213
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder214
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder215
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder216
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder217
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder218
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder219
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder220
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder221
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder222
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder223
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder224
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder225
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder226
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder227
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder228
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder229
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder230
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder231
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder232
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Lamp
+      parentName: sazabi(Clone)
+      position: {x: -4.0762453, y: 5.903862, z: -1.005454}
+      rotation: {x: 0.52327543, y: -0.34203398, z: 0.72694236, w: 0.28416628}
+      scale: {x: 100.00001, y: 100, z: 100}
+    - name: Line001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line004
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line005
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line006
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line007
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line008
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line009
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line010
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line011
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line012
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line016
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line017
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line031
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Line039
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object005
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object006
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object007
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object008
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object009
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object010
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object011
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object012
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object013
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object014
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object015
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object016
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object017
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object018
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object019
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object020
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object021
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object022
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object023
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object024
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object025
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object026
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object031
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object032
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object033
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object035
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object036
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object037
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object038
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Object039
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane004
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane006
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane007
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane008
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane009
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane010
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane011
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane012
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane013
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane014
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane015
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane016
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane017
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane018
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane019
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane020
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane021
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane022
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane024
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane027
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane028
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane030
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane031
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane032
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape004
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape005
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape006
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape007
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape008
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape009
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Shape010
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere001
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere002
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere003
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere004
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere005
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere006
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere007
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere008
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere009
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere010
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere011
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere012
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere013
+      parentName: sazabi(Clone)
+      position: {x: -0, y: 0, z: 0.016067035}
+      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
