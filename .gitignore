@@ -33,3 +33,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#Main Mech
+Assets/Mech_Constructor_Humanoids

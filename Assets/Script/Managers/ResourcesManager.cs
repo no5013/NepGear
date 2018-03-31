@@ -32,16 +32,17 @@ public class ResourcesManager : ScriptableObject
             }
         }
 
-        for (int i = 0; i < projectiles.Length; i++)
+        for (int i = 0; i < weaponAbilities.Length; i++)
         {
             WeaponAbility wa = weaponAbilities[i];
-            if (p_dict.ContainsKey(wa.aID))
+            if (w_dict.ContainsKey(wa.aID))
             {
 
             }
             else
             {
-                p_dict.Add(wa.aID, i);
+                Debug.Log(wa.aID);
+                w_dict.Add(wa.aID, i);
             }
         }
 
@@ -78,7 +79,15 @@ public class ResourcesManager : ScriptableObject
         int index = -1;
         if (w_dict.TryGetValue(id, out index))
         {
+            Debug.Log("FOUND " + index);
             retVal = weaponAbilities[index];
+        }
+        else
+        {
+            foreach(string a in w_dict.Keys)
+            {
+                Debug.Log(a);
+            }
         }
 
         return retVal;
@@ -91,6 +100,12 @@ public class ResourcesManager : ScriptableObject
         if (f_dict.TryGetValue(id, out index))
         {
             retVal = frames[index];
+            Debug.Log("FOUND");
+        }
+
+        foreach(string n in f_dict.Keys)
+        {
+            Debug.Log(n);
         }
 
         return retVal;
