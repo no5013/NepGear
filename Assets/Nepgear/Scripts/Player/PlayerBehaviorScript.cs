@@ -29,7 +29,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public float lifeStock;
 
     [SerializeField]
-    private float respawnTime = 2f;
+    private float respawnTime = 5f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -63,6 +63,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     UIManager uiManager;
     InputHandler ih;
+    RagdollManager ragdollManager;
 
     [SyncVar]
     public string characterID;
@@ -80,6 +81,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
         ih = GetComponent<InputHandler>();
+        ragdollManager = GetComponent<RagdollManager>();
+
         mainCamera = Camera.main.gameObject;
     }
 
@@ -146,6 +149,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void EnablePlayer()
     {
+        ragdollManager.DisableRagdoll();
+
         if (isLocalPlayer)
             mainCamera.SetActive(false);
 
@@ -362,7 +367,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     void RpcOnDie()
     {
-        DisablePlayer();
+        //DisablePlayer();
+        ragdollManager.EnableRagdoll();
 
         if (!isOutOfStock())
         {

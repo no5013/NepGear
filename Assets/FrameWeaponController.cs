@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 
 public class FrameWeaponController : NetworkBehaviour {
 
@@ -24,7 +25,7 @@ public class FrameWeaponController : NetworkBehaviour {
     [SyncVar]
     public string rightWeaponID;
 
-    public WeaponResourcesManager wrm;
+    private ResourcesManager wrm;
 
     private float leftCooldown = 0;
     private float leftNextReadyFire = 0;
@@ -39,7 +40,7 @@ public class FrameWeaponController : NetworkBehaviour {
     // Use this for initialization
     void Start ()
     {
-        wrm.Init();
+        wrm = LobbyManager.s_Singleton.resourcesManager;
 
         // Remove when complete Char select
         //Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
