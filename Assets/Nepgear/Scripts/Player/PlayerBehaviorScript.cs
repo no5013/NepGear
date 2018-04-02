@@ -367,7 +367,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     void RpcOnDie()
     {
-        //DisablePlayer();
+        DisablePlayer();
         ragdollManager.EnableRagdoll();
 
         if (!isOutOfStock())

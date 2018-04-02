@@ -16,32 +16,34 @@ public class RagdollManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ragdollColliders = GetComponentsInChildren<Collider>();
-        ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
-
         parentCollider = GetComponent<Collider>();
         parentRigidbody = GetComponent<Rigidbody>();
 
-        animator = GetComponentInChildren<Animator>();
+        ragdollColliders = GetComponentsInChildren<Collider>();
+        ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
 
-        //DisableRagdoll();
-        //EnableRagdoll();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void DisableRagdoll()
     {
         foreach (Collider collider in ragdollColliders)
         {
-            collider.isTrigger = true;
+            if(parentCollider != collider)
+            {
+                collider.isTrigger = true;
+            }
         }
 
         foreach (Rigidbody rigidbody in ragdollRigidbodies)
         {
-            rigidbody.isKinematic = true;
+            if(parentRigidbody != rigidbody)
+            {
+                rigidbody.isKinematic = true;
+            }
         }
 
         parentCollider.enabled = true;
-        parentRigidbody.isKinematic = false;
         animator.enabled = true;
     }
 
