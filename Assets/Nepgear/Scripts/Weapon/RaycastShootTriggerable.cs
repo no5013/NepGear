@@ -37,7 +37,7 @@ public class RaycastShootTriggerable : MonoBehaviour {
         {
             bulletLeft--;
             soundSource.Play();
-            fwc.CmdFireRaycast(gunId, damage, force, range, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+            fwc.CmdFireRaycast(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
         }
         else
         {

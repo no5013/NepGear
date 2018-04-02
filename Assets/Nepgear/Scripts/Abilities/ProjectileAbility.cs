@@ -19,6 +19,7 @@ public class ProjectileAbility : WeaponAbility
         gun.magazine = aMagazine;
         gun.gunSound = aGunSound;
         gun.reloadTime = reloadTime;
+        gun.gunId = aID;
         gun.Initialize();
     }
 

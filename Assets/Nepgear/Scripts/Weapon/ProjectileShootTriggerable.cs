@@ -10,6 +10,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     [HideInInspector] public int magazine;
     [HideInInspector] public float reloadTime;
     [HideInInspector] public AudioClip gunSound;
+    [HideInInspector] public string gunId;
     private AudioSource soundSource;
 
     private int bulletLeft;
@@ -36,7 +37,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         {
             bulletLeft--;
             soundSource.Play();
-            fwc.CmdFireProjectile(projectile.projectileId, projectileForce, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+            fwc.CmdFireProjectile(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
         }
         else
         {

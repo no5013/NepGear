@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour {
 
     public GameObject statusUI;
     public GameObject ammoUI;
+    public Text gameResultText;
     private Image hitpointBar;
     private Image staminaBar;
     private Image ultimateBar;
@@ -52,5 +53,20 @@ public class UIManager : MonoBehaviour {
     public void SetBullet(int bulletLeft, int bulletMax)
     {
         bulletText.text = bulletLeft + "/" + bulletMax;
+    }
+
+    public void SetResult(string winner)
+    {
+        gameResultText.text = "The winner is " + winner;
+    }
+
+    public void ShowResult()
+    {
+        gameResultText.GetComponent<Text>().enabled = true;
+    }
+
+    public void HideResult()
+    {
+        gameResultText.GetComponent<Text>().enabled = false;
     }
 }
