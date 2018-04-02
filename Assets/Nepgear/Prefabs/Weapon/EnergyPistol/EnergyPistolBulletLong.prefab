@@ -55,6 +55,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -70,6 +71,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -113,7 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   force: 1000
-  aliveTime: 5
+  lifeTime: 0
+  impactPrefab: {fileID: 1728081142672444, guid: 834579b161ab15141905a150068924ee,
+    type: 2}
 --- !u!114 &114222605185556824
 MonoBehaviour:
   m_ObjectHideFlags: 1

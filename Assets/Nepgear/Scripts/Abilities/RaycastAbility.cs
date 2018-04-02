@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Abilities/ProjectileAbility")]
-public class ProjectileAbility : WeaponAbility
-{
-    public float projectileForce;
-    public Projectile projectile;
-    public float reloadTime;
+[CreateAssetMenu (menuName = "Abilities/RaycastAbility")]
+public class RaycastAbility : WeaponAbility {
 
-    private ProjectileShootTriggerable gun;
+    public float damage;
+    public float range;
+    public float reloadTime;
+    public float force;
+
+    private RaycastShootTriggerable gun;
 
     public override void Initialize(GameObject obj)
     {
-        gun = obj.GetComponent<ProjectileShootTriggerable>();
-        gun.projectileForce = projectileForce;
-        gun.projectile = projectile;
+        gun = obj.GetComponent<RaycastShootTriggerable>();
+        gun.gunId = aID;
+        gun.damage = damage;
+        gun.range = range;
         gun.magazine = aMagazine;
         gun.gunSound = aGunSound;
         gun.reloadTime = reloadTime;
-        gun.gunId = aID;
+        gun.force = force;
         gun.Initialize();
     }
 
@@ -32,4 +34,5 @@ public class ProjectileAbility : WeaponAbility
     {
         gun.Reload();
     }
+
 }

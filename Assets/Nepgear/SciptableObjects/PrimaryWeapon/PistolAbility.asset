@@ -17,6 +17,8 @@ MonoBehaviour:
   aMagazine: 12
   aFireDelay: 0.5
   gunPrefab: {fileID: 1234929971947354, guid: c4c80d668b6dbd441a2ebb3ce035cdc6, type: 2}
+  muzzleFlash: {fileID: 1148127744127816, guid: 49a0a0782e3a6204980eabae8db8b1eb,
+    type: 2}
   projectileForce: 1000
   projectile: {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
   reloadTime: 2

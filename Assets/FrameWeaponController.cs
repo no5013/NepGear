@@ -158,11 +158,13 @@ public class FrameWeaponController : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdFireProjectile(string projectileId, float projectileForce, Vector3 forward, Vector3 position, Quaternion rotation)
+    public void CmdFireProjectile(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
     {
-        Projectile projectile = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetProjectile(projectileId);
+        ProjectileAbility gun = (ProjectileAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
+        Projectile projectile = gun.projectile;
         GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
 
+        
         Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
         projectileRigidBody.velocity = forward * 5f;
 
@@ -171,6 +173,52 @@ public class FrameWeaponController : NetworkBehaviour {
         b.lifeTime = projectile.lifeTime;
         b.force = projectile.force;
 
+        RpcMuzzleFlash(gunId, position, rotation);
+
         NetworkServer.Spawn(projectileRigidBody.gameObject);
     }
+
+    [ClientRpc]
+    public void RpcMuzzleFlash(string gunId, Vector3 position, Quaternion rotation)
+    {
+        //find the right muzzle flash
+        WeaponAbility gun = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
+        Instantiate(gun.muzzleFlash, position, rotation);
+    }
+
+    [Command]
+    public void CmdFireRaycast(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        RaycastAbility gun = (RaycastAbility) Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
+        
+        RaycastHit hit;
+        if (Physics.Raycast(position, forward, out hit, gun.range))
+        {
+            if (hit.collider.tag.Equals("Player"))
+            {
+                hit.collider.SendMessage("TakeDamage", gun.damage);
+            }
+            Destructible target = hit.collider.transform.GetComponent<Destructible>();
+            if (target != null)
+            {
+                target.TakeDamage(gun.damage);
+                Rigidbody r = hit.collider.GetComponent<Rigidbody>();
+                r.AddForce(transform.forward * gun.force);
+            }
+        }
+        
+    }
+
+    //[ClientRpc]
+    //public void RpcRaycastHit(RaycastHit hit, float damage)
+    //{
+    //    if (hit.collider.gameObject.tag == "player")
+    //    {
+    //        Debug.Log("Hit Player");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Hit Smthing");
+    //    }
+    //}
 }

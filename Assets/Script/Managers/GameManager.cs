@@ -27,6 +27,8 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
+    private UIManager ui;
+
     public Transform[] spawnPoints_A;
     public Transform[] spawnPoints_B;
 
@@ -38,10 +40,10 @@ public class GameManager : NetworkBehaviour {
             // Create the delays so they only have to be made once.
             m_StartWait = new WaitForSeconds(startDelay);
             m_EndWait = new WaitForSeconds(endDelay);
-
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine(GameLoop());
         }
+        ui = FindObjectOfType<UIManager>().GetComponent<UIManager>();
     }
 
     void Awake()
@@ -136,6 +138,8 @@ public class GameManager : NetworkBehaviour {
 
         // Once execution has returned here, run the 'RoundEnding' coroutine.
         yield return StartCoroutine(RoundEnding());
+
+        ui.HideResult();
 
         // This code is not run until 'RoundEnding' has finished.  At which point, check if there is a winner of the game.
         /*if (m_GameWinner != null)
@@ -246,8 +250,7 @@ public class GameManager : NetworkBehaviour {
     private IEnumerator RoundEnding()
     {
         // See if there is a winner now the round is over.
-        gameWinner = GetRoundWinner();
-
+        
         //notify client they should disable tank control
         RpcRoundEnding();
 
@@ -258,7 +261,9 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     private void RpcRoundEnding()
     {
+        gameWinner = GetRoundWinner();
         DisablePlayers();
+        ShowResult();
         Debug.Log("ROUND ENDING");
     }
 
@@ -309,6 +314,13 @@ public class GameManager : NetworkBehaviour {
         {
             players[i].DisablePlayer();
         }
+    }
+
+    private void ShowResult()
+    {
+        Debug.Log(gameWinner.characterID);
+        ui.SetResult(gameWinner.characterID);
+        ui.ShowResult();
     }
 
     [ClientRpc]

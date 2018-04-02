@@ -12,6 +12,7 @@ public abstract class WeaponAbility : ScriptableObject {
     public float aFireDelay;
 
     public GameObject gunPrefab;
+    public GameObject muzzleFlash;
 
     public abstract void Initialize(GameObject obj);
     public abstract void TriggerAbility();

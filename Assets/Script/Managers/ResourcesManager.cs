@@ -41,7 +41,6 @@ public class ResourcesManager : ScriptableObject
             }
             else
             {
-                Debug.Log(wa.aID);
                 w_dict.Add(wa.aID, i);
             }
         }
@@ -81,13 +80,6 @@ public class ResourcesManager : ScriptableObject
         {
             Debug.Log("FOUND " + index);
             retVal = weaponAbilities[index];
-        }
-        else
-        {
-            foreach(string a in w_dict.Keys)
-            {
-                Debug.Log(a);
-            }
         }
 
         return retVal;
