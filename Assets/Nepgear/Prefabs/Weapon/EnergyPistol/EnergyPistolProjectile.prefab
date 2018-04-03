@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4096301845284782}
   - component: {fileID: 198038527800838954}
   - component: {fileID: 199604742777277128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4918986147393478}
   - component: {fileID: 198366697213998488}
   - component: {fileID: 199135901873100398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: flarespikes_thin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4984299384903348}
   - component: {fileID: 198585600545278484}
   - component: {fileID: 199206214223787318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 114820941968358388}
   - component: {fileID: 114416562627843580}
   - component: {fileID: 136738647631320256}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnergyPistolProjectile
   m_TagString: FX
   m_Icon: {fileID: 0}
