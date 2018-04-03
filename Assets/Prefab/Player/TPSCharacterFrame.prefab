@@ -1271,10 +1271,7 @@ GameObject:
   - component: {fileID: 114789073758345394}
   - component: {fileID: 95408917976693762}
   - component: {fileID: 114162967979381030}
-  - component: {fileID: 114617504630316410}
-  - component: {fileID: 114606333802260874}
-  - component: {fileID: 114494560769945962}
-  - component: {fileID: 114023574521000810}
+  - component: {fileID: 114022043614001948}
   m_Layer: 0
   m_Name: TPSCharacterFrame
   m_TagString: Player
@@ -3328,7 +3325,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1787091611343242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 963fa29a513cc1840ba876fc77f3360a, type: 3}
   m_Controller: {fileID: 9100000, guid: 722be012c63dfdd4c9b2d3e8cf008bba, type: 2}
   m_CullingMode: 0
@@ -3350,12 +3347,12 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 722be012c63dfdd4c9b2d3e8cf008bba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114023574521000810
+--- !u!114 &114022043614001948
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3363,36 +3360,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1988203107150656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed387674c0c8344e58608412fb8ada4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 175d746bb7b01b242a5800e32a59355e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onToggleShared:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.35127, Culture=neutral,
-      PublicKeyToken=null
-  onToggleLocal:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.35127, Culture=neutral,
-      PublicKeyToken=null
-  onToggleRemote:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.35127, Culture=neutral,
-      PublicKeyToken=null
-  walkSpeed: 0
-  runSpeed: 0
-  lifeStock: 0
-  respawnTime: 2
-  hitPoint: 0
-  maxHitPoint: 0
-  stamina: 0
-  maxStamina: 0
-  ultimateCharge: 0
-  floatSpeed: 0
-  healthBar: {fileID: 0}
-  charFrame: {fileID: 0}
+  animator: {fileID: 0}
+  directionDampTime: 0.25
 --- !u!114 &114036569358326226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3493,110 +3465,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114494560769945962
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988203107150656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b0573e5161c984db618240c141e330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontal: 0
-  vertical: 0
-  fire1: 0
-  fire2: 0
-  dash: 0
---- !u!114 &114606333802260874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988203107150656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ec5cf00ca181d45a42ba1870e148c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsWalking: 0
-  m_WalkSpeed: 0
-  m_RunSpeed: 0
-  m_RunstepLenghten: 0
-  m_JumpSpeed: 0
-  m_StickToGroundForce: 0
-  m_GravityMultiplier: 0
-  m_MouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
-    clampVerticalRotation: 1
-    MinimumX: -90
-    MaximumX: 90
-    smooth: 0
-    smoothTime: 5
-    lockCursor: 1
-  m_UseFovKick: 0
-  m_FovKick:
-    Camera: {fileID: 0}
-    originalFov: 0
-    FOVIncrease: 3
-    TimeToIncrease: 1
-    TimeToDecrease: 1
-    IncreaseCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_UseHeadBob: 0
-  m_HeadBob:
-    HorizontalBobRange: 0.33
-    VerticalBobRange: 0.33
-    Bobcurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1.5
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 2
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    VerticaltoHorizontalRatio: 1
-  m_JumpBob:
-    BobDuration: 0
-    BobAmount: 0
-  m_StepInterval: 0
-  m_FootstepSounds: []
-  m_JumpSound: {fileID: 0}
-  m_LandSound: {fileID: 0}
 --- !u!114 &114614551603012996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3624,19 +3492,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114617504630316410
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1988203107150656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175d746bb7b01b242a5800e32a59355e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  directionDampTime: 0.25
 --- !u!114 &114635248709156898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3683,17 +3538,17 @@ MonoBehaviour:
   onToggleShared:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.35127, Culture=neutral,
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.36480, Culture=neutral,
       PublicKeyToken=null
   onToggleLocal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.35127, Culture=neutral,
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.36480, Culture=neutral,
       PublicKeyToken=null
   onToggleRemote:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.35127, Culture=neutral,
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=1.0.2.36480, Culture=neutral,
       PublicKeyToken=null
   walkSpeed: 0
   runSpeed: 0
