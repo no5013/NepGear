@@ -14,15 +14,21 @@ public class InputHandler : NetworkBehaviour {
 
     public float dash;
 
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void FixedUpdate()
     {
-        //if (!isLocalPlayer)
-        //{
-        //    return;
-        //}
-        HandleInput();
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         UpdateStates();
+        HandleInput();
     }
 
     private void HandleInput()
@@ -41,11 +47,11 @@ public class InputHandler : NetworkBehaviour {
         {
             fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
         }
-        
     }
 
     private void UpdateStates()
     {
-
+        animator.SetFloat("Forward", vertical, 0.1f, Time.deltaTime);
+        animator.SetFloat("Turn", horizontal, 0.1f, Time.deltaTime);
     }
 }
