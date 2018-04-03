@@ -20,26 +20,33 @@ public class Bullet : NetworkBehaviour {
 
         //Debug.Log("Points colliding: " + other.contacts.Length);
         //Debug.Log("First normal of the point that collide: " + other.contacts[0].normal);
-        Debug.Log("Bullet hit");
-        if (other.gameObject.tag.Equals("Player"))
+        Debug.Log("Collision Bullet hit");
+        PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
+        if (isPlayer != null)
         {
-            string dir = GetHitDir(other.transform);
-            other.gameObject.SendMessage("TakeDamage", damage);
-            //other.SendMessage("ShowHitDir", dir);
-
+            GameObject parent = isPlayer.gameObject;
+            if (parent.tag.Equals("Player"))
+            {
+                string dir = GetHitDir(other.transform);
+                parent.SendMessage("TakeDamage", damage);
+                //other.SendMessage("ShowHitDir", dir);
+            }
         }
-        if (other.gameObject.tag.Equals("Enemy"))
+        //if (other.gameObject.tag.Equals("Enemy"))
+        //{
+        //    Debug.Log("Hit Enemy");
+        //    other.gameObject.SendMessage("TakeDamage", damage);
+        //}
+        else
         {
-            Debug.Log("Hit Enemy");
-            other.gameObject.SendMessage("TakeDamage", damage);
-        }
-        Destructible target = other.transform.GetComponent<Destructible>();
+            Destructible target = other.transform.GetComponent<Destructible>();
 
-        if (target != null)
-        {
-            target.TakeDamage(damage);
-            Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
-            r.AddForce(transform.forward * force);
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+                Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
+                r.AddForce(transform.forward * force);
+            }
         }
         RpcImpactEffect(other.contacts[0].point, Quaternion.identity);
         Destroy(this.gameObject);
@@ -50,7 +57,7 @@ public class Bullet : NetworkBehaviour {
     //[ServerCallback]
     //private void OnTriggerEnter(Collider other)
     //{
-    //    Debug.Log("Bullet hit");
+    //    Debug.Log("Trigger Bullet hit");
     //    if (other.tag.Equals("Player"))
     //    {
     //        string dir = GetHitDir(other.transform);
@@ -70,9 +77,8 @@ public class Bullet : NetworkBehaviour {
     //        target.TakeDamage(damage);
     //        Rigidbody r = other.GetComponent<Rigidbody>();
     //        r.AddForce(transform.forward * force);
-    //    }
-
-    //    Destroy(this.gameObject);
+    //    } 
+    //   Destroy(this.gameObject);
     //}
 
     [ClientRpc]

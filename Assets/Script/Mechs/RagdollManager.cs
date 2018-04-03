@@ -27,13 +27,13 @@ public class RagdollManager : MonoBehaviour
 
     public void DisableRagdoll()
     {
-        foreach (Collider collider in ragdollColliders)
-        {
-            if(parentCollider != collider)
-            {
-                collider.isTrigger = true;
-            }
-        }
+        //foreach (Collider collider in ragdollColliders)
+        //{
+        //    if(parentCollider != collider)
+        //    {
+        //        collider.isTrigger = true;
+        //    }
+        //}
 
         foreach (Rigidbody rigidbody in ragdollRigidbodies)
         {
@@ -49,10 +49,10 @@ public class RagdollManager : MonoBehaviour
 
     public void EnableRagdoll()
     {
-        foreach (Collider collider in ragdollColliders)
-        {
-            collider.isTrigger = false;
-        }
+        //foreach (Collider collider in ragdollColliders)
+        //{
+        //    collider.isTrigger = false;
+        //}
 
         foreach (Rigidbody rigidbody in ragdollRigidbodies)
         {
