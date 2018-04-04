@@ -29,7 +29,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public float lifeStock;
 
     [SerializeField]
-    private float respawnTime = 5f;
+    private float respawnTime = 10f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -70,6 +70,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [SyncVar]
     public string team;
+
+    [SyncVar]
+    public bool dead = false;
 
     [SerializeField] private Character charFrame;
 
@@ -349,34 +352,54 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [Server]
     public void TakeDamage(float damage)
     {
+        if (dead)
+            return;
+
+        RpcTakeDamage(damage);
         hitPoint -= damage;
+
         if (hitPoint <=0)
         {
             hitPoint = 0;
+
             Die();
         }
     }
 
     [Server]
-    private void Die()
+    public void Die()
     {
+        dead = true;
         lifeStock--;
-        RpcOnDie();
-    }
-
-    [ClientRpc]
-    void RpcOnDie()
-    {
-        DisablePlayer();
-        ragdollManager.EnableRagdoll();
-
+        RpcDie();
         if (!isOutOfStock())
         {
             Invoke("Respawn", respawnTime);
         }
     }
 
+    [ClientRpc]
+    public void RpcTakeDamage(float damage)
+    {
+       
+    }
+
+    [ClientRpc]
+    void RpcDie()
+    {
+        //DisablePlayer();
+        ragdollManager.EnableRagdoll();
+    }
+
+    [Server]
     void Respawn()
+    {
+        dead = false;
+        RpcRespawn();
+    }
+
+    [ClientRpc]
+    void RpcRespawn()
     {
         if (isLocalPlayer)
         {
