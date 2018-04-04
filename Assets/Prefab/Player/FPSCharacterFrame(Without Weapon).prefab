@@ -1432,7 +1432,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515401868217524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.8, z: 0.5}
+  m_LocalPosition: {x: 0, y: 4.8, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4976002978236314}
@@ -2450,6 +2450,7 @@ MonoBehaviour:
   healthBar: {fileID: 224264977491852076}
   characterID: 
   team: 
+  dead: 0
   charFrame: {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
 --- !u!114 &114027015083478438
 MonoBehaviour:
@@ -3115,7 +3116,7 @@ SkinnedMeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1851109821190764}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

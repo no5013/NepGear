@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHitPoint: 100
   maxStamina: 100
   maxUltimate: 100
-  startingSpeed: 5
+  startingSpeed: 15
   characterPrefab: {fileID: 1511154638448052, guid: c65451f247fabdc4cac9e6145264059e,
     type: 2}
   ultimate: {fileID: 11400000, guid: a7d563b4a64407b4398833b52ee65453, type: 2}

@@ -14,7 +14,7 @@ public class GameManager : NetworkBehaviour {
     static public List<PlayerBehaviorScript> players_B = new List<PlayerBehaviorScript>();
 
     public float startDelay = 3f;           // The delay between the start of RoundStarting and RoundPlaying phases.
-    public float endDelay = 3f;             // The delay between the end of RoundPlaying and RoundEnding phases.
+    public float endDelay = 10f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
     public float playerLifeStock = 3f;
 
@@ -120,8 +120,6 @@ public class GameManager : NetworkBehaviour {
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()
     {
-        
-
         while (players.Count < 2)
             yield return null;
 
@@ -262,9 +260,8 @@ public class GameManager : NetworkBehaviour {
     private void RpcRoundEnding()
     {
         gameWinner = GetRoundWinner();
-        DisablePlayers();
+        //DisablePlayers();
         ShowResult();
-        Debug.Log("ROUND ENDING");
     }
 
     private IEnumerator RoundClosing()
@@ -285,11 +282,6 @@ public class GameManager : NetworkBehaviour {
             // ... and if they are active, increment the counter.
             if (!players[i].isOutOfStock())
                 numPlayersLeft++;
-            else
-            {
-                Debug.Log("Lifestock" + players[i].lifeStock);
-                Debug.Log("WTF");
-            }
         }
 
         // If there are one or fewer tanks remaining return true, otherwise return false.
