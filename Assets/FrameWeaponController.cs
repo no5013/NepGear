@@ -165,9 +165,11 @@ public class FrameWeaponController : NetworkBehaviour {
         Projectile projectile = gun.projectile;
         GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
 
-        
+       
         Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-        projectileRigidBody.velocity = forward * 50f;
+        //Vector3 recoilDirection = Vector3.zero;
+        //projectileRigidBody.AddTorque(new Vector3(x, y, z));
+        projectileRigidBody.velocity = (forward) * 50f;
 
         Bullet b = projectileInstance.GetComponent<Bullet>();
         b.damage = projectile.damage;

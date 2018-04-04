@@ -29,14 +29,15 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
     public void Fire()
     {
-        if(isReloading)
+        if (isReloading)
         {
             return;
         }
-        if(CanFire())
+        if (CanFire())
         {
             bulletLeft--;
             soundSource.Play();
+            RandomBulletSpawnRotation();
             fwc.CmdFireProjectile(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
         }
         else
@@ -52,7 +53,15 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     {
         return !(isReloading || bulletLeft <= 0);
     }
-    
+    private void RandomBulletSpawnRotation()
+    {
+        float x = Random.Range(-1.5f, 1.5f);
+        float y = Random.Range(-1.5f, 1.5f);
+        float z = Random.Range(-1.5f, 1.5f);
+        bulletSpawn.localRotation = Quaternion.Euler(x,y,z);
+    }
+
+
     IEnumerator Reloading()
     {
         isReloading = true;
