@@ -139,7 +139,9 @@ public class GameManager : NetworkBehaviour {
         // Once execution has returned here, run the 'RoundEnding' coroutine.
         yield return StartCoroutine(RoundEnding());
 
-        ui.HideResult();
+        yield return StartCoroutine(RoundClosing());
+
+        //ui.HideResult();
 
         // This code is not run until 'RoundEnding' has finished.  At which point, check if there is a winner of the game.
         /*if (m_GameWinner != null)
@@ -179,8 +181,6 @@ public class GameManager : NetworkBehaviour {
             // Note that this coroutine doesn't yield.  This means that the current version of the GameLoop will end.
             StartCoroutine(GameLoop());
         }*/
-
-        LobbyManager.s_Singleton.ServerReturnToLobby();
     }
 
     private IEnumerator RoundSetup()
@@ -267,6 +267,13 @@ public class GameManager : NetworkBehaviour {
         Debug.Log("ROUND ENDING");
     }
 
+    private IEnumerator RoundClosing()
+    {
+        FindObjectOfType<NetworkLobbyManager>().SendReturnToLobby();
+
+        yield return null;
+    }
+
     private bool OnePlayerLeft()
     {
         // Start the count of tanks left at zero.
@@ -278,6 +285,11 @@ public class GameManager : NetworkBehaviour {
             // ... and if they are active, increment the counter.
             if (!players[i].isOutOfStock())
                 numPlayersLeft++;
+            else
+            {
+                Debug.Log("Lifestock" + players[i].lifeStock);
+                Debug.Log("WTF");
+            }
         }
 
         // If there are one or fewer tanks remaining return true, otherwise return false.
