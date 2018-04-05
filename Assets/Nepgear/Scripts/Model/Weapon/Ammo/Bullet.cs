@@ -28,15 +28,16 @@ public class Bullet : NetworkBehaviour {
             if (parent.tag.Equals("Player"))
             {
                 string dir = GetHitDir(other.transform);
-                parent.SendMessage("TakeDamage", damage);
-                //other.SendMessage("ShowHitDir", dir);
+                //parent.SendMessage("TakeDamage", damage);
+
+                isPlayer.TakeDamage(damage);
+                if (isPlayer.isDead())
+                {
+                    //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
+                    //r.AddForce(transform.forward * 100);
+                }
             }
         }
-        //if (other.gameObject.tag.Equals("Enemy"))
-        //{
-        //    Debug.Log("Hit Enemy");
-        //    other.gameObject.SendMessage("TakeDamage", damage);
-        //}
         else
         {
             Destructible target = other.transform.GetComponent<Destructible>();

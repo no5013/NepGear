@@ -18,6 +18,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] ToggleEvent onToggleLocal;
     [SerializeField] ToggleEvent onToggleRemote;
 
+    [SerializeField] ToggleEvent onToggleRenderer;
+
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
     private Rigidbody rigidbody;
@@ -28,8 +30,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public float lifeStock;
 
-    [SerializeField]
-    private float respawnTime = 10f;
+    private float respawnTime = 5f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -74,7 +75,15 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public bool dead = false;
 
-    [SerializeField] private Character charFrame;
+    [SerializeField]
+    private Character charFrame;
+
+    [SerializeField]
+    private ParticleSystem explosionParticle;
+    [SerializeField]
+    private AudioClip explosionSound;
+    [SerializeField]
+    private float timeBeforeExplode = 2f;
 
     protected void Start()
     {
@@ -139,6 +148,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void DisablePlayer()
     {
+        SetFrameActive(false);
+
         if (isLocalPlayer)
             mainCamera.SetActive(true);
 
@@ -152,6 +163,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void EnablePlayer()
     {
+        SetFrameActive(true);
         ragdollManager.DisableRagdoll();
 
         if (isLocalPlayer)
@@ -381,14 +393,15 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     public void RpcTakeDamage(float damage)
     {
-       
+
     }
 
     [ClientRpc]
     void RpcDie()
     {
-        //DisablePlayer();
+        Explode();
         ragdollManager.EnableRagdoll();
+        Invoke("FrameExplode", timeBeforeExplode);
     }
 
     [Server]
@@ -409,6 +422,20 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
         ResetPlayerStatus();
         EnablePlayer();
+    }
+
+    void Explode()
+    {
+        explosionParticle.Play();
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position, 10f);
+
+    }
+
+    void FrameExplode()
+    {
+        Explode();
+        SetFrameActive(false);
+        DisablePlayer();
     }
 
     void ResetPlayerStatus()
@@ -434,5 +461,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public bool isOutOfStock()
     {
         return (lifeStock <= 0);
+    }
+
+    private void SetFrameActive(bool active)
+    {
+        onToggleRenderer.Invoke(active);
     }
 }
