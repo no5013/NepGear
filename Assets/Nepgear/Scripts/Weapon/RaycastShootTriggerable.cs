@@ -11,10 +11,14 @@ public class RaycastShootTriggerable : MonoBehaviour {
     [HideInInspector] public float range;
     [HideInInspector] public string gunId;
     [HideInInspector] public float force;
+    [HideInInspector] public float maxRecoil;
+    [HideInInspector] public float recoilRate;
     private AudioSource soundSource;
 
     private int bulletLeft;
     private bool isReloading;
+    private float recoil;
+    private float recoilCooldown;
 
     FrameWeaponController fwc;
 
@@ -27,6 +31,26 @@ public class RaycastShootTriggerable : MonoBehaviour {
         isReloading = false;
     }
 
+    private void Update()
+    {
+        if (recoilCooldown > 0)
+        {
+            recoilCooldown -= Time.deltaTime;
+            if (recoilCooldown < 0)
+            {
+                recoilCooldown = 0f;
+            }
+        }
+        else
+        {
+            recoil -= 0.1f;
+            if (recoil < 0)
+            {
+                recoil = 0f;
+            }
+        }
+    }
+
     public void Fire()
     {
         if (isReloading)
@@ -37,13 +61,42 @@ public class RaycastShootTriggerable : MonoBehaviour {
         {
             bulletLeft--;
             soundSource.Play();
+            RandomBulletSpawnRotation();
             fwc.CmdFireRaycast(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+            Recoil();
         }
         else
         {
             Reload();
         }
     }
+
+    private void Recoil()
+    {
+        recoil += recoilRate;
+        if (recoil > maxRecoil)
+        {
+            recoil = maxRecoil;
+        }
+    }
+
+    private void RandomBulletSpawnRotation()
+    {
+        if (recoil == 0)
+        {
+            bulletSpawn.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        float x = RandomRecoil();
+        float y = RandomRecoil();
+        float z = RandomRecoil();
+        bulletSpawn.localRotation = Quaternion.Euler(x, y, z);
+    }
+
+    private float RandomRecoil()
+    {
+        return Random.Range(-recoil, recoil);
+    }
+
     public void Reload()
     {
         StartCoroutine(Reloading());

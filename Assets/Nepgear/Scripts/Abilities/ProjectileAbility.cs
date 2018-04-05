@@ -20,6 +20,8 @@ public class ProjectileAbility : WeaponAbility
         gun.gunSound = aGunSound;
         gun.reloadTime = reloadTime;
         gun.gunId = aID;
+        gun.maxRecoil = maxRecoil;
+        gun.recoilRate = recoilRate;
         gun.Initialize();
     }
 

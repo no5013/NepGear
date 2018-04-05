@@ -10,6 +10,8 @@ public abstract class WeaponAbility : ScriptableObject {
     public AudioClip aGunSound;
     public int aMagazine;
     public float aFireDelay;
+    public float maxRecoil;
+    public float recoilRate;
 
     public GameObject gunPrefab;
     public GameObject muzzleFlash;
