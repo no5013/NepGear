@@ -16,6 +16,8 @@ MonoBehaviour:
   aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
   aMagazine: 12
   aFireDelay: 0.5
+  maxRecoil: 1.5
+  recoilRate: 0.2
   gunPrefab: {fileID: 1234929971947354, guid: c4c80d668b6dbd441a2ebb3ce035cdc6, type: 2}
   muzzleFlash: {fileID: 1148127744127816, guid: 49a0a0782e3a6204980eabae8db8b1eb,
     type: 2}

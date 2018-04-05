@@ -11,10 +11,14 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     [HideInInspector] public float reloadTime;
     [HideInInspector] public AudioClip gunSound;
     [HideInInspector] public string gunId;
+    [HideInInspector] public float maxRecoil;
+    [HideInInspector] public float recoilRate;
     private AudioSource soundSource;
 
     private int bulletLeft;
     private bool isReloading;
+    private float recoil;
+    private float recoilCooldown;
 
     FrameWeaponController fwc;
 
@@ -25,6 +29,28 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         soundSource.clip = gunSound;
         bulletLeft = magazine;
         isReloading = false;
+        recoil = 0f;
+        recoilCooldown = 0f;
+    }
+
+    private void Update()
+    {
+        if (recoilCooldown > 0)
+        {
+            recoilCooldown -= Time.deltaTime;
+            if (recoilCooldown < 0)
+            {
+                recoilCooldown = 0f;
+            }
+        }
+        else 
+        {
+            recoil -= 0.1f;
+            if(recoil < 0)
+            {
+                recoil = 0f;
+            }
+        }
     }
 
     public void Fire()
@@ -39,12 +65,23 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             soundSource.Play();
             RandomBulletSpawnRotation();
             fwc.CmdFireProjectile(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+            Recoil();
+            recoilCooldown = 2.0f;
         }
         else
         {
             Reload();
         }
     }
+    private void Recoil()
+    {
+        recoil += recoilRate;
+        if(recoil > maxRecoil)
+        {
+            recoil = maxRecoil;
+        }
+    }
+
     public void Reload()
     {
         StartCoroutine(Reloading());
@@ -55,10 +92,19 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     }
     private void RandomBulletSpawnRotation()
     {
-        float x = Random.Range(-1.5f, 1.5f);
-        float y = Random.Range(-1.5f, 1.5f);
-        float z = Random.Range(-1.5f, 1.5f);
+        if (recoil == 0)
+        {
+            bulletSpawn.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        float x = RandomRecoil();
+        float y = RandomRecoil();
+        float z = RandomRecoil();
         bulletSpawn.localRotation = Quaternion.Euler(x,y,z);
+    }
+
+    private float RandomRecoil()
+    {
+        return Random.Range(-recoil, recoil);
     }
 
 

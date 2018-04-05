@@ -22,6 +22,8 @@ public class RaycastAbility : WeaponAbility {
         gun.gunSound = aGunSound;
         gun.reloadTime = reloadTime;
         gun.force = force;
+        gun.maxRecoil = maxRecoil;
+        gun.recoilRate = recoilRate;
         gun.Initialize();
     }
 
