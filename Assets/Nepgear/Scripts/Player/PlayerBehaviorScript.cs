@@ -18,6 +18,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] ToggleEvent onToggleLocal;
     [SerializeField] ToggleEvent onToggleRemote;
 
+    [SerializeField] ToggleEvent onToggleRenderer;
+
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
     private Rigidbody rigidbody;
@@ -146,6 +148,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void DisablePlayer()
     {
+        SetFrameActive(false);
         if (isLocalPlayer)
             mainCamera.SetActive(true);
 
@@ -159,6 +162,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void EnablePlayer()
     {
+        SetFrameActive(true);
         ragdollManager.DisableRagdoll();
 
         if (isLocalPlayer)
@@ -423,6 +427,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         explosionParticle.Play();
         AudioSource.PlayClipAtPoint(explosionSound, transform.position, 10f);
+        SetFrameActive(false);
     }
 
     void ResetPlayerStatus()
@@ -448,5 +453,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public bool isOutOfStock()
     {
         return (lifeStock <= 0);
+    }
+
+    private void SetFrameActive(bool active)
+    {
+        onToggleRenderer.Invoke(active);
     }
 }
