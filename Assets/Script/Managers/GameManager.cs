@@ -68,25 +68,14 @@ public class GameManager : NetworkBehaviour {
         {
             players_B.Add(newPlayer);
         }
+
+        newPlayer.DisablePlayer();
     }
 
     static public void AddPlayerAutoTeam(GameObject player)
     {
-        PlayerBehaviorScript newPlayer = player.GetComponent<PlayerBehaviorScript>();
-
         string recommendedTeam = RecommendTeam();
-        newPlayer.team = recommendedTeam;
-
-        players.Add(newPlayer);
-
-        if (recommendedTeam.Equals("A"))
-        {
-            players_A.Add(newPlayer);
-        }
-        else
-        {
-            players_B.Add(newPlayer);
-        }
+        AddPlayer(player, recommendedTeam);
     }
 
     static public string RecommendTeam()
@@ -116,6 +105,14 @@ public class GameManager : NetworkBehaviour {
         if (toRemove != null)
             players.Remove(toRemove);
     }
+
+    /*public void PreparePlayers()
+    {
+        foreach (PlayerBehaviorScript player in players)
+        {
+            player.DisablePlayer();
+        }
+    }*/
 
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()

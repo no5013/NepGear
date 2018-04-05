@@ -148,7 +148,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void DisablePlayer()
     {
+        Debug.Log("DISABLE");
+
         SetFrameActive(false);
+
         if (isLocalPlayer)
             mainCamera.SetActive(true);
 
@@ -392,7 +395,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     public void RpcTakeDamage(float damage)
     {
-        Debug.Log("WTF");
+
     }
 
     [ClientRpc]
