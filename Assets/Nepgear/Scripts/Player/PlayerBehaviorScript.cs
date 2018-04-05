@@ -30,7 +30,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public float lifeStock;
 
-    private float respawnTime = 10f;
+    private float respawnTime = 5f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -148,8 +148,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void DisablePlayer()
     {
-        Debug.Log("DISABLE");
-
         SetFrameActive(false);
 
         if (isLocalPlayer)
@@ -437,6 +435,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         Explode();
         SetFrameActive(false);
+        DisablePlayer();
     }
 
     void ResetPlayerStatus()

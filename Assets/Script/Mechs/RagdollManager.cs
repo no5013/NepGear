@@ -14,7 +14,7 @@ public class RagdollManager : MonoBehaviour
     private Animator animator;
 
     // Use this for initialization
-    void Start()
+    private void Awake()
     {
         parentCollider = GetComponent<Collider>();
         parentRigidbody = GetComponent<Rigidbody>();
