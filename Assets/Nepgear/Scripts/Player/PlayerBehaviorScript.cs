@@ -28,7 +28,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public float lifeStock;
 
-    [SerializeField]
     private float respawnTime = 10f;
 
     [SyncVar(hook = "OnChangeHealth")]
@@ -74,7 +73,15 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public bool dead = false;
 
-    [SerializeField] private Character charFrame;
+    [SerializeField]
+    private Character charFrame;
+
+    [SerializeField]
+    private ParticleSystem explosionParticle;
+    [SerializeField]
+    private AudioClip explosionSound;
+    [SerializeField]
+    private float timeBeforeExplode = 2f;
 
     protected void Start()
     {
@@ -381,7 +388,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     public void RpcTakeDamage(float damage)
     {
-       
+        Debug.Log("WTF");
     }
 
     [ClientRpc]
@@ -389,6 +396,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         //DisablePlayer();
         ragdollManager.EnableRagdoll();
+        Invoke("Explode", timeBeforeExplode);
     }
 
     [Server]
@@ -409,6 +417,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
         ResetPlayerStatus();
         EnablePlayer();
+    }
+
+    void Explode()
+    {
+        explosionParticle.Play();
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position, 10f);
     }
 
     void ResetPlayerStatus()
