@@ -398,9 +398,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     void RpcDie()
     {
-        //DisablePlayer();
+        Explode();
         ragdollManager.EnableRagdoll();
-        Invoke("Explode", timeBeforeExplode);
+        Invoke("FrameExplode", timeBeforeExplode);
     }
 
     [Server]
@@ -427,6 +427,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         explosionParticle.Play();
         AudioSource.PlayClipAtPoint(explosionSound, transform.position, 10f);
+
+    }
+
+    void FrameExplode()
+    {
+        Explode();
         SetFrameActive(false);
     }
 
