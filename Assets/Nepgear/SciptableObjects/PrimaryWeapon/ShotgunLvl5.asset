@@ -18,7 +18,7 @@ MonoBehaviour:
   aFireDelay: 1
   maxRecoil: 2
   recoilRate: 0.2
-  gunPrefab: {fileID: 1743981299396364, guid: 0290eccb23babaa4392f610cea0b3d00, type: 2}
+  gunPrefab: {fileID: 1025452556742392, guid: 2a9897bcd8d80f2459c87334224101d2, type: 2}
   muzzleFlash: {fileID: 1148127744127816, guid: 49a0a0782e3a6204980eabae8db8b1eb,
     type: 2}
   projectileForce: 1000
