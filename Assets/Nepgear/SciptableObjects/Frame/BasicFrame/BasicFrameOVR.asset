@@ -17,7 +17,7 @@ MonoBehaviour:
   maxStamina: 100
   maxUltimate: 100
   startingSpeed: 5
-  characterPrefab: {fileID: 1506734105768074, guid: ac02b3259184a2d4fb850a7a4b8993d7,
+  characterPrefab: {fileID: 1138042371069490, guid: a47d0510a7644f84e932729c95950835,
     type: 2}
   ultimate: {fileID: 11400000, guid: a7d563b4a64407b4398833b52ee65453, type: 2}
   leftWeapon: {fileID: 0}
