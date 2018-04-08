@@ -2736,8 +2736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ikActive: 1
-  rightHandObj: {fileID: 4815145420111174}
   leftHandObj: {fileID: 4976002978236314}
+  rightHandObj: {fileID: 4815145420111174}
   lookObj: {fileID: 0}
 --- !u!114 &114461754126563436
 MonoBehaviour:
@@ -2890,7 +2890,7 @@ MonoBehaviour:
     MaximumX: 90
     smooth: 0
     smoothTime: 5
-    lockCursor: 1
+    lockCursor: 0
   m_UseFovKick: 1
   m_FovKick:
     Camera: {fileID: 0}

@@ -167,7 +167,7 @@ public class FrameWeaponController : NetworkBehaviour {
 
        
         Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-        projectileRigidBody.velocity = (forward) * 50f;
+        projectileRigidBody.velocity = (forward) * 100f;
 
         Bullet b = projectileInstance.GetComponent<Bullet>();
         b.damage = projectile.damage;

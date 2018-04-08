@@ -263,9 +263,19 @@ public class GameManager : NetworkBehaviour {
 
     private IEnumerator RoundClosing()
     {
-        FindObjectOfType<NetworkLobbyManager>().SendReturnToLobby();
+        //Prototype.NetworkLobby.LobbyManager.s_Singleton.ServerReturnToLobby();
+
+        RpcGameClosing();
 
         yield return null;
+    }
+
+    [ClientRpc]
+    private void RpcGameClosing()
+    {
+        string lobbyScene = FindObjectOfType<LobbyManager>().lobbyScene;
+        Destroy(FindObjectOfType<LobbyManager>().gameObject);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene);
     }
 
     private bool OnePlayerLeft()
