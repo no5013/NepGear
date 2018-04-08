@@ -31,6 +31,7 @@ public class Bullet : NetworkBehaviour {
                 //parent.SendMessage("TakeDamage", damage);
 
                 isPlayer.TakeDamage(damage);
+                isPlayer.TickIndicator(dir);
                 if (isPlayer.isDead())
                 {
                     //Rigidbody r = isPlayer.GetComponent<Rigidbody>();

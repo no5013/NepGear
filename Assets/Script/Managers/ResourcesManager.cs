@@ -92,13 +92,13 @@ public class ResourcesManager : ScriptableObject
         if (f_dict.TryGetValue(id, out index))
         {
             retVal = frames[index];
-            Debug.Log("FOUND");
+            //Debug.Log("FOUND");
         }
 
-        foreach(string n in f_dict.Keys)
-        {
-            Debug.Log(n);
-        }
+        //foreach(string n in f_dict.Keys)
+        //{
+        //    Debug.Log(n);
+        //}
 
         return retVal;
     }

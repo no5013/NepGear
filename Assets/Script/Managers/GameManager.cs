@@ -27,7 +27,7 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
-    private UIManager ui;
+    //private UIManager ui;
 
     public Transform[] spawnPoints_A;
     public Transform[] spawnPoints_B;
@@ -43,7 +43,7 @@ public class GameManager : NetworkBehaviour {
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine(GameLoop());
         }
-        ui = FindObjectOfType<UIManager>().GetComponent<UIManager>();
+        //ui = FindObjectOfType<UIManager>().GetComponent<UIManager>();
     }
 
     void Awake()
@@ -331,8 +331,8 @@ public class GameManager : NetworkBehaviour {
     private void ShowResult()
     {
         Debug.Log(gameWinner.characterID);
-        ui.SetResult(gameWinner.characterID);
-        ui.ShowResult();
+        //ui.SetResult(gameWinner.characterID);
+        //ui.ShowResult();
     }
 
     [ClientRpc]
