@@ -13,7 +13,7 @@ public class GameManager : NetworkBehaviour {
     static public List<PlayerBehaviorScript> players_A = new List<PlayerBehaviorScript>();
     static public List<PlayerBehaviorScript> players_B = new List<PlayerBehaviorScript>();
 
-    public float startDelay = 3f;           // The delay between the start of RoundStarting and RoundPlaying phases.
+    public float startDelay = 5f;           // The delay between the start of RoundStarting and RoundPlaying phases.
     public float endDelay = 10f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
     public float playerLifeStock = 3f;
