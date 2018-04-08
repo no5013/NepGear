@@ -274,6 +274,7 @@ public class GameManager : NetworkBehaviour {
     private void RpcGameClosing()
     {
         string lobbyScene = FindObjectOfType<LobbyManager>().lobbyScene;
+        FindObjectOfType<LobbyManager>().StopClient();
         Destroy(FindObjectOfType<LobbyManager>().gameObject);
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene);
     }

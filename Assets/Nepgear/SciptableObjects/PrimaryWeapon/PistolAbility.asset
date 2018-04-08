@@ -14,7 +14,7 @@ MonoBehaviour:
   aName: Pistol
   aID: W1
   aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
-  aMagazine: 12
+  aMagazine: 2
   aFireDelay: 0.5
   maxRecoil: 1.5
   recoilRate: 0.2
