@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using Prototype.NetworkLobby;
 
@@ -28,6 +29,8 @@ public class GameManager : NetworkBehaviour {
     public bool isFinished = false;
 
     private UIManager ui;
+
+    private Camera mapCamera;
 
     public Transform[] spawnPoints_A;
     public Transform[] spawnPoints_B;
@@ -178,13 +181,6 @@ public class GameManager : NetworkBehaviour {
         }*/
     }
 
-    private IEnumerator RoundSetup()
-    {
-        RpcMapSetup();
-
-        yield return null;
-    }
-
     private IEnumerator RoundStarting()
     {
         //we notify all clients that the round is starting
@@ -197,6 +193,7 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     void RpcRoundStarting()
     {
+        SetCanvasActive(false);
         DisablePlayers();
         ResetPlayers();
         Debug.Log("ROUND STARTING");
@@ -334,9 +331,10 @@ public class GameManager : NetworkBehaviour {
         ui.ShowResult();
     }
 
-    [ClientRpc]
-    void RpcMapSetup()
+    void MapSetup()
     {
+        mapCamera = Camera.main;
+
         GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
         spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
 
@@ -344,12 +342,9 @@ public class GameManager : NetworkBehaviour {
         spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
     }
 
-    void MapSetup()
+    void SetCanvasActive(bool active)
     {
-        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
-        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
-
-        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
-        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+        Canvas mapCanvas = mapCamera.transform.parent.GetComponentInChildren<Canvas>();
+        mapCanvas.enabled = active;
     }
 }
