@@ -13,4 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: m0
   mapName: Dev Field
-  mapScene: {fileID: 102900000, guid: f6870c0acfd30a446ad37fa2e217db8f, type: 3}
+  mapScene:
+    m_SceneAsset: {fileID: 102900000, guid: f6870c0acfd30a446ad37fa2e217db8f, type: 3}
+    m_SceneName: DevMap

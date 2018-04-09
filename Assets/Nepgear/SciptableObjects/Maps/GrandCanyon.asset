@@ -13,4 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: m1
   mapName: Grand Canyon
-  mapScene: {fileID: 102900000, guid: e1b793c40df980747b159fd6e9176269, type: 3}
+  mapScene:
+    m_SceneAsset: {fileID: 102900000, guid: e1b793c40df980747b159fd6e9176269, type: 3}
+    m_SceneName: GrandCanyon
