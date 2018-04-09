@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 114724283107134054}
   - component: {fileID: 114702036923137018}
   - component: {fileID: 114606171151889186}
+  - component: {fileID: 114458589711933736}
   m_Layer: 9
   m_Name: FPSCharacterFrame(Without Weapon)
   m_TagString: Player
@@ -2765,6 +2766,19 @@ MonoBehaviour:
   leftHandObj: {fileID: 4976002978236314}
   rightHandObj: {fileID: 4815145420111174}
   lookObj: {fileID: 0}
+--- !u!114 &114458589711933736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1511154638448052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13ae70ce1734644d86a5b43eebc2b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftWeaponId: 
+  rightWeaponId: 
 --- !u!114 &114461754126563436
 MonoBehaviour:
   m_ObjectHideFlags: 1

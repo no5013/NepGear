@@ -1109,6 +1109,58 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 283702045}
+--- !u!1001 &351370306
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672961352167854, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114528927800064204, guid: 4781cc865a262464ebb5e0e8d776ce8f,
+        type: 2}
+      propertyPath: mechId
+      value: mech1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114528927800064204, guid: 4781cc865a262464ebb5e0e8d776ce8f,
+        type: 2}
+      propertyPath: input
+      value: mech1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4781cc865a262464ebb5e0e8d776ce8f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &357124771
 GameObject:
   m_ObjectHideFlags: 0
@@ -5649,6 +5701,7 @@ MonoBehaviour:
   characterText: {fileID: 1802090501}
   leftWeaponText: {fileID: 1077811112}
   rightWeaponText: {fileID: 1596120020}
+  mechBase: {fileID: 2084693171}
 --- !u!114 &1345568861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8554,6 +8607,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2062317308}
+--- !u!114 &2084693171 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114528927800064204, guid: 4781cc865a262464ebb5e0e8d776ce8f,
+    type: 2}
+  m_PrefabInternal: {fileID: 351370306}
+  m_Script: {fileID: 11500000, guid: 0c72090ef85150340aa6502334df5e53, type: 3}
 --- !u!1 &2087771347
 GameObject:
   m_ObjectHideFlags: 0

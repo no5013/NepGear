@@ -32,6 +32,7 @@ namespace Prototype.NetworkLobby
         public Text rightWeaponText;
         private Dropdown[] dropdowns;
 
+        public MechBase mechBase;
 
         void Start()
         {
@@ -58,6 +59,11 @@ namespace Prototype.NetworkLobby
             }
             characterText.text = characters[selectedCharacterRef].characterName;
             //selectedCharacter = characters[characterChoice];
+
+            if (mechBase != null)
+            {
+                mechBase.InitializeMech(characters[selectedCharacterRef].characterID);
+            }
         }
 
         public void OnLeftHandWeaponSelect(int weaponChoice)
@@ -109,6 +115,11 @@ namespace Prototype.NetworkLobby
 
         public void OnConfirmCharacter()
         {
+            if(mechBase != null)
+            {
+                mechBase.Initialize(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+            }
+
             if(isServer)
             {
                 lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
