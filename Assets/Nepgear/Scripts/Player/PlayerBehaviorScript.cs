@@ -401,7 +401,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void RpcDie()
     {
         Explode();
-        onToggleControl.Invoke(false);
+        DisableControl();
         ragdollManager.EnableRagdoll();
         Invoke("FrameExplode", timeBeforeExplode);
     }
@@ -453,6 +453,16 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             //uiManager.SetHitpoint(currentHealth, currentHealth * 1.0f / maxHitPoint * 1.0f);
         }
+    }
+
+    public void EnableControl()
+    {
+        onToggleControl.Invoke(true);
+    }
+
+    public void DisableControl()
+    {
+        onToggleControl.Invoke(false);
     }
 
     public bool isDead()

@@ -194,8 +194,10 @@ public class GameManager : NetworkBehaviour {
     void RpcRoundStarting()
     {
         SetCanvasActive(false);
-        DisablePlayers();
+        //DisablePlayers();
         ResetPlayers();
+        EnablePlayers();
+        DisablePlayerControl();
         Debug.Log("ROUND STARTING");
     }
 
@@ -321,6 +323,22 @@ public class GameManager : NetworkBehaviour {
         for (int i = 0; i < players.Count; i++)
         {
             players[i].DisablePlayer();
+        }
+    }
+
+    private void EnablePlayerControl()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].EnableControl();
+        }
+    }
+
+    private void DisablePlayerControl()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].DisableControl();
         }
     }
 
