@@ -7,7 +7,7 @@ using Prototype.NetworkLobby;
 
 public class MapSelector : MonoBehaviour {
 
-    public string[] maps;
+    private Map[] maps;
 
     public Text currentMapText;
     
@@ -18,13 +18,15 @@ public class MapSelector : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
+        maps = LobbyManager.s_Singleton.resourcesManager.maps;
+
         currentMapIndex = 0;
         SetShownMap(currentMapIndex);
 	}
 	
 	public void SetShownMap(int mapIndex)
     {
-        currentMapText.text = maps[mapIndex];
+        currentMapText.text = maps[mapIndex].mapName;
     }
 
     public void OnClickNextMap()
@@ -67,7 +69,7 @@ public class MapSelector : MonoBehaviour {
         return currentMapIndex;
     }
 
-    public string GetCurrentMap()
+    public Map GetCurrentMap()
     {
         return maps[currentMapIndex];
     }

@@ -19,6 +19,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] ToggleEvent onToggleRemote;
 
     [SerializeField] ToggleEvent onToggleRenderer;
+    [SerializeField] ToggleEvent onToggleControl;
 
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
@@ -400,6 +401,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void RpcDie()
     {
         Explode();
+        DisableControl();
         ragdollManager.EnableRagdoll();
         Invoke("FrameExplode", timeBeforeExplode);
     }
@@ -451,6 +453,16 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             //uiManager.SetHitpoint(currentHealth, currentHealth * 1.0f / maxHitPoint * 1.0f);
         }
+    }
+
+    public void EnableControl()
+    {
+        onToggleControl.Invoke(true);
+    }
+
+    public void DisableControl()
+    {
+        onToggleControl.Invoke(false);
     }
 
     public bool isDead()

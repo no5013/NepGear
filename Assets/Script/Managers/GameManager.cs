@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using Prototype.NetworkLobby;
 
@@ -13,7 +14,7 @@ public class GameManager : NetworkBehaviour {
     static public List<PlayerBehaviorScript> players_A = new List<PlayerBehaviorScript>();
     static public List<PlayerBehaviorScript> players_B = new List<PlayerBehaviorScript>();
 
-    public float startDelay = 3f;           // The delay between the start of RoundStarting and RoundPlaying phases.
+    public float startDelay = 5f;           // The delay between the start of RoundStarting and RoundPlaying phases.
     public float endDelay = 10f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
     public float playerLifeStock = 3f;
@@ -28,6 +29,8 @@ public class GameManager : NetworkBehaviour {
     public bool isFinished = false;
 
     private UIManager ui;
+
+    private Camera mapCamera;
 
     public Transform[] spawnPoints_A;
     public Transform[] spawnPoints_B;
@@ -178,13 +181,6 @@ public class GameManager : NetworkBehaviour {
         }*/
     }
 
-    private IEnumerator RoundSetup()
-    {
-        RpcMapSetup();
-
-        yield return null;
-    }
-
     private IEnumerator RoundStarting()
     {
         //we notify all clients that the round is starting
@@ -197,8 +193,11 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     void RpcRoundStarting()
     {
-        DisablePlayers();
+        SetCanvasActive(false);
+        //DisablePlayers();
         ResetPlayers();
+        EnablePlayers();
+        DisablePlayerControl();
         Debug.Log("ROUND STARTING");
     }
 
@@ -327,6 +326,22 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
+    private void EnablePlayerControl()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].EnableControl();
+        }
+    }
+
+    private void DisablePlayerControl()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].DisableControl();
+        }
+    }
+
     private void ShowResult()
     {
         Debug.Log(gameWinner.characterID);
@@ -334,9 +349,10 @@ public class GameManager : NetworkBehaviour {
         ui.ShowResult();
     }
 
-    [ClientRpc]
-    void RpcMapSetup()
+    void MapSetup()
     {
+        mapCamera = Camera.main;
+
         GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
         spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
 
@@ -344,12 +360,9 @@ public class GameManager : NetworkBehaviour {
         spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
     }
 
-    void MapSetup()
+    void SetCanvasActive(bool active)
     {
-        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
-        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
-
-        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
-        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+        Canvas mapCanvas = mapCamera.transform.parent.GetComponentInChildren<Canvas>();
+        mapCanvas.enabled = active;
     }
 }

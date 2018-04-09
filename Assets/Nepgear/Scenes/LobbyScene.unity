@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2481,7 +2481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae45dc531c057c4c8df1306ffc5d9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps: []
   currentMapText: {fileID: 276309067}
   currentMapIndex: 0
   mapSelectionPanel: {fileID: 0}
@@ -3373,9 +3372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae45dc531c057c4c8df1306ffc5d9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps:
-  - DevMap
-  - PracticeField
   currentMapText: {fileID: 276309067}
   currentMapIndex: 0
   mapSelectionPanel: {fileID: 657288389}

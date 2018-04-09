@@ -491,7 +491,7 @@ namespace Prototype.NetworkLobby
             if (mapSelector == null)
                 ServerChangeScene(playScene);
             else
-                ServerChangeScene(mapSelector.GetCurrentMap());
+                ServerChangeScene(mapSelector.GetCurrentMap().mapScene.SceneName);
         }
 
         // ----------------- Client callbacks ------------------
