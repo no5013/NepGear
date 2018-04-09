@@ -19,6 +19,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] ToggleEvent onToggleRemote;
 
     [SerializeField] ToggleEvent onToggleRenderer;
+    [SerializeField] ToggleEvent onToggleControl;
 
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
@@ -400,6 +401,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void RpcDie()
     {
         Explode();
+        onToggleControl.Invoke(false);
         ragdollManager.EnableRagdoll();
         Invoke("FrameExplode", timeBeforeExplode);
     }
