@@ -23,7 +23,7 @@ public class MechBase : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID); 
+        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[1].aID, resourcesManager.weaponAbilities[1].aID); 
     }
 
     public void Initialize(string mechId, string leftWeaponId, string rightWeaponId)
