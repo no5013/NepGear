@@ -23,7 +23,7 @@ public class MechBase : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[1].aID, resourcesManager.weaponAbilities[1].aID); 
+        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID); 
     }
 
     public void Initialize(string mechId, string leftWeaponId, string rightWeaponId)
@@ -37,17 +37,23 @@ public class MechBase : MonoBehaviour {
 
     public void InitializeMech(string mechId)
     {
+        if (this.mechId.Equals(mechId))
+            return;
+
         Character initializeMech = resourcesManager.GetCharacter(mechId);
 
         if (initializeMech != null)
         {
             Destroy(mech);
 
-            mech = Instantiate(initializeMech.characterPrefab);
+            mech = Instantiate(initializeMech.framePrefab);
             mech.transform.parent = transform;
             mech.transform.position = spawnPosition.position;
             mech.transform.rotation = spawnPosition.rotation;
+            this.mechId = mechId;
 
+            leftWeaponId = "";
+            rightWeaponId = "";
             EquipLeftWeaponToMech(leftWeaponId);
             EquipRightWeaponToMech(rightWeaponId);
         }
@@ -55,21 +61,29 @@ public class MechBase : MonoBehaviour {
 
     public void EquipLeftWeaponToMech(string weaponId)
     {
+        if (leftWeaponId.Equals(weaponId))
+            return;
+
         WeaponAbility weaponAbility = resourcesManager.GetWeapon(weaponId);
         if(weaponAbility != null)
         {
             FrameManager fm = mech.GetComponent<FrameManager>();
             fm.EquipLeftWeapon(weaponAbility);
+            leftWeaponId = weaponId;
         }        
     }
 
     public void EquipRightWeaponToMech(string weaponId)
     {
+        if (rightWeaponId.Equals(weaponId))
+            return;
+
         WeaponAbility weaponAbility = resourcesManager.GetWeapon(weaponId);
         if (weaponAbility != null)
         {
             FrameManager fm = mech.GetComponent<FrameManager>();
             fm.EquipRightWeapon(weaponAbility);
+            rightWeaponId = weaponId;
         }
     }
 
