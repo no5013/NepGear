@@ -30,6 +30,16 @@ namespace Prototype.NetworkLobby
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
 
+        [SyncVar]
+        public string frameId = "F1";
+
+        [SyncVar]
+        public string leftWeaponId = "W1";
+
+        [SyncVar]
+        public string rightWeaponId = "W1";
+
+
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
@@ -63,6 +73,10 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
+            OnFrame(frameId);
+            OnLeftWeapon(leftWeaponId);
+            OnRightWeapon(rightWeaponId);
+
         }
 
         public override void OnStartAuthority()
@@ -192,6 +206,21 @@ namespace Prototype.NetworkLobby
         {
             playerColor = newColor;
             colorButton.GetComponent<Image>().color = newColor;
+        }
+
+        public void OnFrame(string newFrameId)
+        {
+            frameId = newFrameId;
+        }
+
+        public void OnLeftWeapon(string newWeaponId)
+        {
+            leftWeaponId = newWeaponId;
+        }
+
+        public void OnRightWeapon(string newWeaponId)
+        {
+            rightWeaponId = newWeaponId;
         }
 
         //===== UI Handler
@@ -331,6 +360,9 @@ namespace Prototype.NetworkLobby
         {
             Debug.Log("SET CHARACTER");
             LobbyManager.s_Singleton.ServerSetCharacter(GetComponent<NetworkIdentity>().connectionToClient, characterID, leftWeaponID, rightWeaponID);
+            frameId = characterID;
+            leftWeaponId = leftWeaponID;
+            rightWeaponId = rightWeaponID;
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)

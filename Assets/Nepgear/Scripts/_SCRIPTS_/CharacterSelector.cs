@@ -122,6 +122,13 @@ namespace Prototype.NetworkLobby
             }
         }
 
+        public void OnCancelSelect()
+        {
+            mechBase.Initialize(lobbyPlayer.frameId, lobbyPlayer.leftWeaponId, lobbyPlayer.rightWeaponId);
+
+            LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
+        }
+
         public void OnConfirmCharacter()
         {
             OnChangeSetting();

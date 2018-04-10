@@ -111,11 +111,6 @@ public class ResourcesManager : ScriptableObject
             Debug.Log("FOUND");
         }
 
-        foreach(string n in f_dict.Keys)
-        {
-            Debug.Log(n);
-        }
-
         return retVal;
     }
 
