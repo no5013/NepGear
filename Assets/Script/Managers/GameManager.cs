@@ -238,7 +238,7 @@ public class GameManager : NetworkBehaviour {
     {
         Debug.Log("START");
         // As soon as the round begins playing let the players control the tanks.
-        EnablePlayers();
+        EnablePlayerControl();
     }
 
     private IEnumerator RoundEnding()
