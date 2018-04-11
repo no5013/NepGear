@@ -15,6 +15,8 @@ public class FrameWeaponController : NetworkBehaviour {
     //[SerializeField] private FrameWeapon rightHand;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private WeaponAbility rightHandAbility;
+
+    //[SerializeField] private WeaponAbility eyeAbility;
     //public GameObject leftHand;
     //public Ability leftHandAbility;
     //public GameObject rightHand;
@@ -24,6 +26,8 @@ public class FrameWeaponController : NetworkBehaviour {
     public string leftWeaponID;
     [SyncVar]
     public string rightWeaponID;
+    [SyncVar]
+    public string eyeWeaponID;
 
     private ResourcesManager wrm;
 
@@ -206,9 +210,10 @@ public class FrameWeaponController : NetworkBehaviour {
                 Rigidbody r = hit.collider.GetComponent<Rigidbody>();
                 r.AddForce(transform.forward * gun.force);
             }
-        }
-        
+        }   
     }
+    //[Command]
+    //public void CmdFireEyeWeapon()
 
     //[ClientRpc]
     //public void RpcRaycastHit(RaycastHit hit, float damage)
