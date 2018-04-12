@@ -41,12 +41,12 @@ public class RocketShootTriggerable : MonoBehaviour {
         Transform muzzle = muzzles[fireIndex];
         if (CanFire() && Physics.Raycast(eyePosition.position, eyePosition.forward, out hit, range))
         {
-            GameObject rocketClone = Instantiate(rocket, muzzle.transform.position, Quaternion.identity);
+            /*GameObject rocketClone = Instantiate(rocket, muzzle.transform.position, Quaternion.identity);
             HomingRocket rocketScript = rocketClone.GetComponent<HomingRocket>();
             rocketScript.hitX = hit.point.x;
             rocketScript.hitY = hit.point.y;
             rocketScript.hitZ = hit.point.z;
-            fireIndex++;
+            fireIndex++;*/
         }
     }
 

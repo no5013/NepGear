@@ -4,13 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - FxTemporaire
+  - projectile
   - Unpassable Object
-  - Enemy
-  - Bullet
-  - Main Weapon
-  - Sub Weapon
-  - Spawn_A
   - Spawn_B
+  - Spawn_A
+  - Sub Weapon
+  - FX
+  - Main Weapon
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -47,7 +49,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: GUI
-    uniqueID: 890378239
     locked: 0
