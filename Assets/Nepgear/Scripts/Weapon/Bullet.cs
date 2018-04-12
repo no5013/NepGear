@@ -92,17 +92,12 @@ public class Bullet : NetworkBehaviour {
 
     private string GetHitDir(Transform target)
     {
-        //Vector3 vecBulletLocal = transform.InverseTransformDirection(target.position - transform.position);
-        //Debug.Log("Local position in player" + vecBulletLocal.ToString());
-
         Vector3 displacement = transform.position - target.position;
-        //Vector2 displacement = new Vector2(displacement3.x, displacement3.z);
-        //Debug.Log(displacement.ToString());
+
         float forwardAngle = Vector3.Angle(displacement, target.forward);
         float angle = 0;
         float rightAngle = Vector3.Angle(displacement, target.right);
-        //Debug.Log("Forward Dir = " + forwardAngle);
-        //Debug.Log("Right Dir = " + rightAngle);
+
 
         if (rightAngle >= 90) // Shot come from left side
         {
@@ -110,14 +105,6 @@ public class Bullet : NetworkBehaviour {
         }
 
         angle = forwardAngle;
-        //float angle = Vector3.Angle(new Vector3(0, 0, 1), vecBulletLocal) * Mathf.Sign(vecBulletLocal.x);
-        //Vector2 u = new Vector2(target.position.x, target.position.z);
-        //Vector2 v = new Vector2(transform.position.x, transform.position.z);
-        //Debug.Log("Target vector is" + u.ToString());
-        //Debug.Log("Bullet vector is" + v.ToString());
-        //float angle = Vector2.Angle(u, v);
-        ////float angle = Mathf.Acos((Vector2.Dot(u, v)) / (Vector2. * Vector2.Magnitude(v))) * Mathf.Rad2Deg;
-        //Debug.Log("Hit dir angle is " + angle);
         if((angle>= 315 && angle <=360) || (angle >= 0 && angle < 45))
         {
             return "front";
@@ -135,10 +122,6 @@ public class Bullet : NetworkBehaviour {
             return "left";
         }
         return "";
-        ////Vector3 heading = transform.position - target.position;
-        ////float angle = Vector3.Angle(heading, transform.forward);
-        ////if ()
-
     }
 
 

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLuncherBehavior : MonoBehaviour {
+public class RocketShootTriggerable : MonoBehaviour {
 
-    public GameObject rocket;
-    public float damage;
-    public float cooldown;
-    public float range;
+    [HideInInspector] public Projectile rocket;
+    [HideInInspector] public float damage;
+    [HideInInspector] public float cooldown;
+    [HideInInspector] public float range;
     public Transform[] muzzles;
 
     public Transform eyePosition;

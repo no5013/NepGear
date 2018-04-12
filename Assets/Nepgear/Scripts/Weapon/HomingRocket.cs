@@ -2,49 +2,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class HomingRocket : MonoBehaviour {
+public class HomingRocket : NetworkBehaviour {
 
-    public float damage;
-    public float speed;
-    private bool isActivated;
-    private float timeBeforeHoming;
-    public GameObject target;
+    [SyncVar] [HideInInspector] public float damage;
+    [SyncVar] [HideInInspector] public float risingSpeed;
+    [SyncVar] [HideInInspector] public float timeBeforeHoming;
+    [SyncVar] [HideInInspector] public float travelSpeed;
+    public GameObject impactPrefab;
 
-    public float hitX;
-    public float hitY;
-    public float hitZ;
+    //public GameObject target;
+
+    [HideInInspector] public float hitX;
+    [HideInInspector] public float hitY;
+    [HideInInspector] public float hitZ;
 
     private float distance_x;
-    [SerializeField] private float travelSpeed = 20f;
     private float distance_y;
     private float distance_z;
     private float gravity = Physics.gravity.magnitude;
     private float usedAngle = 0f;
-    private float turnAngle = 0f;
     private float velocityZ = 0f;
     private Rigidbody rb;
     private Vector3 velocity;
-    //private Vector3 thrownpoint;
-    //private bool debugDraw = false;
+    private bool isActivated;
+
     // Use this for initialization
-	void Start () {
+    void Start () {
         isActivated = false;
         timeBeforeHoming = 1f;
-        Destroy(this, 10f);
         rb = GetComponent<Rigidbody>();
-        hitX = target.transform.position.x;
-        hitY = 0;
-        hitZ = target.transform.position.z;
-
-
+        Destroy(this, 10f);
     }
 
     // Update is called once per frame
     void Update () {
         if (!isActivated)
         {
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
+            transform.Translate(Vector3.up * Time.deltaTime * risingSpeed);
             timeBeforeHoming -= Time.deltaTime;
             if (timeBeforeHoming <= 0f)
             {
@@ -57,8 +53,6 @@ public class HomingRocket : MonoBehaviour {
         {
             Rotate();
         }
-        //if (debugDraw)
-        //    Debug.DrawLine(thrownpoint, velocity, Color.red);
 
     }
 
@@ -78,8 +72,6 @@ public class HomingRocket : MonoBehaviour {
         }
         else 
             velocity = new Vector3(velocityX, velocityY, -velocityZ);
-        //thrownpoint = transform.position;
-        //debugDraw = true;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = velocity;
         rb.useGravity = true;
@@ -119,7 +111,6 @@ public class HomingRocket : MonoBehaviour {
         else
         {
             distance_y = transform.position.y - hitY;
-            //distance_y = -distance_y;
         }
         if (hitZ > transform.position.z)
         {
@@ -129,7 +120,6 @@ public class HomingRocket : MonoBehaviour {
         else
         {
             distance_z = transform.position.z - hitZ;
-            //distance_z = -distance_z;
         }
         if (distance_x == 0 && distance_z ==0)
         {
@@ -141,14 +131,6 @@ public class HomingRocket : MonoBehaviour {
             distance_x_in_projectile = distance_z;
         else
             distance_x_in_projectile = distance_x;
-        //distance_x = hitX - transform.position.x;
-        //distance_y = hitY - transform.position.y;
-        //distance_z = hitX - transform.position.z;
-
-
-        //Debug.Log("distance_x is " + distance_x);
-        //Debug.Log("distance_y is " + distance_y);
-        //Debug.Log("distance_z is " + distance_z);
 
 
         float a = gravity * (distance_x_in_projectile * distance_x_in_projectile) / (2 * (travelSpeed * travelSpeed));
@@ -174,7 +156,6 @@ public class HomingRocket : MonoBehaviour {
         {
             usedAngle = angle1;
         }
-        //Debug.Log("Used Angle is" + usedAngle);
         if (distance_x == 0)
         {
             return;
@@ -183,22 +164,15 @@ public class HomingRocket : MonoBehaviour {
        
         velocityZ = distance_z / time;
         float realVelocityX = travelSpeed * Mathf.Cos((usedAngle) * Mathf.Deg2Rad);
-        turnAngle = Math.Abs(Mathf.Atan2(realVelocityX, velocityZ) * Mathf.Rad2Deg);
+        float turnAngle = Math.Abs(Mathf.Atan2(realVelocityX, velocityZ) * Mathf.Rad2Deg);
         float maxVelocityZ = travelSpeed * Mathf.Cos((turnAngle) * Mathf.Deg2Rad);
-        Debug.Log(velocityZ);
-        Debug.Log(maxVelocityZ);
         if (Mathf.Abs(velocityZ) > Math.Abs(maxVelocityZ)) 
         {
             if (velocityZ > 0)
                 velocityZ = Math.Abs(travelSpeed * Mathf.Cos((turnAngle) * Mathf.Deg2Rad));
             else
                 velocityZ = -Math.Abs(travelSpeed * Mathf.Cos((turnAngle) * Mathf.Deg2Rad));
-            //velocityZ = travelSpeed;
         }
-
-        //Debug.Log("angle Turn in pane z" + (90 - angleTurn)*-1);
-        //Debug.Log("VelocityZ " + velocityZ);
-
 
     }
 
