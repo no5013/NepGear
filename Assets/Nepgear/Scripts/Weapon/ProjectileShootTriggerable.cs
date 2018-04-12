@@ -59,7 +59,6 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             reloadDelay += Time.deltaTime;
             if (reloadDelay >= autoReloadDelay)
             {
-                Debug.Log("Auto Reload");
                 Reload();
             }
         }
@@ -83,7 +82,6 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Reload by no bullet");
             Reload();
         }
     }

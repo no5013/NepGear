@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512319041963350}
   - component: {fileID: 65778849180911502}
+  - component: {fileID: 114397002455725740}
   m_Layer: 10
   m_Name: Mech_Humanoid_Spine_2
   m_TagString: Untagged
@@ -4848,9 +4849,11 @@ MonoBehaviour:
   leftHandAbility: {fileID: 0}
   rightHand: {fileID: 0}
   rightHandAbility: {fileID: 0}
+  uniqueWeapon: {fileID: 1003043507664110}
+  uniqueAbility: {fileID: 11400000, guid: a08478208bbbe7546ba3742dbada85ad, type: 2}
+  eye: {fileID: 4005039986417304}
   leftWeaponID: 
   rightWeaponID: 
-  eyeWeaponID: 
 --- !u!114 &114167132767471544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5256,6 +5259,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaa2222b14535c4d96e9653c885abf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114397002455725740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1003043507664110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae990c986b6bd142bb619afc6b79b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocket: {fileID: 0}
+  cooldown: 0
+  range: 0
+  gunId: 
+  muzzles:
+  - {fileID: 4818662306839912}
+  - {fileID: 4898942388167730}
+  - {fileID: 4020768836585930}
+  - {fileID: 4755223506461602}
+  eyePosition: {fileID: 4005039986417304}
 --- !u!114 &114417394745520326
 MonoBehaviour:
   m_ObjectHideFlags: 1

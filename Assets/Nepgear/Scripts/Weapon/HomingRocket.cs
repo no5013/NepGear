@@ -7,16 +7,20 @@ using UnityEngine.Networking;
 public class HomingRocket : NetworkBehaviour {
 
     [SyncVar] [HideInInspector] public float damage;
-    [SyncVar] [HideInInspector] public float risingSpeed;
-    [SyncVar] [HideInInspector] public float timeBeforeHoming;
+    [SyncVar] [HideInInspector] public float impactForce;
+    //[SyncVar] [HideInInspector] public float risingSpeed;
     [SyncVar] [HideInInspector] public float travelSpeed;
+    [SyncVar] [HideInInspector] public float lifeTime;
+    [SyncVar] [HideInInspector] public float blastDamage;
+    [SyncVar] [HideInInspector] public float blastRadius;
+    [SyncVar] [HideInInspector] public float blastForce;
     public GameObject impactPrefab;
 
     //public GameObject target;
 
-    [HideInInspector] public float hitX;
-    [HideInInspector] public float hitY;
-    [HideInInspector] public float hitZ;
+    [SyncVar] [HideInInspector] public float hitX;
+    private float hitY;
+    [SyncVar] [HideInInspector] public float hitZ;
 
     private float distance_x;
     private float distance_y;
@@ -25,26 +29,32 @@ public class HomingRocket : NetworkBehaviour {
     private float usedAngle = 0f;
     private float velocityZ = 0f;
     private Rigidbody rb;
+    private CapsuleCollider cc;
     private Vector3 velocity;
     private bool isActivated;
+    private float timeBeforeHoming = 1f;
 
     // Use this for initialization
     void Start () {
+        cc = GetComponent<CapsuleCollider>();
+        cc.enabled = false;
         isActivated = false;
-        timeBeforeHoming = 1f;
+        hitY = 0f;
+        //timeBeforeHoming = 1f;
         rb = GetComponent<Rigidbody>();
-        Destroy(this, 10f);
+        Destroy(this.gameObject, lifeTime);
     }
 
     // Update is called once per frame
     void Update () {
         if (!isActivated)
         {
-            transform.Translate(Vector3.up * Time.deltaTime * risingSpeed);
+            //transform.Translate(Vector3.up * Time.deltaTime * risingSpeed);
             timeBeforeHoming -= Time.deltaTime;
             if (timeBeforeHoming <= 0f)
             {
                 isActivated = true;
+                Activate();
                 findShootingAngle();
                 ApplyVelocity();
             }
@@ -54,6 +64,11 @@ public class HomingRocket : NetworkBehaviour {
             Rotate();
         }
 
+    }
+
+    private void Activate()
+    {
+        cc.enabled = true;
     }
 
     private void ApplyVelocity()

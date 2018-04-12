@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketShootTriggerable : MonoBehaviour {
 
-    [HideInInspector] public Projectile rocket;
-    [HideInInspector] public float damage;
+    [HideInInspector] public BlastRound rocket;
     [HideInInspector] public float cooldown;
     [HideInInspector] public float range;
+    [HideInInspector] public string gunId;
     public Transform[] muzzles;
 
     public Transform eyePosition;
@@ -16,22 +17,34 @@ public class RocketShootTriggerable : MonoBehaviour {
 
     private float fireCooldown;
 
+    FrameWeaponController fwc;
+
 	// Use this for initialization
 	void Start () {
         fireCooldown = 0f;
+        fwc = GetComponentInParent<FrameWeaponController>();
         //muzzle = GetComponentInParent<Transform>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyUp(KeyCode.F) && fireCooldown <= 0f)
+    }
+
+    // Update is called once per frame
+    void Update () {
+        
+        if(fireIndex != 0)
         {
-            Debug.Log("Rocket Fire");
-            Fire();
-        }
-        if (fireCooldown > 0f)
+            fireCooldown += Time.deltaTime;
+            if (fireCooldown >= cooldown)
+            {
+                fireCooldown = 0f;
+                ReloadRocket();
+            }
+        }  
+    }
+
+    private void ReloadRocket()
+    {
+       if(fireIndex > 0)
         {
-            fireCooldown -= Time.deltaTime;
+            fireIndex--;
         }
     }
 
@@ -39,14 +52,18 @@ public class RocketShootTriggerable : MonoBehaviour {
     {
         RaycastHit hit;
         Transform muzzle = muzzles[fireIndex];
+        Quaternion rotation = muzzle.rotation;
+        rotation.eulerAngles = new Vector3(-90, 0, 0);
         if (CanFire() && Physics.Raycast(eyePosition.position, eyePosition.forward, out hit, range))
         {
-            GameObject rocketClone = Instantiate(rocket, muzzle.transform.position, Quaternion.identity);
-            HomingRocket rocketScript = rocketClone.GetComponent<HomingRocket>();
-            rocketScript.hitX = hit.point.x;
-            rocketScript.hitY = hit.point.y;
-            rocketScript.hitZ = hit.point.z;
             fireIndex++;
+            fwc.CmdFireRocket(gunId, muzzle.up, muzzle.position, rotation);
+            //GameObject rocketClone = Instantiate(rocket, muzzle.transform.position, Quaternion.identity);
+            //HomingRocket rocketScript = rocketClone.GetComponent<HomingRocket>();
+            //rocketScript.hitX = hit.point.x;
+            //rocketScript.hitY = hit.point.y;
+            //rocketScript.hitZ = hit.point.z;
+            //fireIndex++;
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Prototype.NetworkLobby;
+using System;
 
 public class FrameWeaponController : NetworkBehaviour {
 
@@ -16,6 +17,11 @@ public class FrameWeaponController : NetworkBehaviour {
     [SerializeField] private GameObject rightHand;
     [SerializeField] private WeaponAbility rightHandAbility;
 
+    [SerializeField] private GameObject uniqueWeapon;
+    [SerializeField] private WeaponAbility uniqueAbility;
+
+    public Transform eye;
+    //public GameObjec unique
     //[SerializeField] private WeaponAbility eyeAbility;
     //public GameObject leftHand;
     //public Ability leftHandAbility;
@@ -26,8 +32,7 @@ public class FrameWeaponController : NetworkBehaviour {
     public string leftWeaponID;
     [SyncVar]
     public string rightWeaponID;
-    [SyncVar]
-    public string eyeWeaponID;
+    
 
     private ResourcesManager wrm;
 
@@ -38,6 +43,10 @@ public class FrameWeaponController : NetworkBehaviour {
     private float rightCooldown = 0;
     private float rightNextReadyFire = 0;
     private float rightCoolDownTimeLeft = 0;
+
+    private float uniqueCooldown = 0;
+    private float uniqueNextReadyFire = 0;
+    private float uniqueCoolDownTimeLeft = 0;
 
 
 
@@ -90,6 +99,8 @@ public class FrameWeaponController : NetworkBehaviour {
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
+
+        uniqueAbility.Initialize(uniqueWeapon);
     }
 
     public void SetLeftAbility(WeaponAbility la)
@@ -136,6 +147,20 @@ public class FrameWeaponController : NetworkBehaviour {
 
             }
         }
+        if (ih.fire2 > 0)
+        {
+            if (Time.time > uniqueNextReadyFire)
+            {
+                UniqueButtonTriggered();
+            }
+        }
+    }
+
+    private void UniqueButtonTriggered()
+    {
+        uniqueNextReadyFire = uniqueCooldown + Time.time;
+        uniqueCoolDownTimeLeft = uniqueCooldown;
+        uniqueAbility.TriggerAbility();
     }
 
     private void LeftButtonTriggered()
@@ -171,7 +196,7 @@ public class FrameWeaponController : NetworkBehaviour {
 
        
         Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-        projectileRigidBody.velocity = (forward) * 100f;
+        projectileRigidBody.velocity = (forward) * projectile.speed;
 
         Bullet b = projectileInstance.GetComponent<Bullet>();
         b.damage = projectile.damage;
@@ -181,6 +206,36 @@ public class FrameWeaponController : NetworkBehaviour {
         RpcMuzzleFlash(gunId, position, rotation);
 
         NetworkServer.Spawn(projectileRigidBody.gameObject);
+    }
+    [Command]
+    public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        RocketAbility gun = (RocketAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
+        RaycastHit hit;
+        if (Physics.Raycast(eye.position, eye.forward, out hit, gun.range))
+        {
+            BlastRound rocket = gun.rocket;
+            GameObject rocketInstance = Instantiate(rocket.projectilePrefab, position, rotation);
+
+            Rigidbody rocketRigidBody = rocketInstance.GetComponent<Rigidbody>();
+            rocketRigidBody.velocity = (forward) * rocket.risingSpeed;
+
+            HomingRocket r = rocketInstance.GetComponent<HomingRocket>();
+            r.damage = rocket.damage;
+            r.travelSpeed = rocket.speed;
+            r.impactForce = rocket.force;
+            r.blastForce = rocket.blastForce;
+            r.blastRadius = rocket.blastRadius;
+            r.blastDamage = rocket.blastDamage;
+            r.hitX = hit.point.x;
+            r.hitZ = hit.point.z;
+
+            //RpcMuzzleFlash();
+
+            NetworkServer.Spawn(rocketRigidBody.gameObject);
+        }
+
+         
     }
 
     [ClientRpc]
