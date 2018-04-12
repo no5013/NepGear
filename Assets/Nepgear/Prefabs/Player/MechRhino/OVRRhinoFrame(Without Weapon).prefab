@@ -4850,7 +4850,7 @@ MonoBehaviour:
   rightHand: {fileID: 0}
   rightHandAbility: {fileID: 0}
   uniqueWeapon: {fileID: 1003043507664110}
-  uniqueAbility: {fileID: 11400000, guid: a08478208bbbe7546ba3742dbada85ad, type: 2}
+  uniqueAbility: {fileID: 11400000, guid: b944ae1cf1cce75498240e2f925e3a69, type: 2}
   eye: {fileID: 4005039986417304}
   leftWeaponID: 
   rightWeaponID: 
@@ -5280,6 +5280,7 @@ MonoBehaviour:
   - {fileID: 4020768836585930}
   - {fileID: 4755223506461602}
   eyePosition: {fileID: 4005039986417304}
+  parentOfMuzzle: {fileID: 4673054218733092}
 --- !u!114 &114417394745520326
 MonoBehaviour:
   m_ObjectHideFlags: 1

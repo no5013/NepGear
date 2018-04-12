@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 114118961258428282}
   - component: {fileID: 54356125477697790}
   - component: {fileID: 136352854374614462}
-  m_Layer: 0
+  - component: {fileID: 114513766968946262}
+  - component: {fileID: 114826471931528196}
+  m_Layer: 8
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +41,7 @@ GameObject:
   - component: {fileID: 4590603403589938}
   - component: {fileID: 33206452758032732}
   - component: {fileID: 23658415588745646}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meduim_Rocket_Geom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,8 +150,62 @@ MonoBehaviour:
   blastRadius: 0
   blastForce: 0
   impactPrefab: {fileID: 0}
+  target: {fileID: 0}
   hitX: 0
   hitZ: 0
+--- !u!114 &114513766968946262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1277214001833184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 143
+    i1: 252
+    i2: 247
+    i3: 239
+    i4: 198
+    i5: 40
+    i6: 167
+    i7: 20
+    i8: 75
+    i9: 195
+    i10: 4
+    i11: 102
+    i12: 8
+    i13: 75
+    i14: 193
+    i15: 186
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114826471931528196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1277214001833184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!136 &136352854374614462
 CapsuleCollider:
   m_ObjectHideFlags: 1

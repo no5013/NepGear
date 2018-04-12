@@ -96,10 +96,10 @@ public class FrameWeaponController : NetworkBehaviour {
 
         leftCooldown = leftHandAbility.aFireDelay;
         rightCooldown = rightHandAbility.aFireDelay;
+        uniqueCooldown = uniqueAbility.aFireDelay;
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
-
         uniqueAbility.Initialize(uniqueWeapon);
     }
 
@@ -214,11 +214,12 @@ public class FrameWeaponController : NetworkBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(eye.position, eye.forward, out hit, gun.range))
         {
+            Debug.Log("Found target to fire");
             BlastRound rocket = gun.rocket;
             GameObject rocketInstance = Instantiate(rocket.projectilePrefab, position, rotation);
 
             Rigidbody rocketRigidBody = rocketInstance.GetComponent<Rigidbody>();
-            rocketRigidBody.velocity = (forward) * rocket.risingSpeed;
+            //rocketRigidBody.velocity = (forward) * rocket.risingSpeed;
 
             HomingRocket r = rocketInstance.GetComponent<HomingRocket>();
             r.damage = rocket.damage;
@@ -229,9 +230,10 @@ public class FrameWeaponController : NetworkBehaviour {
             r.blastDamage = rocket.blastDamage;
             r.hitX = hit.point.x;
             r.hitZ = hit.point.z;
+            r.lifeTime = rocket.lifeTime;
 
             //RpcMuzzleFlash();
-
+            Debug.Log("Spawn rocket");
             NetworkServer.Spawn(rocketRigidBody.gameObject);
         }
 

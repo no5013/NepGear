@@ -13,6 +13,7 @@ public class RocketShootTriggerable : MonoBehaviour {
 
     public Transform eyePosition;
 
+    public Transform parentOfMuzzle;
     private int fireIndex;
 
     private float fireCooldown;
@@ -51,13 +52,14 @@ public class RocketShootTriggerable : MonoBehaviour {
     public void Fire()
     {
         RaycastHit hit;
-        Transform muzzle = muzzles[fireIndex];
-        Quaternion rotation = muzzle.rotation;
-        rotation.eulerAngles = new Vector3(-90, 0, 0);
         if (CanFire() && Physics.Raycast(eyePosition.position, eyePosition.forward, out hit, range))
         {
+            //Debug.Log("Lock rocket at " + hit.collider.gameObject.ToString());
+            Transform muzzle = muzzles[fireIndex];
+            //Quaternion rotation = muzzle.rotation;
+            //rotation.eulerAngles = new Vector3(-90, 0, 0);
             fireIndex++;
-            fwc.CmdFireRocket(gunId, muzzle.up, muzzle.position, rotation);
+            fwc.CmdFireRocket(gunId, muzzle.up, muzzle.position, parentOfMuzzle.rotation);
             //GameObject rocketClone = Instantiate(rocket, muzzle.transform.position, Quaternion.identity);
             //HomingRocket rocketScript = rocketClone.GetComponent<HomingRocket>();
             //rocketScript.hitX = hit.point.x;

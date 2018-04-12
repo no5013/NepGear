@@ -11,14 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc1ab7901b4f9143841fa346ff05457, type: 3}
   m_Name: RocketAbility
   m_EditorClassIdentifier: 
-  aName: New Ability
-  aID: 
+  aName: Rocket
+  aID: UW1
   aGunSound: {fileID: 0}
   aMagazine: 0
-  aFireDelay: 0
+  aFireDelay: 3
   maxRecoil: 0
   recoilRate: 0
   gunPrefab: {fileID: 0}
   muzzleFlash: {fileID: 0}
-  rocket: {fileID: 0}
-  range: 0
+  rocket: {fileID: 11400000, guid: e56a43e16689ce947a6ce792093baf41, type: 2}
+  range: 200
+  reloadDelay: 20

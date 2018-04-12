@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class HomingRocket : NetworkBehaviour {
+public class HomingRocket : MonoBehaviour {
 
-    [SyncVar] [HideInInspector] public float damage;
+    /*[SyncVar] [HideInInspector] public float damage;
     [SyncVar] [HideInInspector] public float impactForce;
     //[SyncVar] [HideInInspector] public float risingSpeed;
     [SyncVar] [HideInInspector] public float travelSpeed;
@@ -16,11 +16,29 @@ public class HomingRocket : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastForce;
     public GameObject impactPrefab;
 
-    //public GameObject target;
+    public GameObject target;
 
     [SyncVar] [HideInInspector] public float hitX;
     private float hitY;
-    [SyncVar] [HideInInspector] public float hitZ;
+    [SyncVar] [HideInInspector] public float hitZ;*/
+
+    public float damage;
+    public float impactForce;
+    //[SyncVar] [HideInInspector] public float risingSpeed;
+    public float travelSpeed;
+    public float lifeTime;
+    public float blastDamage;
+    public float blastRadius;
+    public float blastForce;
+    public GameObject impactPrefab;
+
+    public GameObject target;
+
+    //[SyncVar] [HideInInspector] public float hitX;
+    public float hitX;
+    private float hitY;
+    public float hitZ;
+    //[SyncVar] [HideInInspector] public float hitZ;
 
     private float distance_x;
     private float distance_y;
@@ -40,6 +58,17 @@ public class HomingRocket : NetworkBehaviour {
         cc.enabled = false;
         isActivated = false;
         hitY = 0f;
+        if (target)
+        {
+            hitX = target.transform.position.x;
+            hitZ = target.transform.position.z;
+        }
+
+        //travelSpeed = 10f;
+        //lifeTime = 10f;
+        Debug.Log(lifeTime);
+        Debug.Log(hitX);
+        Debug.Log(hitZ);
         //timeBeforeHoming = 1f;
         rb = GetComponent<Rigidbody>();
         Destroy(this.gameObject, lifeTime);
@@ -49,7 +78,7 @@ public class HomingRocket : NetworkBehaviour {
     void Update () {
         if (!isActivated)
         {
-            //transform.Translate(Vector3.up * Time.deltaTime * risingSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * 5f);
             timeBeforeHoming -= Time.deltaTime;
             if (timeBeforeHoming <= 0f)
             {
@@ -98,12 +127,14 @@ public class HomingRocket : NetworkBehaviour {
         float y = rb.velocity.y;
         float z = rb.velocity.z;
         float angleDrop = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-        float angleTurn = Mathf.Atan2(x, z) * Mathf.Rad2Deg;
-        float offSetAngleDrop = 90 - angleDrop;
-        float offSetAngleTurn = 90 - angleTurn;
+        //float angleTurn1 = Mathf.Atan2(x, z) * Mathf.Rad2Deg;
+        float angleTurn2 = Mathf.Atan2(y, z) * Mathf.Rad2Deg;
+        float offSetAngleDrop = angleDrop - 180;
+        //float offSetAngleTurn1 = angleTurn1 - 180;
+        float offSetAngleTurn2 = 90 - angleTurn2;
         if (offSetAngleDrop > 0)
             offSetAngleDrop = -offSetAngleDrop;
-        transform.eulerAngles = new Vector3(0, -offSetAngleTurn, offSetAngleDrop);
+        transform.eulerAngles = new Vector3(offSetAngleDrop, offSetAngleTurn2, 0);
     }
 
     private void findShootingAngle()
@@ -191,14 +222,19 @@ public class HomingRocket : NetworkBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.tag.Equals("Player"))
-            return;
-        if (other.tag.Equals("Enemy"))
-        {
-            other.SendMessage("TakeDamage", damage);
-            Destroy(this.gameObject);
-        }
+        Debug.Log("Rocket Hit");
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag.Equals("Player"))
+    //        return;
+    //    if (other.tag.Equals("Enemy"))
+    //    {
+    //        other.SendMessage("TakeDamage", damage);
+    //        Destroy(this.gameObject);
+    //    }
+    //}
 }
