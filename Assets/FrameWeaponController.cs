@@ -62,6 +62,7 @@ public class FrameWeaponController : NetworkBehaviour {
         Initialize(Instantiate(wrm.GetWeapon(leftWeaponID)), Instantiate(wrm.GetWeapon(rightWeaponID)));
     }
 
+
     //public void Initialize(WeaponAbility selectedLeftHandAbility, GameObject leftHandWeapon, WeaponAbility selectedRightHandAbility, GameObject rightHandWeapon)
     //{
     //    leftHandAbility = selectedLeftHandAbility;
@@ -154,6 +155,7 @@ public class FrameWeaponController : NetworkBehaviour {
                 UniqueButtonTriggered();
             }
         }
+
     }
 
     private void UniqueButtonTriggered()
