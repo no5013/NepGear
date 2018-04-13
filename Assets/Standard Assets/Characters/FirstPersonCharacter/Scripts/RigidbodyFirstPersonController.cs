@@ -17,6 +17,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             public float BoostSpeed = 12.0f;   // Speed when sprinting
 
+            public float AccendingForce = 10f;
+
 	        public KeyCode RunKey = KeyCode.LeftShift;
             public float JumpForce = 30f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
@@ -89,7 +91,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
-        private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
+        private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded, m_Ascending;
 
 
         public Vector3 Velocity
@@ -132,9 +134,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
+            /*if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+            {
+                m_Jump = true;
+            }*/
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
                 m_Jump = true;
+            }
+
+            if (CrossPlatformInputManager.GetButton("Jump") && !m_IsGrounded)
+            {
+                m_Ascending = true;
             }
         }
 
@@ -189,7 +200,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     StickToGroundHelper();
                 }
             }
+
+            if (m_Ascending)
+            {
+                Debug.Log("Ascending");
+                m_RigidBody.AddForce(Vector3.up * movementSettings.AccendingForce * Time.fixedDeltaTime, ForceMode.Acceleration);
+            }
+
             m_Jump = false;
+            m_Ascending = false;
         }
 
 
