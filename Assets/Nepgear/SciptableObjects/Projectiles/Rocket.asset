@@ -15,7 +15,7 @@ MonoBehaviour:
   damage: 15
   force: 1500
   lifeTime: 10
-  speed: 5
+  speed: 15
   projectilePrefab: {fileID: 1277214001833184, guid: 8ffcf7efc628a7144bc30466084bc1ba,
     type: 2}
   blastForce: 500

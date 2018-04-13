@@ -86,6 +86,7 @@ public class Bullet : NetworkBehaviour {
     [ClientRpc]
     public void RpcImpactEffect(Vector3 position, Quaternion rotation)
     {
+        Debug.Log("Instantiate Bullet Impact Prefab");
         Instantiate(impactPrefab, position, rotation);
     }
 

@@ -211,11 +211,9 @@ public class FrameWeaponController : NetworkBehaviour {
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
     {
         RocketAbility gun = (RocketAbility)uniqueAbility;
-
         RaycastHit hit;
         if (Physics.Raycast(eye.position, eye.forward, out hit, gun.range))
         {
-            Debug.Log("Found target to fire");
             BlastRound rocket = gun.rocket;
             GameObject rocketInstance = Instantiate(rocket.projectilePrefab, position, rotation);
 
@@ -234,7 +232,6 @@ public class FrameWeaponController : NetworkBehaviour {
             r.lifeTime = rocket.lifeTime;
 
             //RpcMuzzleFlash();
-            Debug.Log("Spawn rocket");
             NetworkServer.Spawn(rocketRigidBody.gameObject);
         }
 
@@ -270,19 +267,5 @@ public class FrameWeaponController : NetworkBehaviour {
             }
         }   
     }
-    //[Command]
-    //public void CmdFireEyeWeapon()
 
-    //[ClientRpc]
-    //public void RpcRaycastHit(RaycastHit hit, float damage)
-    //{
-    //    if (hit.collider.gameObject.tag == "player")
-    //    {
-    //        Debug.Log("Hit Player");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Hit Smthing");
-    //    }
-    //}
 }

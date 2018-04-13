@@ -54,18 +54,18 @@ public class HomingRocket : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         cc = GetComponent<CapsuleCollider>();
-        cc.enabled = false;
+        //cc.enabled = false;
         isActivated = false;
         hitY = 0f;
-        if (target)
-        {
-            hitX = target.transform.position.x;
-            hitZ = target.transform.position.z;
-        }
-
+        //if (target)
+        //{
+        //    hitX = target.transform.position.x;
+        //    hitZ = target.transform.position.z;
+        //}
+        //Debug.Log(damage);
         //travelSpeed = 10f;
         //lifeTime = 10f;
-        //timeBeforeHoming = 1f;
+        timeBeforeHoming = 1f;
         rb = GetComponent<Rigidbody>();
         Destroy(this.gameObject, lifeTime);
     }
@@ -74,7 +74,7 @@ public class HomingRocket : NetworkBehaviour {
     void Update () {
         if (!isActivated)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * 5f);
+            transform.Translate(Vector3.forward * Time.deltaTime * 10f);
             timeBeforeHoming -= Time.deltaTime;
             if (timeBeforeHoming <= 0f)
             {
@@ -232,7 +232,7 @@ public class HomingRocket : NetworkBehaviour {
     [ServerCallback]
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Rocket Hit");
+        Debug.Log("Rocket Hit " + other.gameObject.ToString());
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
         if(isPlayer != null)
         {
@@ -262,9 +262,11 @@ public class HomingRocket : NetworkBehaviour {
                 r.AddForce(transform.forward * impactForce);
             }
         }
-        Explode();
+        //Explode();
         //Explosion(other.contacts[0].point, Quaternion.identity);
+        Debug.Log("Preparing to RPC");
         RpcExplosion(other.contacts[0].point, Quaternion.identity);
+        Debug.Log("RPC DOne");
         Destroy(this.gameObject);
     }
 
@@ -286,9 +288,7 @@ public class HomingRocket : NetworkBehaviour {
             PlayerBehaviorScript targetHealth = targetRigidbody.GetComponent<PlayerBehaviorScript>();
             Destructible destructible = targetRigidbody.GetComponent<Destructible>();
             // If there is no TankHealth script attached to the gameobject, go on to the next collider.
-            if (!targetHealth && !destructible)
-                continue;
-
+            
             // Create a vector from the shell to the target.
             Vector3 explosionToTarget = targetRigidbody.position - transform.position;
 
@@ -304,8 +304,11 @@ public class HomingRocket : NetworkBehaviour {
             // Make sure that the minimum damage is always 0.
             damage = Mathf.Max(0f, damage);
 
+            if (targetHealth)
+                targetHealth.TakeDamage(damage);
+            if (destructible)
+                destructible.TakeDamage(damage);
             // Deal this damage to the tank.
-            targetHealth.TakeDamage(damage);
             targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
         }
     }
@@ -313,13 +316,14 @@ public class HomingRocket : NetworkBehaviour {
     [ClientRpc]
     public void RpcExplosion(Vector3 position, Quaternion rotation)
     {
+        Debug.Log("Instantiate Explosion Impact Prefab");
         Instantiate(impactPrefab, position, rotation);
     }
     
-    /*public void Explosion(Vector3 position, Quaternion rotation)
+    public void Explosion(Vector3 position, Quaternion rotation)
     {
         Instantiate(impactPrefab, position, rotation);
-    }*/
+    }
 
     private string GetHitDir(Transform target)
     {
