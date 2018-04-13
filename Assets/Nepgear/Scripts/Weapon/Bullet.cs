@@ -87,7 +87,6 @@ public class Bullet : NetworkBehaviour {
     public void RpcImpactEffect(Vector3 position, Quaternion rotation)
     {
         Instantiate(impactPrefab, position, rotation);
-
     }
 
     private string GetHitDir(Transform target)

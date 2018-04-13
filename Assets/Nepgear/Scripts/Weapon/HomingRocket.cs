@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class HomingRocket : MonoBehaviour {
+public class HomingRocket : NetworkBehaviour {
 
-    /*[SyncVar] [HideInInspector] public float damage;
+    [SyncVar] [HideInInspector] public float damage;
     [SyncVar] [HideInInspector] public float impactForce;
     //[SyncVar] [HideInInspector] public float risingSpeed;
     [SyncVar] [HideInInspector] public float travelSpeed;
@@ -16,13 +16,13 @@ public class HomingRocket : MonoBehaviour {
     [SyncVar] [HideInInspector] public float blastForce;
     public GameObject impactPrefab;
 
-    public GameObject target;
+    //public GameObject target;
 
     [SyncVar] [HideInInspector] public float hitX;
     private float hitY;
-    [SyncVar] [HideInInspector] public float hitZ;*/
+    [SyncVar] [HideInInspector] public float hitZ;
 
-    public float damage;
+    /*public float damage;
     public float impactForce;
     //[SyncVar] [HideInInspector] public float risingSpeed;
     public float travelSpeed;
@@ -38,7 +38,7 @@ public class HomingRocket : MonoBehaviour {
     public float hitX;
     private float hitY;
     public float hitZ;
-    //[SyncVar] [HideInInspector] public float hitZ;
+    //[SyncVar] [HideInInspector] public float hitZ;*/
 
     private float distance_x;
     private float distance_y;
@@ -58,17 +58,14 @@ public class HomingRocket : MonoBehaviour {
         cc.enabled = false;
         isActivated = false;
         hitY = 0f;
-        if (target)
-        {
-            hitX = target.transform.position.x;
-            hitZ = target.transform.position.z;
-        }
+        //if (target)
+        //{
+        //    hitX = target.transform.position.x;
+        //    hitZ = target.transform.position.z;
+        //}
 
         //travelSpeed = 10f;
         //lifeTime = 10f;
-        Debug.Log(lifeTime);
-        Debug.Log(hitX);
-        Debug.Log(hitZ);
         //timeBeforeHoming = 1f;
         rb = GetComponent<Rigidbody>();
         Destroy(this.gameObject, lifeTime);
@@ -222,9 +219,125 @@ public class HomingRocket : MonoBehaviour {
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    [ServerCallback]
+    private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Rocket Hit");
+        PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
+        if(isPlayer != null)
+        {
+            GameObject parent = isPlayer.gameObject;
+            if (parent.tag.Equals("Player"))
+            {
+                string dir = GetHitDir(other.transform);
+                //parent.SendMessage("TakeDamage", damage);
+
+                isPlayer.TakeDamage(damage);
+                isPlayer.TickIndicator(dir);
+                if (isPlayer.isDead())
+                {
+                    //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
+                    //r.AddForce(transform.forward * 100);
+                }
+            }
+        }
+        else
+        {
+            Destructible target = other.transform.GetComponent<Destructible>();
+
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+                Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
+                r.AddForce(transform.forward * impactForce);
+            }
+        }
+        Explode();
+        RpcExplosion(other.contacts[0].point, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    private void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
+
+        // Go through all the colliders...
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            // ... and find their rigidbody.
+            Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();
+
+            // If they don't have a rigidbody, go on to the next collider.
+            if (!targetRigidbody)
+                continue;
+
+            // Find the TankHealth script associated with the rigidbody.
+            PlayerBehaviorScript targetHealth = targetRigidbody.GetComponent<PlayerBehaviorScript>();
+            Destructible destructible = targetRigidbody.GetComponent<Destructible>();
+            // If there is no TankHealth script attached to the gameobject, go on to the next collider.
+            if (!targetHealth && !destructible)
+                continue;
+
+            // Create a vector from the shell to the target.
+            Vector3 explosionToTarget = targetRigidbody.position - transform.position;
+
+            // Calculate the distance from the shell to the target.
+            float explosionDistance = explosionToTarget.magnitude;
+
+            // Calculate the proportion of the maximum distance (the explosionRadius) the target is away.
+            float relativeDistance = (blastRadius - explosionDistance) / blastRadius;
+
+            // Calculate damage as this proportion of the maximum possible damage.
+            float damage = relativeDistance * blastDamage;
+
+            // Make sure that the minimum damage is always 0.
+            damage = Mathf.Max(0f, damage);
+
+            // Deal this damage to the tank.
+            targetHealth.TakeDamage(damage);
+            targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcExplosion(Vector3 position, Quaternion rotation)
+    {
+        Instantiate(impactPrefab, position, rotation);
+    }
+
+
+    private string GetHitDir(Transform target)
+    {
+        Vector3 displacement = transform.position - target.position;
+
+        float forwardAngle = Vector3.Angle(displacement, target.forward);
+        float angle = 0;
+        float rightAngle = Vector3.Angle(displacement, target.right);
+
+
+        if (rightAngle >= 90) // Shot come from left side
+        {
+            forwardAngle = 360 - forwardAngle;
+        }
+
+        angle = forwardAngle;
+        if ((angle >= 315 && angle <= 360) || (angle >= 0 && angle < 45))
+        {
+            return "front";
+        }
+        else if (angle >= 45 && angle < 135)
+        {
+            return "right";
+        }
+        else if (angle >= 135 && angle < 225)
+        {
+            return "back";
+        }
+        else if (angle >= 225 && angle < 315)
+        {
+            return "left";
+        }
+        return "";
     }
 
     //private void OnTriggerEnter(Collider other)
