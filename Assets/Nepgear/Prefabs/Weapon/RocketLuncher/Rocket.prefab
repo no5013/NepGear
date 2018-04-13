@@ -149,7 +149,8 @@ MonoBehaviour:
   blastDamage: 0
   blastRadius: 0
   blastForce: 0
-  impactPrefab: {fileID: 0}
+  impactPrefab: {fileID: 1718167680027486, guid: 46a2e4b5c8e1bba4ea13e01ae146c954,
+    type: 2}
   target: {fileID: 0}
   hitX: 0
   hitZ: 0

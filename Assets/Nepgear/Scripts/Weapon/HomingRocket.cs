@@ -16,8 +16,7 @@ public class HomingRocket : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastForce;
     public GameObject impactPrefab;
 
-    //public GameObject target;
-
+    
     [SyncVar] [HideInInspector] public float hitX;
     private float hitY;
     [SyncVar] [HideInInspector] public float hitZ;
@@ -32,13 +31,13 @@ public class HomingRocket : NetworkBehaviour {
     public float blastForce;
     public GameObject impactPrefab;
 
-    public GameObject target;
-
     //[SyncVar] [HideInInspector] public float hitX;
     public float hitX;
     private float hitY;
     public float hitZ;
     //[SyncVar] [HideInInspector] public float hitZ;*/
+
+    [SerializeField] private GameObject target;
 
     private float distance_x;
     private float distance_y;
@@ -58,11 +57,11 @@ public class HomingRocket : NetworkBehaviour {
         cc.enabled = false;
         isActivated = false;
         hitY = 0f;
-        //if (target)
-        //{
-        //    hitX = target.transform.position.x;
-        //    hitZ = target.transform.position.z;
-        //}
+        if (target)
+        {
+            hitX = target.transform.position.x;
+            hitZ = target.transform.position.z;
+        }
 
         //travelSpeed = 10f;
         //lifeTime = 10f;
@@ -124,14 +123,25 @@ public class HomingRocket : NetworkBehaviour {
         float y = rb.velocity.y;
         float z = rb.velocity.z;
         float angleDrop = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-        //float angleTurn1 = Mathf.Atan2(x, z) * Mathf.Rad2Deg;
-        float angleTurn2 = Mathf.Atan2(y, z) * Mathf.Rad2Deg;
-        float offSetAngleDrop = angleDrop - 180;
-        //float offSetAngleTurn1 = angleTurn1 - 180;
-        float offSetAngleTurn2 = 90 - angleTurn2;
-        if (offSetAngleDrop > 0)
-            offSetAngleDrop = -offSetAngleDrop;
-        transform.eulerAngles = new Vector3(offSetAngleDrop, offSetAngleTurn2, 0);
+        float angleTurn2 = Mathf.Atan2(x, z) * Mathf.Rad2Deg;
+        float offSetAngleDrop = -angleDrop;
+        offSetAngleDrop = SetOffSetAngleDrop(offSetAngleDrop);
+        transform.eulerAngles = new Vector3(offSetAngleDrop, angleTurn2, 0);
+    }
+
+    private float SetOffSetAngleDrop(float offSetAngleDrop)
+    {
+        if (offSetAngleDrop >= -180 && offSetAngleDrop <= -90)
+        {
+            float diff = offSetAngleDrop + 90;
+            return -90 + Math.Abs(diff);
+        }
+        else if (offSetAngleDrop <= 180 && offSetAngleDrop >= 90)
+        {
+            float diff = offSetAngleDrop - 180;
+            return Math.Abs(diff);
+        }
+        return offSetAngleDrop;
     }
 
     private void findShootingAngle()
@@ -253,6 +263,7 @@ public class HomingRocket : NetworkBehaviour {
             }
         }
         Explode();
+        //Explosion(other.contacts[0].point, Quaternion.identity);
         RpcExplosion(other.contacts[0].point, Quaternion.identity);
         Destroy(this.gameObject);
     }
@@ -304,7 +315,11 @@ public class HomingRocket : NetworkBehaviour {
     {
         Instantiate(impactPrefab, position, rotation);
     }
-
+    
+    /*public void Explosion(Vector3 position, Quaternion rotation)
+    {
+        Instantiate(impactPrefab, position, rotation);
+    }*/
 
     private string GetHitDir(Transform target)
     {

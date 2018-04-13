@@ -210,7 +210,8 @@ public class FrameWeaponController : NetworkBehaviour {
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
     {
-        RocketAbility gun = (RocketAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
+        RocketAbility gun = (RocketAbility)uniqueAbility;
+
         RaycastHit hit;
         if (Physics.Raycast(eye.position, eye.forward, out hit, gun.range))
         {
