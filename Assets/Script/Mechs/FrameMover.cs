@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Networking;
 
-public class FrameMover : MonoBehaviour
+public class FrameMover : NetworkBehaviour
 {
     public Transform target;
     public float maxSpeed = 10f;
@@ -17,8 +18,6 @@ public class FrameMover : MonoBehaviour
     private CharacterController character;
     private FirstPersonController firstPersonController;
 
-    private float startTime;
-
     // Use this for initialization
     void Start()
     {
@@ -26,11 +25,10 @@ public class FrameMover : MonoBehaviour
         firstPersonController = GetComponent<FirstPersonController>();
 
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
-        transform.LookAt(targetPostition);
-
         moveDir = CalculateMoveDirection();
 
-        startTime = Time.time;
+        if(isLocalPlayer)
+            transform.LookAt(targetPostition);
     }
 
     private Vector3 CalculateMoveDirection()
@@ -43,6 +41,10 @@ public class FrameMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         Vector3 destinationPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
         float distance = Vector3.Distance(transform.position, destinationPosition);
 
@@ -55,6 +57,7 @@ public class FrameMover : MonoBehaviour
         if(reached && character.isGrounded)
         {
             this.enabled = false;
+            GetComponent<PlayerBehaviorScript>().EnableControl();
         }
 
         Vector3 moveVector = new Vector3(moveDir.x * CalculateCurrentSpeed(), 0f, moveDir.z * CalculateCurrentSpeed());

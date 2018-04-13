@@ -12,7 +12,7 @@ public class CatapultManager : MonoBehaviour {
 
     public float maxSpeed = 100f;
 
-    public bool enableCatapult;
+    public bool launching;
 
     private bool reached;
 
@@ -28,16 +28,12 @@ public class CatapultManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        rb = stand.GetComponent<Rigidbody>();
-        characterController = stand.GetComponent<CharacterController>();
-
-        stand.transform.position = new Vector3(startPosition.position.x, stand.transform.position.y, startPosition.position.z);
-
+        ResetCatapult();
         SetCatapultTarget(target.position);
 
-        SetupFrame(player);
+        if(player != null)
+            SetupFrame(player);
 	}
-
 
     public void SetupFrame(GameObject frame)
     {
@@ -48,7 +44,7 @@ public class CatapultManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (!enableCatapult)
+        if (!launching)
         {
             return;
         }
@@ -70,7 +66,12 @@ public class CatapultManager : MonoBehaviour {
         }
 	}
 
-    private void SetCatapultTarget(Vector3 target)
+    public void ResetCatapult()
+    {
+        stand.transform.position = new Vector3(startPosition.position.x, stand.transform.position.y, startPosition.position.z);
+    }
+
+    public void SetCatapultTarget(Vector3 target)
     {
         Vector3 targetPostition = new Vector3(target.x, transform.position.y, target.z);
         transform.LookAt(targetPostition);
@@ -101,5 +102,11 @@ public class CatapultManager : MonoBehaviour {
         frameMover.maxSpeed = maxSpeed;
         frameMover.target = target;
         frameMover.enabled = true;
+    }
+
+    public void launch()
+    {
+        this.enabled = true;
+        launching = true;
     }
 }
