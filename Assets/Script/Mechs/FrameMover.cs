@@ -31,6 +31,18 @@ public class FrameMover : NetworkBehaviour
             transform.LookAt(targetPostition);
     }
 
+    private void OnEnable()
+    {
+        Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
+        moveDir = CalculateMoveDirection();
+
+        if (isLocalPlayer)
+        {
+            Debug.Log(transform.rotation);
+            transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
+        }
+    }
+
     private Vector3 CalculateMoveDirection()
     {
         Vector3 destinationPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
