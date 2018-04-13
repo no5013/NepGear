@@ -6,18 +6,19 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class FrameMover : MonoBehaviour
 {
-
-    public float speed = 10f;
     public Transform target;
+    public float maxSpeed = 10f;
+    public float timeToReachMaxSpeed = 1f;
+    public float reachedSpeed = 10f;
 
-    public float drag = 0.9f;
-
-    public bool reach = false;
+    private bool reach = false;
 
     private Vector3 moveDir;
 
     private CharacterController character;
     private FirstPersonController firstPersonController;
+
+    private float startTime;
 
     // Use this for initialization
     void Start()
@@ -29,6 +30,8 @@ public class FrameMover : MonoBehaviour
         transform.LookAt(targetPostition);
 
         moveDir = CalculateMoveDirection();
+
+        startTime = Time.time;
     }
 
     private Vector3 CalculateMoveDirection()
@@ -55,7 +58,19 @@ public class FrameMover : MonoBehaviour
             this.enabled = false;
         }
 
-        Vector3 moveVector = new Vector3(moveDir.x * speed, 0f, moveDir.z * speed);
+        Vector3 moveVector = new Vector3(moveDir.x * maxSpeed, 0f, moveDir.z * CalculateCurrentSpeed());
         character.Move(moveVector * Time.fixedDeltaTime);
+    }
+
+    private float CalculateCurrentSpeed()
+    {
+        if (reach)
+        {
+            return reachedSpeed;
+        }
+
+        float currentSpeed = ((Time.time - startTime) / timeToReachMaxSpeed) * maxSpeed;
+
+        return currentSpeed > maxSpeed ? maxSpeed : currentSpeed;
     }
 }
