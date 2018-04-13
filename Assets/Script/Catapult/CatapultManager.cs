@@ -11,6 +11,9 @@ public class CatapultManager : MonoBehaviour {
     public GameObject stand;
 
     public float maxSpeed = 100f;
+
+    public bool enableCatapult;
+
     private bool reached;
 
     private float minDistance = 0.2f;
@@ -45,6 +48,11 @@ public class CatapultManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (!enableCatapult)
+        {
+            return;
+        }
+
         Vector3 destinationPosition = new Vector3(endPosition.position.x, stand.transform.position.y, endPosition.position.z);
         float distance = Vector3.Distance(stand.transform.position, destinationPosition);
         if (distance < minDistance)
