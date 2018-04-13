@@ -8,10 +8,9 @@ public class FrameMover : MonoBehaviour
 {
     public Transform target;
     public float maxSpeed = 10f;
-    public float timeToReachMaxSpeed = 1f;
     public float reachedSpeed = 10f;
 
-    private bool reach = false;
+    private bool reached = false;
 
     private Vector3 moveDir;
 
@@ -50,27 +49,25 @@ public class FrameMover : MonoBehaviour
         if (distance < 10)
         {
             firstPersonController.enabled = true;
-            reach = true;
+            reached = true;
         }
 
-        if(reach && character.isGrounded)
+        if(reached && character.isGrounded)
         {
             this.enabled = false;
         }
 
-        Vector3 moveVector = new Vector3(moveDir.x * maxSpeed, 0f, moveDir.z * CalculateCurrentSpeed());
+        Vector3 moveVector = new Vector3(moveDir.x * CalculateCurrentSpeed(), 0f, moveDir.z * CalculateCurrentSpeed());
         character.Move(moveVector * Time.fixedDeltaTime);
     }
 
     private float CalculateCurrentSpeed()
     {
-        if (reach)
+        if (reached)
         {
             return reachedSpeed;
         }
 
-        float currentSpeed = ((Time.time - startTime) / timeToReachMaxSpeed) * maxSpeed;
-
-        return currentSpeed > maxSpeed ? maxSpeed : currentSpeed;
+        return maxSpeed;
     }
 }

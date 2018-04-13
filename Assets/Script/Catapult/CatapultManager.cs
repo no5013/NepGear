@@ -1,0 +1,97 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CatapultManager : MonoBehaviour {
+
+    public Transform startPosition;
+    public Transform endPosition;
+
+    public Transform target;
+    public GameObject stand;
+
+    public float maxSpeed = 100f;
+    private bool reached;
+
+    private float minDistance = 0.2f;
+    private float minSpeedPercent = 0.5f;
+
+    private Vector3 moveDirection;
+
+    private Rigidbody rb;
+    private CharacterController characterController;
+
+    public GameObject player;
+
+    // Use this for initialization
+    void Start () {
+        rb = stand.GetComponent<Rigidbody>();
+        characterController = stand.GetComponent<CharacterController>();
+
+        stand.transform.position = new Vector3(startPosition.position.x, stand.transform.position.y, startPosition.position.z);
+
+        SetCatapultTarget(target.position);
+
+        SetupFrame(player);
+	}
+
+
+    public void SetupFrame(GameObject frame)
+    {
+        frame.transform.parent = stand.transform;
+        frame.transform.localPosition = Vector3.zero;
+        frame.transform.localRotation = Quaternion.identity;
+    }
+	
+	// Update is called once per frame
+	void FixedUpdate () {
+        Vector3 destinationPosition = new Vector3(endPosition.position.x, stand.transform.position.y, endPosition.position.z);
+        float distance = Vector3.Distance(stand.transform.position, destinationPosition);
+        if (distance < minDistance)
+        {
+            reached = true;
+            detachFrame();
+            this.enabled = false;
+        }
+
+        if (!reached)
+        {
+            moveDirection = CalculateMoveDirection();
+            Vector3 moveVector = new Vector3(moveDirection.x * maxSpeed, 0f, moveDirection.z * CalculateCurrentSpeed());
+            stand.transform.position = Vector3.MoveTowards(stand.transform.position, destinationPosition, CalculateCurrentSpeed() * Time.fixedDeltaTime);
+        }
+	}
+
+    private void SetCatapultTarget(Vector3 target)
+    {
+        Vector3 targetPostition = new Vector3(target.x, transform.position.y, target.z);
+        transform.LookAt(targetPostition);
+    }
+
+    private Vector3 CalculateMoveDirection()
+    {
+        Vector3 destinationPosition = new Vector3(endPosition.position.x, stand.transform.position.y, endPosition.position.z);
+        Vector3 moveDirection = (destinationPosition - stand.transform.position).normalized;
+
+        return moveDirection;
+    }
+
+    private float CalculateCurrentSpeed()
+    {
+        float distanceStartEnd = Vector3.Distance(startPosition.position, endPosition.position);
+        float distanceStandStart = Vector3.Distance(stand.transform.position, new Vector3(startPosition.position.x, stand.transform.position.y, startPosition.position.z));
+        float percentDistance = (distanceStandStart + minSpeedPercent / distanceStartEnd) > 1f ? 1f : (distanceStandStart + minSpeedPercent / distanceStartEnd);
+        return maxSpeed * percentDistance;
+    }
+
+    private void detachFrame()
+    {
+        PlayerBehaviorScript player = stand.GetComponentInChildren<PlayerBehaviorScript>();
+        player.transform.parent = null;
+
+        FrameMover frameMover = player.GetComponent<FrameMover>();
+        frameMover.maxSpeed = maxSpeed;
+        frameMover.target = target;
+        frameMover.enabled = true;
+    }
+}
