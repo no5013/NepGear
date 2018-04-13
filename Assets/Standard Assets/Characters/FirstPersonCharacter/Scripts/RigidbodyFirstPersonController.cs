@@ -143,9 +143,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Jump = true;
             }
 
-            if (CrossPlatformInputManager.GetButton("Jump") && !m_IsGrounded)
+            if (CrossPlatformInputManager.GetButton("Jump"))
             {
                 m_Ascending = true;
+
+                Debug.Log("TEST");
             }
         }
 
@@ -155,7 +157,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GroundCheck();
             Vector2 input = GetInput();
 
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded || Boosting))
+            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded || Boosting || m_Ascending))
             {
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
@@ -164,11 +166,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
                 desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
                 desiredMove.y = desiredMove.y*movementSettings.CurrentTargetSpeed;
-                if (m_RigidBody.velocity.sqrMagnitude <
+                /*if (m_RigidBody.velocity.sqrMagnitude <
                     (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
                 {
-                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
-                }
+                    m_RigidBody.velocity = desiredMove;
+                }*/
+
+                m_RigidBody.velocity = desiredMove;
+
+                Debug.Log("TEST MOVE");
             }
 
             if (m_IsGrounded)
@@ -204,6 +210,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (m_Ascending)
             {
                 Debug.Log("Ascending");
+                Debug.Log(Vector3.up * movementSettings.AccendingForce * Time.fixedDeltaTime);
                 m_RigidBody.AddForce(Vector3.up * movementSettings.AccendingForce * Time.fixedDeltaTime, ForceMode.Acceleration);
             }
 
@@ -285,8 +292,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jumping = false;
             }
-
-            Debug.Log(m_IsGrounded);
         }
     }
 }

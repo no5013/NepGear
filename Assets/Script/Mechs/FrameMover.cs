@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class FrameMover : MonoBehaviour
@@ -13,36 +14,48 @@ public class FrameMover : MonoBehaviour
 
     public bool reach = false;
 
-    private Rigidbody rb;
+    private Vector3 moveDir;
+
+    private CharacterController character;
+    private FirstPersonController firstPersonController;
 
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        character = GetComponent<CharacterController>();
+        firstPersonController = GetComponent<FirstPersonController>();
 
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         transform.LookAt(targetPostition);
+
+        moveDir = CalculateMoveDirection();
+    }
+
+    private Vector3 CalculateMoveDirection()
+    {
+        Vector3 destinationPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+        Vector3 moveDirection = (destinationPosition - transform.position).normalized;
+
+        return moveDirection;
     }
 
     private void FixedUpdate()
     {
-        Vector3 currentPosition = new Vector3(transform.position.x, 0f, transform.position.z);
-        Vector3 destinationPosition = new Vector3(target.position.x, 0f, target.position.z);
+        Vector3 destinationPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+        float distance = Vector3.Distance(transform.position, destinationPosition);
 
-        Vector3 moveDirection = (destinationPosition - currentPosition).normalized;
-
-        float distance = Vector3.Distance(currentPosition, destinationPosition);
-
-        Debug.Log(distance);
-
-        if (distance < 0.5)
+        if (distance < 10)
         {
+            firstPersonController.enabled = true;
             reach = true;
+        }
+
+        if(reach && character.isGrounded)
+        {
             this.enabled = false;
         }
-        else if (!reach)
-        {
-            rb.velocity = new Vector3(moveDirection.x, 0, moveDirection.z) * speed;
-        }
+
+        Vector3 moveVector = new Vector3(moveDir.x * speed, 0f, moveDir.z * speed);
+        character.Move(moveVector * Time.fixedDeltaTime);
     }
 }
