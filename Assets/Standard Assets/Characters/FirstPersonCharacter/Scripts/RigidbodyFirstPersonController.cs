@@ -14,14 +14,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public float ForwardSpeed = 8.0f;   // Speed when walking forward
             public float BackwardSpeed = 4.0f;  // Speed when walking backwards
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
-            public float RunMultiplier = 2.0f;   // Speed when sprinting
+
+            public float BoostSpeed = 12.0f;   // Speed when sprinting
+
 	        public KeyCode RunKey = KeyCode.LeftShift;
             public float JumpForce = 30f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
 #if !MOBILE_INPUT
-            private bool m_Running;
+            private bool m_Boosting;
 #endif
 
             public void UpdateDesiredTargetSpeed(Vector2 input)
@@ -46,20 +48,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
 	            if (Input.GetKey(RunKey))
 	            {
-		            CurrentTargetSpeed *= RunMultiplier;
-		            m_Running = true;
+		            CurrentTargetSpeed = BoostSpeed;
+		            m_Boosting = true;
 	            }
 	            else
 	            {
-		            m_Running = false;
+		            m_Boosting = false;
 	            }
 #endif
             }
 
 #if !MOBILE_INPUT
-            public bool Running
+            public bool Boosting
             {
-                get { return m_Running; }
+                get { return m_Boosting; }
             }
 #endif
         }
@@ -105,12 +107,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             get { return m_Jumping; }
         }
 
-        public bool Running
+        public bool Boosting
         {
             get
             {
  #if !MOBILE_INPUT
-				return movementSettings.Running;
+				return movementSettings.Boosting;
 #else
 	            return false;
 #endif
@@ -142,7 +144,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GroundCheck();
             Vector2 input = GetInput();
 
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded || Boosting))
             {
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
@@ -174,6 +176,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_RigidBody.Sleep();
                 }
+            }
+            else if (Boosting)
+            {
+                m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
             }
             else
             {
@@ -260,6 +266,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jumping = false;
             }
+
+            Debug.Log(m_IsGrounded);
         }
     }
 }

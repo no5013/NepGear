@@ -317,6 +317,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_isDashing = false;
             currentLerpTime = 0f;
         }
+
+        Debug.Log("DASH");
     }
 
     public bool IsDashing()
