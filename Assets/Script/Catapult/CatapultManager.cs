@@ -37,6 +37,8 @@ public class CatapultManager : MonoBehaviour {
 
     public void SetupFrame(GameObject frame)
     {
+        ResetCatapult();
+
         frame.transform.parent = stand.transform;
         frame.transform.localPosition = Vector3.zero;
         frame.transform.localRotation = Quaternion.identity;
@@ -69,6 +71,8 @@ public class CatapultManager : MonoBehaviour {
     public void ResetCatapult()
     {
         stand.transform.position = new Vector3(startPosition.position.x, stand.transform.position.y, startPosition.position.z);
+        reached = false;
+        launching = false;
     }
 
     public void SetCatapultTarget(Vector3 target)

@@ -221,12 +221,12 @@ public class GameManager : NetworkBehaviour {
             Transform spawnPoint;
             if (players[i].team.Equals("A"))
             {
-                players[i].transform.rotation = spawnPoints_A[0].transform.rotation;
+                players[i].SetCatapult(spawnPoints_A[0]);
                 spawnPoints_A[0].SetupFrame(players[i].gameObject);
             }
             else
             {
-                players[i].transform.rotation = spawnPoints_B[0].transform.rotation;
+                players[i].SetCatapult(spawnPoints_B[0]);
                 spawnPoints_B[0].SetupFrame(players[i].gameObject);
             }
         }

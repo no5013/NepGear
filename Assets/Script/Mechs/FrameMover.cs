@@ -27,14 +27,15 @@ public class FrameMover : NetworkBehaviour
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         moveDir = CalculateMoveDirection();
 
-        if(isLocalPlayer)
-            transform.LookAt(targetPostition);
+        reached = false;
     }
 
     private void OnEnable()
     {
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         moveDir = CalculateMoveDirection();
+
+        reached = false;
     }
 
     private Vector3 CalculateMoveDirection()
@@ -68,14 +69,6 @@ public class FrameMover : NetworkBehaviour
 
         Vector3 moveVector = new Vector3(moveDir.x * CalculateCurrentSpeed(), 0f, moveDir.z * CalculateCurrentSpeed());
         character.Move(moveVector * Time.fixedDeltaTime);
-
-        /*if (!reached)
-        {
-            Debug.Log("1" + transform.rotation);
-            Debug.Log("2" + Quaternion.LookRotation(moveVector));
-            Debug.Log("3" + transform.rotation);
-            firstPersonController.transform.rotation = Quaternion.LookRotation(moveVector);
-        }*/
     }
 
     private float CalculateCurrentSpeed()
