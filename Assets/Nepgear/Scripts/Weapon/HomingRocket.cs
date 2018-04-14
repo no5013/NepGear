@@ -14,7 +14,7 @@ public class HomingRocket : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastDamage;
     [SyncVar] [HideInInspector] public float blastRadius;
     [SyncVar] [HideInInspector] public float blastForce;
-    public GameObject impactPrefab;
+    public ParticleSystem explosion;
 
     
     [SyncVar] [HideInInspector] public float hitX;
@@ -49,14 +49,16 @@ public class HomingRocket : NetworkBehaviour {
     private CapsuleCollider cc;
     private Vector3 velocity;
     private bool isActivated;
-    private float timeBeforeHoming = 1f;
+    private const float timeBeforeHoming = 1f;
 
     // Use this for initialization
     void Start () {
-        cc = GetComponent<CapsuleCollider>();
+        GetComponent<CapsuleCollider>().enabled = false;
+        explosion.gameObject.GetComponent<destroyMe>().deathtimer = lifeTime + 2f;
         //cc.enabled = false;
         isActivated = false;
         hitY = 0f;
+        StartCoroutine(EnableCollision());
         //if (target)
         //{
         //    hitX = target.transform.position.x;
@@ -65,9 +67,17 @@ public class HomingRocket : NetworkBehaviour {
         //Debug.Log(damage);
         //travelSpeed = 10f;
         //lifeTime = 10f;
-        timeBeforeHoming = 1f;
         rb = GetComponent<Rigidbody>();
         Destroy(this.gameObject, lifeTime);
+    }
+
+    IEnumerator EnableCollision()
+    {
+        yield return new WaitForSeconds(timeBeforeHoming);
+        GetComponent<CapsuleCollider>().enabled = true;
+        findShootingAngle();
+        ApplyVelocity();
+        isActivated = true;
     }
 
     // Update is called once per frame
@@ -75,25 +85,12 @@ public class HomingRocket : NetworkBehaviour {
         if (!isActivated)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * 10f);
-            timeBeforeHoming -= Time.deltaTime;
-            if (timeBeforeHoming <= 0f)
-            {
-                isActivated = true;
-                Activate();
-                findShootingAngle();
-                ApplyVelocity();
-            }
         }
         else
         {
             Rotate();
         }
 
-    }
-
-    private void Activate()
-    {
-        cc.enabled = true;
     }
 
     private void ApplyVelocity()
@@ -262,11 +259,10 @@ public class HomingRocket : NetworkBehaviour {
                 r.AddForce(transform.forward * impactForce);
             }
         }
-        //Explode();
-        //Explosion(other.contacts[0].point, Quaternion.identity);
-        Debug.Log("Preparing to RPC");
-        RpcExplosion(other.contacts[0].point, Quaternion.identity);
-        Debug.Log("RPC DOne");
+        Explode();
+        Explosion();
+       
+        //RpcExplosion(other.contacts[0].point, Quaternion.identity);
         Destroy(this.gameObject);
     }
 
@@ -313,16 +309,20 @@ public class HomingRocket : NetworkBehaviour {
         }
     }
 
-    [ClientRpc]
-    public void RpcExplosion(Vector3 position, Quaternion rotation)
-    {
-        Debug.Log("Instantiate Explosion Impact Prefab");
-        Instantiate(impactPrefab, position, rotation);
-    }
+    //[ClientRpc]
+    //public void RpcExplosion(Vector3 position, Quaternion rotation)
+    //{
+    //    Debug.Log("Instantiate Explosion Impact Prefab");
+    //    Instantiate(impactPrefab, position, rotation);
+    //}
     
-    public void Explosion(Vector3 position, Quaternion rotation)
+    public void Explosion()
     {
-        Instantiate(impactPrefab, position, rotation);
+        Debug.Log("Explosion");
+        explosion.transform.parent = null;
+        explosion.Play();
+        explosion.gameObject.GetComponent<AudioSource>().Play();
+        //Instantiate(impactPrefab, position, rotation);
     }
 
     private string GetHitDir(Transform target)

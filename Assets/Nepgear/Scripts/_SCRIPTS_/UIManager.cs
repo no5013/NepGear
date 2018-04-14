@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour {
     public DamageIndicatorBehavior backIndicator;
     public DamageIndicatorBehavior leftIndicator;
     public DamageIndicatorBehavior rightIndicator;
+
+    public 
     // Use this for initialization
     void Start () {
         //healthText = healthConsoleUI.GetComponentInChildren<Text>();
