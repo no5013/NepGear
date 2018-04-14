@@ -33,6 +33,9 @@ public class FrameMover : NetworkBehaviour
 
     private void OnEnable()
     {
+        character = GetComponent<CharacterController>();
+        firstPersonController = GetComponent<FirstPersonController>();
+
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         moveDir = CalculateMoveDirection();
 
@@ -43,7 +46,6 @@ public class FrameMover : NetworkBehaviour
     private void SetCorrectRotation()
     {
         firstPersonController.SetCharacterRotation(transform);
-        Debug.Log("HAHAHA");
     }
 
     private Vector3 CalculateMoveDirection()
