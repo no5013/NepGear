@@ -194,20 +194,56 @@ public class FrameWeaponController : NetworkBehaviour {
     {
         ProjectileAbility gun = (ProjectileAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
         Projectile projectile = gun.projectile;
-        GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
+        if (gun.isSpread)
+        {
+            GameObject pallet;
+            Rigidbody palletRigidBody;
+            Bullet b;
+            for (int i = 0; i< gun.palletCount; i++)
+            {
+                Quaternion projectileRotation = rotation;
+                 
+                float x = UnityEngine.Random.Range(-gun.spreadFactor, gun.spreadFactor);
+                float y = UnityEngine.Random.Range(-gun.spreadFactor, gun.spreadFactor);
+                projectileRotation *= Quaternion.Euler(new Vector3(x, y, 0));
+                //projectileRotation.eulerAngles = new Vector3(x, y, 0);
+                //projectileRotation.y += y;
 
-       
-        Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-        projectileRigidBody.velocity = (forward) * projectile.speed;
+                pallet = Instantiate(projectile.projectilePrefab, position, projectileRotation);
 
-        Bullet b = projectileInstance.GetComponent<Bullet>();
-        b.damage = projectile.damage;
-        b.lifeTime = projectile.lifeTime;
-        b.force = projectile.force;
+                palletRigidBody = pallet.GetComponent<Rigidbody>();
+                palletRigidBody.velocity = pallet.transform.forward * projectile.speed;
 
+                b = pallet.GetComponent<Bullet>();
+                b.damage = projectile.damage;
+                b.lifeTime = projectile.lifeTime;
+                b.force = projectile.force;
+
+                NetworkServer.Spawn(palletRigidBody.gameObject);
+            }
+        }
+        else
+        {
+            GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
+
+            Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
+            projectileRigidBody.velocity = (forward) * projectile.speed;
+
+            Bullet b = projectileInstance.GetComponent<Bullet>();
+            b.damage = projectile.damage;
+            b.lifeTime = projectile.lifeTime;
+            b.force = projectile.force;
+
+            NetworkServer.Spawn(projectileRigidBody.gameObject);
+        }
         RpcMuzzleFlash(gunId, position, rotation);
 
-        NetworkServer.Spawn(projectileRigidBody.gameObject);
+        // ถ้า โปรเจ็คไตล์กัน.spread
+        //วน จำนวนกระสุน 
+        // เอา Random factor มา Instantiate
+
+
+
     }
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
