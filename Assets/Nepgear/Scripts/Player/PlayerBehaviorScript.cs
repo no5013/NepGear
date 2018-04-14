@@ -189,13 +189,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             return;
         }
-        if (CrossPlatformInputManager.GetButton("Dash"))
+
+        if (ih.dashing)
         {
             timePressedKey += Time.deltaTime;
-        }
-        else
-        {
-            timePressedKey = 0f;
         }
 
         if (m_isDashing)
@@ -260,7 +257,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             vertical = ih.vertical;
         }
 
-        if (CrossPlatformInputManager.GetButtonUp("Dash") && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
+        if (!ih.dashing && 0.0f < timePressedKey && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
         {
             m_isDashing = true;
             m_CharacterDashStartPos = characterController.transform.position;
@@ -274,9 +271,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_CharacterDashEndPos = characterController.transform.position + desiredMove;
             staminaUsed += 10f;
             //           walking = false;
+
+            timePressedKey = 0;
         }
 
-        if (CrossPlatformInputManager.GetButton("Dash") && timePressedKey >= 0.30f && !IsExhausted())
+        if (ih.dashing && timePressedKey >= 0.30f && !IsExhausted())
         {
             isRunning = true;
             staminaUsed += 1f;

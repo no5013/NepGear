@@ -16,6 +16,7 @@ public class InputHandler : NetworkBehaviour {
     public float yRot;
 
     public bool jumping;
+    public bool dashing;
 
     private Animator animator;
 
@@ -55,6 +56,7 @@ public class InputHandler : NetworkBehaviour {
         }
 
         jumping = CrossPlatformInputManager.GetButton("Jump");
+        dashing = CrossPlatformInputManager.GetButton("Dash");
     }
 
     private void UpdateStates()
