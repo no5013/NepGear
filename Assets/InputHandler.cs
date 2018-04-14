@@ -15,7 +15,7 @@ public class InputHandler : NetworkBehaviour {
     public float xRot;
     public float yRot;
 
-    public float dash;
+    public bool jumping;
 
     private Animator animator;
 
@@ -53,6 +53,8 @@ public class InputHandler : NetworkBehaviour {
         {
             fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
         }
+
+        jumping = CrossPlatformInputManager.GetButton("Jump");
     }
 
     private void UpdateStates()

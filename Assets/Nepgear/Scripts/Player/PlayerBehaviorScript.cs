@@ -285,7 +285,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             isRunning = false;
         }
-        if (CrossPlatformInputManager.GetButton("Jump") && !IsExhausted())
+        if (ih.jumping && !IsExhausted())
         {
             m_Float = true;
             staminaUsed += 1f;
