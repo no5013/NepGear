@@ -32,8 +32,8 @@ public class GameManager : NetworkBehaviour {
 
     private Camera mapCamera;
 
-    public Transform[] spawnPoints_A;
-    public Transform[] spawnPoints_B;
+    public CatapultManager[] spawnPoints_A;
+    public CatapultManager[] spawnPoints_B;
 
     private void Start()
     {
@@ -221,15 +221,14 @@ public class GameManager : NetworkBehaviour {
             Transform spawnPoint;
             if (players[i].team.Equals("A"))
             {
-                spawnPoint = spawnPoints_A[0];
+                players[i].SetCatapult(spawnPoints_A[0]);
+                spawnPoints_A[0].SetupFrame(players[i].gameObject);
             }
             else
             {
-                spawnPoint = spawnPoints_B[0];
+                players[i].SetCatapult(spawnPoints_B[0]);
+                spawnPoints_B[0].SetupFrame(players[i].gameObject);
             }
-
-            players[i].transform.position = spawnPoint.position;
-            players[i].transform.rotation = spawnPoint.rotation;
         }
     }
 
@@ -237,8 +236,11 @@ public class GameManager : NetworkBehaviour {
     void RpcRoundPlaying()
     {
         Debug.Log("START");
+
         // As soon as the round begins playing let the players control the tanks.
-        EnablePlayers();
+        // EnablePlayers();
+        
+        launchFrames();
     }
 
     private IEnumerator RoundEnding()
@@ -353,16 +355,28 @@ public class GameManager : NetworkBehaviour {
     {
         mapCamera = Camera.main;
 
-        GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
+        /*GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
         spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
 
         GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
-        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);
+        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);*/
+
+        spawnPoints_A = new CatapultManager[1];
+        spawnPoints_A[0] = GameObject.FindGameObjectsWithTag("Spawn_A")[0].GetComponent<CatapultManager>();
+
+        spawnPoints_B = new CatapultManager[1];
+        spawnPoints_B[0] = GameObject.FindGameObjectsWithTag("Spawn_B")[0].GetComponent<CatapultManager>();
     }
 
     void SetCanvasActive(bool active)
     {
         Canvas mapCanvas = mapCamera.transform.parent.GetComponentInChildren<Canvas>();
         mapCanvas.enabled = active;
+    }
+
+    void launchFrames()
+    {
+        spawnPoints_A[0].launch();
+        spawnPoints_B[0].launch();
     }
 }

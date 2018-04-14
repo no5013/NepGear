@@ -31,6 +31,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public float lifeStock;
 
+    public bool enabledControl = false; 
+
     private float respawnTime = 5f;
 
     [SyncVar(hook = "OnChangeHealth")]
@@ -61,11 +63,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public RectTransform healthBar;
 
-    GameObject mainCamera;
+    private GameObject mainCamera;
 
-    UIManager uiManager;
-    InputHandler ih;
-    RagdollManager ragdollManager;
+    private UIManager uiManager;
+    private InputHandler ih;
+    private RagdollManager ragdollManager;
 
     [SyncVar]
     public string characterID;
@@ -85,6 +87,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private AudioClip explosionSound;
     [SerializeField]
     private float timeBeforeExplode = 2f;
+
+    private CatapultManager catapult;
 
     protected void Start()
     {
@@ -317,6 +321,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_isDashing = false;
             currentLerpTime = 0f;
         }
+
+        Debug.Log("DASH");
     }
 
     public bool IsDashing()
@@ -416,14 +422,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     void RpcRespawn()
     {
-        if (isLocalPlayer)
-        {
-            Transform spawn = NetworkManager.singleton.GetStartPosition();
-            transform.position = spawn.position;
-            transform.rotation = spawn.rotation;
-        }
         ResetPlayerStatus();
+
+        catapult.SetupFrame(this.gameObject);
         EnablePlayer();
+        DisableControl();
+
+        catapult.launch();
     }
 
     void Explode()
@@ -458,11 +463,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public void EnableControl()
     {
         onToggleControl.Invoke(true);
+        enabledControl = true;
     }
 
     public void DisableControl()
     {
         onToggleControl.Invoke(false);
+        enabledControl = false;
     }
 
     public bool isDead()
@@ -478,5 +485,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private void SetFrameActive(bool active)
     {
         onToggleRenderer.Invoke(active);
+    }
+
+    public void SetCatapult(CatapultManager newCatapult)
+    {
+        this.catapult = newCatapult;
     }
 }

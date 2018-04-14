@@ -14,14 +14,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public float ForwardSpeed = 8.0f;   // Speed when walking forward
             public float BackwardSpeed = 4.0f;  // Speed when walking backwards
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
-            public float RunMultiplier = 2.0f;   // Speed when sprinting
+
+            public float BoostSpeed = 12.0f;   // Speed when sprinting
+
+            public float AccendingForce = 10f;
+
 	        public KeyCode RunKey = KeyCode.LeftShift;
             public float JumpForce = 30f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
 #if !MOBILE_INPUT
-            private bool m_Running;
+            private bool m_Boosting;
 #endif
 
             public void UpdateDesiredTargetSpeed(Vector2 input)
@@ -46,20 +50,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
 	            if (Input.GetKey(RunKey))
 	            {
-		            CurrentTargetSpeed *= RunMultiplier;
-		            m_Running = true;
+		            CurrentTargetSpeed = BoostSpeed;
+		            m_Boosting = true;
 	            }
 	            else
 	            {
-		            m_Running = false;
+		            m_Boosting = false;
 	            }
 #endif
             }
 
 #if !MOBILE_INPUT
-            public bool Running
+            public bool Boosting
             {
-                get { return m_Running; }
+                get { return m_Boosting; }
             }
 #endif
         }
@@ -87,7 +91,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
-        private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
+        private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded, m_Ascending;
 
 
         public Vector3 Velocity
@@ -105,12 +109,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             get { return m_Jumping; }
         }
 
-        public bool Running
+        public bool Boosting
         {
             get
             {
  #if !MOBILE_INPUT
-				return movementSettings.Running;
+				return movementSettings.Boosting;
 #else
 	            return false;
 #endif
@@ -130,9 +134,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
+            /*if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+            {
+                m_Jump = true;
+            }*/
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
                 m_Jump = true;
+            }
+
+            if (CrossPlatformInputManager.GetButton("Jump"))
+            {
+                m_Ascending = true;
+
+                Debug.Log("TEST");
             }
         }
 
@@ -142,7 +157,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GroundCheck();
             Vector2 input = GetInput();
 
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded || Boosting || m_Ascending))
             {
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
@@ -151,11 +166,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
                 desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
                 desiredMove.y = desiredMove.y*movementSettings.CurrentTargetSpeed;
-                if (m_RigidBody.velocity.sqrMagnitude <
+                /*if (m_RigidBody.velocity.sqrMagnitude <
                     (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
                 {
-                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
-                }
+                    m_RigidBody.velocity = desiredMove;
+                }*/
+
+                m_RigidBody.velocity = desiredMove;
+
+                Debug.Log("TEST MOVE");
             }
 
             if (m_IsGrounded)
@@ -175,6 +194,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     m_RigidBody.Sleep();
                 }
             }
+            else if (Boosting)
+            {
+                m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
+            }
             else
             {
                 m_RigidBody.drag = 0f;
@@ -183,7 +206,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     StickToGroundHelper();
                 }
             }
+
+            if (m_Ascending)
+            {
+                Debug.Log("Ascending");
+                Debug.Log(Vector3.up * movementSettings.AccendingForce * Time.fixedDeltaTime);
+                m_RigidBody.AddForce(Vector3.up * movementSettings.AccendingForce * Time.fixedDeltaTime, ForceMode.Acceleration);
+            }
+
             m_Jump = false;
+            m_Ascending = false;
         }
 
 
