@@ -100,10 +100,11 @@ public class FrameWeaponController : NetworkBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if(!isLocalPlayer)
+        if(!isLocalPlayer || !ih.enabled)
         {
             return;
         }
+
         if (ih.fire1 > 0)
         {
             //Debug.Log("Called From Server : " + isServer.ToString() + " LeftHandNormal");
