@@ -2675,7 +2675,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4728494459772366, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 182
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4728494459772366, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2713,6 +2713,10 @@ Prefab:
     - target: {fileID: 1484578966566048, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
       propertyPath: m_Name
       value: Catapult_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917020599702434, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 220
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
@@ -6025,7 +6029,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4728494459772366, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -182
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 4728494459772366, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6071,6 +6075,10 @@ Prefab:
     - target: {fileID: 1484578966566048, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
       propertyPath: m_TagString
       value: Spawn_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917020599702434, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 220
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f94ce4ff1cff6554381ce39ded1bd7ef, type: 2}
