@@ -44,9 +44,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-        private PlayerBehaviorScript player;
 
-        InputHandler ih;
+        private PlayerBehaviorScript player;
+        private InputHandler ih;
 
         // Use this for initialization
         private void Start()

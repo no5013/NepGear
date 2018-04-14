@@ -42,6 +42,20 @@ public class InputHandler : NetworkBehaviour {
 
         yRot = CrossPlatformInputManager.GetAxis("Mouse X");
         xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
+        float handR = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.RTouch);
+        float handL = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.LTouch);
+        if (handR > 0 && handL > 0)
+        {
+
+        }
+        else if (handR > 0)
+        {
+            yRot = handR;
+        }
+        else if (handL > 0)
+        {
+            yRot = -(handL);
+        }
 
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
