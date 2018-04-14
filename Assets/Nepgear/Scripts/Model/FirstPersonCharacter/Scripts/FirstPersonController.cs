@@ -162,6 +162,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource.Play();
         }
 
+        public void SetCharacterRotation(Transform character)
+        {
+            m_MouseLook.SetCharacterRotation(character);
+        }
 
         private void ProgressStepCycle(float speed)
         {

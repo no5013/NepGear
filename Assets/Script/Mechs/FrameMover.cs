@@ -27,6 +27,7 @@ public class FrameMover : NetworkBehaviour
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         moveDir = CalculateMoveDirection();
 
+        SetCorrectRotation();
         reached = false;
     }
 
@@ -35,7 +36,14 @@ public class FrameMover : NetworkBehaviour
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         moveDir = CalculateMoveDirection();
 
+        SetCorrectRotation();
         reached = false;
+    }
+
+    private void SetCorrectRotation()
+    {
+        firstPersonController.SetCharacterRotation(transform);
+        Debug.Log("HAHAHA");
     }
 
     private Vector3 CalculateMoveDirection()

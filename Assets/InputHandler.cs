@@ -12,6 +12,9 @@ public class InputHandler : NetworkBehaviour {
     public float fire1;
     public float fire2;
 
+    public float xRot;
+    public float yRot;
+
     public float dash;
 
     private Animator animator;
@@ -35,6 +38,9 @@ public class InputHandler : NetworkBehaviour {
     {
         horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
         vertical = CrossPlatformInputManager.GetAxis("Vertical");
+
+        yRot = CrossPlatformInputManager.GetAxis("Mouse X");
+        xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
 
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
