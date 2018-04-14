@@ -32,6 +32,7 @@ namespace Prototype.NetworkLobby
         public Text rightWeaponText;
         private Dropdown[] dropdowns;
 
+        public MechBase mechBase;
 
         void Start()
         {
@@ -58,6 +59,8 @@ namespace Prototype.NetworkLobby
             }
             characterText.text = characters[selectedCharacterRef].characterName;
             //selectedCharacter = characters[characterChoice];
+
+            OnChangeSetting();
         }
 
         public void OnLeftHandWeaponSelect(int weaponChoice)
@@ -83,6 +86,8 @@ namespace Prototype.NetworkLobby
             //selectedCharacter.leftWeapon = weapons[weaponChoice];
 
             //selectedCharacter.leftWeaponPrefab = weaponsPrefab[weaponChoice];
+
+            OnChangeSetting();
         }
 
         public void OnRightHandWeaponSelect(int weaponChoice)
@@ -105,10 +110,28 @@ namespace Prototype.NetworkLobby
                 }
             }
             rightWeaponText.text = weapons[selectedRightWeaponRef].aName;
+
+            OnChangeSetting();
+        }
+
+        private void OnChangeSetting()
+        {
+            if (mechBase != null)
+            {
+                mechBase.Initialize(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+            }
+        }
+
+        public void OnCancelSelect()
+        {
+            mechBase.Initialize(lobbyPlayer.frameId, lobbyPlayer.leftWeaponId, lobbyPlayer.rightWeaponId);
+
+            LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
         }
 
         public void OnConfirmCharacter()
         {
+            OnChangeSetting();
             if(isServer)
             {
                 lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);

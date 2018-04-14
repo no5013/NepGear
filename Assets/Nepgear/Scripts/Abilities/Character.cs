@@ -14,6 +14,8 @@ public class Character : ScriptableObject
     public float startingSpeed = 5f;
     public GameObject characterPrefab;
 
+    public GameObject framePrefab;
+
     public UltimateAbility ultimate;
     [HideInInspector] public WeaponAbility leftWeapon;
     [HideInInspector] public string leftWeaponID;

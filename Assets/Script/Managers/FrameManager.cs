@@ -10,17 +10,18 @@ public class FrameManager : MonoBehaviour {
     private GameObject leftWeapon;
     private GameObject rightWeapon;
 
+    private Animator animator;
+
     public string leftWeaponId;
     public string rightWeaponId;
-
-    public Animator animator;
 
     // Use this for initialization
 
     private void Awake()
     {
-        mountGadgetL = GetComponentInChildren<MountGadgetL>().transform;
-        mountGadgetR = GetComponentInChildren<MountGadgetR>().transform;
+        mountGadgetL = GetComponentInChildren<LeftController>().transform;
+        mountGadgetR = GetComponentInChildren<RightController>().transform;
+
         animator = GetComponent<Animator>();
 
         /*EquipWeaponLeft(leftWeaponId);
