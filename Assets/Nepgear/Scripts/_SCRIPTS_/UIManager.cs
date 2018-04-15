@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     //public GameObject healthConsoleUI;
     //public GameObject staminaConsoleUI;
     //public GameObject damageIndicatorUI;
-
+ 
     public Image healthImage;
     public Text healthText;
 

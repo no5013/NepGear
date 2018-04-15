@@ -26,4 +26,4 @@ MonoBehaviour:
   reloadTime: 2
   isSpread: 1
   palletCount: 8
-  spreadFactor: 1
+  spreadFactor: 2
