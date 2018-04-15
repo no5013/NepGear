@@ -230,7 +230,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
             uiManager.SetStagger(stagger * 1.0f / staggerLimit * 1.0f);
         }
-           
+
     }
     private void FixedUpdate()
     {
@@ -569,6 +569,16 @@ public class PlayerBehaviorScript : NetworkBehaviour
         this.catapult = newCatapult;
     }
 
+    public void WinGame()
+    {
+        Debug.Log("WIN");
+    }
+
+    public void LoseGame()
+    {
+        Debug.Log("LOSE");
+    }
+    
     private bool HasUltimate()
     {
         return ultimate != null;

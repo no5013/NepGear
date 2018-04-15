@@ -316,6 +316,23 @@ public class GameManager : NetworkBehaviour {
         ShowResult();
     }
 
+    private void DeclareResult()
+    {
+        RpcDeclareResult();
+    }
+
+    [ClientRpc]
+    private void RpcDeclareResult()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (gameWinner == players[i])
+                players[i].WinGame();
+            else
+                players[i].LoseGame();
+        }
+    }
+
     private IEnumerator RoundClosing()
     {
         float remainingTime = returnCountdown;
