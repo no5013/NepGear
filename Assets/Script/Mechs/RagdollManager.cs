@@ -25,6 +25,11 @@ public class RagdollManager : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
+    private void Start()
+    {
+        DisableRagdoll();
+    }
+
     public void DisableRagdoll()
     {
         //foreach (Collider collider in ragdollColliders)
@@ -43,8 +48,11 @@ public class RagdollManager : MonoBehaviour
             }
         }
 
-        parentCollider.enabled = true;
-        animator.enabled = true;
+        if(parentCollider != null)
+            parentCollider.enabled = true;
+
+        if (animator != null)
+            animator.enabled = true;
     }
 
     public void EnableRagdoll()
@@ -59,7 +67,10 @@ public class RagdollManager : MonoBehaviour
             rigidbody.isKinematic = false;
         }
 
-        parentCollider.enabled = false;
-        animator.enabled = false;
+        if (parentCollider != null)
+            parentCollider.enabled = false;
+
+        if (animator != null)
+            animator.enabled = false;
     }
 }

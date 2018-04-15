@@ -12,7 +12,11 @@ public class InputHandler : NetworkBehaviour {
     public float fire1;
     public float fire2;
 
-    public float dash;
+    public float xRot;
+    public float yRot;
+
+    public bool jumping;
+    public bool dashing;
 
     private Animator animator;
 
@@ -36,17 +40,39 @@ public class InputHandler : NetworkBehaviour {
         horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
         vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
+        yRot = CrossPlatformInputManager.GetAxis("Mouse X");
+        xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
+        float handR = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.RTouch);
+        float handL = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.LTouch);
+        if (handR > 0 && handL > 0)
+        {
+
+        }
+        else if (handR > 0)
+        {
+            yRot = handR;
+        }
+        else if (handL > 0)
+        {
+            yRot = -(handL);
+        }
+
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
         {
-            fire1 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+            //fire1 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+            fire1 = CrossPlatformInputManager.GetAxis("VRFire1");
         }
 
         fire2 = CrossPlatformInputManager.GetAxis("Fire2");
         if (fire2 <= 0)
         {
-            fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+            //fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+            fire2 = CrossPlatformInputManager.GetAxis("VRFire2");
         }
+
+        jumping = CrossPlatformInputManager.GetButton("Ascending");
+        dashing = CrossPlatformInputManager.GetButton("Dash");
     }
 
     private void UpdateStates()

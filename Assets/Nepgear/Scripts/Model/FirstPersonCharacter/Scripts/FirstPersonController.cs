@@ -44,9 +44,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-        private PlayerBehaviorScript player;
 
-        InputHandler ih;
+        private PlayerBehaviorScript player;
+        private InputHandler ih;
 
         // Use this for initialization
         private void Start()
@@ -54,14 +54,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             player = GetComponent<PlayerBehaviorScript>();
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
-            m_OriginalCameraPosition = m_Camera.transform.localPosition;
-            m_FovKick.Setup(m_Camera);
-            m_HeadBob.Setup(m_Camera, m_StepInterval);
+
+            if(m_Camera != null)
+            {
+                m_OriginalCameraPosition = m_Camera.transform.localPosition;
+                m_FovKick.Setup(m_Camera);
+                m_HeadBob.Setup(m_Camera, m_StepInterval);
+            }
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle / 2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-            m_MouseLook.Init(transform, m_Camera.transform);
+            m_MouseLook.Init(transform, transform);
 
             ih = GetComponent<InputHandler>();
         }
@@ -162,6 +166,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource.Play();
         }
 
+        public void SetCharacterRotation(Transform character)
+        {
+            m_MouseLook.SetCharacterRotation(character);
+        }
 
         private void ProgressStepCycle(float speed)
         {
@@ -247,7 +255,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used
-            if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
+
+            if (m_Camera != null && m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
             {
                 StopAllCoroutines();
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
@@ -256,7 +265,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation(transform, m_Camera.transform);
+            m_MouseLook.LookRotation(transform, transform, ih.yRot, ih.xRot);
         }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)

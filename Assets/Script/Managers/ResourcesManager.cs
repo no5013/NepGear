@@ -16,6 +16,9 @@ public class ResourcesManager : ScriptableObject
     public Character[] frames;
     public Dictionary<string, int> f_dict = new Dictionary<string, int>();
 
+    public Map[] maps;
+    public Dictionary<string, int> m_dict = new Dictionary<string, int>();
+
     public void Init()
     {
         for (int i = 0; i < projectiles.Length; i++)
@@ -58,6 +61,19 @@ public class ResourcesManager : ScriptableObject
                 f_dict.Add(frame.characterID, i);
             }
         }
+
+        for (int i = 0; i < maps.Length; i++)
+        {
+            Map map = maps[i];
+            if (m_dict.ContainsKey(map.id))
+            {
+
+            }
+            else
+            {
+                m_dict.Add(map.id, i);
+            }
+        }
     }
 
     public Projectile GetProjectile(string id)
@@ -95,10 +111,17 @@ public class ResourcesManager : ScriptableObject
             //Debug.Log("FOUND");
         }
 
-        //foreach(string n in f_dict.Keys)
-        //{
-        //    Debug.Log(n);
-        //}
+        return retVal;
+    }
+
+    public Map GetMap(string id)
+    {
+        Map retVal = null;
+        int index = -1;
+        if (m_dict.TryGetValue(id, out index))
+        {
+            retVal = maps[index];
+        }
 
         return retVal;
     }

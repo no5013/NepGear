@@ -13,7 +13,9 @@ public class Character : ScriptableObject
     public float maxUltimate = 100f;
     public float startingSpeed = 5f;
     public GameObject characterPrefab;
-    
+
+    public GameObject framePrefab;
+
     public UltimateAbility ultimate;
     public WeaponAbility uniqueWeaponAbility;
 

@@ -19,6 +19,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] ToggleEvent onToggleRemote;
 
     [SerializeField] ToggleEvent onToggleRenderer;
+    [SerializeField] ToggleEvent onToggleControl;
 
     private CharacterController characterController;
     private FirstPersonController firstPersonController;
@@ -29,6 +30,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [SyncVar]
     public float lifeStock;
+
+    public bool enabledControl = false;
 
     private float respawnTime = 5f;
 
@@ -60,12 +63,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public RectTransform healthBar;
 
-    GameObject mainCamera;
+    private GameObject mainCamera;
 
-    //public GameObject uiObject;
-    public UIManager uiManager;
-    InputHandler ih;
-    RagdollManager ragdollManager;
+    private UIManager uiManager;
+    private InputHandler ih;
+    private RagdollManager ragdollManager;
 
     [SyncVar]
     public string characterID;
@@ -85,6 +87,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private AudioClip explosionSound;
     [SerializeField]
     private float timeBeforeExplode = 2f;
+
+    private CatapultManager catapult;
 
     protected void Start()
     {
@@ -188,13 +192,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             return;
         }
-        if (CrossPlatformInputManager.GetButton("Dash"))
+
+        if (ih.dashing)
         {
             timePressedKey += Time.deltaTime;
-        }
-        else
-        {
-            timePressedKey = 0f;
         }
 
         if (m_isDashing)
@@ -258,7 +259,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             vertical = ih.vertical;
         }
 
-        if (CrossPlatformInputManager.GetButtonUp("Dash") && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
+        if (!ih.dashing && 0.0f < timePressedKey && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
         {
             m_isDashing = true;
             m_CharacterDashStartPos = characterController.transform.position;
@@ -272,9 +273,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_CharacterDashEndPos = characterController.transform.position + desiredMove;
             staminaUsed += 10f;
             //           walking = false;
+
+            timePressedKey = 0;
         }
 
-        if (CrossPlatformInputManager.GetButton("Dash") && timePressedKey >= 0.30f && !IsExhausted())
+        if (ih.dashing && timePressedKey >= 0.30f && !IsExhausted())
         {
             isRunning = true;
             staminaUsed += 1f;
@@ -283,7 +286,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             isRunning = false;
         }
-        if (CrossPlatformInputManager.GetButton("Jump") && !IsExhausted())
+        if (ih.jumping && !IsExhausted())
         {
             m_Float = true;
             staminaUsed += 1f;
@@ -319,6 +322,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_isDashing = false;
             currentLerpTime = 0f;
         }
+
+        Debug.Log("DASH");
     }
 
     public bool IsDashing()
@@ -403,6 +408,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void RpcDie()
     {
         Explode();
+        DisableControl();
         ragdollManager.EnableRagdoll();
         Invoke("FrameExplode", timeBeforeExplode);
     }
@@ -417,14 +423,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     void RpcRespawn()
     {
-        if (isLocalPlayer)
-        {
-            Transform spawn = NetworkManager.singleton.GetStartPosition();
-            transform.position = spawn.position;
-            transform.rotation = spawn.rotation;
-        }
         ResetPlayerStatus();
+
+        catapult.SetupFrame(this.gameObject);
         EnablePlayer();
+        DisableControl();
+
+        catapult.launch();
     }
 
     void Explode()
@@ -461,6 +466,18 @@ public class PlayerBehaviorScript : NetworkBehaviour
         uiManager.TickDamage(dir);
     }
 
+    public void EnableControl()
+    {
+        onToggleControl.Invoke(true);
+        enabledControl = true;
+    }
+
+    public void DisableControl()
+    {
+        onToggleControl.Invoke(false);
+        enabledControl = false;
+    }
+
     public bool isDead()
     {
         return (hitPoint <= 0);
@@ -474,5 +491,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private void SetFrameActive(bool active)
     {
         onToggleRenderer.Invoke(active);
+    }
+
+    public void SetCatapult(CatapultManager newCatapult)
+    {
+        this.catapult = newCatapult;
     }
 }

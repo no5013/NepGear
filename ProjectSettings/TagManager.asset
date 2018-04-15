@@ -11,6 +11,7 @@ TagManager:
   - Sub Weapon
   - Spawn_A
   - Spawn_B
+  - Camera Wheel
   layers:
   - Default
   - TransparentFX
