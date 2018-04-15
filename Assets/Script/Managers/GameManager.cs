@@ -261,9 +261,9 @@ public class GameManager : NetworkBehaviour {
 
     private IEnumerator RoundClosing()
     {
-        //Prototype.NetworkLobby.LobbyManager.s_Singleton.ServerReturnToLobby();
+        Prototype.NetworkLobby.LobbyManager.s_Singleton.SendReturnToLobby();
 
-        RpcGameClosing();
+        //RpcGameClosing();
 
         yield return null;
     }
@@ -271,10 +271,10 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     private void RpcGameClosing()
     {
-        string lobbyScene = FindObjectOfType<LobbyManager>().lobbyScene;
+        /*string lobbyScene = FindObjectOfType<LobbyManager>().lobbyScene;
         FindObjectOfType<LobbyManager>().StopClient();
         Destroy(FindObjectOfType<LobbyManager>().gameObject);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene);*/
     }
 
     private bool OnePlayerLeft()

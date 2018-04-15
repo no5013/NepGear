@@ -273,8 +273,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_CharacterDashEndPos = characterController.transform.position + desiredMove;
             staminaUsed += 10f;
             //           walking = false;
-
-            timePressedKey = 0;
         }
 
         if (ih.dashing && timePressedKey >= 0.30f && !IsExhausted())
@@ -302,6 +300,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
             ultimateCharge = 0f;
             //uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
         }
+
+        if (!ih.dashing)
+        {
+            timePressedKey = 0f;
+        }
+
         stamina -= staminaUsed;
     }
 
