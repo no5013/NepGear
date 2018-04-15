@@ -38,6 +38,9 @@ public class GameManager : NetworkBehaviour {
     //Startup
     private float matchCountdown = 3f;
 
+    //Return to hangar
+    private float returnCountdown = 3f;
+
     //Text ui for player
     private string readyText = "READY";
     private string startText = "GO";
@@ -315,9 +318,29 @@ public class GameManager : NetworkBehaviour {
 
     private IEnumerator RoundClosing()
     {
-        Prototype.NetworkLobby.LobbyManager.s_Singleton.SendReturnToLobby();
+        float remainingTime = returnCountdown;
+        int floorTime = Mathf.FloorToInt(remainingTime);
 
-        //RpcGameClosing();
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                //To Set player ui
+                if (floorTime > 0)
+                {
+                    RpcSetPlayerStateText("Return to hangar in " + (floorTime + 1).ToString());
+                }
+            }
+        }
+
+        Prototype.NetworkLobby.LobbyManager.s_Singleton.SendReturnToLobby();
 
         yield return null;
     }
