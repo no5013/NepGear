@@ -24,20 +24,17 @@ public class Bullet : NetworkBehaviour {
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
         if (isPlayer != null)
         {
-            GameObject parent = isPlayer.gameObject;
-            if (parent.tag.Equals("Player"))
-            {
-                string dir = GetHitDir(other.transform);
-                //parent.SendMessage("TakeDamage", damage);
+            string dir = GetHitDir(other.transform);
+            //parent.SendMessage("TakeDamage", damage);
 
-                isPlayer.TakeDamage(damage);
-                isPlayer.TickIndicator(dir);
-                if (isPlayer.isDead())
-                {
-                    //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
-                    //r.AddForce(transform.forward * 100);
-                }
+            isPlayer.TakeDamage(damage);
+            isPlayer.TickIndicator(dir);
+            if (isPlayer.isDead())
+            {
+                //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
+                //r.AddForce(transform.forward * 100);
             }
+            
         }
         else
         {

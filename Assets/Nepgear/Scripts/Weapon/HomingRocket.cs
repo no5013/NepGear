@@ -229,24 +229,21 @@ public class HomingRocket : NetworkBehaviour {
     [ServerCallback]
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Rocket Hit " + other.gameObject.ToString());
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
         if(isPlayer != null)
         {
-            GameObject parent = isPlayer.gameObject;
-            if (parent.tag.Equals("Player"))
-            {
-                string dir = GetHitDir(other.transform);
-                //parent.SendMessage("TakeDamage", damage);
+         
+            string dir = GetHitDir(other.transform);
+            //parent.SendMessage("TakeDamage", damage);
 
-                isPlayer.TakeDamage(damage);
-                isPlayer.TickIndicator(dir);
-                if (isPlayer.isDead())
-                {
-                    //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
-                    //r.AddForce(transform.forward * 100);
-                }
+            isPlayer.TakeDamage(damage);
+            isPlayer.TickIndicator(dir);
+            if (isPlayer.isDead())
+            {
+                //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
+                //r.AddForce(transform.forward * 100);
             }
+            
         }
         else
         {
@@ -318,7 +315,6 @@ public class HomingRocket : NetworkBehaviour {
     
     public void Explosion()
     {
-        Debug.Log("Explosion");
         explosion.transform.parent = null;
         explosion.Play();
         explosion.gameObject.GetComponent<AudioSource>().Play();

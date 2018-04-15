@@ -239,17 +239,29 @@ public class FrameWeaponController : NetworkBehaviour {
             projectileRigidBody.velocity = (forward) * projectile.speed;
 
             Bullet b = projectileInstance.GetComponent<Bullet>();
-            b.damage = projectile.damage;
-            b.lifeTime = projectile.lifeTime;
-            b.force = projectile.force;
+            if(b != null)
+            {
+                b.damage = projectile.damage;
+                b.lifeTime = projectile.lifeTime;
+                b.force = projectile.force;
+            }
+            GrenadeBullet g = projectileInstance.GetComponent<GrenadeBullet>();
+            if(g != null)
+            {
+                BlastRound blastRound = (BlastRound) projectile;
+                g.damage = blastRound.damage;
+                g.lifeTime = blastRound.lifeTime;
+                g.impactForce = blastRound.force;
+                g.blastDamage = blastRound.blastDamage;
+                g.blastForce = blastRound.blastForce;
+                g.blastRadius = blastRound.blastRadius;
+                g.travelSpeed = blastRound.speed;
+            }
+         
 
             NetworkServer.Spawn(projectileRigidBody.gameObject);
         }
         RpcMuzzleFlash(gunId, position, rotation);
-
-        // ถ้า โปรเจ็คไตล์กัน.spread
-        //วน จำนวนกระสุน 
-        // เอา Random factor มา Instantiate
 
 
 

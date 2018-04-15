@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: HeavyMachineEnergyGun
   aID: W4
-  aGunSound: {fileID: 0}
+  aGunSound: {fileID: 8300000, guid: f59164772db507d44b2e5027faaed519, type: 3}
   aMagazine: 100
   aFireDelay: 0.25
   maxRecoil: 3
