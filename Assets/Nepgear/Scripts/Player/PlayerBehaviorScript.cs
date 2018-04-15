@@ -65,7 +65,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     private GameObject mainCamera;
 
-    private UIManager uiManager;
+    public UIManager uiManager;
     private InputHandler ih;
     private RagdollManager ragdollManager;
 
