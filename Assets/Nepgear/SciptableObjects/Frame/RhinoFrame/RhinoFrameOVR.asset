@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8ea559571403c42b283dc8cc828f5e, type: 3}
+  m_Name: RhinoFrameOVR
+  m_EditorClassIdentifier: 
+  characterName: RhinoOVR
+  characterID: OF2
+  maxHitPoint: 500
+  maxStamina: 300
+  maxUltimate: 100
+  startingSpeed: 5
+  characterPrefab: {fileID: 1138042371069490, guid: a47d0510a7644f84e932729c95950835,
+    type: 2}
+  ultimate: {fileID: 11400000, guid: 84f94b3e5915c3a48b175541c5fe9268, type: 2}
+  uniqueWeaponAbility: {fileID: 11400000, guid: b944ae1cf1cce75498240e2f925e3a69,
+    type: 2}
+  leftWeapon: {fileID: 0}
+  leftWeaponID: 
+  rightWeapon: {fileID: 0}
+  rightWeaponID: 

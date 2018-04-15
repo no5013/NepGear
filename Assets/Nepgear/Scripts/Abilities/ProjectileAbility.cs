@@ -9,6 +9,10 @@ public class ProjectileAbility : WeaponAbility
     public Projectile projectile;
     public float reloadTime;
 
+    public bool isSpread;
+    public int palletCount;
+    public float spreadFactor;
+
     private ProjectileShootTriggerable gun;
 
     public override void Initialize(GameObject obj)

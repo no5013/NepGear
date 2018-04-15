@@ -31,7 +31,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public float lifeStock;
 
-    public bool enabledControl = false; 
+    public bool enabledControl = false;
 
     private float respawnTime = 5f;
 
@@ -65,7 +65,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     private GameObject mainCamera;
 
-    private UIManager uiManager;
+    public UIManager uiManager;
     private InputHandler ih;
     private RagdollManager ragdollManager;
 
@@ -100,6 +100,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
 
+        //Debug.Log("Can find ui?? " + GetComponentInChildren<UIManager>().ToString());
+        //uiManager = GetComponentInChildren<UIManager>();
+        //uiManager = uiObject.GetComponent<UIManager>();
         mainCamera = Camera.main.gameObject;
     }
 
@@ -122,7 +125,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         timePressedKey = 0f;
         m_Float = false;
         isUltimateActived = false;
-        uiManager = FindObjectOfType<UIManager>();
+        //uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
     }
 
@@ -212,8 +215,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             }
         }
 
-        uiManager.SetStamina(stamina, stamina*1.0f / maxStamina*1.0f);
-        uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
+        uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
     }
     private void FixedUpdate()
     {
@@ -298,7 +300,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             isUltimateActived = true;
             ultimate.TriggerAbility();
             ultimateCharge = 0f;
-            uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
+            //uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
         }
         stamina -= staminaUsed;
     }
@@ -448,15 +450,20 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         hitPoint = maxHitPoint;
         stamina = maxStamina;
-}
+    }
 
     void OnChangeHealth (float currentHealth)
     {
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         if (isLocalPlayer)
         {
-            //uiManager.SetHitpoint(currentHealth, currentHealth * 1.0f / maxHitPoint * 1.0f);
+            uiManager.SetHealth(currentHealth * 1.0f / maxHitPoint * 1.0f);
         }
+    }
+
+    public void TickIndicator(string dir)
+    {
+        uiManager.TickDamage(dir);
     }
 
     public void EnableControl()

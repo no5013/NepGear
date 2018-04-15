@@ -22,5 +22,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1148127744127816, guid: 49a0a0782e3a6204980eabae8db8b1eb,
     type: 2}
   projectileForce: 1000
-  projectile: {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
+  projectile: {fileID: 11400000, guid: 9bad8589e2a841645a2e449e64349aee, type: 2}
   reloadTime: 2
+  isSpread: 1
+  palletCount: 8
+  spreadFactor: 2

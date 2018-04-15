@@ -28,7 +28,7 @@ public class GameManager : NetworkBehaviour {
     [SyncVar]
     public bool isFinished = false;
 
-    private UIManager ui;
+    //private UIManager ui;
 
     private Camera mapCamera;
 
@@ -46,7 +46,7 @@ public class GameManager : NetworkBehaviour {
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine(GameLoop());
         }
-        ui = FindObjectOfType<UIManager>().GetComponent<UIManager>();
+        //ui = FindObjectOfType<UIManager>().GetComponent<UIManager>();
     }
 
     void Awake()
@@ -272,6 +272,7 @@ public class GameManager : NetworkBehaviour {
     private void RpcGameClosing()
     {
         string lobbyScene = FindObjectOfType<LobbyManager>().lobbyScene;
+        FindObjectOfType<LobbyManager>().StopClient();
         Destroy(FindObjectOfType<LobbyManager>().gameObject);
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene);
     }
@@ -344,8 +345,8 @@ public class GameManager : NetworkBehaviour {
     private void ShowResult()
     {
         Debug.Log(gameWinner.characterID);
-        ui.SetResult(gameWinner.characterID);
-        ui.ShowResult();
+        //ui.SetResult(gameWinner.characterID);
+        //ui.ShowResult();
     }
 
     void MapSetup()

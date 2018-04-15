@@ -10,7 +10,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c0df093047fe0b42b6a2b4d23310327, type: 3}
   m_Name: Resources Manager
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   projectiles:
   - {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
   weaponAbilities:
@@ -20,5 +20,6 @@ MonoBehaviour:
   frames:
   - {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
   - {fileID: 11400000, guid: d153bbf95f5921246a5d04ca19fc390e, type: 2}
+  - {fileID: 11400000, guid: 5daa5ce5c553ae04aa2db37236e770ce, type: 2}
   maps:
   - {fileID: 11400000, guid: eaf79a8e75c63a741842010967137156, type: 2}

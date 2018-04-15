@@ -108,7 +108,7 @@ public class ResourcesManager : ScriptableObject
         if (f_dict.TryGetValue(id, out index))
         {
             retVal = frames[index];
-            Debug.Log("FOUND");
+            //Debug.Log("FOUND");
         }
 
         return retVal;

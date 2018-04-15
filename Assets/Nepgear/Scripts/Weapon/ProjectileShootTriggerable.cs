@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileShootTriggerable : MonoBehaviour {
 
+    public static float autoReloadDelay = 2f;
+
     [HideInInspector] public Projectile projectile;
     public Transform bulletSpawn;
     [HideInInspector] public float projectileForce;
@@ -19,6 +21,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     private bool isReloading;
     private float recoil;
     private float recoilCooldown;
+    private float reloadDelay;
 
     FrameWeaponController fwc;
 
@@ -51,6 +54,14 @@ public class ProjectileShootTriggerable : MonoBehaviour {
                 recoil = 0f;
             }
         }
+        if (bulletLeft < magazine && !isReloading)
+        {
+            reloadDelay += Time.deltaTime;
+            if (reloadDelay >= autoReloadDelay)
+            {
+                Reload();
+            }
+        }
     }
 
     public void Fire()
@@ -59,6 +70,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         {
             return;
         }
+        reloadDelay = 0f;
         if (CanFire())
         {
             bulletLeft--;
@@ -84,6 +96,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
     public void Reload()
     {
+        reloadDelay = 0f;
         StartCoroutine(Reloading());
     }
     public bool CanFire()
