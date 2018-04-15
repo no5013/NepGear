@@ -215,7 +215,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
             }
         }
 
-        uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
+        if (uiManager != null)
+            uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
     }
     private void FixedUpdate()
     {
@@ -461,13 +462,15 @@ public class PlayerBehaviorScript : NetworkBehaviour
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         if (isLocalPlayer)
         {
-            uiManager.SetHealth(currentHealth * 1.0f / maxHitPoint * 1.0f);
+            if(uiManager != null)
+                uiManager.SetHealth(currentHealth * 1.0f / maxHitPoint * 1.0f);
         }
     }
 
     public void TickIndicator(string dir)
     {
-        uiManager.TickDamage(dir);
+        if (uiManager != null)
+            uiManager.TickDamage(dir);
     }
 
     public void EnableControl()

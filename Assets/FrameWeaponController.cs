@@ -97,11 +97,15 @@ public class FrameWeaponController : NetworkBehaviour {
 
         leftCooldown = leftHandAbility.aFireDelay;
         rightCooldown = rightHandAbility.aFireDelay;
-        uniqueCooldown = uniqueAbility.aFireDelay;
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
-        uniqueAbility.Initialize(uniqueWeapon);
+
+        if(uniqueAbility != null)
+        {
+            uniqueCooldown = uniqueAbility.aFireDelay;
+            uniqueAbility.Initialize(uniqueWeapon);
+        }
     }
 
     public void SetLeftAbility(WeaponAbility la)
@@ -149,6 +153,7 @@ public class FrameWeaponController : NetworkBehaviour {
 
             }
         }
+
         if (ih.fire2 > 0)
         {
             if (Time.time > uniqueNextReadyFire)
@@ -161,9 +166,12 @@ public class FrameWeaponController : NetworkBehaviour {
 
     private void UniqueButtonTriggered()
     {
-        uniqueNextReadyFire = uniqueCooldown + Time.time;
-        uniqueCoolDownTimeLeft = uniqueCooldown;
-        uniqueAbility.TriggerAbility();
+        if(uniqueAbility != null)
+        {
+            uniqueNextReadyFire = uniqueCooldown + Time.time;
+            uniqueCoolDownTimeLeft = uniqueCooldown;
+            uniqueAbility.TriggerAbility();
+        }
     }
 
     private void LeftButtonTriggered()
