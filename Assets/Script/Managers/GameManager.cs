@@ -35,6 +35,13 @@ public class GameManager : NetworkBehaviour {
     public CatapultManager[] spawnPoints_A;
     public CatapultManager[] spawnPoints_B;
 
+    //Startup
+    private float matchCountdown = 3f;
+
+    //Text ui for player
+    private string readyText = "READY";
+    private string startText = "GO";
+
     private void Start()
     {
         MapSetup();
@@ -186,8 +193,35 @@ public class GameManager : NetworkBehaviour {
         //we notify all clients that the round is starting
         RpcRoundStarting();
 
+        RpcSetPlayerStateText(readyText);
+
+        float remainingTime = matchCountdown;
+        int floorTime = Mathf.FloorToInt(remainingTime);
+
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                //To Set player ui
+                if(floorTime > 0)
+                {
+                    RpcSetPlayerStateText((floorTime + 1).ToString());
+                }
+            }
+        }
+
+        //To change player ui to go
+        RpcSetPlayerStateText(startText);
+
         // Wait for the specified length of time until yielding control back to the game loop.
-        yield return m_StartWait;
+        yield return null;
     }
 
     [ClientRpc]
@@ -198,6 +232,8 @@ public class GameManager : NetworkBehaviour {
         ResetPlayers();
         EnablePlayers();
         DisablePlayerControl();
+
+
         Debug.Log("ROUND STARTING");
     }
 
@@ -239,6 +275,24 @@ public class GameManager : NetworkBehaviour {
 
         launchFrames();
     }
+
+    [ClientRpc]
+    void RpcSetPlayerStateText(string text)
+    {
+        SetPlayerStateText(text);
+    }
+
+    private void SetPlayerStateText(string text)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            UIManager playerUI = players[i].uiManager;
+            if(playerUI != null)
+            {
+                playerUI.SetStateText(text);
+            }
+        }
+    } 
 
     private IEnumerator RoundEnding()
     {
@@ -352,12 +406,6 @@ public class GameManager : NetworkBehaviour {
     void MapSetup()
     {
         mapCamera = Camera.main;
-
-        /*GameObject[] o_SpawnPoint_A = GameObject.FindGameObjectsWithTag("Spawn_A");
-        spawnPoints_A = Utils.gameObjectsToTransforms(o_SpawnPoint_A);
-
-        GameObject[] o_SpawnPoint_B = GameObject.FindGameObjectsWithTag("Spawn_B");
-        spawnPoints_B = Utils.gameObjectsToTransforms(o_SpawnPoint_B);*/
 
         spawnPoints_A = new CatapultManager[1];
         spawnPoints_A[0] = GameObject.FindGameObjectsWithTag("Spawn_A")[0].GetComponent<CatapultManager>();

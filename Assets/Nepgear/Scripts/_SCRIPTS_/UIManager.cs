@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     //public GameObject healthConsoleUI;
     //public GameObject staminaConsoleUI;
     //public GameObject damageIndicatorUI;
- 
+
     public Image healthImage;
     public Text healthText;
 
@@ -23,7 +23,8 @@ public class UIManager : MonoBehaviour {
     public DamageIndicatorBehavior leftIndicator;
     public DamageIndicatorBehavior rightIndicator;
 
-    public 
+    public Text gameStateText;
+
     // Use this for initialization
     void Start () {
         //healthText = healthConsoleUI.GetComponentInChildren<Text>();
@@ -67,6 +68,15 @@ public class UIManager : MonoBehaviour {
     {
         staminaText.text = (percent*100) + "%";
         staminaImage.fillAmount = percent;
+    }
+
+    public void SetStateText(string text)
+    {
+        Debug.Log(text);
+        if(gameStateText != null)
+        {
+            gameStateText.text = text;
+        }
     }
 
     public void SetStagger(float percent)
