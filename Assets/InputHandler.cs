@@ -71,7 +71,7 @@ public class InputHandler : NetworkBehaviour {
             fire2 = CrossPlatformInputManager.GetAxis("VRFire2");
         }
 
-        jumping = CrossPlatformInputManager.GetButton("Jump");
+        jumping = CrossPlatformInputManager.GetButton("Ascending");
         dashing = CrossPlatformInputManager.GetButton("Dash");
     }
 
