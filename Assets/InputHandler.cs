@@ -60,13 +60,15 @@ public class InputHandler : NetworkBehaviour {
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
         {
-            fire1 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+            //fire1 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+            fire1 = CrossPlatformInputManager.GetAxis("VRFire1");
         }
 
         fire2 = CrossPlatformInputManager.GetAxis("Fire2");
         if (fire2 <= 0)
         {
-            fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+            //fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+            fire2 = CrossPlatformInputManager.GetAxis("VRFire2");
         }
 
         jumping = CrossPlatformInputManager.GetButton("Jump");
