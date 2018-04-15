@@ -10,13 +10,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c0df093047fe0b42b6a2b4d23310327, type: 3}
   m_Name: Resources Manager
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
   weaponAbilities:
   - {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
   - {fileID: 11400000, guid: 08b9bd97e9dcadd479fc67fb4e7be448, type: 2}
   - {fileID: 11400000, guid: ff2c2e4a0deb6ba45a13a5e07e1b4d40, type: 2}
+  - {fileID: 11400000, guid: 5772328bb1ccc2e4e8522584356ea30f, type: 2}
   frames:
   - {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
   - {fileID: 11400000, guid: d153bbf95f5921246a5d04ca19fc390e, type: 2}

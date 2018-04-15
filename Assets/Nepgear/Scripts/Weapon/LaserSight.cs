@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaserSight : MonoBehaviour {
 
     private LineRenderer lr;
-    public float maxDistance = 100f;
+    public float maxDistance = 10f;
 	// Use this for initialization
 	void Start () {
         lr = GetComponent<LineRenderer>();

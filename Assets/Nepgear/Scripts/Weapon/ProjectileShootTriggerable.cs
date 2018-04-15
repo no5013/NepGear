@@ -7,7 +7,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     public static float autoReloadDelay = 2f;
 
     [HideInInspector] public Projectile projectile;
-    public Transform bulletSpawn;
+    public Transform[] bulletSpawns;
     [HideInInspector] public float projectileForce;
     [HideInInspector] public int magazine;
     [HideInInspector] public float reloadTime;
@@ -15,6 +15,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     [HideInInspector] public string gunId;
     [HideInInspector] public float maxRecoil;
     [HideInInspector] public float recoilRate;
+    public bool isFiring;
     private AudioSource soundSource;
 
     private int bulletLeft;
@@ -34,6 +35,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         isReloading = false;
         recoil = 0f;
         recoilCooldown = 0f;
+        isFiring = false;
     }
 
     private void Update()
@@ -43,6 +45,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             recoilCooldown -= Time.deltaTime;
             if (recoilCooldown < 0)
             {
+                isFiring = false;
                 recoilCooldown = 0f;
             }
         }
@@ -73,12 +76,17 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         reloadDelay = 0f;
         if (CanFire())
         {
-            bulletLeft--;
+            for (int i = 0; i< bulletSpawns.Length; i++)
+            {
+                isFiring = true;
+                bulletLeft--;
+                Transform bulletSpawn = bulletSpawns[i];
+                RandomBulletSpawnRotation(ref bulletSpawn);
+                fwc.CmdFireProjectile(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+                Recoil();
+                recoilCooldown = 2.0f;
+            }
             soundSource.Play();
-            RandomBulletSpawnRotation();
-            fwc.CmdFireProjectile(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
-            Recoil();
-            recoilCooldown = 2.0f;
         }
         else
         {
@@ -103,7 +111,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     {
         return !(isReloading || bulletLeft <= 0);
     }
-    private void RandomBulletSpawnRotation()
+    private void RandomBulletSpawnRotation(ref Transform bulletSpawn)
     {
         if (recoil == 0)
         {
