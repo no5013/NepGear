@@ -109,12 +109,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public void Initialize(Character frame)
     {
         walkSpeed = frame.startingSpeed;
-        runSpeed = frame.startingSpeed * 1.5f;
+        runSpeed = frame.boostSpeed;
 
         maxHitPoint = frame.maxHitPoint;
         maxStamina = frame.maxStamina;
         ultimateCharge = 0f;
-        floatSpeed = frame.startingSpeed * 1.25f;
+        floatSpeed = frame.jumpForce;
         lerpTime = 0.25f;
         m_DashDistance = frame.startingSpeed;
         hitPoint = maxHitPoint;

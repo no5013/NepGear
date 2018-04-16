@@ -12,6 +12,9 @@ public class Character : ScriptableObject
     public float maxStamina = 100f;
     public float maxUltimate = 100f;
     public float startingSpeed = 5f;
+    //public float runningSpeed;
+    public float jumpForce;
+    public float boostSpeed;
     public GameObject characterPrefab;
 
     public GameObject framePrefab;
