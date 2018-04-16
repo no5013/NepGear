@@ -55,6 +55,7 @@ public class HomingRocket : NetworkBehaviour {
     void Start () {
         GetComponent<CapsuleCollider>().enabled = false;
         explosion.gameObject.GetComponent<destroyMe>().deathtimer = lifeTime + 2f;
+        explosion.gameObject.GetComponent<destroyMe>().enabled = true;
         //cc.enabled = false;
         isActivated = false;
         hitY = 0f;

@@ -199,7 +199,7 @@ public class FrameWeaponController : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdFireProjectile(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
+    public void CmdFireProjectile(string gunId, float charge, Vector3 forward, Vector3 position, Quaternion rotation)
     {
         ProjectileAbility gun = (ProjectileAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
         Projectile projectile = gun.projectile;
@@ -215,18 +215,16 @@ public class FrameWeaponController : NetworkBehaviour {
                 float x = UnityEngine.Random.Range(-gun.spreadFactor, gun.spreadFactor);
                 float y = UnityEngine.Random.Range(-gun.spreadFactor, gun.spreadFactor);
                 projectileRotation *= Quaternion.Euler(new Vector3(x, y, 0));
-                //projectileRotation.eulerAngles = new Vector3(x, y, 0);
-                //projectileRotation.y += y;
 
                 pallet = Instantiate(projectile.projectilePrefab, position, projectileRotation);
 
                 palletRigidBody = pallet.GetComponent<Rigidbody>();
-                palletRigidBody.velocity = pallet.transform.forward * projectile.speed;
+                palletRigidBody.velocity = pallet.transform.forward * projectile.speed * charge;
 
                 b = pallet.GetComponent<Bullet>();
-                b.damage = projectile.damage;
+                b.damage = projectile.damage * charge;
                 b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force;
+                b.force = projectile.force * charge;
 
                 NetworkServer.Spawn(palletRigidBody.gameObject);
             }
@@ -236,36 +234,34 @@ public class FrameWeaponController : NetworkBehaviour {
             GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
 
             Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-            projectileRigidBody.velocity = (forward) * projectile.speed;
+            projectileRigidBody.velocity = (forward) * projectile.speed * charge;
 
             Bullet b = projectileInstance.GetComponent<Bullet>();
             if(b != null)
             {
-                b.damage = projectile.damage;
+                b.damage = projectile.damage * charge;
                 b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force;
+                b.force = projectile.force * charge;
             }
             GrenadeBullet g = projectileInstance.GetComponent<GrenadeBullet>();
             if(g != null)
             {
                 BlastRound blastRound = (BlastRound) projectile;
-                g.damage = blastRound.damage;
+                g.damage = blastRound.damage * charge;
                 g.lifeTime = blastRound.lifeTime;
-                g.impactForce = blastRound.force;
-                g.blastDamage = blastRound.blastDamage;
-                g.blastForce = blastRound.blastForce;
-                g.blastRadius = blastRound.blastRadius;
-                g.travelSpeed = blastRound.speed;
+                g.impactForce = blastRound.force * charge;
+                g.blastDamage = blastRound.blastDamage * charge;
+                g.blastForce = blastRound.blastForce * charge;
+                g.blastRadius = blastRound.blastRadius * charge;
+                g.travelSpeed = blastRound.speed * charge;
             }
          
 
             NetworkServer.Spawn(projectileRigidBody.gameObject);
         }
         RpcMuzzleFlash(gunId, position, rotation);
-
-
-
     }
+
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
     {

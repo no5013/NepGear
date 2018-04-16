@@ -18,7 +18,6 @@ public class GrenadeBullet : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         GetComponent<Collider>().enabled = false;
-        explosion.gameObject.GetComponent<destroyMe>().deathtimer = lifeTime + 2f;
         StartCoroutine(EnableCollision());
         Destroy(this.gameObject, lifeTime);
 	}
@@ -108,8 +107,12 @@ public class GrenadeBullet : NetworkBehaviour {
     private void Explosion()
     {
         explosion.transform.parent = null;
+        explosion.gameObject.GetComponent<destroyMe>().deathtimer = 2f;
+        explosion.gameObject.GetComponent<destroyMe>().enabled = true;
         explosion.Play();
-        explosion.gameObject.GetComponent<AudioSource>().Play();
+        AudioSource explosionSound = explosion.gameObject.GetComponent<AudioSource>();
+        if (explosionSound != null)
+            explosionSound.Play();
     }
 
     private string GetHitDir(Transform target)

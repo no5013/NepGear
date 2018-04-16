@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3d290d53d5cc54e8facd8d47ee305f, type: 3}
+  m_Name: BeamRifle
+  m_EditorClassIdentifier: 
+  aName: Beam Rifle
+  aID: W6
+  aGunSound: {fileID: 0}
+  aMagazine: 12
+  aFireDelay: 1
+  maxRecoil: 0
+  recoilRate: 0
+  gunPrefab: {fileID: 1875504163993926, guid: beb0152ca4a6a9141ab3dcfd0361aff6, type: 2}
+  muzzleFlash: {fileID: 1277724371099970, guid: 6e5f90f147f3ec9448d254a3453e6cc9,
+    type: 2}
+  projectileForce: 800
+  projectile: {fileID: 11400000, guid: 331fc01e437d4474fba25e34b29cfac2, type: 2}
+  reloadTime: 5
+  isSpread: 0
+  palletCount: 0
+  spreadFactor: 0
+  isChargable: 1
+  chargeRate: 5
+  maxCharge: 100

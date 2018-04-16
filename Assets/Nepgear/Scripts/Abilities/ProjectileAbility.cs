@@ -13,6 +13,10 @@ public class ProjectileAbility : WeaponAbility
     public int palletCount;
     public float spreadFactor;
 
+    public bool isChargable;
+    public float chargeRate;
+    public float maxCharge;
+
     private ProjectileShootTriggerable gun;
 
     public override void Initialize(GameObject obj)
@@ -26,6 +30,12 @@ public class ProjectileAbility : WeaponAbility
         gun.gunId = aID;
         gun.maxRecoil = maxRecoil;
         gun.recoilRate = recoilRate;
+        gun.isChargable = isChargable;
+        if (isChargable)
+        {
+            gun.chargeRate = chargeRate;
+            gun.maxCharge = maxCharge;
+        }
         gun.Initialize();
     }
 
