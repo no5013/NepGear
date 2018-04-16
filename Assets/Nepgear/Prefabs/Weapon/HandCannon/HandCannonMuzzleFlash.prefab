@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114771342756004460}
   - component: {fileID: 198863544346353464}
   m_Layer: 0
-  m_Name: EnergyPistolMuzzleFlash
+  m_Name: HandCannonMuzzleFlash
   m_TagString: FX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

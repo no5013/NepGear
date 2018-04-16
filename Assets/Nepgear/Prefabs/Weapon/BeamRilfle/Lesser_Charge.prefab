@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4092074792465190}
   - component: {fileID: 198008484766935452}
   - component: {fileID: 199165850133844858}
-  - component: {fileID: 54758356362969472}
   - component: {fileID: 114721813266635354}
   - component: {fileID: 114699874960541012}
   m_Layer: 0
@@ -137,21 +136,6 @@ Transform:
   m_Father: {fileID: 4092074792465190}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
---- !u!54 &54758356362969472
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577056578941396}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &114699874960541012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -309,7 +293,7 @@ MonoBehaviour:
     type: 2}
   explosionPrefab: {fileID: 0}
   thrust: 0
-  thisRigidbody: {fileID: 54758356362969472}
+  thisRigidbody: {fileID: 0}
   particleKillGroup: {fileID: 0}
   LookRotation: 1
   Missile: 0

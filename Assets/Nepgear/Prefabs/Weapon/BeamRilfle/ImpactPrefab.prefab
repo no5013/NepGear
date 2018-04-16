@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4286021305322130}
   - component: {fileID: 198154339334132548}
   - component: {fileID: 199750872022895988}
+  - component: {fileID: 114515189532146788}
   m_Layer: 0
   m_Name: ImpactPrefab
   m_TagString: Untagged
@@ -103,6 +104,18 @@ Transform:
   m_Father: {fileID: 4286021305322130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114515189532146788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1760128665195370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a895231490da6545890b1e1794f8704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathtimer: 10
 --- !u!198 &198154339334132548
 ParticleSystem:
   m_ObjectHideFlags: 1
