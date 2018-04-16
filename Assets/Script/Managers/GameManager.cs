@@ -369,13 +369,12 @@ public class GameManager : NetworkBehaviour {
             int newFloorTime = Mathf.FloorToInt(remainingTime);
 
             if (newFloorTime != floorTime)
-            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+            {
                 floorTime = newFloorTime;
 
-                //To Set player ui
                 if (floorTime > 0)
                 {
-                    RpcSetPlayerStateText("Return to hangar in " + (floorTime + 1).ToString());
+                    RpcSetPlayerStateText("Return to hangar in " + floorTime.ToString());
                 }
             }
         }

@@ -62,13 +62,13 @@ public class UIManager : MonoBehaviour {
 
     public void SetHealth(float percent)
     {
-        healthText.text = (percent*100) + "%";
+        healthText.text = Mathf.Floor(percent*100) + "%";
         healthImage.fillAmount = percent;
     }
 
     public void SetStamina(float percent)
     {
-        staminaText.text = (percent*100) + "%";
+        staminaText.text = Mathf.Floor(percent*100) + "%";
         staminaImage.fillAmount = percent;
     }
 
