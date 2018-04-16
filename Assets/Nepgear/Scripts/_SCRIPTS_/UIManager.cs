@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour {
 
     public Text gameStateText;
 
+    public Text leftWeaponText;
+    public Text rightWeaponText;
+
     private float fadeDelay = 3f;
 
     // Use this for initialization
@@ -80,6 +83,22 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public void SetLeftWeaponText(string text)
+    {
+        if(leftWeaponText != null)
+        {
+            leftWeaponText.text = text;
+        }
+    }
+
+    public void SetRightWeaponText(string text)
+    {
+        if (rightWeaponText != null)
+        {
+            rightWeaponText.text = text;
+        }
+    }
+
     public void FadeStateText()
     {
         StartCoroutine(EFadeStateText());
@@ -99,8 +118,6 @@ public class UIManager : MonoBehaviour {
             elapsedTime += Time.deltaTime;
 
             gameStateText.color = stateTextColor;
-
-            Debug.Log(gameStateText.color.a);
 
             yield return null;
         }
