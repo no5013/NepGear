@@ -96,9 +96,21 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public bool isStaggering;
 
+    public bool debug = false;
+
     protected void Start()
     {
-        SetFrame(Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID));
+        if (Prototype.NetworkLobby.LobbyManager.s_Singleton != null)
+        {
+            Character frame = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID);
+            SetFrame(Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID));
+        }
+        else
+        {
+            Character basicFrame = new Character();
+            SetFrame(basicFrame);
+        }
+
         lifeStock = 3;
 
         characterController = GetComponent<CharacterController>();
@@ -110,6 +122,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         //uiManager = GetComponentInChildren<UIManager>();
         //uiManager = uiObject.GetComponent<UIManager>();
         mainCamera = Camera.main.gameObject;
+
+        if (debug)
+        {
+            EnablePlayer();
+        }
     }
 
     public void Initialize(Character frame)
@@ -168,12 +185,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         SetFrameActive(false);
 
-        if (isLocalPlayer)
+        if (isLocalPlayer || debug)
             mainCamera.SetActive(true);
 
         onToggleShared.Invoke(false);
 
-        if (isLocalPlayer)
+        if (isLocalPlayer || debug)
             onToggleLocal.Invoke(false);
         else
             onToggleRemote.Invoke(false);
@@ -184,12 +201,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
         SetFrameActive(true);
         ragdollManager.DisableRagdoll();
 
-        if (isLocalPlayer)
+        if (isLocalPlayer || debug)
             mainCamera.SetActive(false);
 
         onToggleShared.Invoke(true);
 
-        if (isLocalPlayer)
+        if (isLocalPlayer || debug)
             onToggleLocal.Invoke(true);
         else
             onToggleRemote.Invoke(true);
