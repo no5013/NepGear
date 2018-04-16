@@ -1063,11 +1063,7 @@ GameObject:
   - component: {fileID: 222607742173631106}
   - component: {fileID: 114047816623808626}
   m_Layer: 0
-<<<<<<< HEAD
-  m_Name: StaggerPercentText
-=======
   m_Name: StateText
->>>>>>> Adjust ui element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5241,8 +5237,6 @@ MonoBehaviour:
   rightHandObj: {fileID: 4925243652112928}
   headRotation: {fileID: 4933549582895496}
   lookObj: {fileID: 0}
-<<<<<<< HEAD
-=======
 --- !u!114 &114317295178485114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5276,7 +5270,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 100%
->>>>>>> Adjust ui element
 --- !u!114 &114347733633777736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5303,13 +5296,7 @@ MonoBehaviour:
   healthImage: {fileID: 114741945140774284}
   healthText: {fileID: 114566726825326330}
   staminaImage: {fileID: 114426866364970952}
-<<<<<<< HEAD
-  staminaText: {fileID: 114479652878134954}
-  staggerImage: {fileID: 114792665496286222}
-  staggerText: {fileID: 114047816623808626}
-=======
   staminaText: {fileID: 114786599229861440}
->>>>>>> Adjust ui element
   frontIndicator: {fileID: 114400956029056752}
   backIndicator: {fileID: 114109612120610748}
   leftIndicator: {fileID: 114923414435245588}
@@ -5350,10 +5337,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eaa2222b14535c4d96e9653c885abf5, type: 3}
-<<<<<<< HEAD
-  m_Name:
-  m_EditorClassIdentifier:
-=======
   m_Name:
   m_EditorClassIdentifier:
 --- !u!114 &114402546844651494
@@ -5372,7 +5355,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
->>>>>>> Adjust ui element
 --- !u!114 &114426866364970952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5850,10 +5832,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eaa2222b14535c4d96e9653c885abf5, type: 3}
-<<<<<<< HEAD
-  m_Name:
-  m_EditorClassIdentifier:
-=======
   m_Name:
   m_EditorClassIdentifier:
 --- !u!114 &114786599229861440
@@ -5889,7 +5867,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 100%
->>>>>>> Adjust ui element
 --- !u!114 &114792665496286222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17774,17 +17751,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
-<<<<<<< HEAD
-  - {fileID: 224487725280000678}
-  - {fileID: 224430689021803452}
-  - {fileID: 224832252486368052}
-  - {fileID: 224551258779982560}
-=======
   - {fileID: 224551258779982560}
   - {fileID: 224843424574681420}
   - {fileID: 224832252486368052}
   - {fileID: 224430689021803452}
->>>>>>> Adjust ui element
   m_Father: {fileID: 4173681836293074}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17830,59 +17800,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
---- !u!224 &224215603670118558
-=======
 --- !u!224 &224384753750900302
->>>>>>> Adjust ui element
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1592645826576002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224487725280000678}
-=======
   m_GameObject: {fileID: 1489420039539580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 224843424574681420}
->>>>>>> Adjust ui element
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 28, y: -42}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224341546023245366
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1887461501681256}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224430689021803452}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28, y: -42}
-  m_SizeDelta: {x: 100, y: 100}
-=======
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 1000}
->>>>>>> Adjust ui element
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224417627228447008
 RectTransform:
@@ -17913,12 +17847,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
-<<<<<<< HEAD
-  - {fileID: 224797587260740408}
-  - {fileID: 224341546023245366}
-=======
   - {fileID: 224514575386469512}
->>>>>>> Adjust ui element
   m_Father: {fileID: 224010088956915942}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17974,24 +17903,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-<<<<<<< HEAD
-  m_Children:
-  - {fileID: 224912621066727440}
-  m_Father: {fileID: 224487725280000678}
-=======
   m_Children: []
   m_Father: {fileID: 224430689021803452}
->>>>>>> Adjust ui element
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-<<<<<<< HEAD
-  m_SizeDelta: {x: 100, y: 100}
-=======
   m_SizeDelta: {x: 400, y: 200}
->>>>>>> Adjust ui element
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224551258779982560
 RectTransform:
@@ -17999,13 +17918,8 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1677965621428900}
-<<<<<<< HEAD
-  m_LocalRotation: {x: -0, y: -0.3420201, z: -0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 0, z: -175.39996}
-=======
   m_LocalRotation: {x: 0, y: -0.3420201, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 0, z: -25}
->>>>>>> Adjust ui element
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 224788528185293526}
@@ -18015,11 +17929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -40, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: -51, y: 100}
-=======
   m_AnchoredPosition: {x: -51, y: -50}
->>>>>>> Adjust ui element
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224666331621787284

@@ -36,7 +36,7 @@ public class GameManager : NetworkBehaviour {
     public CatapultManager[] spawnPoints_B;
 
     //Startup
-    private float matchCountdown = 3f;
+    private float matchCountdown = 4f;
 
     //Return to hangar
     private float returnCountdown = 3f;
@@ -215,7 +215,7 @@ public class GameManager : NetworkBehaviour {
                 //To Set player ui
                 if(floorTime > 0)
                 {
-                    RpcSetPlayerStateText((floorTime + 1).ToString());
+                    RpcSetPlayerStateText((floorTime).ToString());
                 }
             }
         }
@@ -282,7 +282,14 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     void RpcSetPlayerStateText(string text)
     {
-        SetPlayerStateText(text);
+        if (text.Equals(startText))
+        {
+            SetPlayerStateText(text, true);
+        }
+        else
+        {
+            SetPlayerStateText(text);
+        }
     }
 
     private void SetPlayerStateText(string text)
@@ -295,7 +302,23 @@ public class GameManager : NetworkBehaviour {
                 playerUI.SetStateText(text);
             }
         }
-    } 
+    }
+
+    private void SetPlayerStateText(string text, bool fade)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            UIManager playerUI = players[i].uiManager;
+            if (playerUI != null)
+            {
+                playerUI.SetStateText(text);
+                if (fade)
+                {
+                    playerUI.FadeStateText();
+                }
+            }
+        }
+    }
 
     private IEnumerator RoundEnding()
     {

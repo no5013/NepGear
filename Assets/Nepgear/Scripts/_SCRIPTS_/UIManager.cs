@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour {
 
     public Text gameStateText;
 
+    private float fadeDelay = 3f;
+
     // Use this for initialization
     void Start () {
         //healthText = healthConsoleUI.GetComponentInChildren<Text>();
@@ -72,10 +74,35 @@ public class UIManager : MonoBehaviour {
 
     public void SetStateText(string text)
     {
-        Debug.Log(text);
         if(gameStateText != null)
         {
             gameStateText.text = text;
+        }
+    }
+
+    public void FadeStateText()
+    {
+        StartCoroutine(EFadeStateText());
+    }
+
+    private IEnumerator EFadeStateText()
+    {
+        float elapsedTime = 0.0f;
+        float wait = fadeDelay - 0.5f;
+
+        yield return null;
+
+        while (elapsedTime < wait)
+        {
+            Color stateTextColor = gameStateText.color;
+            stateTextColor.a = 1.0f - (elapsedTime / wait);
+            elapsedTime += Time.deltaTime;
+
+            gameStateText.color = stateTextColor;
+
+            Debug.Log(gameStateText.color.a);
+
+            yield return null;
         }
     }
 

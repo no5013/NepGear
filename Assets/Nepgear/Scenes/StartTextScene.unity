@@ -397,6 +397,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 502169405}
+    - target: {fileID: 114352407787766276, guid: 3fcd8cc7c7c38d74094315a89bfcc79f,
+        type: 2}
+      propertyPath: gameStateText
+      value: 
+      objectReference: {fileID: 1762076899}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fcd8cc7c7c38d74094315a89bfcc79f, type: 2}
   m_IsPrefabParent: 0
@@ -637,6 +642,12 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!114 &1762076899 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114047816623808626, guid: 3fcd8cc7c7c38d74094315a89bfcc79f,
+    type: 2}
+  m_PrefabInternal: {fileID: 688633449}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!21 &1784759486
 Material:
   serializedVersion: 6
