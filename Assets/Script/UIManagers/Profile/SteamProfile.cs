@@ -27,7 +27,7 @@ public class SteamProfile : MonoBehaviour
         displayName.text = SteamFriends.GetPersonaName();
 
         //Set value of stat
-        Debug.Log(SteamUserStats.SetStat("star5", 5));
+        SteamUserStats.SetStat("star5", 5);
         SteamUserStats.StoreStats();
 
 
@@ -36,7 +36,6 @@ public class SteamProfile : MonoBehaviour
         {
             int outData;
             SteamUserStats.GetStat("star5", out outData);
-            Debug.Log(outData);
             killC += outData;
         }
 
