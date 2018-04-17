@@ -19,9 +19,10 @@ MonoBehaviour:
   startingSpeed: 15
   characterPrefab: {fileID: 1511154638448052, guid: c65451f247fabdc4cac9e6145264059e,
     type: 2}
-  framePrefab: {fileID: 1591422676292908, guid: aa6e5271241c64541be3d368a5b1ace4,
+  framePrefab: {fileID: 1635197861194840, guid: 5589b12c7bce0d14fb4b3c695006ccbc,
     type: 2}
   ultimate: {fileID: 11400000, guid: a7d563b4a64407b4398833b52ee65453, type: 2}
+  uniqueWeaponAbility: {fileID: 0}
   leftWeapon: {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
   leftWeaponID: 
   rightWeapon: {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
