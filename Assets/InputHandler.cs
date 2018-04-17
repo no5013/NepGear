@@ -15,9 +15,6 @@ public class InputHandler : NetworkBehaviour {
     public float fire1;
     public float fire2;
 
-    public float xRot;
-    public float yRot;
-
     public bool jumping;
     public bool dashing;
 
@@ -68,7 +65,7 @@ public class InputHandler : NetworkBehaviour {
 
     private void UpdateStates()
     {
-        animator.SetFloat("Forward", vertical, 0.1f, Time.deltaTime);
-        animator.SetFloat("Turn", yRot, 0.1f, Time.deltaTime);
+        /*animator.SetFloat("Forward", vertical, 0.1f, Time.deltaTime);
+        animator.SetFloat("Turn", yRot, 0.1f, Time.deltaTime);*/
     }
 }
