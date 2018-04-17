@@ -10,6 +10,7 @@ public class Projectile : ScriptableObject {
     public float force;
     public float lifeTime;
     public float speed;
+    public float staggerDamage;
 
     public GameObject projectilePrefab;
 }

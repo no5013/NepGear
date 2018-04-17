@@ -13,6 +13,7 @@ public class GrenadeBullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastDamage;
     [SyncVar] [HideInInspector] public float blastRadius;
     [SyncVar] [HideInInspector] public float blastForce;
+    [SyncVar] [HideInInspector] public float staggerDamage;
     public ParticleSystem explosion;
 
     // Use this for initialization
@@ -36,6 +37,7 @@ public class GrenadeBullet : NetworkBehaviour {
         {
             string dir = GetHitDir(other.transform);
             isPlayer.TakeDamage(damage);
+            isPlayer.Staggering(staggerDamage);
             isPlayer.TickIndicator(dir);
         }
         else
@@ -85,12 +87,17 @@ public class GrenadeBullet : NetworkBehaviour {
 
             // Calculate damage as this proportion of the maximum possible damage.
             float damage = relativeDistance * blastDamage;
+            float stagger = relativeDistance * staggerDamage;
 
             // Make sure that the minimum damage is always 0.
             damage = Mathf.Max(0f, damage);
+            stagger = Mathf.Max(0f, stagger);
 
             if (targetHealth)
+            {
                 targetHealth.TakeDamage(damage);
+                targetHealth.Staggering(stagger);
+            }
             if (destructible)
                 destructible.TakeDamage(damage);
             // Deal this damage to the tank.

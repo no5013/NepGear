@@ -203,6 +203,11 @@ public class FrameWeaponController : NetworkBehaviour {
     {
         ProjectileAbility gun = (ProjectileAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
         Projectile projectile = gun.projectile;
+        float initialCharge = 0f;
+        if (charge <= 0f)
+        {
+            initialCharge = 1f;
+        }
         if (gun.isSpread)
         {
             GameObject pallet;
@@ -219,12 +224,13 @@ public class FrameWeaponController : NetworkBehaviour {
                 pallet = Instantiate(projectile.projectilePrefab, position, projectileRotation);
 
                 palletRigidBody = pallet.GetComponent<Rigidbody>();
-                palletRigidBody.velocity = pallet.transform.forward * projectile.speed * charge;
+                palletRigidBody.velocity = pallet.transform.forward * (projectile.speed * charge + initialCharge);
 
                 b = pallet.GetComponent<Bullet>();
-                b.damage = projectile.damage * charge;
+                b.damage = projectile.damage * charge + initialCharge;
                 b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force * charge;
+                b.force = projectile.force * charge + initialCharge;
+                b.staggerDamage = projectile.staggerDamage * charge + initialCharge;
 
                 NetworkServer.Spawn(palletRigidBody.gameObject);
             }
@@ -234,26 +240,28 @@ public class FrameWeaponController : NetworkBehaviour {
             GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
 
             Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-            projectileRigidBody.velocity = (forward) * projectile.speed * charge;
+            projectileRigidBody.velocity = (forward) * (projectile.speed * charge + initialCharge);
 
             Bullet b = projectileInstance.GetComponent<Bullet>();
             if(b != null)
             {
-                b.damage = projectile.damage * charge;
+                b.damage = projectile.damage * charge + initialCharge;
                 b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force * charge;
+                b.force = projectile.force * charge + initialCharge;
+                b.staggerDamage = projectile.staggerDamage * charge + initialCharge;
             }
             GrenadeBullet g = projectileInstance.GetComponent<GrenadeBullet>();
             if(g != null)
             {
                 BlastRound blastRound = (BlastRound) projectile;
-                g.damage = blastRound.damage * charge;
+                g.damage = blastRound.damage * charge + initialCharge;
                 g.lifeTime = blastRound.lifeTime;
-                g.impactForce = blastRound.force * charge;
-                g.blastDamage = blastRound.blastDamage * charge;
-                g.blastForce = blastRound.blastForce * charge;
-                g.blastRadius = blastRound.blastRadius * charge;
-                g.travelSpeed = blastRound.speed * charge;
+                g.impactForce = blastRound.force * charge + initialCharge;
+                g.blastDamage = blastRound.blastDamage * charge + initialCharge;
+                g.blastForce = blastRound.blastForce * charge + initialCharge;
+                g.blastRadius = blastRound.blastRadius * charge + initialCharge;
+                g.travelSpeed = blastRound.speed * charge + initialCharge;
+                g.staggerDamage = blastRound.staggerDamage * charge + initialCharge;
             }
          
 
@@ -282,6 +290,7 @@ public class FrameWeaponController : NetworkBehaviour {
             r.blastForce = rocket.blastForce;
             r.blastRadius = rocket.blastRadius;
             r.blastDamage = rocket.blastDamage;
+            r.staggerDamage = rocket.staggerDamage;
             r.hitX = hit.point.x;
             r.hitZ = hit.point.z;
             r.lifeTime = rocket.lifeTime;

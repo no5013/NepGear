@@ -16,5 +16,6 @@ MonoBehaviour:
   force: 1000
   lifeTime: 5
   speed: 50
+  staggerDamage: 150
   projectilePrefab: {fileID: 1658349165770792, guid: d71dca6d9cd8a494c9980017cfdf1755,
     type: 2}

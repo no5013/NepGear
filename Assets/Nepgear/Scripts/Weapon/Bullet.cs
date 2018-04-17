@@ -8,7 +8,8 @@ public class Bullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float damage;
     [SyncVar] [HideInInspector] public float force;
     [SyncVar] [HideInInspector] public float lifeTime;
-    public ParticleSystem impactPrefab;
+    [SyncVar] [HideInInspector] public float staggerDamage;
+    //public ParticleSystem impactPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,7 @@ public class Bullet : NetworkBehaviour {
             //parent.SendMessage("TakeDamage", damage);
 
             isPlayer.TakeDamage(damage);
+            isPlayer.Staggering(staggerDamage);
             isPlayer.TickIndicator(dir);
             if (isPlayer.isDead())
             {
@@ -48,7 +50,7 @@ public class Bullet : NetworkBehaviour {
                 r.AddForce(transform.forward * force);
             }
         }
-        Impact();
+        //Impact();
         //RpcImpactEffect(other.contacts[0].point, Quaternion.identity);
         Destroy(this.gameObject);
     }
@@ -89,16 +91,16 @@ public class Bullet : NetworkBehaviour {
     //    Instantiate(impactPrefab, position, rotation);
     //}
 
-    public void Impact()
-    {
-        impactPrefab.transform.parent = null;
-        impactPrefab.Play();
-        impactPrefab.GetComponent<destroyMe>().deathtimer = 1f;
-        impactPrefab.GetComponent<destroyMe>().enabled = true;
-        AudioSource impactAudio = impactPrefab.gameObject.GetComponent<AudioSource>();
-        if (impactAudio != null)
-            impactAudio.Play();
-    }
+    //public void Impact()
+    //{
+    //    impactPrefab.transform.parent = null;
+    //    impactPrefab.Play();
+    //    impactPrefab.GetComponent<destroyMe>().deathtimer = 1f;
+    //    impactPrefab.GetComponent<destroyMe>().enabled = true;
+    //    AudioSource impactAudio = impactPrefab.gameObject.GetComponent<AudioSource>();
+    //    if (impactAudio != null)
+    //        impactAudio.Play();
+    //}
 
     private string GetHitDir(Transform target)
     {

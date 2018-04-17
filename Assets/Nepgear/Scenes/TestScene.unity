@@ -1179,6 +1179,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   staminaImage: {fileID: 0}
   staminaText: {fileID: 0}
+  staggerImage: {fileID: 0}
+  staggerText: {fileID: 0}
   frontIndicator: {fileID: 0}
   backIndicator: {fileID: 0}
   leftIndicator: {fileID: 0}
@@ -1787,6 +1789,7 @@ MonoBehaviour:
   blastDamage: 0
   blastRadius: 0
   blastForce: 0
+  staggerDamage: 0
   explosion: {fileID: 0}
   hitX: 10.526
   hitZ: 1.68

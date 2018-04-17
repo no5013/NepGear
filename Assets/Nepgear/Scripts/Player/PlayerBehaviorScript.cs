@@ -89,6 +89,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private float timeBeforeExplode = 2f;
 
     private CatapultManager catapult;
+    [SyncVar]
+    public float stagger;
+    private float staggerRecovery;
+    private float staggerLimit;
+    [SyncVar]
+    public bool isStaggering;
 
     protected void Start()
     {
@@ -120,6 +126,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
         hitPoint = maxHitPoint;
         stamina = maxStamina;
         ultimate = frame.ultimate;
+        stagger = 0f;
+        staggerLimit = frame.staggerLimit;
+        staggerRecovery = frame.staggerRecovery;
+        isStaggering = false;
 
         currentLerpTime = 0f;
         timePressedKey = 0f;
@@ -216,7 +226,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
 
         if (uiManager != null)
+        {
             uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
+            uiManager.SetStagger(stagger * 1.0f / staggerLimit * 1.0f);
+        }
+           
     }
     private void FixedUpdate()
     {
@@ -244,6 +258,23 @@ public class PlayerBehaviorScript : NetworkBehaviour
         if (ultimateCharge <= ultimate.maxCharge)
         {
             ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
+        }
+        if (stagger > 0f)
+        {
+            stagger -= staggerRecovery*Time.fixedDeltaTime;
+            if (isStaggering)
+            {
+                stagger -= staggerRecovery * Time.fixedDeltaTime;
+            }
+            if (stagger < 0f)
+            {
+                stagger = 0f;
+                if(isStaggering)
+                {
+                    EnableControl();
+                    isStaggering = false;
+                }
+            }
         }
 
     }
@@ -390,6 +421,31 @@ public class PlayerBehaviorScript : NetworkBehaviour
             Die();
         }
     }
+    [Server]
+    public void Staggering(float staggerDamage)
+    {
+        if (dead)
+            return;
+        if (isStaggering)
+            return;
+        RpcStaggering(staggerDamage);
+        stagger += staggerDamage;
+
+        if(stagger >= staggerLimit)
+        {
+            stagger = staggerLimit;
+
+            Stagger();
+        }
+    }
+
+    [Server]
+    public void Stagger()
+    {
+        isStaggering = true;
+        DisableControl();
+        Debug.Log("Staggering");
+    }
 
     [Server]
     public void Die()
@@ -405,6 +461,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [ClientRpc]
     public void RpcTakeDamage(float damage)
+    {
+
+    }
+
+    [ClientRpc]
+    public void RpcStaggering(float damage)
     {
 
     }

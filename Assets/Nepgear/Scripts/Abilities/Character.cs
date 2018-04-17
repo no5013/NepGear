@@ -15,6 +15,8 @@ public class Character : ScriptableObject
     //public float runningSpeed;
     public float jumpForce;
     public float boostSpeed;
+    public float staggerLimit;
+    public float staggerRecovery;
     public GameObject characterPrefab;
 
     public GameObject framePrefab;
