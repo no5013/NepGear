@@ -9,11 +9,11 @@ public class InputHandler : NetworkBehaviour {
     public float horizontal;
     public float vertical;
 
+    public float yRot;
+    public float xRot;
+
     public float fire1;
     public float fire2;
-
-    public float xRot;
-    public float yRot;
 
     public bool jumping;
     public bool dashing;
@@ -31,7 +31,7 @@ public class InputHandler : NetworkBehaviour {
         {
             return;
         }
-        UpdateStates();
+        //UpdateStates();
         HandleInput();
     }
 
@@ -42,20 +42,8 @@ public class InputHandler : NetworkBehaviour {
 
         yRot = CrossPlatformInputManager.GetAxis("Mouse X");
         xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
-        float handR = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.RTouch);
-        float handL = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.LTouch);
-        if (handR > 0 && handL > 0)
-        {
 
-        }
-        else if (handR > 0)
-        {
-            yRot = handR;
-        }
-        else if (handL > 0)
-        {
-            yRot = -(handL);
-        }
+        Debug.Log(yRot);
 
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
@@ -77,7 +65,7 @@ public class InputHandler : NetworkBehaviour {
 
     private void UpdateStates()
     {
-        animator.SetFloat("Forward", vertical, 0.1f, Time.deltaTime);
-        animator.SetFloat("Turn", horizontal, 0.1f, Time.deltaTime);
+        /*animator.SetFloat("Forward", vertical, 0.1f, Time.deltaTime);
+        animator.SetFloat("Turn", yRot, 0.1f, Time.deltaTime);*/
     }
 }

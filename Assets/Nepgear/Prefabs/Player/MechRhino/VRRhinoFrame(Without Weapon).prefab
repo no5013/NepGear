@@ -1290,6 +1290,7 @@ GameObject:
   - component: {fileID: 95013111665373362}
   - component: {fileID: 114301644867963698}
   - component: {fileID: 114874841662691322}
+  - component: {fileID: 114890798258375596}
   - component: {fileID: 114692430822223660}
   - component: {fileID: 114435726940560908}
   - component: {fileID: 114245323298059850}
@@ -4455,12 +4456,18 @@ Animator:
   m_GameObject: {fileID: 1624428743771486}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 963fa29a513cc1840ba876fc77f3360a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0044b323732ba3d409025b29d2c64754, type: 2}
+  m_Controller: {fileID: 9100000, guid: 722be012c63dfdd4c9b2d3e8cf008bba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'Mech_Humanoid_LeftFoot'\n\tTransform 'Mech_Humanoid_LeftFoot'\n\tFrom
+    animation clip 'Mech_Float'\n\tFrom animation clip 'Mech_Dash_Front'\n\tFrom animation
+    clip 'Mech_Dash_Left'\n\tFrom animation clip 'Mech_Dash_Right'\n\tFrom animation
+    clip 'Mech_Dash_Front'\n\tFrom animation clip 'Mech_Dash_Left'\n\tFrom animation
+    clip 'Mech_Dash_Right'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95281848761690322
@@ -4706,7 +4713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95013111665373362}
-  m_ParameterSendBits: 51
+  m_ParameterSendBits: 127
   param0: 
   param1: 
   param2: 
@@ -5315,10 +5322,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal: 0
   vertical: 0
+  yRot: 0
+  xRot: 0
   fire1: 0
   fire2: 0
-  xRot: 0
-  yRot: 0
   jumping: 0
   dashing: 0
 --- !u!114 &114544737983660928
@@ -5624,6 +5631,19 @@ MonoBehaviour:
   target: {fileID: 0}
   maxSpeed: 10
   reachedSpeed: 10
+--- !u!114 &114890798258375596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624428743771486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175d746bb7b01b242a5800e32a59355e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  directionDampTime: 0.25
 --- !u!114 &114896191142164154
 MonoBehaviour:
   m_ObjectHideFlags: 1
