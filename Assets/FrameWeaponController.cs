@@ -18,7 +18,7 @@ public class FrameWeaponController : NetworkBehaviour {
     [SerializeField] private WeaponAbility rightHandAbility;
 
     [SerializeField] private GameObject uniqueWeapon;
-    [SerializeField] private WeaponAbility uniqueAbility;
+    [SerializeField] private UniqueAbility uniqueAbility;
 
     public Transform eye;
     //public GameObjec unique
@@ -103,7 +103,8 @@ public class FrameWeaponController : NetworkBehaviour {
 
         if(uniqueAbility != null)
         {
-            uniqueCooldown = uniqueAbility.aFireDelay;
+            Debug.Log("Initializing UniqueAbility");
+            uniqueCooldown = uniqueAbility.triggerDelay;
             uniqueAbility.Initialize(uniqueWeapon);
         }
     }
@@ -161,6 +162,10 @@ public class FrameWeaponController : NetworkBehaviour {
                 UniqueButtonTriggered();
             }
         }
+        else
+        {
+            UniqueButtonDeTriggered();    
+        }
 
     }
 
@@ -171,6 +176,13 @@ public class FrameWeaponController : NetworkBehaviour {
             uniqueNextReadyFire = uniqueCooldown + Time.time;
             uniqueCoolDownTimeLeft = uniqueCooldown;
             uniqueAbility.TriggerAbility();
+        }
+    }
+    private void UniqueButtonDeTriggered()
+    {
+        if (uniqueAbility != null)
+        {
+            uniqueAbility.DeTriggerAbility();
         }
     }
 
@@ -269,6 +281,12 @@ public class FrameWeaponController : NetworkBehaviour {
         }
         RpcMuzzleFlash(gunId, position, rotation);
     }
+
+    //[Command]
+    //public void CmdActivateShield()
+    //{
+        
+    //}
 
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)

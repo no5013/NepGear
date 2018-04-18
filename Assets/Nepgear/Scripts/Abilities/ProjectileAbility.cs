@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Abilities/ProjectileAbility")]
+[CreateAssetMenu (menuName = "Abilities/WeaponAbilities/ProjectileAbility")]
 public class ProjectileAbility : WeaponAbility
 {
     public float projectileForce;

@@ -9,6 +9,7 @@ public class RocketShootTriggerable : MonoBehaviour {
     [HideInInspector] public float cooldown;
     [HideInInspector] public float range;
     [HideInInspector] public string gunId;
+    [HideInInspector] public AudioClip rocketSound;
     public Transform[] muzzles;
 
     public Transform eyePosition;
@@ -17,6 +18,8 @@ public class RocketShootTriggerable : MonoBehaviour {
     private int fireIndex;
 
     private float fireCooldown;
+
+    private AudioSource audioSource;
 
     FrameWeaponController fwc;
 

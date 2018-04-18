@@ -22,7 +22,7 @@ public class Character : ScriptableObject
     public GameObject framePrefab;
 
     public UltimateAbility ultimate;
-    public WeaponAbility uniqueWeaponAbility;
+    public UniqueAbility uniqueWeaponAbility;
 
     [HideInInspector] public WeaponAbility leftWeapon;
     [HideInInspector] public string leftWeaponID;

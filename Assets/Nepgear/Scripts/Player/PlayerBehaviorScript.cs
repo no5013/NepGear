@@ -254,10 +254,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             boostChargeTime = Time.time + 1f;
         }
-
-        if (ultimateCharge <= ultimate.maxCharge)
+        if (HasUltimate())
         {
-            ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
+            if (ultimateCharge <= ultimate.maxCharge)
+            {
+                ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
+            }
         }
         if (stagger > 0f)
         {
@@ -565,5 +567,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public void SetCatapult(CatapultManager newCatapult)
     {
         this.catapult = newCatapult;
+    }
+
+    private bool HasUltimate()
+    {
+        return ultimate != null;
     }
 }
