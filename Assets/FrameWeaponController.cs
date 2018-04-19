@@ -282,11 +282,49 @@ public class FrameWeaponController : NetworkBehaviour {
         RpcMuzzleFlash(gunId, position, rotation);
     }
 
-    //[Command]
-    //public void CmdActivateShield()
-    //{
+    [Command]
+    public void CmdActivateShield()
+    {
+        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        //shield.isActivate = true;
+        //shield.RpcChangeStatus(true);
+        RpcChangeShieldStatus(true);
+    }
+
+    [ClientRpc]
+    public void RpcChangeShieldStatus(bool status)
+    {
+        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        shield.isActivate = status;
+    }
+
+
+    [Command]
+    public void CmdDeactivateShield()
+    {
+        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        //shield.isActivate = true;
+        //shield.RpcChangeStatus(true);
+        RpcChangeShieldStatus(false);
+    }
+
+    /*[ClientRpc]
+    public void RpcChangeShieldStatus(bool status)
+    {
+        // Disable or Enable Exactly shield for every client.
         
-    //}
+        //uniqueWeapon.id
+    }
+
+    [Command]
+    public void CmdDeactivateShield()
+    {
+
+        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        //shield.isActivate = false;
+        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        shield.RpcChangeStatus(false);
+    }*/
 
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
