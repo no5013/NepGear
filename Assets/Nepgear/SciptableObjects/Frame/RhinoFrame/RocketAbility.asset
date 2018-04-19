@@ -13,13 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Rocket
   aID: UW1
-  aGunSound: {fileID: 0}
-  aMagazine: 0
-  aFireDelay: 3
-  maxRecoil: 0
-  recoilRate: 0
-  gunPrefab: {fileID: 0}
-  muzzleFlash: {fileID: 0}
+  aSound: {fileID: 8300000, guid: aa4e916996a24a5448df09343af92270, type: 3}
+  triggerDelay: 3
   rocket: {fileID: 11400000, guid: e56a43e16689ce947a6ce792093baf41, type: 2}
   range: 200
   reloadDelay: 20

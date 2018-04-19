@@ -9,12 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd1a3db733a0ed249b78e56d3c536bd2, type: 3}
-  m_Name: EnergyPistolBullet
+  m_Name: EnergyMachineGunBullet
   m_EditorClassIdentifier: 
-  projectileId: P1
-  damage: 20
-  force: 1000
-  lifeTime: 5
+  projectileId: P4
+  damage: 3
+  force: 200
+  lifeTime: 2
   speed: 50
-  projectilePrefab: {fileID: 1658349165770792, guid: d71dca6d9cd8a494c9980017cfdf1755,
+  staggerDamage: 50
+  projectilePrefab: {fileID: 1074170991746498, guid: 3d9c177dc7701e74381888c331a6dac9,
     type: 2}

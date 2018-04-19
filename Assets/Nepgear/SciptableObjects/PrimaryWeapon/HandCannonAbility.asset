@@ -9,18 +9,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd3d290d53d5cc54e8facd8d47ee305f, type: 3}
-  m_Name: PistolAbility
+  m_Name: HandCannonAbility
   m_EditorClassIdentifier: 
-  aName: Pistol
+  aName: Hand Cannon
   aID: W1
   aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
   aMagazine: 12
   aFireDelay: 0.5
   maxRecoil: 1.5
   recoilRate: 0.2
-  gunPrefab: {fileID: 1234929971947354, guid: c4c80d668b6dbd441a2ebb3ce035cdc6, type: 2}
+  gunPrefab: {fileID: 1433530797723004, guid: eaf81ab4a9dd4a240abd8b9bebd720b5, type: 2}
   muzzleFlash: {fileID: 1148127744127816, guid: 49a0a0782e3a6204980eabae8db8b1eb,
     type: 2}
   projectileForce: 1000
   projectile: {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
   reloadTime: 2
+  isSpread: 0
+  palletCount: 0
+  spreadFactor: 0
+  isChargable: 0
+  chargeRate: 0
+  maxCharge: 0

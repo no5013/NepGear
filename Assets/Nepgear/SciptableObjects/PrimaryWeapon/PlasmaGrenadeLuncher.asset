@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3d290d53d5cc54e8facd8d47ee305f, type: 3}
+  m_Name: PlasmaGrenadeLuncher
+  m_EditorClassIdentifier: 
+  aName: PlasmaGrenadeLuncher
+  aID: W5
+  aGunSound: {fileID: 8300000, guid: 160ef49e55f03eb4bbea9848c26494bb, type: 3}
+  aMagazine: 6
+  aFireDelay: 0.8
+  maxRecoil: 0.5
+  recoilRate: 0.1
+  gunPrefab: {fileID: 1179863343121704, guid: f1e12ad3435fc95479fdc45cc5970391, type: 2}
+  muzzleFlash: {fileID: 1390237122513402, guid: 04ab4e5aa98b7a64f8bae8a1dae55302,
+    type: 2}
+  projectileForce: 800
+  projectile: {fileID: 11400000, guid: 42dbaaed5964ec343a47f5d3da725c26, type: 2}
+  reloadTime: 2
+  isSpread: 0
+  palletCount: 0
+  spreadFactor: 0

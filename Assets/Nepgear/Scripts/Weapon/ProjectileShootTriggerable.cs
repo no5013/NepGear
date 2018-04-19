@@ -7,7 +7,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     public static float autoReloadDelay = 2f;
 
     [HideInInspector] public Projectile projectile;
-    public Transform bulletSpawn;
+    public Transform[] bulletSpawns;
     [HideInInspector] public float projectileForce;
     [HideInInspector] public int magazine;
     [HideInInspector] public float reloadTime;
@@ -15,6 +15,13 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     [HideInInspector] public string gunId;
     [HideInInspector] public float maxRecoil;
     [HideInInspector] public float recoilRate;
+    [HideInInspector] public float chargeRate;
+    [HideInInspector] public float maxCharge;
+    public bool isChargable;
+
+    public ParticleSystem[] chargeParticleSystems;
+
+    public bool isFiring;
     private AudioSource soundSource;
 
     private int bulletLeft;
@@ -22,6 +29,10 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     private float recoil;
     private float recoilCooldown;
     private float reloadDelay;
+    private float charge;
+
+    private int lastParticleIndex;
+    private float perCharge;
 
     FrameWeaponController fwc;
 
@@ -34,6 +45,19 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         isReloading = false;
         recoil = 0f;
         recoilCooldown = 0f;
+        charge = 0f;
+        isFiring = false;
+        if (isChargable)
+        {
+            lastParticleIndex = -1;
+            FindPerCharge();
+        }
+        
+    }
+
+    private void FindPerCharge()
+    {
+        perCharge = 100f / chargeParticleSystems.Length;
     }
 
     private void Update()
@@ -43,6 +67,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             recoilCooldown -= Time.deltaTime;
             if (recoilCooldown < 0)
             {
+                isFiring = false;
                 recoilCooldown = 0f;
             }
         }
@@ -62,6 +87,54 @@ public class ProjectileShootTriggerable : MonoBehaviour {
                 Reload();
             }
         }
+        if (isChargable)
+        {
+            if (charge < maxCharge)
+            {
+                Charge();
+            }
+        }
+    }
+
+    private void Charge()
+    {
+        charge += Time.deltaTime * chargeRate;
+        if (charge > maxCharge)
+        {
+            charge = maxCharge;
+        }
+       
+      
+        int index = Mathf.FloorToInt((charge / maxCharge * 100) / perCharge) - 1;
+        if (index == lastParticleIndex)
+        {
+            return;
+        }
+        lastParticleIndex = index;
+        ChangeChargeState(index);
+    }
+
+    private void ChangeChargeState(int index)
+    {
+        for (int i = 0; i< chargeParticleSystems.Length; i++)
+        {
+            if (i == index)
+            {
+                //chargeParticleSystems[i].enableEmission = true;
+                if(!chargeParticleSystems[i].isPlaying)
+                {
+                    chargeParticleSystems[i].Play();
+                }
+            }
+            else
+            {
+                //chargeParticleSystems[i].enableEmission = false;
+                if (chargeParticleSystems[i].isPlaying)
+                {
+                    chargeParticleSystems[i].Stop();
+                }
+            }
+        }
     }
 
     public void Fire()
@@ -73,12 +146,26 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         reloadDelay = 0f;
         if (CanFire())
         {
-            bulletLeft--;
+            isFiring = true;
+            for (int i = 0; i< bulletSpawns.Length; i++)
+            {
+                bulletLeft--;
+                Transform bulletSpawn = bulletSpawns[i];
+                RandomBulletSpawnRotation(ref bulletSpawn);
+                if (isChargable)
+                {
+                    float chargePercent = charge / maxCharge;
+                    fwc.CmdFireProjectile(gunId, chargePercent, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+                    charge = 0f;
+                }
+                else
+                {
+                    fwc.CmdFireProjectile(gunId, 1f, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
+                }
+                Recoil();
+                recoilCooldown = 2.0f;
+            }
             soundSource.Play();
-            RandomBulletSpawnRotation();
-            fwc.CmdFireProjectile(gunId, bulletSpawn.forward, bulletSpawn.position, bulletSpawn.rotation);
-            Recoil();
-            recoilCooldown = 2.0f;
         }
         else
         {
@@ -103,7 +190,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     {
         return !(isReloading || bulletLeft <= 0);
     }
-    private void RandomBulletSpawnRotation()
+    private void RandomBulletSpawnRotation(ref Transform bulletSpawn)
     {
         if (recoil == 0)
         {

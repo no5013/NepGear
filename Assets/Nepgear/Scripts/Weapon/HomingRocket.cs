@@ -14,6 +14,7 @@ public class HomingRocket : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastDamage;
     [SyncVar] [HideInInspector] public float blastRadius;
     [SyncVar] [HideInInspector] public float blastForce;
+    [SyncVar] [HideInInspector] public float staggerDamage;
     public ParticleSystem explosion;
 
     
@@ -55,6 +56,7 @@ public class HomingRocket : NetworkBehaviour {
     void Start () {
         GetComponent<CapsuleCollider>().enabled = false;
         explosion.gameObject.GetComponent<destroyMe>().deathtimer = lifeTime + 2f;
+        explosion.gameObject.GetComponent<destroyMe>().enabled = true;
         //cc.enabled = false;
         isActivated = false;
         hitY = 0f;
@@ -229,24 +231,22 @@ public class HomingRocket : NetworkBehaviour {
     [ServerCallback]
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Rocket Hit " + other.gameObject.ToString());
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
         if(isPlayer != null)
         {
-            GameObject parent = isPlayer.gameObject;
-            if (parent.tag.Equals("Player"))
-            {
-                string dir = GetHitDir(other.transform);
-                //parent.SendMessage("TakeDamage", damage);
+         
+            string dir = GetHitDir(other.transform);
+            //parent.SendMessage("TakeDamage", damage);
 
-                isPlayer.TakeDamage(damage);
-                isPlayer.TickIndicator(dir);
-                if (isPlayer.isDead())
-                {
-                    //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
-                    //r.AddForce(transform.forward * 100);
-                }
+            isPlayer.TakeDamage(damage);
+            isPlayer.Staggering(staggerDamage);
+            isPlayer.TickIndicator(dir);
+            if (isPlayer.isDead())
+            {
+                //Rigidbody r = isPlayer.GetComponent<Rigidbody>();
+                //r.AddForce(transform.forward * 100);
             }
+            
         }
         else
         {
@@ -296,12 +296,19 @@ public class HomingRocket : NetworkBehaviour {
 
             // Calculate damage as this proportion of the maximum possible damage.
             float damage = relativeDistance * blastDamage;
+            float stagger = relativeDistance * staggerDamage;
 
             // Make sure that the minimum damage is always 0.
             damage = Mathf.Max(0f, damage);
+            stagger = Mathf.Max(0f, stagger);
 
             if (targetHealth)
+            {
                 targetHealth.TakeDamage(damage);
+                targetHealth.Staggering(stagger);
+            }
+          
+
             if (destructible)
                 destructible.TakeDamage(damage);
             // Deal this damage to the tank.
@@ -318,7 +325,6 @@ public class HomingRocket : NetworkBehaviour {
     
     public void Explosion()
     {
-        Debug.Log("Explosion");
         explosion.transform.parent = null;
         explosion.Play();
         explosion.gameObject.GetComponent<AudioSource>().Play();

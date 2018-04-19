@@ -18,7 +18,7 @@ public class FrameWeaponController : NetworkBehaviour {
     [SerializeField] private WeaponAbility rightHandAbility;
 
     [SerializeField] private GameObject uniqueWeapon;
-    [SerializeField] private WeaponAbility uniqueAbility;
+    [SerializeField] private UniqueAbility uniqueAbility;
 
     public Transform eye;
     //public GameObjec unique
@@ -103,7 +103,8 @@ public class FrameWeaponController : NetworkBehaviour {
 
         if(uniqueAbility != null)
         {
-            uniqueCooldown = uniqueAbility.aFireDelay;
+            Debug.Log("Initializing UniqueAbility");
+            uniqueCooldown = uniqueAbility.triggerDelay;
             uniqueAbility.Initialize(uniqueWeapon);
         }
     }
@@ -161,6 +162,10 @@ public class FrameWeaponController : NetworkBehaviour {
                 UniqueButtonTriggered();
             }
         }
+        else
+        {
+            UniqueButtonDeTriggered();    
+        }
 
     }
 
@@ -171,6 +176,13 @@ public class FrameWeaponController : NetworkBehaviour {
             uniqueNextReadyFire = uniqueCooldown + Time.time;
             uniqueCoolDownTimeLeft = uniqueCooldown;
             uniqueAbility.TriggerAbility();
+        }
+    }
+    private void UniqueButtonDeTriggered()
+    {
+        if (uniqueAbility != null)
+        {
+            uniqueAbility.DeTriggerAbility();
         }
     }
 
@@ -199,10 +211,15 @@ public class FrameWeaponController : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdFireProjectile(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
+    public void CmdFireProjectile(string gunId, float charge, Vector3 forward, Vector3 position, Quaternion rotation)
     {
         ProjectileAbility gun = (ProjectileAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
         Projectile projectile = gun.projectile;
+        float initialCharge = 0f;
+        if (charge <= 0f)
+        {
+            initialCharge = 1f;
+        }
         if (gun.isSpread)
         {
             GameObject pallet;
@@ -215,18 +232,17 @@ public class FrameWeaponController : NetworkBehaviour {
                 float x = UnityEngine.Random.Range(-gun.spreadFactor, gun.spreadFactor);
                 float y = UnityEngine.Random.Range(-gun.spreadFactor, gun.spreadFactor);
                 projectileRotation *= Quaternion.Euler(new Vector3(x, y, 0));
-                //projectileRotation.eulerAngles = new Vector3(x, y, 0);
-                //projectileRotation.y += y;
 
                 pallet = Instantiate(projectile.projectilePrefab, position, projectileRotation);
 
                 palletRigidBody = pallet.GetComponent<Rigidbody>();
-                palletRigidBody.velocity = pallet.transform.forward * projectile.speed;
+                palletRigidBody.velocity = pallet.transform.forward * (projectile.speed * charge + initialCharge);
 
                 b = pallet.GetComponent<Bullet>();
-                b.damage = projectile.damage;
+                b.damage = projectile.damage * charge + initialCharge;
                 b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force;
+                b.force = projectile.force * charge + initialCharge;
+                b.staggerDamage = projectile.staggerDamage * charge + initialCharge;
 
                 NetworkServer.Spawn(palletRigidBody.gameObject);
             }
@@ -236,24 +252,80 @@ public class FrameWeaponController : NetworkBehaviour {
             GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
 
             Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-            projectileRigidBody.velocity = (forward) * projectile.speed;
+            projectileRigidBody.velocity = (forward) * (projectile.speed * charge + initialCharge);
 
             Bullet b = projectileInstance.GetComponent<Bullet>();
-            b.damage = projectile.damage;
-            b.lifeTime = projectile.lifeTime;
-            b.force = projectile.force;
+            if(b != null)
+            {
+                b.damage = projectile.damage * charge + initialCharge;
+                b.lifeTime = projectile.lifeTime;
+                b.force = projectile.force * charge + initialCharge;
+                b.staggerDamage = projectile.staggerDamage * charge + initialCharge;
+            }
+            GrenadeBullet g = projectileInstance.GetComponent<GrenadeBullet>();
+            if(g != null)
+            {
+                BlastRound blastRound = (BlastRound) projectile;
+                g.damage = blastRound.damage * charge + initialCharge;
+                g.lifeTime = blastRound.lifeTime;
+                g.impactForce = blastRound.force * charge + initialCharge;
+                g.blastDamage = blastRound.blastDamage * charge + initialCharge;
+                g.blastForce = blastRound.blastForce * charge + initialCharge;
+                g.blastRadius = blastRound.blastRadius * charge + initialCharge;
+                g.travelSpeed = blastRound.speed * charge + initialCharge;
+                g.staggerDamage = blastRound.staggerDamage * charge + initialCharge;
+            }
+         
 
             NetworkServer.Spawn(projectileRigidBody.gameObject);
         }
         RpcMuzzleFlash(gunId, position, rotation);
-
-        // ถ้า โปรเจ็คไตล์กัน.spread
-        //วน จำนวนกระสุน 
-        // เอา Random factor มา Instantiate
-
-
-
     }
+
+    [Command]
+    public void CmdActivateShield()
+    {
+        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        //shield.isActivate = true;
+        //shield.RpcChangeStatus(true);
+        RpcChangeShieldStatus(true);
+    }
+
+    [ClientRpc]
+    public void RpcChangeShieldStatus(bool status)
+    {
+        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        shield.isActivate = status;
+    }
+
+
+    [Command]
+    public void CmdDeactivateShield()
+    {
+        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        //shield.isActivate = true;
+        //shield.RpcChangeStatus(true);
+        RpcChangeShieldStatus(false);
+    }
+
+    /*[ClientRpc]
+    public void RpcChangeShieldStatus(bool status)
+    {
+        // Disable or Enable Exactly shield for every client.
+        
+        //uniqueWeapon.id
+    }
+
+    [Command]
+    public void CmdDeactivateShield()
+    {
+
+        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        //shield.isActivate = false;
+        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        shield.RpcChangeStatus(false);
+    }*/
+
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
     {
@@ -274,6 +346,7 @@ public class FrameWeaponController : NetworkBehaviour {
             r.blastForce = rocket.blastForce;
             r.blastRadius = rocket.blastRadius;
             r.blastDamage = rocket.blastDamage;
+            r.staggerDamage = rocket.staggerDamage;
             r.hitX = hit.point.x;
             r.hitZ = hit.point.z;
             r.lifeTime = rocket.lifeTime;

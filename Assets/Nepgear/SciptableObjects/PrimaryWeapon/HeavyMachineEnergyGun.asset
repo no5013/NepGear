@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3d290d53d5cc54e8facd8d47ee305f, type: 3}
+  m_Name: HeavyMachineEnergyGun
+  m_EditorClassIdentifier: 
+  aName: HeavyMachineEnergyGun
+  aID: W4
+  aGunSound: {fileID: 8300000, guid: f59164772db507d44b2e5027faaed519, type: 3}
+  aMagazine: 100
+  aFireDelay: 0.25
+  maxRecoil: 3
+  recoilRate: 0.5
+  gunPrefab: {fileID: 1240602844059310, guid: aa4d8588ec5efcb4bb1c2317682b6d30, type: 2}
+  muzzleFlash: {fileID: 1118711543012910, guid: df2844dffeec85b4abd41a56c1dd42f5,
+    type: 2}
+  projectileForce: 800
+  projectile: {fileID: 11400000, guid: 91bcb27dae1cd4b4fb899e9c582c0e11, type: 2}
+  reloadTime: 5
+  isSpread: 0
+  palletCount: 0
+  spreadFactor: 0

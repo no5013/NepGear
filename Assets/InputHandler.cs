@@ -14,6 +14,7 @@ public class InputHandler : NetworkBehaviour {
 
     public float fire1;
     public float fire2;
+    public float fire3;
 
     public bool jumping;
     public bool dashing;
@@ -57,6 +58,11 @@ public class InputHandler : NetworkBehaviour {
         {
             //fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
             fire2 = CrossPlatformInputManager.GetAxis("VRFire2");
+        }
+        fire3 = CrossPlatformInputManager.GetAxis("Fire3");
+        if (fire3 <= 0)
+        {
+            //fire3 = CrossPlatformInputManager.GetAxis("VRFire3");
         }
 
         jumping = CrossPlatformInputManager.GetButton("Ascending");

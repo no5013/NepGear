@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour {
     public Image staminaImage;
     public Text staminaText;
 
+    public Image staggerImage;
+    public Text staggerText;
+
     public DamageIndicatorBehavior frontIndicator;
     public DamageIndicatorBehavior backIndicator;
     public DamageIndicatorBehavior leftIndicator;
@@ -64,6 +67,12 @@ public class UIManager : MonoBehaviour {
     {
         staminaText.text = (percent*100) + "%";
         staminaImage.fillAmount = percent;
+    }
+
+    public void SetStagger(float percent)
+    {
+        staggerText.text = (percent * 100) + "%";
+        staggerImage.fillAmount = percent;
     }
 
 }
