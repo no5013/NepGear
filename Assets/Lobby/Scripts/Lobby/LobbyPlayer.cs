@@ -81,7 +81,6 @@ namespace Prototype.NetworkLobby
             OnFrame(frameId);
             OnLeftWeapon(leftWeaponId);
             OnRightWeapon(rightWeaponId);
-
         }
 
         public override void OnStartAuthority()
@@ -113,6 +112,8 @@ namespace Prototype.NetworkLobby
 
             readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
             readyButton.interactable = false;
+
+            StartCoroutine(FetchAvatar(new CSteamID(steamID)));
 
             OnClientReady(false);
         }
