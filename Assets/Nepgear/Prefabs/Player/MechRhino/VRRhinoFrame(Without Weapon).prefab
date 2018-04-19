@@ -209,6 +209,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4192248240456334}
+  - component: {fileID: 95259569085150980}
   m_Layer: 0
   m_Name: Cockpit_Base
   m_TagString: Untagged
@@ -985,7 +986,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4173681836293074}
-  - component: {fileID: 95281848761690322}
+  - component: {fileID: 95871875217676292}
   m_Layer: 0
   m_Name: Cockpit_Rhino
   m_TagString: Untagged
@@ -5829,16 +5830,33 @@ Animator:
     clip 'Mech_Dash_Right'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95281848761690322
+--- !u!95 &95259569085150980
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1076141660470902}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b9c38f7aa2c0c944e9c3b6751e8ab699, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95871875217676292
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1349624942127170}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b9c38f7aa2c0c944e9c3b6751e8ab699, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5ecd009623918a5489b5123a75e853db, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5920,6 +5938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545bca7b6ecfbee4aa67237a4a7df13e, type: 3}
   m_Name:
   m_EditorClassIdentifier:
+  stareAt: {fileID: 0}
 --- !u!114 &114052390855751634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6074,7 +6093,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   m_Animator: {fileID: 95013111665373362}
-  m_ParameterSendBits: 127
+  m_ParameterSendBits: 511
   param0:
   param1:
   param2:

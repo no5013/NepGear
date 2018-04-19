@@ -38,8 +38,8 @@ public class FrameWeaponController : NetworkBehaviour {
     [SyncVar]
     public string rightWeaponID;
     
-
     private ResourcesManager wrm;
+    private Animator animator;
 
     private float leftCooldown = 0;
     private float leftNextReadyFire = 0;
@@ -64,6 +64,7 @@ public class FrameWeaponController : NetworkBehaviour {
         //Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
 
         ih = GetComponent<InputHandler>();
+        animator = GetComponent<Animator>();
         uiManager = GetComponent<PlayerBehaviorScript>().uiManager;
 
         Initialize(Instantiate(wrm.GetWeapon(leftWeaponID)), Instantiate(wrm.GetWeapon(rightWeaponID)));
@@ -153,6 +154,7 @@ public class FrameWeaponController : NetworkBehaviour {
                 /*CmdLeftHandShoot(muzzle.transform.position, muzzle.transform.rotation);
                 nextFire = Time.time + 1f / 3;*/
                 LeftButtonTriggered();
+                
                 //GameObject testBullet;
                 //leftHand.Shoot(out testBullet);
            
@@ -213,6 +215,7 @@ public class FrameWeaponController : NetworkBehaviour {
         //abilitySource.clip = ability.aSound;
         //abilitySource.Play();
         leftHandAbility.TriggerAbility();
+        animator.SetTrigger("RecoilLeft");
 
         uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
     }
@@ -227,6 +230,7 @@ public class FrameWeaponController : NetworkBehaviour {
         //abilitySource.clip = ability.aSound;
         //abilitySource.Play();
         rightHandAbility.TriggerAbility();
+        animator.SetTrigger("RecoilRight");
 
         uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
     }
