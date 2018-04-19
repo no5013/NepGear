@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ShieldTriggerable : NetworkBehaviour {
+public class ShieldTriggerable : MonoBehaviour {
 
     [HideInInspector] public float maxShieldHealth;
     [HideInInspector] public float shieldDecayRate;
