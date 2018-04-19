@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Steamworks;
 
 namespace Prototype.NetworkLobby
 {
@@ -15,6 +16,7 @@ namespace Prototype.NetworkLobby
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
+        public Image avatarImage;
         public Button colorButton;
         public InputField nameInput;
         public Button readyButton;
@@ -29,6 +31,8 @@ namespace Prototype.NetworkLobby
         public string playerName = "";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
+        [SyncVar(hook = "OnSteamID")]
+        public ulong steamID;
 
         [SyncVar]
         public string frameId = "F1";
@@ -73,6 +77,7 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
+            OnSteamID(steamID);
             OnFrame(frameId);
             OnLeftWeapon(leftWeaponId);
             OnRightWeapon(rightWeaponId);
@@ -130,7 +135,11 @@ namespace Prototype.NetworkLobby
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
             if (playerName == "")
-                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount-1));
+            {
+                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
+                Debug.Log(SteamUser.GetSteamID().m_SteamID);
+                CmdSteamIDChanged(SteamUser.GetSteamID().m_SteamID);
+            }
 
             //we switch from simple name display to name input
             colorButton.interactable = true;
@@ -206,6 +215,15 @@ namespace Prototype.NetworkLobby
         {
             playerColor = newColor;
             colorButton.GetComponent<Image>().color = newColor;
+        }
+
+        public void OnSteamID(ulong newSteamID)
+        {
+            steamID = newSteamID;
+            playerName = SteamFriends.GetFriendPersonaName(new CSteamID(steamID));
+            OnMyName(playerName);
+            StartCoroutine(FetchAvatar(new CSteamID(steamID)));
+            //colorButton.GetComponent<Image>().color = newColor;
         }
 
         public void OnFrame(string newFrameId)
@@ -330,6 +348,12 @@ namespace Prototype.NetworkLobby
         }
 
         [Command]
+        public void CmdSteamIDChanged(ulong newSteamID)
+        {
+            steamID = newSteamID;
+        }
+
+        [Command]
         public void CmdNextMapClicked()
         {
             int currentMapIndex = GetComponentInParent<MapSelector>().NextMap();
@@ -397,6 +421,37 @@ namespace Prototype.NetworkLobby
                 return false;
             else return true;
             //return base.Equals(other);
+        }
+
+        private int avatarInt;
+        private uint width, height;
+        private Texture2D downloadedAvatar;
+        private Rect rect = new Rect(0, 0, 184, 184);
+        private Vector2 pivot = new Vector2(0.5f, 0.5f);
+        private IEnumerator FetchAvatar(CSteamID steamID)
+        {
+            avatarInt = SteamFriends.GetLargeFriendAvatar(steamID);
+            while (avatarInt == -1)
+            {
+                yield return null;
+            }
+
+            if (avatarInt > 0)
+            {
+                SteamUtils.GetImageSize(avatarInt, out width, out height);
+                if (width > 0 && height > 0)
+                {
+                    byte[] avatarStream = new byte[4 * (int)width * (int)height];
+
+                    SteamUtils.GetImageRGBA(avatarInt, avatarStream, 4 * (int)width * (int)height);
+
+                    downloadedAvatar = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false);
+                    downloadedAvatar.LoadRawTextureData(avatarStream);
+                    downloadedAvatar.Apply();
+
+                    avatarImage.sprite = Sprite.Create(downloadedAvatar, rect, pivot);
+                }
+            }
         }
     }
 }
