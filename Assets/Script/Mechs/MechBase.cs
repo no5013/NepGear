@@ -16,13 +16,9 @@ public class MechBase : MonoBehaviour {
 
     public ResourcesManager resourcesManager;
 
-    private void Awake()
-    {
-        resourcesManager.Init();
-    }
-
     // Use this for initialization
     void Start () {
+        resourcesManager.Init();
         Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID); 
     }
 

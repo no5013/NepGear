@@ -7,18 +7,23 @@ using System;
 
 public class FrameWeaponController : NetworkBehaviour {
 
+    private UIManager uiManager;
     private InputHandler ih;
 
     //Gun component
     //[SerializeField] private FrameWeapon leftHand;
     [SerializeField] private GameObject leftHand;
     [SerializeField] private WeaponAbility leftHandAbility;
+    private ProjectileShootTriggerable leftHandTrigger;
+
     //[SerializeField] private FrameWeapon rightHand;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private WeaponAbility rightHandAbility;
+    private ProjectileShootTriggerable rightHandTrigger;
 
     [SerializeField] private GameObject uniqueWeapon;
     [SerializeField] private UniqueAbility uniqueAbility;
+
 
     public Transform eye;
     //public GameObjec unique
@@ -33,8 +38,8 @@ public class FrameWeaponController : NetworkBehaviour {
     [SyncVar]
     public string rightWeaponID;
     
-
     private ResourcesManager wrm;
+    private Animator animator;
 
     private float leftCooldown = 0;
     private float leftNextReadyFire = 0;
@@ -59,6 +64,9 @@ public class FrameWeaponController : NetworkBehaviour {
         //Initialize(Instantiate(leftHandAbility), leftHand, Instantiate(rightHandAbility), rightHand);
 
         ih = GetComponent<InputHandler>();
+        animator = GetComponent<Animator>();
+        uiManager = GetComponent<PlayerBehaviorScript>().uiManager;
+
         Initialize(Instantiate(wrm.GetWeapon(leftWeaponID)), Instantiate(wrm.GetWeapon(rightWeaponID)));
     }
 
@@ -95,8 +103,12 @@ public class FrameWeaponController : NetworkBehaviour {
         leftHandAbility = selectedLeftHandAbility;
         rightHandAbility = selectedRightHandAbility;
 
+        leftHandTrigger = leftWeapon.GetComponent<ProjectileShootTriggerable>();
+        rightHandTrigger = rightWeapon.GetComponent<ProjectileShootTriggerable>();
+
         leftCooldown = leftHandAbility.aFireDelay;
         rightCooldown = rightHandAbility.aFireDelay;
+
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
@@ -106,6 +118,12 @@ public class FrameWeaponController : NetworkBehaviour {
             Debug.Log("Initializing UniqueAbility");
             uniqueCooldown = uniqueAbility.triggerDelay;
             uniqueAbility.Initialize(uniqueWeapon);
+        }
+
+        if(uiManager != null)
+        {
+            uiManager.SetLeftWeaponText(leftHandAbility.aMagazine + "/" + leftHandAbility.aMagazine);
+            uiManager.SetRightWeaponText(rightHandAbility.aMagazine + "/" + rightHandAbility.aMagazine);
         }
     }
 
@@ -136,6 +154,7 @@ public class FrameWeaponController : NetworkBehaviour {
                 /*CmdLeftHandShoot(muzzle.transform.position, muzzle.transform.rotation);
                 nextFire = Time.time + 1f / 3;*/
                 LeftButtonTriggered();
+                
                 //GameObject testBullet;
                 //leftHand.Shoot(out testBullet);
            
@@ -196,6 +215,9 @@ public class FrameWeaponController : NetworkBehaviour {
         //abilitySource.clip = ability.aSound;
         //abilitySource.Play();
         leftHandAbility.TriggerAbility();
+        animator.SetTrigger("RecoilLeft");
+
+        uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
     }
 
     private void RightButtonTriggered()
@@ -208,6 +230,9 @@ public class FrameWeaponController : NetworkBehaviour {
         //abilitySource.clip = ability.aSound;
         //abilitySource.Play();
         rightHandAbility.TriggerAbility();
+        animator.SetTrigger("RecoilRight");
+
+        uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
     }
 
     [Command]

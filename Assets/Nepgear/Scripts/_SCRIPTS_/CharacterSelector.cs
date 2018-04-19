@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 namespace Prototype.NetworkLobby
 {
-    public class CharacterSelector : NetworkBehaviour
+    public class CharacterSelector : MonoBehaviour
     {
 
         //public LobbyManager lobbyManager;
@@ -33,6 +33,9 @@ namespace Prototype.NetworkLobby
         private Dropdown[] dropdowns;
 
         public MechBase mechBase;
+
+        [SerializeField]
+        private ResourcesManager resourcesManager;
 
         void Start()
         {
@@ -131,8 +134,10 @@ namespace Prototype.NetworkLobby
 
         public void OnConfirmCharacter()
         {
+            lobbyPlayer = LobbyPlayerList._instance.FindLocalPlayer();
+
             OnChangeSetting();
-            if(isServer)
+            if(lobbyPlayer.isServer)
             {
                 lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
             }
@@ -176,8 +181,10 @@ namespace Prototype.NetworkLobby
 
         private void Initialize()
         {
-            characters = LobbyManager.s_Singleton.resourcesManager.frames;
-            weapons = LobbyManager.s_Singleton.resourcesManager.weaponAbilities;
+            resourcesManager.Init();
+
+            characters = resourcesManager.frames;
+            weapons = resourcesManager.weaponAbilities;
 
             dropdowns = GetComponentsInChildren<Dropdown>();
             for (int i = 0; i < dropdowns.Length; i++)

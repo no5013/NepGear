@@ -24,8 +24,8 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     public bool isFiring;
     private AudioSource soundSource;
 
-    private int bulletLeft;
-    private bool isReloading;
+    [HideInInspector] public int bulletLeft;
+    [HideInInspector] public bool isReloading;
     private float recoil;
     private float recoilCooldown;
     private float reloadDelay;

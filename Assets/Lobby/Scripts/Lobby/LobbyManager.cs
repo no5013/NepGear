@@ -145,6 +145,7 @@ namespace Prototype.NetworkLobby
                 LobbyPlayer localPlayer = LobbyPlayerList._instance.FindLocalPlayer();
                 characterPanel.gameObject.GetComponent<CharacterSelector>().lobbyPlayer = LobbyPlayerList._instance.FindLocalPlayer();
             }
+
             if (currentPanel != mainMenuPanel)
             {
                 backButton.gameObject.SetActive(true);

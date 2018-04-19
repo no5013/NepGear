@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     //public GameObject healthConsoleUI;
     //public GameObject staminaConsoleUI;
     //public GameObject damageIndicatorUI;
- 
+
     public Image healthImage;
     public Text healthText;
 
@@ -23,7 +23,13 @@ public class UIManager : MonoBehaviour {
     public DamageIndicatorBehavior leftIndicator;
     public DamageIndicatorBehavior rightIndicator;
 
-    public 
+    public Text gameStateText;
+
+    public Text leftWeaponText;
+    public Text rightWeaponText;
+
+    private float fadeDelay = 3f;
+
     // Use this for initialization
     void Start () {
         //healthText = healthConsoleUI.GetComponentInChildren<Text>();
@@ -59,14 +65,62 @@ public class UIManager : MonoBehaviour {
 
     public void SetHealth(float percent)
     {
-        healthText.text = (percent*100) + "%";
+        healthText.text = Mathf.Floor(percent*100) + "%";
         healthImage.fillAmount = percent;
     }
 
     public void SetStamina(float percent)
     {
-        staminaText.text = (percent*100) + "%";
+        staminaText.text = Mathf.Floor(percent*100) + "%";
         staminaImage.fillAmount = percent;
+    }
+
+    public void SetStateText(string text)
+    {
+        if(gameStateText != null)
+        {
+            gameStateText.text = text;
+        }
+    }
+
+    public void SetLeftWeaponText(string text)
+    {
+        if(leftWeaponText != null)
+        {
+            leftWeaponText.text = text;
+        }
+    }
+
+    public void SetRightWeaponText(string text)
+    {
+        if (rightWeaponText != null)
+        {
+            rightWeaponText.text = text;
+        }
+    }
+
+    public void FadeStateText()
+    {
+        StartCoroutine(EFadeStateText());
+    }
+
+    private IEnumerator EFadeStateText()
+    {
+        float elapsedTime = 0.0f;
+        float wait = fadeDelay - 0.5f;
+
+        yield return null;
+
+        while (elapsedTime < wait)
+        {
+            Color stateTextColor = gameStateText.color;
+            stateTextColor.a = 1.0f - (elapsedTime / wait);
+            elapsedTime += Time.deltaTime;
+
+            gameStateText.color = stateTextColor;
+
+            yield return null;
+        }
     }
 
     public void SetStagger(float percent)
