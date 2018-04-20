@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7408cbbd6a623164fad4146743d7b21a, type: 3}
   m_Name: OverclockAbility
   m_EditorClassIdentifier: 
-  uName: New Ultimate
-  duration: 0
-  maxCharge: 0
+  uName: Overclock
+  uID: U1
+  duration: 10
+  maxCharge: 100
+  multiplier: 2

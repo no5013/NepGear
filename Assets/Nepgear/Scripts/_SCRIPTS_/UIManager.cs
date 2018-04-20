@@ -125,8 +125,8 @@ public class UIManager : MonoBehaviour {
 
     public void SetStagger(float percent)
     {
-        staggerText.text = (percent * 100) + "%";
-        staggerImage.fillAmount = percent;
+        //staggerText.text = (percent * 100) + "%";
+        //staggerImage.fillAmount = percent;
     }
 
 }

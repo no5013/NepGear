@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7bc583f18c838e46a113fa124d5cbe9, type: 3}
+  m_Name: SatelliteCannonAbility
+  m_EditorClassIdentifier: 
+  uName: SatelliteCannon
+  uID: U2
+  duration: 10
+  maxCharge: 150
+  projectile: {fileID: 11400000, guid: 0adee95fbf902bf4fa44b75f774d1531, type: 2}
+  fireDelay: 1.5
+  startHeight: 1000
