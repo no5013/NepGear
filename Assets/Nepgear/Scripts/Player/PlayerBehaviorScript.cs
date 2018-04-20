@@ -251,6 +251,27 @@ public class PlayerBehaviorScript : NetworkBehaviour
     }
     private void FixedUpdate()
     {
+        if (isServer)
+        {
+            if (stagger > 0f)
+            {
+                stagger -= staggerRecovery * Time.fixedDeltaTime;
+                if (isStaggering)
+                {
+                    stagger -= staggerRecovery * Time.fixedDeltaTime;
+                }
+                if (stagger < 0f)
+                {
+                    stagger = 0f;
+                    if (isStaggering)
+                    {
+                        EnableControl();
+                        isStaggering = false;
+                    }
+                }
+            }
+        }
+
         if (!isLocalPlayer)
         {
             return;
@@ -278,26 +299,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
                 ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
             }
         }
-
-        Debug.Log("STAGGER" + stagger);
-        if (stagger > 0f)
-        {
-            stagger -= staggerRecovery*Time.fixedDeltaTime;
-            if (isStaggering)
-            {
-                stagger -= staggerRecovery * Time.fixedDeltaTime;
-            }
-            if (stagger < 0f)
-            {
-                stagger = 0f;
-                if(isStaggering)
-                {
-                    EnableControl();
-                    isStaggering = false;
-                }
-            }
-        }
-
     }
     private void GetInput()
     {
@@ -466,7 +467,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         isStaggering = true;
         DisableControl();
-        Debug.Log("Staggering");
     }
 
     [Server]
@@ -542,6 +542,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         hitPoint = maxHitPoint;
         stamina = maxStamina;
+        stagger = 0f;
+        isStaggering = false;
     }
 
     void OnChangeHealth (float currentHealth)

@@ -158,8 +158,10 @@ public class GameManager : NetworkBehaviour {
         foreach (PlayerBehaviorScript player in players)
         {
             UIManager playerUI = player.uiManager;
-            if (playerUI!= null)
+            if (playerUI != null)
                 playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)));
+            else
+                Debug.Log(player.lifeStock + " " + GetTeamStock(GetEnemyTeam(player.team)));
         }
     }
 

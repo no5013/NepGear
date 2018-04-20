@@ -44,8 +44,6 @@ public class InputHandler : NetworkBehaviour {
         yRot = CrossPlatformInputManager.GetAxis("Mouse X");
         xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
 
-        Debug.Log(yRot);
-
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
         {
