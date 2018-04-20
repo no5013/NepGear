@@ -125,8 +125,16 @@ public class UIManager : MonoBehaviour {
 
     public void SetStagger(float percent)
     {
+        if(staggerText == null)
+        {
+            return;
+        }
         staggerText.text = (percent * 100) + "%";
         staggerImage.fillAmount = percent;
     }
 
+    public void SetStocks(float myStock, float enemyStock)
+    {
+        Debug.Log(myStock + " " + enemyStock);
+    }
 }

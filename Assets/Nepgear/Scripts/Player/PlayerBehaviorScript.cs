@@ -278,6 +278,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
                 ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
             }
         }
+
+        Debug.Log("STAGGER" + stagger);
         if (stagger > 0f)
         {
             stagger -= staggerRecovery*Time.fixedDeltaTime;
@@ -440,6 +442,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             Die();
         }
     }
+
     [Server]
     public void Staggering(float staggerDamage)
     {
@@ -471,7 +474,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         dead = true;
         lifeStock--;
+        GameManager.instance.OnPlayerDie();
+
         RpcDie();
+
         if (!isOutOfStock())
         {
             Invoke("Respawn", respawnTime);

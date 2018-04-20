@@ -217,7 +217,10 @@ public class FrameWeaponController : NetworkBehaviour {
         leftHandAbility.TriggerAbility();
         animator.SetTrigger("RecoilLeft");
 
-        uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+        if (uiManager)
+        {
+            uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+        }
     }
 
     private void RightButtonTriggered()
@@ -232,7 +235,10 @@ public class FrameWeaponController : NetworkBehaviour {
         rightHandAbility.TriggerAbility();
         animator.SetTrigger("RecoilRight");
 
-        uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
+        if (uiManager)
+        {
+            uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
+        }
     }
 
     [Command]

@@ -103,6 +103,20 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
+    public static float GetTeamStock(string team)
+    {
+        float lifeStock = 0;
+        if (team.Equals("A") && players_A.Count > 0)
+        {
+            lifeStock = players_A[0].lifeStock;
+        }
+        else if(team.Equals("B") && players_B.Count > 0)
+        {
+            lifeStock = players_B[0].lifeStock;
+        }
+        return lifeStock;
+    }
+
     public void RemovePlayer(GameObject player)
     {
         PlayerBehaviorScript toRemove = null;
@@ -119,6 +133,45 @@ public class GameManager : NetworkBehaviour {
             players.Remove(toRemove);
     }
 
+    /*public void TeamDie(PlayerBehaviorScript player)
+    {
+        string team = player.team;
+        if (team.Equals("A") && players_A.Count > 0)
+        {
+            stock_A--;
+        }
+        else if (team.Equals("B") && players_B.Count > 0)
+        {
+            stock_B--;
+        }
+    }*/
+
+    [Server]
+    public void OnPlayerDie()
+    {
+        RpcUpdateTeamScore();
+    }
+
+    [ClientRpc]
+    private void RpcUpdateTeamScore()
+    {
+        foreach (PlayerBehaviorScript player in players)
+        {
+            UIManager playerUI = player.uiManager;
+            if (playerUI!= null)
+                playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)));
+        }
+    }
+
+    private string GetEnemyTeam(string currentTeam)
+    {
+        if (currentTeam.Equals("A"))
+        {
+            return "B";
+        }
+        return "A";
+    }
+
     /*public void PreparePlayers()
     {
         foreach (PlayerBehaviorScript player in players)
@@ -126,6 +179,16 @@ public class GameManager : NetworkBehaviour {
             player.DisablePlayer();
         }
     }*/
+
+    public void OnStockAChange()
+    {
+
+    }
+
+    public void OnStockBChange()
+    {
+
+    }
 
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()
