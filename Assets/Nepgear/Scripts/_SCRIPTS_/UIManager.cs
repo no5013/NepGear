@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour {
     public Text leftWeaponText;
     public Text rightWeaponText;
 
+    //Stock and time ui
+    public Text teamStockText;
+    public Text enemyStockText;
+    public Text remainingTimeText;
+
     private float fadeDelay = 3f;
 
     // Use this for initialization
@@ -133,8 +138,14 @@ public class UIManager : MonoBehaviour {
         staggerImage.fillAmount = percent;
     }
 
-    public void SetStocks(float myStock, float enemyStock)
+    public void SetStocks(float teamStock, float enemyStock)
     {
-        Debug.Log(myStock + " " + enemyStock);
+        teamStockText.text = teamStock.ToString();
+        enemyStockText.text = enemyStock.ToString();
+    }
+
+    public void SetTime(float time)
+    {
+        remainingTimeText.text = time.ToString();
     }
 }
