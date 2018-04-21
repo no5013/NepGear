@@ -29,22 +29,26 @@ public class UltimateControllerScript : MonoBehaviour {
         pbs.CmdStopOverClock(multiplier);
     }
 
-    public void SatelliteCannon(float duration, float startHeight, float fireDelay)
+    public void SatelliteCannon(float startHeight, float fireDelay)
     {
         canSatelliteFire = true;
-        Debug.Log("Firing Satellite");
         StartCoroutine(FiringSatellite(startHeight, fireDelay));
-        StartCoroutine(CountDownSatellite(duration));
+        //StartCoroutine(CountDownSatellite(duration));
         //FiringSatellite(startHeight, fireDelay);
         //CountDownSatellite(duration);    
 
     }
 
-    IEnumerator CountDownSatellite(float duration)
+    public void StopSatelliteCannon()
     {
-        yield return new WaitForSeconds(duration);
         canSatelliteFire = false;
     }
+
+    //IEnumerator CountDownSatellite(float duration)
+    //{
+    //    yield return new WaitForSeconds(duration);
+    //    canSatelliteFire = false;
+    //}
 
     IEnumerator FiringSatellite(float startHeight, float fireDelay)
     {
@@ -57,6 +61,8 @@ public class UltimateControllerScript : MonoBehaviour {
             {
                 if (otherPlayer != myself && !otherPlayer.team.Equals(myself.team))
                 {
+                    if (otherPlayer.isDead())
+                        continue;
                     //position = new Vector3(otherPlayer.transform.position.x, startHeight, otherPlayer.transform.position.z);
                     rotation.SetLookRotation(Vector3.down);
                     fwc.CmdFireSatelliteCannon(Vector3.down, new Vector3(otherPlayer.transform.position.x, startHeight, otherPlayer.transform.position.z), rotation);
