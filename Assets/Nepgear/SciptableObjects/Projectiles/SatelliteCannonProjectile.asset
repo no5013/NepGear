@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fa5d94f72cd3d40b8e689bfa1e2c6f, type: 3}
+  m_Name: SatelliteCannonProjectile
+  m_EditorClassIdentifier: 
+  projectileId: P7
+  damage: 150
+  force: 200
+  lifeTime: 5
+  speed: 600
+  staggerDamage: 10
+  projectilePrefab: {fileID: 1853589197864470, guid: 08429843fc3624042880c2951276361d,
+    type: 2}
+  blastForce: 100
+  blastRadius: 500
+  blastDamage: 50
+  timeBeforeDestroy: 2
+  risingSpeed: 0
