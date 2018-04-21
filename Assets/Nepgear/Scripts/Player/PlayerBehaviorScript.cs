@@ -68,6 +68,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public UIManager uiManager;
     private InputHandler ih;
     private RagdollManager ragdollManager;
+    private Animator animator;
 
     [SyncVar]
     public string characterID;
@@ -83,6 +84,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [SerializeField]
     private ParticleSystem explosionParticle;
+    [SerializeField]
+    private ParticleSystem shockParticle;
     [SerializeField]
     private AudioClip explosionSound;
     [SerializeField]
@@ -117,6 +120,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         firstPersonController = GetComponent<FirstPersonController>();
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
+        animator = GetComponent<Animator>();
 
         //Debug.Log("Can find ui?? " + GetComponentInChildren<UIManager>().ToString());
         //uiManager = GetComponentInChildren<UIManager>();
@@ -266,7 +270,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
                     stagger = 0f;
                     if (isStaggering)
                     {
-                        EnableControl();
+                        RpcOnStaggerFinish();
                         isStaggering = false;
                     }
                 }
@@ -506,8 +510,23 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [Server]
     public void Stagger()
     {
+        RpcOnStagger();
         isStaggering = true;
+    }
+
+    [ClientRpc]
+    private void RpcOnStagger()
+    {
         DisableControl();
+        animator.SetTrigger("Stun");
+        if(shockParticle != null)
+            shockParticle.Play();
+    }
+
+    [ClientRpc]
+    private void RpcOnStaggerFinish()
+    {
+        EnableControl();
     }
 
     [Server]
@@ -575,8 +594,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void FrameExplode()
     {
         Explode();
-        SetFrameActive(false);
-        DisablePlayer();
+        if(!isLocalPlayer)
+            SetFrameActive(false);
+        //DisablePlayer();
     }
 
     void ResetPlayerStatus()
