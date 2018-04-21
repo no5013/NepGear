@@ -33,7 +33,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public bool enabledControl = false;
 
-    private float respawnTime = 5f;
+    private float respawnTime = 8f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -540,7 +540,45 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
         if (!isOutOfStock())
         {
-            Invoke("Respawn", respawnTime);
+            StartCoroutine(Respawning());
+        }
+    }
+
+    private IEnumerator Respawning()
+    {
+        float remainingTime = respawnTime;
+        int floorTime = Mathf.FloorToInt(remainingTime);
+
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {
+                floorTime = newFloorTime;
+
+                if (floorTime > 0)
+                {
+                    RpcSetRespawningTime(floorTime);
+                }
+            }
+        }
+        Respawn();
+    }
+
+    [ClientRpc]
+    public void RpcSetRespawningTime(float respawnTime)
+    {
+        if(uiManager != null)
+        {
+
+        }
+        else
+        {
+            Debug.Log(respawnTime);
         }
     }
 
