@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4881855061815962}
   - component: {fileID: 198889673361869488}
   - component: {fileID: 199454927226928130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4912821610482664}
   - component: {fileID: 198028780223729586}
   - component: {fileID: 199480453615470390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4287908515136236}
   - component: {fileID: 198855651860335456}
   - component: {fileID: 199183243188873570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: laserOuter
   m_TagString: FX
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4039578612025840}
   - component: {fileID: 33208983887215814}
   - component: {fileID: 23421374275014136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: laserInner
   m_TagString: FX
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4907500648743316}
   - component: {fileID: 198488130893750844}
   - component: {fileID: 199170876320415680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: glow
   m_TagString: FX
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 114687633018568948}
   - component: {fileID: 114504905835308022}
   - component: {fileID: 136862498542859116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SatelliteCannonProjectile
   m_TagString: FX
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 199281824627231694}
   - component: {fileID: 114854052144303308}
   - component: {fileID: 82595291991837310}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ImpactPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 96315853
+  randomSeed: -1511101345
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3958,7 +3958,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1641564803
+  randomSeed: 1673612828
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7316,7 +7316,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -637187850
+  randomSeed: 428708996
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10722,7 +10722,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1933070260
+  randomSeed: -852041728
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14083,7 +14083,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -738842726
+  randomSeed: 1987663054
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -17489,7 +17489,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 482728725
+  randomSeed: -307177940
   InitialModule:
     serializedVersion: 3
     enabled: 1

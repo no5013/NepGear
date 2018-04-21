@@ -17,12 +17,15 @@ public class GrenadeBullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float timeBeforeDestroy;
     public ParticleSystem explosion;
 
+    private bool isCollideAlready;
+
     // Use this for initialization
     void Start () {
-        GetComponent<Collider>().enabled = false;
+        DisableCollision();
         StartCoroutine(EnableCollision());
         Destroy(this.gameObject, lifeTime);
-	}
+        //isCollideAlready = false;
+    }
 	
     IEnumerator EnableCollision()
     {
@@ -34,12 +37,14 @@ public class GrenadeBullet : NetworkBehaviour {
     private void OnCollisionEnter(Collision other)
     {
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
-        if (isPlayer != null)
+        if (isPlayer != null && GetComponent<Collider>().enabled)
         {
+            DisableCollision();
             string dir = GetHitDir(other.transform);
             isPlayer.TakeDamage(damage);
             isPlayer.Staggering(staggerDamage);
             isPlayer.TickIndicator(dir);
+            
         }
         else
         {
@@ -50,12 +55,16 @@ public class GrenadeBullet : NetworkBehaviour {
                 target.TakeDamage(damage);
                 Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
                 r.AddForce(transform.forward * impactForce);
+                //DisableCollision();
             }
         }
         Explode();
         Explosion();
-
-        Destroy(this.gameObject, timeBeforeDestroy);
+        Destroy(this.gameObject);
+    }
+    private void DisableCollision()
+    {
+        GetComponent<Collider>().enabled = false;
     }
 
     private void Explode()
