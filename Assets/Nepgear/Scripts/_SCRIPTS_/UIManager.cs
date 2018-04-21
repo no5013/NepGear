@@ -28,9 +28,13 @@ public class UIManager : MonoBehaviour {
     public Text leftWeaponText;
     public Text rightWeaponText;
 
-    //Stock and time ui
+    //Stock ui
+    public Image teamStockImage;
     public Text teamStockText;
+    public Image enemyStockImage;
     public Text enemyStockText;
+
+    //time ui
     public Text remainingTimeText;
 
     private float fadeDelay = 3f;
@@ -70,13 +74,13 @@ public class UIManager : MonoBehaviour {
 
     public void SetHealth(float percent)
     {
-        healthText.text = Mathf.Floor(percent*100) + "%";
+        healthText.text = Mathf.Clamp(Mathf.Floor(percent * 100), 0f, 100f) + "%";
         healthImage.fillAmount = percent;
     }
 
     public void SetStamina(float percent)
     {
-        staminaText.text = Mathf.Floor(percent*100) + "%";
+        staminaText.text = Mathf.Clamp(Mathf.Floor(percent*100), 0f, 100f) + "%";
         staminaImage.fillAmount = percent;
     }
 
@@ -138,14 +142,17 @@ public class UIManager : MonoBehaviour {
         staggerImage.fillAmount = percent;
     }
 
-    public void SetStocks(float teamStock, float enemyStock)
+    public void SetStocks(float teamStock, float enemyStock, float maxStock)
     {
         teamStockText.text = teamStock.ToString();
+        teamStockImage.fillAmount = (teamStock/maxStock);
+
         enemyStockText.text = enemyStock.ToString();
+        enemyStockImage.fillAmount = (enemyStock / maxStock);
     }
 
-    public void SetTime(float time)
+    public void SetTime(float sec, float dec)
     {
-        remainingTimeText.text = time.ToString();
+        remainingTimeText.text = sec + "\"" + dec;
     }
 }

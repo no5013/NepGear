@@ -45,6 +45,9 @@ public class GameManager : NetworkBehaviour {
     private string readyText = "READY";
     private string startText = "GO";
 
+    //Time limit
+    private float timeLimit = 300f;
+
     private void Start()
     {
         MapSetup();
@@ -159,7 +162,7 @@ public class GameManager : NetworkBehaviour {
         {
             UIManager playerUI = player.uiManager;
             if (playerUI != null)
-                playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)));
+                playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)), playerLifeStock);
             else
                 Debug.Log(player.lifeStock + " " + GetTeamStock(GetEnemyTeam(player.team)));
         }
@@ -310,11 +313,23 @@ public class GameManager : NetworkBehaviour {
         //notify clients that the round is now started, they should allow player to move.
         RpcRoundPlaying();
 
-        // While there is not one tank left...
-        while (!OnePlayerLeft())
+        float remainingTime = timeLimit;
+        int floorTime = Mathf.FloorToInt(remainingTime *10);
+
+        while (!OnePlayerLeft() && remainingTime > 0f)
         {
             // ... return on the next frame.
             yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime * 10);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                RpcSetRemainingTime(floorTime);
+            }
         }
     }
 
@@ -345,6 +360,12 @@ public class GameManager : NetworkBehaviour {
     }
 
     [ClientRpc]
+    void RpcSetRemainingTime(float time)
+    {
+        SetPlayerRemainingTime(time);
+    }
+
+    [ClientRpc]
     void RpcSetPlayerStateText(string text)
     {
         if (text.Equals(startText))
@@ -354,6 +375,18 @@ public class GameManager : NetworkBehaviour {
         else
         {
             SetPlayerStateText(text);
+        }
+    }
+
+    private void SetPlayerRemainingTime(float time)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            UIManager playerUI = players[i].uiManager;
+            if (playerUI != null)
+            {
+                playerUI.SetTime(Mathf.FloorToInt(time/10), time%10);
+            }
         }
     }
 
