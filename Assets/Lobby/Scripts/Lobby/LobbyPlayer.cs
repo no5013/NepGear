@@ -220,6 +220,8 @@ namespace Prototype.NetworkLobby
 
         public void OnSteamID(ulong newSteamID)
         {
+            if (!SteamManager.Initialized)
+                return;
             steamID = newSteamID;
             playerName = SteamFriends.GetFriendPersonaName(new CSteamID(steamID));
             OnMyName(playerName);

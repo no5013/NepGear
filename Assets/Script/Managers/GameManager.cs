@@ -45,6 +45,9 @@ public class GameManager : NetworkBehaviour {
     private string readyText = "READY";
     private string startText = "GO";
 
+    //Time limit
+    private float timeLimit = 300f;
+
     private void Start()
     {
         MapSetup();
@@ -103,6 +106,20 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
+    public static float GetTeamStock(string team)
+    {
+        float lifeStock = 0;
+        if (team.Equals("A") && players_A.Count > 0)
+        {
+            lifeStock = players_A[0].lifeStock;
+        }
+        else if(team.Equals("B") && players_B.Count > 0)
+        {
+            lifeStock = players_B[0].lifeStock;
+        }
+        return lifeStock;
+    }
+
     public void RemovePlayer(GameObject player)
     {
         PlayerBehaviorScript toRemove = null;
@@ -119,6 +136,47 @@ public class GameManager : NetworkBehaviour {
             players.Remove(toRemove);
     }
 
+    /*public void TeamDie(PlayerBehaviorScript player)
+    {
+        string team = player.team;
+        if (team.Equals("A") && players_A.Count > 0)
+        {
+            stock_A--;
+        }
+        else if (team.Equals("B") && players_B.Count > 0)
+        {
+            stock_B--;
+        }
+    }*/
+
+    [Server]
+    public void OnPlayerDie()
+    {
+        RpcUpdateTeamScore();
+    }
+
+    [ClientRpc]
+    private void RpcUpdateTeamScore()
+    {
+        foreach (PlayerBehaviorScript player in players)
+        {
+            UIManager playerUI = player.uiManager;
+            if (playerUI != null)
+                playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)), playerLifeStock);
+            else
+                Debug.Log(player.lifeStock + " " + GetTeamStock(GetEnemyTeam(player.team)));
+        }
+    }
+
+    private string GetEnemyTeam(string currentTeam)
+    {
+        if (currentTeam.Equals("A"))
+        {
+            return "B";
+        }
+        return "A";
+    }
+
     /*public void PreparePlayers()
     {
         foreach (PlayerBehaviorScript player in players)
@@ -126,6 +184,16 @@ public class GameManager : NetworkBehaviour {
             player.DisablePlayer();
         }
     }*/
+
+    public void OnStockAChange()
+    {
+
+    }
+
+    public void OnStockBChange()
+    {
+
+    }
 
     // This is called from start and will run each phase of the game one after another. ONLY ON SERVER (as Start is only called on server)
     private IEnumerator GameLoop()
@@ -245,11 +313,23 @@ public class GameManager : NetworkBehaviour {
         //notify clients that the round is now started, they should allow player to move.
         RpcRoundPlaying();
 
-        // While there is not one tank left...
-        while (!OnePlayerLeft())
+        float remainingTime = timeLimit;
+        int floorTime = Mathf.FloorToInt(remainingTime *10);
+
+        while (!OnePlayerLeft() && remainingTime > 0f)
         {
             // ... return on the next frame.
             yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime * 10);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                RpcSetRemainingTime(floorTime);
+            }
         }
     }
 
@@ -280,6 +360,12 @@ public class GameManager : NetworkBehaviour {
     }
 
     [ClientRpc]
+    void RpcSetRemainingTime(float time)
+    {
+        SetPlayerRemainingTime(time);
+    }
+
+    [ClientRpc]
     void RpcSetPlayerStateText(string text)
     {
         if (text.Equals(startText))
@@ -289,6 +375,18 @@ public class GameManager : NetworkBehaviour {
         else
         {
             SetPlayerStateText(text);
+        }
+    }
+
+    private void SetPlayerRemainingTime(float time)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            UIManager playerUI = players[i].uiManager;
+            if (playerUI != null)
+            {
+                playerUI.SetTime(Mathf.FloorToInt(time/10), time%10);
+            }
         }
     }
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHitPoint: 500
   maxStamina: 300
   maxUltimate: 100
-  startingSpeed: 5
+  startingSpeed: 20
   jumpForce: 10
   boostSpeed: 10
   staggerLimit: 1000

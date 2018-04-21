@@ -252,6 +252,27 @@ public class PlayerBehaviorScript : NetworkBehaviour
     }
     private void FixedUpdate()
     {
+        if (isServer)
+        {
+            if (stagger > 0f)
+            {
+                stagger -= staggerRecovery * Time.fixedDeltaTime;
+                if (isStaggering)
+                {
+                    stagger -= staggerRecovery * Time.fixedDeltaTime;
+                }
+                if (stagger < 0f)
+                {
+                    stagger = 0f;
+                    if (isStaggering)
+                    {
+                        EnableControl();
+                        isStaggering = false;
+                    }
+                }
+            }
+        }
+
         if (!isLocalPlayer)
         {
             return;
@@ -285,24 +306,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
                 }
             }
         }
-        if (stagger > 0f)
-        {
-            stagger -= staggerRecovery * Time.fixedDeltaTime;
-            if (isStaggering)
-            {
-                stagger -= staggerRecovery * Time.fixedDeltaTime;
-            }
-            if (stagger < 0f)
-            {
-                stagger = 0f;
-                if(isStaggering)
-                {
-                    EnableControl();
-                    isStaggering = false;
-                }
-            }
-        }
-
     }
     private void GetInput()
     {
@@ -453,6 +456,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             Die();
         }
     }
+
     [Server]
     public void Staggering(float staggerDamage)
     {
@@ -504,7 +508,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         isStaggering = true;
         DisableControl();
-        Debug.Log("Staggering");
     }
 
     [Server]
@@ -512,7 +515,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         dead = true;
         lifeStock--;
+        GameManager.instance.OnPlayerDie();
+
         RpcDie();
+
         if (!isOutOfStock())
         {
             Invoke("Respawn", respawnTime);
@@ -577,6 +583,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         hitPoint = maxHitPoint;
         stamina = maxStamina;
+        stagger = 0f;
+        isStaggering = false;
     }
 
     void OnChangeHealth (float currentHealth)
@@ -636,7 +644,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         Debug.Log("LOSE");
     }
-    
+
     private bool HasUltimate()
     {
         return ultimate != null;

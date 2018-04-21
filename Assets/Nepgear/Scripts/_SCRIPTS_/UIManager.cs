@@ -28,6 +28,15 @@ public class UIManager : MonoBehaviour {
     public Text leftWeaponText;
     public Text rightWeaponText;
 
+    //Stock ui
+    public Image teamStockImage;
+    public Text teamStockText;
+    public Image enemyStockImage;
+    public Text enemyStockText;
+
+    //time ui
+    public Text remainingTimeText;
+
     private float fadeDelay = 3f;
 
     // Use this for initialization
@@ -65,13 +74,13 @@ public class UIManager : MonoBehaviour {
 
     public void SetHealth(float percent)
     {
-        healthText.text = Mathf.Floor(percent*100) + "%";
+        healthText.text = Mathf.Clamp(Mathf.Floor(percent * 100), 0f, 100f) + "%";
         healthImage.fillAmount = percent;
     }
 
     public void SetStamina(float percent)
     {
-        staminaText.text = Mathf.Floor(percent*100) + "%";
+        staminaText.text = Mathf.Clamp(Mathf.Floor(percent*100), 0f, 100f) + "%";
         staminaImage.fillAmount = percent;
     }
 
@@ -125,8 +134,25 @@ public class UIManager : MonoBehaviour {
 
     public void SetStagger(float percent)
     {
-        //staggerText.text = (percent * 100) + "%";
-        //staggerImage.fillAmount = percent;
+        if(staggerText == null)
+        {
+            return;
+        }
+        staggerText.text = (percent * 100) + "%";
+        staggerImage.fillAmount = percent;
     }
 
+    public void SetStocks(float teamStock, float enemyStock, float maxStock)
+    {
+        teamStockText.text = teamStock.ToString();
+        teamStockImage.fillAmount = (teamStock/maxStock);
+
+        enemyStockText.text = enemyStock.ToString();
+        enemyStockImage.fillAmount = (enemyStock / maxStock);
+    }
+
+    public void SetTime(float sec, float dec)
+    {
+        remainingTimeText.text = sec + "\"" + dec;
+    }
 }
