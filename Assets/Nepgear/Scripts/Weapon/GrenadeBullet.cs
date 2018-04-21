@@ -14,6 +14,7 @@ public class GrenadeBullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastRadius;
     [SyncVar] [HideInInspector] public float blastForce;
     [SyncVar] [HideInInspector] public float staggerDamage;
+    [SyncVar] [HideInInspector] public float timeBeforeDestroy;
     public ParticleSystem explosion;
 
     // Use this for initialization
@@ -54,7 +55,7 @@ public class GrenadeBullet : NetworkBehaviour {
         Explode();
         Explosion();
 
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, timeBeforeDestroy);
     }
 
     private void Explode()
@@ -104,11 +105,10 @@ public class GrenadeBullet : NetworkBehaviour {
             targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
         }
     }
-
     private void OnDestroy()
     {
-        Explode();
-        Explosion();
+        //Explode();
+        //Explosion();
     }
 
     private void Explosion()

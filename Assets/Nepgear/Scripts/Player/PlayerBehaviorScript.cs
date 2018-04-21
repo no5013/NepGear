@@ -42,7 +42,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [HideInInspector] public float stamina;
     [HideInInspector] public float maxStamina;
     [HideInInspector] public float ultimateCharge;
-    private UltimateAbility ultimate;
+    public UltimateAbility ultimate;
     private bool m_isDashing;
     private float lerpTime;
     private float currentLerpTime;
@@ -58,7 +58,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     private float boostChargeTime;
 
-    private float ultimateActiveDuration;
+    //private float ultimateActiveDuration;
     private bool isUltimateActived;
 
     public RectTransform healthBar;
@@ -152,6 +152,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         timePressedKey = 0f;
         m_Float = false;
         isUltimateActived = false;
+        ultimate.Initialize(this.gameObject);
         //uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
     }
@@ -229,18 +230,18 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             Dash();
         }
-        if (isUltimateActived)
-        {
-            ultimateActiveDuration += Time.deltaTime;
-            if (ultimateActiveDuration >= ultimate.duration)
-            {
-                ultimate.TriggerAbilityEnd();
-                ultimateActiveDuration = 0f;
-                ultimateCharge = 0f;
-                isUltimateActived = false;
+        //if (isUltimateActived)
+        //{
+        //    ultimateActiveDuration += Time.deltaTime;
+        //    if (ultimateActiveDuration >= ultimate.duration)
+        //    {
+        //        ultimate.TriggerAbilityEnd();
+        //        ultimateActiveDuration = 0f;
+        //        ultimateCharge = 0f;
+        //        isUltimateActived = false;
 
-            }
-        }
+        //    }
+        //}
 
         if (uiManager != null)
         {
@@ -273,14 +274,20 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
         if (HasUltimate())
         {
-            if (ultimateCharge <= ultimate.maxCharge)
+            if (ultimateCharge < ultimate.maxCharge)
             {
-                ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
+                // For test purpose;
+                //ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
+                ultimateCharge = ultimate.maxCharge;
+                if (ultimateCharge > ultimate.maxCharge)
+                {
+                    ultimateCharge = ultimate.maxCharge;
+                }
             }
         }
         if (stagger > 0f)
         {
-            stagger -= staggerRecovery*Time.fixedDeltaTime;
+            stagger -= staggerRecovery * Time.fixedDeltaTime;
             if (isStaggering)
             {
                 stagger -= staggerRecovery * Time.fixedDeltaTime;
@@ -344,11 +351,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             m_Float = false;
         }
-        if (CrossPlatformInputManager.GetButtonUp("Ultimate") && !isUltimateActived)
+        if (ih.ultimate && !isUltimateActived && IsUltimateAvailable())
         {
-            isUltimateActived = true;
-            ultimate.TriggerAbility();
-            ultimateCharge = 0f;
+            StartCoroutine(UltimateCoroutine());
             //uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
         }
 
@@ -358,6 +363,16 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
 
         stamina -= staminaUsed;
+    }
+
+    IEnumerator UltimateCoroutine()
+    {
+        isUltimateActived = true;
+        ultimate.TriggerAbility();
+        ultimateCharge = 0f;
+        yield return new WaitForSeconds(ultimate.duration);
+        ultimate.TriggerAbilityEnd();
+        isUltimateActived = false;
     }
 
     private void Dash()
@@ -377,8 +392,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_isDashing = false;
             currentLerpTime = 0f;
         }
-
-        Debug.Log("DASH");
     }
 
     public bool IsDashing()
@@ -456,6 +469,34 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
             Stagger();
         }
+    }
+
+    [Command]
+    public void CmdOverclock(float multiplier)
+    {
+        //floatSpeed *= multiplier;
+        //runSpeed *= multiplier;
+        //walkSpeed *= multiplier;
+        RpcOverclock(multiplier);
+    }
+    [Command]
+    public void CmdStopOverClock(float multiplier)
+    {
+        RpcStopOverclock(multiplier);
+    }
+    [ClientRpc]
+    public void RpcOverclock(float multiplier)
+    {
+        floatSpeed *= multiplier;
+        runSpeed *= multiplier;
+        walkSpeed *= multiplier;
+    }
+    [ClientRpc]
+    public void RpcStopOverclock(float multiplier)
+    {
+        floatSpeed /= multiplier;
+        runSpeed /= multiplier;
+        walkSpeed /= multiplier;
     }
 
     [Server]
@@ -599,5 +640,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private bool HasUltimate()
     {
         return ultimate != null;
+    }
+
+    private bool IsUltimateAvailable()
+    {
+        return ultimateCharge >= ultimate.maxCharge;
     }
 }
