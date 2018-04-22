@@ -52,6 +52,8 @@ public class FrameWeaponController : NetworkBehaviour {
     private float uniqueNextReadyFire = 0;
     private float uniqueCoolDownTimeLeft = 0;
 
+    private float leftNextReadyReload = 0;
+    private float rightNextReadyReload = 0;
 
 
     // Use this for initialization
@@ -183,6 +185,22 @@ public class FrameWeaponController : NetworkBehaviour {
             }
         }
 
+        if (ih.reload1 > 0.5)
+        {
+            if (Time.time > leftNextReadyReload)
+            {
+                LeftButtonReload();
+            }
+        }
+
+        if (ih.reload2 > 0.5)
+        {
+            if (Time.time > rightNextReadyReload)
+            {
+                RightButtonReload();
+            }
+        }
+
     }
 
     private void UniqueButtonTriggered()
@@ -218,6 +236,17 @@ public class FrameWeaponController : NetworkBehaviour {
         {
             uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
         }
+    }
+
+    private void LeftButtonReload()
+    {
+        leftNextReadyReload = Time.time + 0.1f;
+        leftHandAbility.TriggerReload();
+    }
+    private void RightButtonReload()
+    {
+        rightNextReadyReload = Time.time + 0.1f;
+        rightHandAbility.TriggerReload();
     }
 
     private void RightButtonTriggered()
