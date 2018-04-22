@@ -97,6 +97,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public bool isStaggering;
 
     public bool debug = false;
+    public bool shouldRegenStamina;
 
     protected void Start()
     {
@@ -153,6 +154,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         m_Float = false;
         isUltimateActived = false;
         ultimate.Initialize(this.gameObject);
+        shouldRegenStamina = true;
         //uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
     }
@@ -280,7 +282,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         GetInput();
         if (characterController.isGrounded && !IsDashing() && !IsRunning())
         {
-            if (stamina < maxStamina && boostChargeTime < Time.time)
+            if (stamina < maxStamina && boostChargeTime < Time.time && shouldRegenStamina)
             {
                 stamina += Math.Abs(stamina+10) * Time.fixedDeltaTime;
                 if (stamina > maxStamina)

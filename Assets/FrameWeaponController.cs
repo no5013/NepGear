@@ -21,10 +21,9 @@ public class FrameWeaponController : NetworkBehaviour {
     [SerializeField] private WeaponAbility rightHandAbility;
     private ProjectileShootTriggerable rightHandTrigger;
 
-    [SerializeField] private GameObject uniqueWeapon;
+    //[SerializeField] private GameObject uniqueWeapon;
     [SerializeField] private UniqueAbility uniqueAbility;
-    //[SerializeField] private UltimateAbility ultimateAbility;
-
+ 
     public Transform eye;
     //public GameObjec unique
     //[SerializeField] private WeaponAbility eyeAbility;
@@ -118,7 +117,7 @@ public class FrameWeaponController : NetworkBehaviour {
         if(uniqueAbility != null)
         {
             uniqueCooldown = uniqueAbility.triggerDelay;
-            uniqueAbility.Initialize(uniqueWeapon);
+            uniqueAbility.Initialize(this.gameObject);
         }
 
         if(uiManager != null)
@@ -182,10 +181,6 @@ public class FrameWeaponController : NetworkBehaviour {
             {
                 UniqueButtonTriggered();
             }
-        }
-        else
-        {
-            UniqueButtonDeTriggered();    
         }
 
     }
@@ -293,7 +288,7 @@ public class FrameWeaponController : NetworkBehaviour {
     [ClientRpc]
     public void RpcChangeShieldStatus(bool status)
     {
-        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        ShieldTriggerable shield = GetComponentInChildren<ShieldTriggerable>();
         shield.isActivate = status;
     }
 
@@ -379,6 +374,38 @@ public class FrameWeaponController : NetworkBehaviour {
 
         Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
         NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdFireFunnel(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        FunnelAbility funnel = (FunnelAbility)uniqueAbility;
+        if(funnel == null)
+        {
+            return;
+        }
+        Projectile projectile = funnel.projectile;
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdActivateFunnel()
+    {
+        RpcChangeFunnelStatus(true);
+    }
+
+    [ClientRpc]
+    public void RpcChangeFunnelStatus(bool status)
+    {
+        FunnelTriggerable funnel = GetComponentInChildren<FunnelTriggerable>();
+        funnel.isActivate = status;
+    }
+    
+    [Command]
+    public void CmdDeactivateFunnel()
+    {
+        RpcChangeFunnelStatus(false);
     }
 
     private Rigidbody SpawnProjectile(Projectile projectile, float charge, Vector3 forward, Vector3 position, Quaternion rotation)

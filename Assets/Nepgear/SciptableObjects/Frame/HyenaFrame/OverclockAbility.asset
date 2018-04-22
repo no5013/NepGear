@@ -8,13 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51eea5166e450ba43b82362169f5536d, type: 3}
-  m_Name: ShieldAbility
+  m_Script: {fileID: 11500000, guid: 7408cbbd6a623164fad4146743d7b21a, type: 3}
+  m_Name: OverclockAbility
   m_EditorClassIdentifier: 
-  aName: Shield Ability
-  aID: UW2
-  aSound: {fileID: 0}
-  triggerDelay: 0.15
-  maxShieldHealth: 2000
-  shieldDecayRate: 100
-  shieldRegenRate: 200
+  uName: Overclock
+  uID: U1
+  duration: 10
+  maxCharge: 100
+  multiplier: 2
