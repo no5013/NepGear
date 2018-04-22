@@ -168,13 +168,19 @@ public class GameManager : NetworkBehaviour {
         }
     }
 
-    private string GetEnemyTeam(string currentTeam)
+    private static string GetEnemyTeam(string currentTeam)
     {
         if (currentTeam.Equals("A"))
         {
             return "B";
         }
         return "A";
+    }
+
+    public static float GetEnemyTeamStock(string currentTeam)
+    {
+        string enemyTeam = GetEnemyTeam(currentTeam);
+        return GetTeamStock(enemyTeam);
     }
 
     /*public void PreparePlayers()

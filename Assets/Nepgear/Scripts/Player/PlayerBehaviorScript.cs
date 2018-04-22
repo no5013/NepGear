@@ -28,7 +28,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
-    [SyncVar]
+    public float maxLifeStock = 3f;
+
+    [SyncVar(hook = "OnChangeLife")]
     public float lifeStock;
 
     public bool enabledControl = false;
@@ -103,6 +105,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     protected void Start()
     {
+        if (isServer)
+        {
+            lifeStock = maxLifeStock;
+        }
+
         if (Prototype.NetworkLobby.LobbyManager.s_Singleton != null)
         {
             Character frame = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID);
@@ -113,8 +120,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
             Character basicFrame = new Character();
             SetFrame(basicFrame);
         }
-
-        lifeStock = 3;
 
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
@@ -534,13 +539,27 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         dead = true;
         lifeStock--;
-        GameManager.instance.OnPlayerDie();
+        //GameManager.instance.OnPlayerDie();
 
         RpcDie();
 
         if (!isOutOfStock())
         {
             StartCoroutine(Respawning());
+        }
+    }
+
+    public void OnChangeLife(float lifeStock)
+    {
+        float enemyLifeStock = GameManager.GetEnemyTeamStock(team);
+
+        if (uiManager != null)
+        {
+            uiManager.SetStocks(lifeStock, enemyLifeStock, maxLifeStock);
+        }
+        else
+        {
+            Debug.Log(lifeStock + " : " + enemyLifeStock);
         }
     }
 
