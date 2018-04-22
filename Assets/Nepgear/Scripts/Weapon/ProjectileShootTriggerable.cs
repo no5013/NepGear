@@ -150,6 +150,8 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             isFiring = true;
             for (int i = 0; i< bulletSpawns.Length; i++)
             {
+                if (bulletLeft <= 0)
+                    return;
                 bulletLeft--;
                 Transform bulletSpawn = bulletSpawns[i];
                 RandomBulletSpawnRotation(ref bulletSpawn);
@@ -220,6 +222,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
         bulletLeft = magazine;
         isReloading = false;
+        fwc.ReloadSuccessful();
         //m_BulletText.text = bulletLeft + "/" + magazine;
     }
 }

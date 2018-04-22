@@ -185,7 +185,7 @@ public class FrameWeaponController : NetworkBehaviour {
             }
         }
 
-        if (ih.reload1 > 0.5)
+        if (ih.reload1 > 0.9f)
         {
             if (Time.time > leftNextReadyReload)
             {
@@ -193,7 +193,7 @@ public class FrameWeaponController : NetworkBehaviour {
             }
         }
 
-        if (ih.reload2 > 0.5)
+        if (ih.reload2 > 0.9f)
         {
             if (Time.time > rightNextReadyReload)
             {
@@ -240,13 +240,22 @@ public class FrameWeaponController : NetworkBehaviour {
 
     private void LeftButtonReload()
     {
-        leftNextReadyReload = Time.time + 0.1f;
+        leftNextReadyReload = Time.time + leftHandTrigger.reloadTime;
         leftHandAbility.TriggerReload();
     }
     private void RightButtonReload()
     {
-        rightNextReadyReload = Time.time + 0.1f;
+        rightNextReadyReload = Time.time + rightHandTrigger.reloadTime;
         rightHandAbility.TriggerReload();
+    }
+
+    public void ReloadSuccessful()
+    {
+        if(uiManager)
+        {
+            uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+            uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
+        }
     }
 
     private void RightButtonTriggered()
