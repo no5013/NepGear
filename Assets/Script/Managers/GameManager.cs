@@ -39,7 +39,10 @@ public class GameManager : NetworkBehaviour {
     private float matchCountdown = 4f;
 
     //Return to hangar
-    private float returnCountdown = 3f;
+    private float returnCountdown = 4f;
+
+    //Time that will stop when the winner is declared
+    private float stopCountdown = 2f;
 
     //Text ui for player
     private string readyText = "READY";
@@ -430,6 +433,53 @@ public class GameManager : NetworkBehaviour {
         
         //notify client they should disable tank control
         RpcRoundEnding();
+        RpcSetTimeScale(0);
+
+        float remainingTime = stopCountdown;
+        int floorTime = Mathf.FloorToInt(remainingTime);
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.unscaledDeltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                //To Set player ui
+                if (floorTime > 0)
+                {
+                    Debug.Log("Time will run in " + floorTime);
+                }
+            }
+        }
+        RpcSetTimeScale(0.05f);
+        RpcSetFixedDeltaTime(0.05f);
+
+        remainingTime = stopCountdown;
+        floorTime = Mathf.FloorToInt(remainingTime);
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.unscaledDeltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                //To Set player ui
+                if (floorTime > 0)
+                {
+                    Debug.Log("Time will speed in " + floorTime);
+                }
+            }
+        }
+        RpcSetTimeScale(1f);
+        RpcSetFixedDeltaTime(1f);
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_EndWait;
@@ -439,8 +489,20 @@ public class GameManager : NetworkBehaviour {
     private void RpcRoundEnding()
     {
         gameWinner = GetRoundWinner();
-        //DisablePlayers();
-        ShowResult();
+
+        Debug.Log("BATTLE OVER");
+    }
+
+    [ClientRpc]
+    private void RpcSetTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
+    }
+
+    [ClientRpc]
+    private void RpcSetFixedDeltaTime(float scale)
+    {
+        Time.fixedDeltaTime = Time.timeScale * scale;
     }
 
     private void DeclareResult()
@@ -479,6 +541,7 @@ public class GameManager : NetworkBehaviour {
                 if (floorTime > 0)
                 {
                     RpcSetPlayerStateText("Return to hangar in " + floorTime.ToString());
+                    Debug.Log("Return to hangar in " + floorTime.ToString());
                 }
             }
         }

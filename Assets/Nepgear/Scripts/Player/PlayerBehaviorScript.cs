@@ -557,10 +557,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             uiManager.SetStocks(lifeStock, enemyLifeStock, maxLifeStock);
         }
-        else
-        {
-            Debug.Log(lifeStock + " : " + enemyLifeStock);
-        }
     }
 
     private IEnumerator Respawning()
