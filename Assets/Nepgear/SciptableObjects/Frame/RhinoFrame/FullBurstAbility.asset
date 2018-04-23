@@ -17,4 +17,4 @@ MonoBehaviour:
   maxCharge: 200
   fullBurstProjectileAbility: {fileID: 11400000, guid: 637b2378f692999488d821e0eced0b91,
     type: 2}
-  fireDelay: 0.1
+  fireDelay: 0.2
