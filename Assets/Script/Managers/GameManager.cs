@@ -495,6 +495,7 @@ public class GameManager : NetworkBehaviour {
         gameWinner = GetRoundWinner();
         //DisablePlayerControl();
 
+        RpcSetPlayerStateText("BATTLE OVER");
         Debug.Log("BATTLE OVER");
     }
 

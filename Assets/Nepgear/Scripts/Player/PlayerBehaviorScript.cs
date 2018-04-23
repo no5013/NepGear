@@ -585,12 +585,19 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         if(uiManager != null)
         {
+            if(respawnTime > 0f)
+            {
+                uiManager.SetStateText("Respawn in " + respawnTime);
+            }
+        }
 
-        }
-        else
-        {
-            Debug.Log(respawnTime);
-        }
+        Debug.Log("Respawn in " + respawnTime);
+    }
+
+    [ClientRpc]
+    public void RpcClearStateText()
+    {
+        uiManager.SetStateText("");
     }
 
     [ClientRpc]
@@ -629,6 +636,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         catapult.SetupFrame(this.gameObject);
         EnablePlayer();
         DisableControl();
+        
+        if(uiManager != null)
+        {
+            uiManager.SetStateText("");
+        }
 
         catapult.launch();
     }
