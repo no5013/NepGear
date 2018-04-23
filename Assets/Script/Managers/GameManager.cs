@@ -42,7 +42,7 @@ public class GameManager : NetworkBehaviour {
     private float returnCountdown = 4f;
 
     //Time that will stop when the winner is declared
-    private float stopCountdown = 2f;
+    private float stopCountdown = 1f;
 
     //Text ui for player
     private string readyText = "READY";
@@ -456,9 +456,9 @@ public class GameManager : NetworkBehaviour {
             }
         }
         RpcSetTimeScale(0.05f);
-        RpcSetFixedDeltaTime(0.05f);
+        //RpcSetFixedDeltaTime(0.2f);
 
-        remainingTime = stopCountdown;
+        remainingTime = 2f;
         floorTime = Mathf.FloorToInt(remainingTime);
         while (remainingTime > 0)
         {
@@ -479,7 +479,7 @@ public class GameManager : NetworkBehaviour {
             }
         }
         RpcSetTimeScale(1f);
-        RpcSetFixedDeltaTime(1f);
+        //RpcSetFixedDeltaTime(1f);
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_EndWait;
@@ -489,6 +489,7 @@ public class GameManager : NetworkBehaviour {
     private void RpcRoundEnding()
     {
         gameWinner = GetRoundWinner();
+        //DisablePlayerControl();
 
         Debug.Log("BATTLE OVER");
     }
@@ -497,6 +498,7 @@ public class GameManager : NetworkBehaviour {
     private void RpcSetTimeScale(float timeScale)
     {
         Time.timeScale = timeScale;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     [ClientRpc]

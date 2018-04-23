@@ -1252,7 +1252,7 @@ Transform:
   - {fileID: 4397099893830538}
   - {fileID: 4791062107384730}
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4146673452805342
 Transform:
@@ -1295,7 +1295,7 @@ Transform:
   m_Children:
   - {fileID: 4442284669704436}
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4205710020169172
 Transform:
@@ -1308,7 +1308,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4234252257772570
 Transform:
@@ -1405,7 +1405,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4301824064540540
 Transform:
@@ -1636,7 +1636,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4634728780604626
 Transform:
@@ -1648,8 +1648,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4145638724920140}
-  - {fileID: 4298612797070636}
   - {fileID: 4683492469940964}
   - {fileID: 4755294638970940}
   - {fileID: 4772802105025318}
@@ -1657,6 +1655,8 @@ Transform:
   - {fileID: 4205710020169172}
   - {fileID: 4615551016533944}
   - {fileID: 4192220528109004}
+  - {fileID: 4298612797070636}
+  - {fileID: 4145638724920140}
   m_Father: {fileID: 4474979330208340}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1699,7 +1699,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4687722263430528
 Transform:
@@ -1793,7 +1793,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4772802105025318
 Transform:
@@ -1806,7 +1806,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4786594227943454
 Transform:
@@ -1918,7 +1918,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4634728780604626}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4874502739515468
 Transform:
@@ -2763,6 +2763,7 @@ MonoBehaviour:
     m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   walkSpeed: 0
   runSpeed: 0
+  maxLifeStock: 3
   lifeStock: 0
   enabledControl: 0
   hitPoint: 0
@@ -4184,7 +4185,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1133350175
+  randomSeed: -557272339
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7590,7 +7591,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1326218432
+  randomSeed: 852325323
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10990,7 +10991,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -670221073
+  randomSeed: -269044723
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14390,7 +14391,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1199934441
+  randomSeed: -1020029148
   InitialModule:
     serializedVersion: 3
     enabled: 1
