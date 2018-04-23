@@ -88,7 +88,10 @@ public class UIManager : MonoBehaviour {
     {
         if(gameStateText != null)
         {
+            Color stateTextColor = gameStateText.color;
+            stateTextColor.a = 1f;
             gameStateText.text = text;
+            gameStateText.color = stateTextColor;
         }
     }
 

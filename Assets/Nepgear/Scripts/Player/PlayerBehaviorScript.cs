@@ -28,12 +28,14 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
-    [SyncVar]
+    public float maxLifeStock = 3f;
+
+    [SyncVar(hook = "OnChangeLife")]
     public float lifeStock;
 
     public bool enabledControl = false;
 
-    private float respawnTime = 5f;
+    private float respawnTime = 8f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -68,6 +70,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public UIManager uiManager;
     private InputHandler ih;
     private RagdollManager ragdollManager;
+    private Animator animator;
 
     [SyncVar]
     public string characterID;
@@ -83,6 +86,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [SerializeField]
     private ParticleSystem explosionParticle;
+    [SerializeField]
+    private ParticleSystem shockParticle;
     [SerializeField]
     private AudioClip explosionSound;
     [SerializeField]
@@ -102,6 +107,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     protected void Start()
     {
+        if (isServer)
+        {
+            lifeStock = maxLifeStock;
+        }
+
         if (Prototype.NetworkLobby.LobbyManager.s_Singleton != null)
         {
             Character frame = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID);
@@ -113,12 +123,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
             SetFrame(basicFrame);
         }
 
-        lifeStock = 3;
-
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
+        animator = GetComponent<Animator>();
 
         //Debug.Log("Can find ui?? " + GetComponentInChildren<UIManager>().ToString());
         //uiManager = GetComponentInChildren<UIManager>();
@@ -270,7 +279,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
                     stagger = 0f;
                     if (isStaggering)
                     {
-                        EnableControl();
+                        RpcOnStaggerFinish();
                         isStaggering = false;
                     }
                 }
@@ -533,8 +542,23 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [Server]
     public void Stagger()
     {
+        RpcOnStagger();
         isStaggering = true;
+    }
+
+    [ClientRpc]
+    private void RpcOnStagger()
+    {
         DisableControl();
+        animator.SetTrigger("Stun");
+        if(shockParticle != null)
+            shockParticle.Play();
+    }
+
+    [ClientRpc]
+    private void RpcOnStaggerFinish()
+    {
+        EnableControl();
     }
 
     [Server]
@@ -542,14 +566,65 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         dead = true;
         lifeStock--;
-        GameManager.instance.OnPlayerDie();
+        //GameManager.instance.OnPlayerDie();
 
         RpcDie();
 
         if (!isOutOfStock())
         {
-            Invoke("Respawn", respawnTime);
+            StartCoroutine(Respawning());
         }
+    }
+
+    public void OnChangeLife(float lifeStock)
+    {
+        this.lifeStock = lifeStock;
+        GameManager.UpdateTeamScore();
+    }
+
+    private IEnumerator Respawning()
+    {
+        float remainingTime = respawnTime;
+        int floorTime = Mathf.FloorToInt(remainingTime);
+
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {
+                floorTime = newFloorTime;
+
+                if (floorTime > 0)
+                {
+                    RpcSetRespawningTime(floorTime);
+                }
+            }
+        }
+        Respawn();
+    }
+
+    [ClientRpc]
+    public void RpcSetRespawningTime(float respawnTime)
+    {
+        if(uiManager != null)
+        {
+            if(respawnTime > 0f)
+            {
+                uiManager.SetStateText("Respawn in " + respawnTime);
+            }
+        }
+
+        Debug.Log("Respawn in " + respawnTime);
+    }
+
+    [ClientRpc]
+    public void RpcClearStateText()
+    {
+        uiManager.SetStateText("");
     }
 
     [ClientRpc]
@@ -588,6 +663,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         catapult.SetupFrame(this.gameObject);
         EnablePlayer();
         DisableControl();
+        
+        if(uiManager != null)
+        {
+            uiManager.SetStateText("");
+        }
 
         catapult.launch();
     }
@@ -602,8 +682,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void FrameExplode()
     {
         Explode();
-        SetFrameActive(false);
-        DisablePlayer();
+        if(!isLocalPlayer)
+            SetFrameActive(false);
+        //DisablePlayer();
     }
 
     void ResetPlayerStatus()
@@ -616,6 +697,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     void OnChangeHealth (float currentHealth)
     {
+        hitPoint = currentHealth;
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         if (isLocalPlayer)
         {
