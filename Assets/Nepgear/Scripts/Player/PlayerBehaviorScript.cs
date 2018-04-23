@@ -551,12 +551,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     public void OnChangeLife(float lifeStock)
     {
-        float enemyLifeStock = GameManager.GetEnemyTeamStock(team);
-
-        if (uiManager != null)
-        {
-            uiManager.SetStocks(lifeStock, enemyLifeStock, maxLifeStock);
-        }
+        this.lifeStock = lifeStock;
+        GameManager.UpdateTeamScore();
     }
 
     private IEnumerator Respawning()
@@ -662,6 +658,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     void OnChangeHealth (float currentHealth)
     {
+        hitPoint = currentHealth;
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         if (isLocalPlayer)
         {

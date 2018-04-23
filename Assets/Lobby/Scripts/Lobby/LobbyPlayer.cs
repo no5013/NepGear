@@ -138,7 +138,6 @@ namespace Prototype.NetworkLobby
             if (playerName == "")
             {
                 CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
-                Debug.Log(SteamUser.GetSteamID().m_SteamID);
                 CmdSteamIDChanged(SteamUser.GetSteamID().m_SteamID);
             }
 

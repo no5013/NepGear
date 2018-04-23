@@ -17,7 +17,7 @@ public class GameManager : NetworkBehaviour {
     private float startDelay = 5f;           // The delay between the start of RoundStarting and RoundPlaying phases.
     private float endDelay = 10f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
-    public float playerLifeStock = 3f;
+    public static float playerLifeStock = 3f;
 
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -111,7 +111,7 @@ public class GameManager : NetworkBehaviour {
 
     public static float GetTeamStock(string team)
     {
-        float lifeStock = 0;
+        float lifeStock = 10;
         if (team.Equals("A") && players_A.Count > 0)
         {
             lifeStock = players_A[0].lifeStock;
@@ -159,15 +159,19 @@ public class GameManager : NetworkBehaviour {
     }
 
     [ClientRpc]
-    private void RpcUpdateTeamScore()
+    public void RpcUpdateTeamScore()
+    {
+        UpdateTeamScore();
+    }
+
+    public static void UpdateTeamScore()
     {
         foreach (PlayerBehaviorScript player in players)
         {
             UIManager playerUI = player.uiManager;
             if (playerUI != null)
                 playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)), playerLifeStock);
-            else
-                Debug.Log(player.lifeStock + " " + GetTeamStock(GetEnemyTeam(player.team)));
+
         }
     }
 
