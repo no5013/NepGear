@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11a12cf53281c140950355c9a178e61, type: 3}
+  m_Name: FullBurstAbility
+  m_EditorClassIdentifier: 
+  uName: FullBurstAbility
+  uID: U3
+  duration: 10
+  maxCharge: 200
+  fullBurstProjectileAbility: {fileID: 11400000, guid: 637b2378f692999488d821e0eced0b91,
+    type: 2}
+  fireDelay: 0.1

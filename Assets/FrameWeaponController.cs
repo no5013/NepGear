@@ -23,7 +23,7 @@ public class FrameWeaponController : NetworkBehaviour {
 
     //[SerializeField] private GameObject uniqueWeapon;
     [SerializeField] private UniqueAbility uniqueAbility;
- 
+
     public Transform eye;
     //public GameObjec unique
     //[SerializeField] private WeaponAbility eyeAbility;
@@ -54,6 +54,9 @@ public class FrameWeaponController : NetworkBehaviour {
 
     private float leftNextReadyReload = 0;
     private float rightNextReadyReload = 0;
+
+    private float saveLeftCooldown = 0f;
+    private float saveRightCooldown = 0f;
 
 
     // Use this for initialization
@@ -111,6 +114,9 @@ public class FrameWeaponController : NetworkBehaviour {
 
         leftCooldown = leftHandAbility.aFireDelay;
         rightCooldown = rightHandAbility.aFireDelay;
+
+        saveLeftCooldown = leftCooldown;
+        saveRightCooldown = rightCooldown;
 
 
         leftHandAbility.Initialize(leftWeapon);
@@ -330,6 +336,32 @@ public class FrameWeaponController : NetworkBehaviour {
         shield.isActivate = status;
     }
 
+    [Command]
+    public void CmdFullBurst()
+    {
+        RpcFullBurst(true);
+    }
+    [Command]
+    public void CmdStopFullBurst()
+    {
+        RpcFullBurst(false);
+    }
+
+    [ClientRpc]
+    public void RpcFullBurst(bool status)
+    {
+        if (status)
+        {
+            leftCooldown = 0f;
+            rightCooldown = 0f;
+        }
+        else
+        {
+            leftCooldown = saveLeftCooldown;
+            rightCooldown = saveRightCooldown;
+        }
+    }
+
 
     [Command]
     public void CmdDeactivateShield()
@@ -410,6 +442,21 @@ public class FrameWeaponController : NetworkBehaviour {
         }
         Projectile projectile = satellite.projectile;
 
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdFireFullBurst(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        FullBurstAbility fullburst = (FullBurstAbility)GetComponent<PlayerBehaviorScript>().ultimate;
+        if(fullburst == null)
+        {
+            return;
+        }
+        Projectile projectile = fullburst.fullBurstProjectileAbility.projectile;
+        Debug.Log("Fire Full Burst");
+        Debug.Log(projectile.ToString());
         Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
         NetworkServer.Spawn(projectileRigidbody.gameObject);
     }

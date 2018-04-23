@@ -175,6 +175,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             Reload();
         }
     }
+
     private void Recoil()
     {
         recoil += recoilRate;

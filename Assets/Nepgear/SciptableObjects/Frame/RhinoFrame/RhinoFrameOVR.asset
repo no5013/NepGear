@@ -15,7 +15,6 @@ MonoBehaviour:
   characterID: OF2
   maxHitPoint: 500
   maxStamina: 300
-  maxUltimate: 100
   startingSpeed: 20
   jumpForce: 10
   boostSpeed: 10
@@ -24,7 +23,7 @@ MonoBehaviour:
   characterPrefab: {fileID: 1624428743771486, guid: 3fcd8cc7c7c38d74094315a89bfcc79f,
     type: 2}
   framePrefab: {fileID: 0}
-  ultimate: {fileID: 11400000, guid: 84f94b3e5915c3a48b175541c5fe9268, type: 2}
+  ultimate: {fileID: 11400000, guid: ead2eda9e920ebf44a5d5342faf1d054, type: 2}
   uniqueWeaponAbility: {fileID: 11400000, guid: b944ae1cf1cce75498240e2f925e3a69,
     type: 2}
   leftWeapon: {fileID: 0}

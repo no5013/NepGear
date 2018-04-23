@@ -9,12 +9,14 @@ public class UltimateControllerScript : MonoBehaviour {
 
     private float satelliteCannonDuration;
     private bool canSatelliteFire;
+    private bool isFullBurst;
     
 	// Use this for initialization
 	void Start () {
         pbs = this.gameObject.GetComponent<PlayerBehaviorScript>();
         fwc = this.gameObject.GetComponent<FrameWeaponController>();
         canSatelliteFire = false;
+        isFullBurst = false;
     }
 
 
@@ -44,11 +46,42 @@ public class UltimateControllerScript : MonoBehaviour {
         canSatelliteFire = false;
     }
 
+    public void FullBurst(float fireDelay)
+    {
+        Debug.Log("Fullburst Activate");
+        isFullBurst = true;
+        fwc.CmdFullBurst();
+        pbs.CmdFullBurst();
+        // ค้าง จารย์ มันค้าง!!!!
+        StartCoroutine(FiringFullBurst(fireDelay));
+    }
+
+    public void StopFullBurst()
+    {
+        isFullBurst = false;
+        fwc.CmdStopFullBurst();
+        pbs.CmdStopFullBurst();
+    }
+
     //IEnumerator CountDownSatellite(float duration)
     //{
     //    yield return new WaitForSeconds(duration);
     //    canSatelliteFire = false;
     //}
+
+    IEnumerator FiringFullBurst(float fireDelay)
+    {
+        while(isFullBurst)
+        {
+            FullBurstShootTriggerable[] allGuns = GetComponentsInChildren<FullBurstShootTriggerable>();
+            foreach(FullBurstShootTriggerable gun in allGuns)
+            {
+                gun.FreeFire();
+            }
+            yield return new WaitForSeconds(fireDelay);
+        }
+       
+    }
 
     IEnumerator FiringSatellite(float startHeight, float fireDelay)
     {
