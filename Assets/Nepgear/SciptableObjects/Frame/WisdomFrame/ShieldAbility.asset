@@ -14,7 +14,7 @@ MonoBehaviour:
   aName: Shield Ability
   aID: UW2
   aSound: {fileID: 0}
-  triggerDelay: 0
+  triggerDelay: 0.15
   maxShieldHealth: 2000
   shieldDecayRate: 100
   shieldRegenRate: 200

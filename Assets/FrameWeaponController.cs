@@ -21,9 +21,8 @@ public class FrameWeaponController : NetworkBehaviour {
     [SerializeField] private WeaponAbility rightHandAbility;
     private ProjectileShootTriggerable rightHandTrigger;
 
-    [SerializeField] private GameObject uniqueWeapon;
+    //[SerializeField] private GameObject uniqueWeapon;
     [SerializeField] private UniqueAbility uniqueAbility;
-    //[SerializeField] private UltimateAbility ultimateAbility;
 
     public Transform eye;
     //public GameObjec unique
@@ -53,6 +52,11 @@ public class FrameWeaponController : NetworkBehaviour {
     private float uniqueNextReadyFire = 0;
     private float uniqueCoolDownTimeLeft = 0;
 
+    private float leftNextReadyReload = 0;
+    private float rightNextReadyReload = 0;
+
+    private float saveLeftCooldown = 0f;
+    private float saveRightCooldown = 0f;
 
 
     // Use this for initialization
@@ -111,6 +115,9 @@ public class FrameWeaponController : NetworkBehaviour {
         leftCooldown = leftHandAbility.aFireDelay;
         rightCooldown = rightHandAbility.aFireDelay;
 
+        saveLeftCooldown = leftCooldown;
+        saveRightCooldown = rightCooldown;
+
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
@@ -118,7 +125,7 @@ public class FrameWeaponController : NetworkBehaviour {
         if(uniqueAbility != null)
         {
             uniqueCooldown = uniqueAbility.triggerDelay;
-            uniqueAbility.Initialize(uniqueWeapon);
+            uniqueAbility.Initialize(this.gameObject);
         }
 
         if(uiManager != null)
@@ -183,9 +190,21 @@ public class FrameWeaponController : NetworkBehaviour {
                 UniqueButtonTriggered();
             }
         }
-        else
+
+        if (ih.reload1 > 0.9f)
         {
-            UniqueButtonDeTriggered();    
+            if (Time.time > leftNextReadyReload)
+            {
+                LeftButtonReload();
+            }
+        }
+
+        if (ih.reload2 > 0.9f)
+        {
+            if (Time.time > rightNextReadyReload)
+            {
+                RightButtonReload();
+            }
         }
 
     }
@@ -222,6 +241,26 @@ public class FrameWeaponController : NetworkBehaviour {
         if (uiManager)
         {
             uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+        }
+    }
+
+    private void LeftButtonReload()
+    {
+        leftNextReadyReload = Time.time + leftHandTrigger.reloadTime;
+        leftHandAbility.TriggerReload();
+    }
+    private void RightButtonReload()
+    {
+        rightNextReadyReload = Time.time + rightHandTrigger.reloadTime;
+        rightHandAbility.TriggerReload();
+    }
+
+    public void ReloadSuccessful()
+    {
+        if(uiManager)
+        {
+            uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+            uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
         }
     }
 
@@ -293,8 +332,34 @@ public class FrameWeaponController : NetworkBehaviour {
     [ClientRpc]
     public void RpcChangeShieldStatus(bool status)
     {
-        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        ShieldTriggerable shield = GetComponentInChildren<ShieldTriggerable>();
         shield.isActivate = status;
+    }
+
+    [Command]
+    public void CmdFullBurst()
+    {
+        RpcFullBurst(true);
+    }
+    [Command]
+    public void CmdStopFullBurst()
+    {
+        RpcFullBurst(false);
+    }
+
+    [ClientRpc]
+    public void RpcFullBurst(bool status)
+    {
+        if (status)
+        {
+            leftCooldown = 0f;
+            rightCooldown = 0f;
+        }
+        else
+        {
+            leftCooldown = saveLeftCooldown;
+            rightCooldown = saveRightCooldown;
+        }
     }
 
 
@@ -379,6 +444,53 @@ public class FrameWeaponController : NetworkBehaviour {
 
         Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
         NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdFireFullBurst(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        FullBurstAbility fullburst = (FullBurstAbility)GetComponent<PlayerBehaviorScript>().ultimate;
+        if(fullburst == null)
+        {
+            return;
+        }
+        Projectile projectile = fullburst.fullBurstProjectileAbility.projectile;
+        Debug.Log("Fire Full Burst");
+        Debug.Log(projectile.ToString());
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdFireFunnel(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        FunnelAbility funnel = (FunnelAbility)uniqueAbility;
+        if(funnel == null)
+        {
+            return;
+        }
+        Projectile projectile = funnel.projectile;
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdActivateFunnel()
+    {
+        RpcChangeFunnelStatus(true);
+    }
+
+    [ClientRpc]
+    public void RpcChangeFunnelStatus(bool status)
+    {
+        FunnelTriggerable funnel = GetComponentInChildren<FunnelTriggerable>();
+        funnel.isActivate = status;
+    }
+    
+    [Command]
+    public void CmdDeactivateFunnel()
+    {
+        RpcChangeFunnelStatus(false);
     }
 
     private Rigidbody SpawnProjectile(Projectile projectile, float charge, Vector3 forward, Vector3 position, Quaternion rotation)

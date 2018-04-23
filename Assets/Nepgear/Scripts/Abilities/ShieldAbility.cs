@@ -13,12 +13,13 @@ public class ShieldAbility : UniqueAbility {
 
     public override void DeTriggerAbility()
     {
-        shield.Deactivate();
+        return;
+        //shield.Deactivate();
     }
 
     public override void Initialize(GameObject obj)
     {
-        shield = obj.GetComponent<ShieldTriggerable>();
+        shield = obj.GetComponentInChildren<ShieldTriggerable>();
         shield.maxShieldHealth = maxShieldHealth;
         shield.shieldDecayRate = shieldDecayRate;
         shield.shieldRegenRate = shieldRegenRate;
@@ -28,7 +29,10 @@ public class ShieldAbility : UniqueAbility {
 
     public override void TriggerAbility()
     {
-        shield.Activate();
+        if (shield.isActivate)
+            shield.Deactivate();
+        else
+            shield.Activate();
     }
 
     public override void TriggerReload()

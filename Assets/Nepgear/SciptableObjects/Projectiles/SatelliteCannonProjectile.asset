@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SatelliteCannonProjectile
   m_EditorClassIdentifier: 
   projectileId: P7
-  damage: 150
+  damage: 50
   force: 200
   lifeTime: 5
   speed: 600
@@ -21,6 +21,6 @@ MonoBehaviour:
     type: 2}
   blastForce: 100
   blastRadius: 500
-  blastDamage: 50
+  blastDamage: 10
   timeBeforeDestroy: 2
   risingSpeed: 0
