@@ -102,6 +102,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public bool isStaggering;
 
     public bool debug = false;
+    public bool shouldRegenStamina;
+    private bool isInvulnerable;
 
     protected void Start()
     {
@@ -162,6 +164,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
         m_Float = false;
         isUltimateActived = false;
         ultimate.Initialize(this.gameObject);
+        shouldRegenStamina = true;
+        isInvulnerable = false;
         //uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
     }
@@ -289,7 +293,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         GetInput();
         if (characterController.isGrounded && !IsDashing() && !IsRunning())
         {
-            if (stamina < maxStamina && boostChargeTime < Time.time)
+            if (stamina < maxStamina && boostChargeTime < Time.time && shouldRegenStamina)
             {
                 stamina += Math.Abs(stamina+10) * Time.fixedDeltaTime;
                 if (stamina > maxStamina)
@@ -454,6 +458,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         if (dead)
             return;
+        if (isInvulnerable)
+            return;
 
         RpcTakeDamage(damage);
         hitPoint -= damage;
@@ -473,6 +479,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
             return;
         if (isStaggering)
             return;
+        if (isInvulnerable)
+            return;
+
         RpcStaggering(staggerDamage);
         stagger += staggerDamage;
 
@@ -487,9 +496,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [Command]
     public void CmdOverclock(float multiplier)
     {
-        //floatSpeed *= multiplier;
-        //runSpeed *= multiplier;
-        //walkSpeed *= multiplier;
         RpcOverclock(multiplier);
     }
     [Command]
@@ -497,6 +503,27 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         RpcStopOverclock(multiplier);
     }
+    [Command]
+    public void CmdFullBurst()
+    {
+        isInvulnerable = true;
+
+        RpcChangeStatusFullBurst(true);
+    }
+    [Command]
+    public void CmdStopFullBurst()
+    {
+        isInvulnerable = false;
+
+        RpcChangeStatusFullBurst(false);
+    }
+
+    [ClientRpc]
+    public void RpcChangeStatusFullBurst(bool status)
+    {
+        isInvulnerable = status;
+    }
+
     [ClientRpc]
     public void RpcOverclock(float multiplier)
     {

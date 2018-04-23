@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a57570da0474c342a3ebcd21b03fdea, type: 3}
+  m_Name: Funnel
+  m_EditorClassIdentifier: 
+  aName: Funnel
+  aID: UW3
+  aSound: {fileID: 8300000, guid: f59164772db507d44b2e5027faaed519, type: 3}
+  triggerDelay: 1
+  projectile: {fileID: 11400000, guid: a655c2237890d8f42986e2fcba3fb12f, type: 2}
+  fireDelay: 0.1
+  staminaDrain: 10

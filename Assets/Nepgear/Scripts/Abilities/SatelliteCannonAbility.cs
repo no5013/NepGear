@@ -18,11 +18,11 @@ public class SatelliteCannonAbility : UltimateAbility {
 
     public override void TriggerAbility()
     {
-        ucs.SatelliteCannon(duration, startHeight, fireDelay);        
+        ucs.SatelliteCannon(startHeight, fireDelay);        
     }
 
     public override void TriggerAbilityEnd()
     {
-        return;
+        ucs.StopSatelliteCannon();
     }
 }

@@ -16,6 +16,9 @@ public class InputHandler : NetworkBehaviour {
     public float fire2;
     public bool fire3;
 
+    public float reload1;
+    public float reload2;
+
     public bool ultimate;
 
     public bool jumping;
@@ -60,6 +63,8 @@ public class InputHandler : NetworkBehaviour {
             fire2 = CrossPlatformInputManager.GetAxis("VRFire2");
         }
         fire3 = CrossPlatformInputManager.GetButton("Fire3");
+        reload1 = CrossPlatformInputManager.GetAxis("Reload1");
+        reload2 = CrossPlatformInputManager.GetAxis("Reload2");
         //if (fire3 <= 0)
         //{
         //    //fire3 = CrossPlatformInputManager.GetAxis("VRFire3");

@@ -13,9 +13,15 @@ public class Bullet : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       
+        StartCoroutine(EnableCollision());
         Destroy(this.gameObject, lifeTime);
 	}
+
+    IEnumerator EnableCollision()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<Collider>().enabled = true;
+    }
 	
     [ServerCallback]
     void OnCollisionEnter(Collision other) {

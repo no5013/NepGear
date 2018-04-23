@@ -19,7 +19,8 @@ public class RocketAbility : UniqueAbility {
 
     public override void Initialize(GameObject obj)
     {
-        rocketLuncher = obj.GetComponent<RocketShootTriggerable>();
+        Debug.Log(obj.ToString());
+        rocketLuncher = obj.GetComponentInChildren<RocketShootTriggerable>();
         rocketLuncher.gunId = aID;
         rocketLuncher.rocket = rocket;
         rocketLuncher.range = range;
