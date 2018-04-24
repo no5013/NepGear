@@ -14,10 +14,10 @@ public class GameManager : NetworkBehaviour {
     static public List<PlayerBehaviorScript> players_A = new List<PlayerBehaviorScript>();
     static public List<PlayerBehaviorScript> players_B = new List<PlayerBehaviorScript>();
 
-    public float startDelay = 5f;           // The delay between the start of RoundStarting and RoundPlaying phases.
-    public float endDelay = 10f;             // The delay between the end of RoundPlaying and RoundEnding phases.
+    private float startDelay = 5f;           // The delay between the start of RoundStarting and RoundPlaying phases.
+    private float endDelay = 10f;             // The delay between the end of RoundPlaying and RoundEnding phases.
 
-    public float playerLifeStock = 3f;
+    public static float playerLifeStock = 3f;
 
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -39,7 +39,10 @@ public class GameManager : NetworkBehaviour {
     private float matchCountdown = 4f;
 
     //Return to hangar
-    private float returnCountdown = 3f;
+    private float returnCountdown = 4f;
+
+    //Time that will stop when the winner is declared
+    private float stopCountdown = 1f;
 
     //Text ui for player
     private string readyText = "READY";
@@ -108,7 +111,7 @@ public class GameManager : NetworkBehaviour {
 
     public static float GetTeamStock(string team)
     {
-        float lifeStock = 0;
+        float lifeStock = 10;
         if (team.Equals("A") && players_A.Count > 0)
         {
             lifeStock = players_A[0].lifeStock;
@@ -156,25 +159,35 @@ public class GameManager : NetworkBehaviour {
     }
 
     [ClientRpc]
-    private void RpcUpdateTeamScore()
+    public void RpcUpdateTeamScore()
+    {
+        UpdateTeamScore();
+    }
+
+    public static void UpdateTeamScore()
     {
         foreach (PlayerBehaviorScript player in players)
         {
             UIManager playerUI = player.uiManager;
             if (playerUI != null)
                 playerUI.SetStocks(player.lifeStock, GetTeamStock(GetEnemyTeam(player.team)), playerLifeStock);
-            else
-                Debug.Log(player.lifeStock + " " + GetTeamStock(GetEnemyTeam(player.team)));
+
         }
     }
 
-    private string GetEnemyTeam(string currentTeam)
+    private static string GetEnemyTeam(string currentTeam)
     {
         if (currentTeam.Equals("A"))
         {
             return "B";
         }
         return "A";
+    }
+
+    public static float GetEnemyTeamStock(string currentTeam)
+    {
+        string enemyTeam = GetEnemyTeam(currentTeam);
+        return GetTeamStock(enemyTeam);
     }
 
     /*public void PreparePlayers()
@@ -424,6 +437,53 @@ public class GameManager : NetworkBehaviour {
         
         //notify client they should disable tank control
         RpcRoundEnding();
+        RpcSetTimeScale(0);
+
+        float remainingTime = stopCountdown;
+        int floorTime = Mathf.FloorToInt(remainingTime);
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.unscaledDeltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                //To Set player ui
+                if (floorTime > 0)
+                {
+                    Debug.Log("Time will run in " + floorTime);
+                }
+            }
+        }
+        RpcSetTimeScale(0.05f);
+        //RpcSetFixedDeltaTime(0.2f);
+
+        remainingTime = 2f;
+        floorTime = Mathf.FloorToInt(remainingTime);
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.unscaledDeltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {//to avoid flooding the network of message, we only send a notice to client when the number of plain seconds change.
+                floorTime = newFloorTime;
+
+                //To Set player ui
+                if (floorTime > 0)
+                {
+                    Debug.Log("Time will speed in " + floorTime);
+                }
+            }
+        }
+        RpcSetTimeScale(1f);
+        //RpcSetFixedDeltaTime(1f);
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_EndWait;
@@ -433,8 +493,23 @@ public class GameManager : NetworkBehaviour {
     private void RpcRoundEnding()
     {
         gameWinner = GetRoundWinner();
-        //DisablePlayers();
-        ShowResult();
+        //DisablePlayerControl();
+
+        RpcSetPlayerStateText("BATTLE OVER");
+        Debug.Log("BATTLE OVER");
+    }
+
+    [ClientRpc]
+    private void RpcSetTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+    }
+
+    [ClientRpc]
+    private void RpcSetFixedDeltaTime(float scale)
+    {
+        Time.fixedDeltaTime = Time.timeScale * scale;
     }
 
     private void DeclareResult()
@@ -473,6 +548,7 @@ public class GameManager : NetworkBehaviour {
                 if (floorTime > 0)
                 {
                     RpcSetPlayerStateText("Return to hangar in " + floorTime.ToString());
+                    Debug.Log("Return to hangar in " + floorTime.ToString());
                 }
             }
         }
