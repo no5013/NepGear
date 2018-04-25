@@ -156,7 +156,11 @@ namespace Prototype.NetworkLobby
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
-            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
+            if (LobbyManager.s_Singleton != null)
+            {
+                LobbyManager.s_Singleton.OnPlayersNumberModified(0);
+                LobbyManager.s_Singleton.characterPanel.GetComponent<CharacterSelector>().OnConfirmCharacter();
+            }
         }
 
         //This enable/disable the remove button depending on if that is the only local player or not

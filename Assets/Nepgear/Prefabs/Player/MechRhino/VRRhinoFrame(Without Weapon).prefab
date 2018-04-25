@@ -7475,7 +7475,7 @@ MonoBehaviour:
   timeBeforeExplode: 2
   stagger: 0
   isStaggering: 0
-  debug: 1
+  debug: 0
   shouldRegenStamina: 0
 --- !u!114 &114177983672831082
 MonoBehaviour:
