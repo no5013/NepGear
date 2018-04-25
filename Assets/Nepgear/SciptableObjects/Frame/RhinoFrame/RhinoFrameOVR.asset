@@ -18,6 +18,8 @@ MonoBehaviour:
   startingSpeed: 20
   jumpForce: 10
   boostSpeed: 10
+  dodgeForce: 600
+  mass: 1000
   staggerLimit: 1000
   staggerRecovery: 50
   characterPrefab: {fileID: 1624428743771486, guid: 3fcd8cc7c7c38d74094315a89bfcc79f,

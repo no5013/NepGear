@@ -101,9 +101,14 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public bool isStaggering;
 
+    [SerializeField] private float dodgeForce;
+    [SerializeField] private float mass;
+
     public bool debug = false;
     public bool shouldRegenStamina;
     private bool isInvulnerable;
+
+    private Vector3 impact;
 
     protected void Start()
     {
@@ -125,9 +130,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
+        rigidbody = GetComponent<Rigidbody>();
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
         animator = GetComponent<Animator>();
+        impact = Vector3.zero;
 
         //Debug.Log("Can find ui?? " + GetComponentInChildren<UIManager>().ToString());
         //uiManager = GetComponentInChildren<UIManager>();
@@ -144,11 +151,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         walkSpeed = frame.startingSpeed;
         runSpeed = frame.boostSpeed;
-
+        dodgeForce = frame.dodgeForce;
         maxHitPoint = frame.maxHitPoint;
         maxStamina = frame.maxStamina;
         ultimateCharge = 0f;
         floatSpeed = frame.jumpForce;
+        mass = frame.mass;
         lerpTime = 0.25f;
         m_DashDistance = frame.startingSpeed;
         hitPoint = maxHitPoint;
@@ -239,10 +247,10 @@ public class PlayerBehaviorScript : NetworkBehaviour
             timePressedKey += Time.deltaTime;
         }
 
-        if (m_isDashing)
-        {
-            Dash();
-        }
+        //if (m_isDashing)
+        //{
+        //    Dash();
+        //}
         //if (isUltimateActived)
         //{
         //    ultimateActiveDuration += Time.deltaTime;
@@ -265,6 +273,16 @@ public class PlayerBehaviorScript : NetworkBehaviour
     }
     private void FixedUpdate()
     {
+        
+        if (impact.magnitude > 0.2)
+        {
+            characterController.Move(impact);
+        }
+        else
+        {
+            m_isDashing = false;
+        }
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.fixedDeltaTime);
         if (isServer)
         {
             if (stagger > 0f)
@@ -306,6 +324,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             boostChargeTime = Time.time + 1f;
         }
+
         if (HasUltimate())
         {
             if (ultimateCharge < ultimate.maxCharge)
@@ -319,6 +338,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
                 }
             }
         }
+       
     }
     private void GetInput()
     {
@@ -336,15 +356,23 @@ public class PlayerBehaviorScript : NetworkBehaviour
         if (!ih.dashing && 0.0f < timePressedKey && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
         {
             m_isDashing = true;
-            m_CharacterDashStartPos = characterController.transform.position;
+           
             Vector2 magnitude = new Vector2(horizontal, vertical);
             if (magnitude.sqrMagnitude > 1)
             {
                 magnitude.Normalize();
             }
-            Vector3 desiredMove = transform.forward * magnitude.y + transform.right * magnitude.x;
-            desiredMove *= m_DashDistance;
-            m_CharacterDashEndPos = characterController.transform.position + desiredMove;
+
+            Vector3 desiredMove = (transform.forward * magnitude.y + transform.right * magnitude.x);
+            CmdAddImpact(desiredMove, dodgeForce);
+            //rigidbody.AddForce(transform.forward * 1000);
+            //rigidbody.drag = 10f;
+            //characterController.Move(desiredMove);
+            //m_isDashing = true;
+            //m_CharacterDashStartPos = characterController.transform.position;
+     
+            //desiredMove *= m_DashDistance;
+            //m_CharacterDashEndPos = characterController.transform.position + desiredMove;
             staminaUsed += 10f;
             //           walking = false;
         }
@@ -451,6 +479,26 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public bool IsExhausted()
     {
         return stamina <= 0;
+    }
+
+    [Command]
+    public void CmdAddImpact(Vector3 dir, float force)
+    {
+        dir.Normalize();
+        if (dir.y < 0) dir.y = -dir.y; // reflect down force on the ground
+        //impact += dir.normalized * force / mass;
+        impact += dir.normalized * force / mass;
+        RpcAddImpact(dir, force);
+    }
+
+    [ClientRpc]
+    public void RpcAddImpact(Vector3 dir, float force)
+    {
+        dir.Normalize();
+        if (dir.y < 0) dir.y = -dir.y; // reflect down force on the ground
+        //impact += dir.normalized * force / mass;
+        impact += dir.normalized * force / mass;
+        Debug.Log("Impact magnitude" + impact.magnitude);
     }
 
     [Server]

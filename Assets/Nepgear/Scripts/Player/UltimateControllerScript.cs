@@ -52,7 +52,6 @@ public class UltimateControllerScript : MonoBehaviour {
         isFullBurst = true;
         fwc.CmdFullBurst();
         pbs.CmdFullBurst();
-        // ค้าง จารย์ มันค้าง!!!!
         StartCoroutine(FiringFullBurst(fireDelay));
     }
 

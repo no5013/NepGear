@@ -79,7 +79,9 @@ public class GrenadeBullet : NetworkBehaviour {
 
             // If they don't have a rigidbody, go on to the next collider.
             if (!targetRigidbody)
+            {
                 continue;
+            }
 
             // Find the TankHealth script associated with the rigidbody.
             PlayerBehaviorScript targetHealth = targetRigidbody.GetComponent<PlayerBehaviorScript>();
@@ -98,7 +100,7 @@ public class GrenadeBullet : NetworkBehaviour {
             // Calculate damage as this proportion of the maximum possible damage.
             float damage = relativeDistance * blastDamage;
             float stagger = relativeDistance * staggerDamage;
-
+            float force = relativeDistance * blastForce;
             // Make sure that the minimum damage is always 0.
             damage = Mathf.Max(0f, damage);
             stagger = Mathf.Max(0f, stagger);
@@ -107,13 +109,17 @@ public class GrenadeBullet : NetworkBehaviour {
             {
                 targetHealth.TakeDamage(damage);
                 targetHealth.Staggering(stagger);
+                targetHealth.CmdAddImpact(explosionToTarget, force);
             }
             if (destructible)
+            {
                 destructible.TakeDamage(damage);
+                targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
+            }
             // Deal this damage to the tank.
-            targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
         }
     }
+
     private void OnDestroy()
     {
         //Explode();
