@@ -260,6 +260,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
             uiManager.SetStagger(stagger * 1.0f / staggerLimit * 1.0f);
+            uiManager.SetUltimate(ultimateCharge * 1.0f / ultimate.maxCharge * 1.0f);
         }
 
     }
