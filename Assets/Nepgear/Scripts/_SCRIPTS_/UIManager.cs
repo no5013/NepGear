@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour {
 
     public void SetUltimate(float percent)
     {
-        ultimateSlider.value = Mathf.Clamp(Mathf.Floor(percent), 0f, 1f);
+        ultimateSlider.value = Mathf.Clamp(percent, 0f, 1f);
     }
 
     public void SetStateText(string text)

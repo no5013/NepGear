@@ -43,7 +43,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [HideInInspector] public float maxHitPoint;
     [HideInInspector] public float stamina;
     [HideInInspector] public float maxStamina;
-    [HideInInspector] public float ultimateCharge;
+    public float ultimateCharge;
     public UltimateAbility ultimate;
     private bool m_isDashing;
     private float lerpTime;
@@ -307,13 +307,14 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             boostChargeTime = Time.time + 1f;
         }
+
         if (HasUltimate())
         {
             if (ultimateCharge < ultimate.maxCharge)
             {
+                ultimateCharge += (ultimate.maxCharge/100f) * Time.fixedDeltaTime;
                 // For test purpose;
-                //ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
-                ultimateCharge = ultimate.maxCharge;
+                //ultimateCharge = ultimate.maxCharge;
                 if (ultimateCharge > ultimate.maxCharge)
                 {
                     ultimateCharge = ultimate.maxCharge;

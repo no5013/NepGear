@@ -44,10 +44,7 @@ public class OnSliderFull : MonoBehaviour
 
     public void OnValueMax()
     {
-        if (!max)
-        {
-            onToggleMax.Invoke(true);
-        }
+        onToggleMax.Invoke(true);
 
         max = true;
         min = false;
@@ -55,10 +52,7 @@ public class OnSliderFull : MonoBehaviour
 
     public void OnValueChange()
     {
-        if (max)
-        {
-            onToggleMax.Invoke(false);
-        }
+        onToggleMax.Invoke(false);
 
         max = false;
         min = false;
@@ -66,10 +60,7 @@ public class OnSliderFull : MonoBehaviour
 
     public void OnValueMin()
     {
-        if (max)
-        {
-            onToggleMax.Invoke(false);
-        }
+        onToggleMax.Invoke(false);
 
         max = false;
         min = true;
