@@ -13,7 +13,8 @@ public class FullBurstAbility : UltimateAbility {
 
     public override void Initialize(GameObject obj)
     {
-        FullBurstShootTriggerable[] additionalGuns = obj.GetComponentsInChildren<FullBurstShootTriggerable>();
+        FullBurstShootTriggerable[] additionalGuns = obj.GetComponentsInChildren<FullBurstShootTriggerable>(true);
+        Debug.Log(obj.transform.name + " FULL BURST GUN " + additionalGuns.Length);
         foreach(FullBurstShootTriggerable gun in additionalGuns)
         {
             fullBurstProjectileAbility.Initialize(gun.gameObject);

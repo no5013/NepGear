@@ -26,6 +26,8 @@ public class CatapultManager : MonoBehaviour {
 
     public GameObject player;
 
+    private float yOffset = 3f;
+
     // Use this for initialization
     void Start () {
         ResetCatapult();
@@ -40,7 +42,9 @@ public class CatapultManager : MonoBehaviour {
         ResetCatapult();
 
         frame.transform.parent = stand.transform;
-        frame.transform.localPosition = Vector3.zero;
+        Vector3 newPosition = Vector3.zero;
+        newPosition.y = yOffset;
+        frame.transform.localPosition = newPosition;
         frame.transform.localRotation = Quaternion.identity;
     }
 	

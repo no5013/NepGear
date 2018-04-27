@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour {
     //time ui
     public Text remainingTimeText;
 
+    //Ultimate Slider
+    public Slider ultimateSlider;
+
     private float fadeDelay = 3f;
 
     // Use this for initialization
@@ -75,13 +78,18 @@ public class UIManager : MonoBehaviour {
     public void SetHealth(float percent)
     {
         healthText.text = Mathf.Clamp(Mathf.Floor(percent * 100), 0f, 100f) + "%";
-        healthImage.fillAmount = percent;
+        healthImage.fillAmount = Mathf.Clamp(percent, 0f, 1f);
     }
 
     public void SetStamina(float percent)
     {
         staminaText.text = Mathf.Clamp(Mathf.Floor(percent*100), 0f, 100f) + "%";
-        staminaImage.fillAmount = percent;
+        staminaImage.fillAmount = Mathf.Clamp(percent, 0f, 1f);
+    }
+
+    public void SetUltimate(float percent)
+    {
+        ultimateSlider.value = Mathf.Clamp(percent, 0f, 1f);
     }
 
     public void SetStateText(string text)

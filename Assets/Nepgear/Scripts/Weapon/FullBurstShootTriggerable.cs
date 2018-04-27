@@ -10,7 +10,7 @@ public class FullBurstShootTriggerable : MonoBehaviour {
     private AudioSource soundSource;
     public Transform[] bulletSpawns;
 
-    FrameWeaponController fwc;
+    public FrameWeaponController fwc;
 
     public void Initialize()
     {
