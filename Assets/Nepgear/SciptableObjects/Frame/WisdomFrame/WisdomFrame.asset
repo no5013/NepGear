@@ -22,7 +22,8 @@ MonoBehaviour:
   staggerRecovery: 50
   characterPrefab: {fileID: 1831574219896470, guid: 190b67e5ac5f8cf4b991d5144daf33c9,
     type: 2}
-  framePrefab: {fileID: 0}
+  framePrefab: {fileID: 1636013433836426, guid: 8dcfe92f2a9483f479236c988f26ab75,
+    type: 2}
   ultimate: {fileID: 11400000, guid: 15d3e53cd21d73149b02a0eb3d9b297f, type: 2}
   uniqueWeaponAbility: {fileID: 11400000, guid: 6198ddf8b2a54f844b88c89ee53d4dd7,
     type: 2}
