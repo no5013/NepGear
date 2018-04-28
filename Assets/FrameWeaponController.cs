@@ -455,8 +455,6 @@ public class FrameWeaponController : NetworkBehaviour {
             return;
         }
         Projectile projectile = fullburst.fullBurstProjectileAbility.projectile;
-        Debug.Log("Fire Full Burst");
-        Debug.Log(projectile.ToString());
         Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
         NetworkServer.Spawn(projectileRigidbody.gameObject);
     }

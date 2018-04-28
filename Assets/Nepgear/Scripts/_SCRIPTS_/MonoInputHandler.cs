@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class InputHandler : NetworkBehaviour {
+public class MonoInputHandler : MonoBehaviour
+{
 
     public float horizontal;
     public float vertical;
@@ -26,19 +26,15 @@ public class InputHandler : NetworkBehaviour {
 
     public bool any;
 
-    private Animator animator;
+    //private Animator animator;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
         //UpdateStates();
         HandleInput();
     }
@@ -52,7 +48,7 @@ public class InputHandler : NetworkBehaviour {
         xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
 
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
-        if(fire1 <= 0)
+        if (fire1 <= 0)
         {
             //fire1 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
             fire1 = CrossPlatformInputManager.GetAxis("VRFire1");
@@ -75,6 +71,7 @@ public class InputHandler : NetworkBehaviour {
         jumping = CrossPlatformInputManager.GetButton("Ascending");
         dashing = CrossPlatformInputManager.GetButton("Dash");
         ultimate = CrossPlatformInputManager.GetButton("UltimateHalfLeft") && CrossPlatformInputManager.GetButton("UltimateHalfRight");
+
         any = fire1 > 0 || fire2 > 0 || fire3 || reload1 > 0 || reload2 > 0 || jumping || dashing || ultimate;
     }
 
