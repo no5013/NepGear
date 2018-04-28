@@ -159,7 +159,7 @@ namespace Prototype.NetworkLobby
             if (LobbyManager.s_Singleton != null)
             {
                 LobbyManager.s_Singleton.OnPlayersNumberModified(0);
-                LobbyManager.s_Singleton.characterPanel.GetComponent<CharacterSelector>().OnConfirmCharacter();
+                //LobbyManager.s_Singleton.characterPanel.GetComponent<CharacterSelector>().OnConfirmCharacter();
             }
         }
 

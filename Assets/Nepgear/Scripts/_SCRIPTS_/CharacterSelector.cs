@@ -134,6 +134,7 @@ namespace Prototype.NetworkLobby
 
         public void OnConfirmCharacter()
         {
+            //if (LobbyPlayerList._instance) {
             lobbyPlayer = LobbyPlayerList._instance.FindLocalPlayer();
 
             OnChangeSetting();

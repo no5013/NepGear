@@ -29,6 +29,12 @@ public class Bullet : NetworkBehaviour {
         //Debug.Log("Points colliding: " + other.contacts.Length);
         //Debug.Log("First normal of the point that collide: " + other.contacts[0].normal);
         Debug.Log("Collision Bullet hit");
+        ShieldTriggerable shield = other.gameObject.GetComponent<ShieldTriggerable>();
+        if (shield != null)
+        {
+            shield.TakeDamage(damage);
+            return;
+        }
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
         if (isPlayer != null)
         {
