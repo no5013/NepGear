@@ -1517,7 +1517,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4426636811211178}
-  - {fileID: 4324697206805488}
   m_Father: {fileID: 4862162214106894}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1714,8 +1713,8 @@ Transform:
   m_LocalPosition: {x: 0.4, y: 0, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4175091663389092}
-  m_RootOrder: 1
+  m_Father: {fileID: 4426636811211178}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!4 &4333905959119012
 Transform:
@@ -1867,6 +1866,7 @@ Transform:
   m_Children:
   - {fileID: 4909206921533920}
   - {fileID: 4794824541320714}
+  - {fileID: 4324697206805488}
   m_Father: {fileID: 4175091663389092}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3325,9 +3325,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.47088668
-  m_Height: 2
+  m_Height: 0
   m_Direction: 0
-  m_Center: {x: -0.8, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!136 &136719227299917962
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3351,9 +3351,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.47088668
-  m_Height: 2
+  m_Height: 0
   m_Direction: 0
-  m_Center: {x: 0.8, y: 0, z: 0}
+  m_Center: {x: 0.5, y: 0, z: 0}
 --- !u!137 &137115248600855400
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
