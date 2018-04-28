@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1075527333812552}
   m_IsPrefabParent: 1
+--- !u!1 &1014072405666636
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4496985747430662}
+  - component: {fileID: 114169188578548822}
+  m_Layer: 10
+  m_Name: Mount_Hand_Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1018565657457354
 GameObject:
   m_ObjectHideFlags: 1
@@ -207,6 +223,22 @@ GameObject:
   - component: {fileID: 137717385150022762}
   m_Layer: 0
   m_Name: Mech_Humanoid_Arm_L_Geom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1138442615914896
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4705752683478636}
+  - component: {fileID: 114842864411108438}
+  m_Layer: 10
+  m_Name: Mount_Hand_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2380,6 +2412,7 @@ Transform:
   m_Children:
   - {fileID: 4432610495496368}
   - {fileID: 4580152990541494}
+  - {fileID: 4496985747430662}
   m_Father: {fileID: 4915503688971388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2479,6 +2512,19 @@ Transform:
   m_Father: {fileID: 4892874391999410}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4496985747430662
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014072405666636}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -0.4, y: 0, z: -0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4442645229964708}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!4 &4526015027071472
 Transform:
   m_ObjectHideFlags: 1
@@ -2506,6 +2552,7 @@ Transform:
   m_Children:
   - {fileID: 4425646235930458}
   - {fileID: 4328869527102356}
+  - {fileID: 4705752683478636}
   m_Father: {fileID: 4103313556984198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2744,6 +2791,19 @@ Transform:
   m_Father: {fileID: 4765038362845704}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4705752683478636
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138442615914896}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.4, y: 0, z: -0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4526974065335708}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!4 &4708180745626722
 Transform:
   m_ObjectHideFlags: 1
@@ -4228,6 +4288,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114169188578548822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014072405666636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65231a7d3bfae143a26d886631aa989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114411270738587560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4241,6 +4312,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftWeaponId: 
   rightWeaponId: 
+--- !u!114 &114842864411108438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138442615914896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e278119c5bf472c4f992a8219d8e01ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135829572073647748
 SphereCollider:
   m_ObjectHideFlags: 1
