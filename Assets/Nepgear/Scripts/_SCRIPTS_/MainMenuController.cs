@@ -12,7 +12,7 @@ public class MainMenuController : MonoBehaviour {
     private bool isLoadingScene;
     public string lobbyScene;
 
-    private float dimTime = 5f;
+    private float dimTime = 3f;
 
     // Use this for initialization
 	void Start () {
@@ -38,7 +38,7 @@ public class MainMenuController : MonoBehaviour {
 
     IEnumerator ChangeScene()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(dimTime);
         SceneManager.LoadScene(lobbyScene);
     }
 
