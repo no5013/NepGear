@@ -1986,6 +1986,7 @@ GameObject:
   - component: {fileID: 114492609279514060}
   - component: {fileID: 114633093717396664}
   - component: {fileID: 114781448284526342}
+  - component: {fileID: 114804667325701444}
   m_Layer: 9
   m_Name: VRWisdomFrame(Without Weapon)
   m_TagString: Player
@@ -5778,6 +5779,7 @@ MonoBehaviour:
   ultimate: 0
   jumping: 0
   dashing: 0
+  any: 0
 --- !u!114 &114380563312953880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6057,6 +6059,8 @@ MonoBehaviour:
   timeBeforeExplode: 2
   stagger: 0
   isStaggering: 0
+  dodgeForce: 0
+  mass: 0
   debug: 0
   shouldRegenStamina: 0
 --- !u!114 &114443227903552898
@@ -6111,7 +6115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95663570295202776}
-  m_ParameterSendBits: 51
+  m_ParameterSendBits: 1023
   param0: 
   param1: 
   param2: 
@@ -6699,6 +6703,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 100%
+--- !u!114 &114804667325701444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831574219896470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175d746bb7b01b242a5800e32a59355e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  directionDampTime: 0.25
 --- !u!114 &114816206567458236
 MonoBehaviour:
   m_ObjectHideFlags: 1
