@@ -19,7 +19,8 @@ MonoBehaviour:
   staggerDamage: 200
   projectilePrefab: {fileID: 1786085406371012, guid: 4fc746812ee73c44b86bb48ce3fbcee0,
     type: 2}
-  blastForce: 2000
-  blastRadius: 200
+  blastForce: 200
+  blastRadius: 5
   blastDamage: 10
+  timeBeforeDestroy: 0
   risingSpeed: 0

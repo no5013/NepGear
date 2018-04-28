@@ -20,6 +20,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1318930004973286, guid: 15d1f109a4b1c58489001dbfbb95dbc5,
     type: 2}
   blastForce: 400
-  blastRadius: 100
+  blastRadius: 2
   blastDamage: 25
+  timeBeforeDestroy: 0
   risingSpeed: 0
