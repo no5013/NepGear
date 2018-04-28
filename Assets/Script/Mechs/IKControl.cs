@@ -33,7 +33,7 @@ public class IKControl : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
 
-        m_HeadTargetRot = animator.GetBoneTransform(HumanBodyBones.Head).rotation;
+        //m_HeadTargetRot = animator.GetBoneTransform(HumanBodyBones.Head).rotation;
     }
 
     //a callback for calculating IK
@@ -84,14 +84,14 @@ public class IKControl : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if (animator && isLocalPlayer)
+        /*if (animator && isLocalPlayer)
         {
             if (headRotation != null)
             {
                 Transform transform = animator.GetBoneTransform(HumanBodyBones.Head);
                 transform.rotation = Quaternion.Slerp(transform.rotation, ClampRotationAroundXAxis(transform.rotation * headRotation.rotation), smoothTime * Time.deltaTime);
             }
-        }
+        }*/
     }
 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
