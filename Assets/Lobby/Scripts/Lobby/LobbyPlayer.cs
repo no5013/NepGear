@@ -73,10 +73,11 @@ namespace Prototype.NetworkLobby
                 SetupOtherPlayer();
             }
 
-            //setup the player data on UI. The value are SyncVar so the player
-            //will be created with the right value currently on server
+            //Reset local rotation of player
             transform.localRotation = Quaternion.identity;
 
+            //setup the player data on UI. The value are SyncVar so the player
+            //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
             OnSteamID(steamID);
@@ -114,8 +115,6 @@ namespace Prototype.NetworkLobby
 
             readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
             readyButton.interactable = false;
-
-            StartCoroutine(FetchAvatar(new CSteamID(steamID)));
 
             OnClientReady(false);
         }
@@ -158,6 +157,8 @@ namespace Prototype.NetworkLobby
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
+            //StartCoroutine(FetchAvatar(new CSteamID(steamID)));
+
             if (LobbyManager.s_Singleton != null)
             {
                 LobbyManager.s_Singleton.OnPlayersNumberModified(0);
@@ -446,6 +447,7 @@ namespace Prototype.NetworkLobby
 
             if (avatarInt > 0)
             {
+                Debug.Log("FETCH FINISH");
                 SteamUtils.GetImageSize(avatarInt, out width, out height);
                 if (width > 0 && height > 0)
                 {
