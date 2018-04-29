@@ -103,6 +103,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     [SerializeField] private float dodgeForce;
     [SerializeField] private float mass;
+    [SerializeField] private AudioClip staggerSound;
 
     public bool debug = false;
     public bool shouldRegenStamina;

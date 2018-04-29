@@ -9,10 +9,13 @@ public class Bullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float force;
     [SyncVar] [HideInInspector] public float lifeTime;
     [SyncVar] [HideInInspector] public float staggerDamage;
+
+    private AudioSource impactSound;
     //public ParticleSystem impactPrefab;
 
 	// Use this for initialization
 	void Start () {
+        impactSound = GetComponent<AudioSource>();
         StartCoroutine(EnableCollision());
         Destroy(this.gameObject, lifeTime);
 	}
@@ -64,7 +67,8 @@ public class Bullet : NetworkBehaviour {
             }
         }
         //Impact();
-        //RpcImpactEffect(other.contacts[0].point, Quaternion.identity);
+        impactSound.Play();
+        RpcImpactEffect();
         Destroy(this.gameObject);
     }
 
@@ -97,12 +101,11 @@ public class Bullet : NetworkBehaviour {
     //   Destroy(this.gameObject);
     //}
 
-    //[ClientRpc]
-    //public void RpcImpactEffect(Vector3 position, Quaternion rotation)
-    //{
-    //    Debug.Log("Instantiate Bullet Impact Prefab");
-    //    Instantiate(impactPrefab, position, rotation);
-    //}
+    [ClientRpc]
+    public void RpcImpactEffect()
+    {
+        impactSound.Play();
+    }
 
     //public void Impact()
     //{

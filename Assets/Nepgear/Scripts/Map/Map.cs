@@ -12,6 +12,7 @@ public class Map : ScriptableObject
 {
     public string id;
     public string mapName;
+    public AudioClip backgroundMusic;
     
     public SceneField mapScene;
 }
