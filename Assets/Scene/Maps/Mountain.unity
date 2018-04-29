@@ -4538,10 +4538,6 @@ Prefab:
       propertyPath: m_Name
       value: CatapultMK2_A
       objectReference: {fileID: 0}
-    - target: {fileID: 1194023534949698, guid: 8954267059f35fc41bd1bf082932f914, type: 2}
-      propertyPath: m_TagString
-      value: Spawn_A
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8954267059f35fc41bd1bf082932f914, type: 2}
   m_IsPrefabParent: 0
@@ -7503,6 +7499,10 @@ Prefab:
     - target: {fileID: 1194023534949698, guid: 8954267059f35fc41bd1bf082932f914, type: 2}
       propertyPath: m_Name
       value: CatapultMK2_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194023534949698, guid: 8954267059f35fc41bd1bf082932f914, type: 2}
+      propertyPath: m_TagString
+      value: Spawn_B
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8954267059f35fc41bd1bf082932f914, type: 2}

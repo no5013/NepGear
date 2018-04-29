@@ -258,6 +258,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4987840485646572}
+  - component: {fileID: 95556942038039772}
   m_Layer: 0
   m_Name: CatapultPivot
   m_TagString: Untagged
@@ -491,10 +492,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4019544843582830}
   - component: {fileID: 114349244198725762}
-  - component: {fileID: 95157853302152290}
   m_Layer: 0
   m_Name: CatapultMK2
-  m_TagString: Spawn_B
+  m_TagString: Spawn_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6484,13 +6484,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95157853302152290
+--- !u!95 &95556942038039772
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1194023534949698}
+  m_GameObject: {fileID: 1085626570654738}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f7f205f9fc3fb464a963ab8453350c5a, type: 2}
@@ -7886,4 +7886,5 @@ MonoBehaviour:
   stand: {fileID: 1393219795685934}
   maxSpeed: 20
   launching: 0
+  animator: {fileID: 95556942038039772}
   player: {fileID: 0}
