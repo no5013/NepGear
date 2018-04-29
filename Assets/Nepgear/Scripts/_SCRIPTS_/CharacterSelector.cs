@@ -23,6 +23,10 @@ namespace Prototype.NetworkLobby
         private int selectedLeftWeaponRef;
         private int selectedRightWeaponRef;
 
+        private int currentSelectedCharacter = 0;
+        private int currentSelectedLeft = 0;
+        private int currentSelectedRight = 0;
+
         public LobbyPlayer lobbyPlayer;
 
         public RectTransform lobbyPanel;
@@ -127,56 +131,69 @@ namespace Prototype.NetworkLobby
 
         public void OnCancelSelect()
         {
-            mechBase.Initialize(lobbyPlayer.frameId, lobbyPlayer.leftWeaponId, lobbyPlayer.rightWeaponId);
+            if(lobbyPlayer != null)
+            {
+                mechBase.Initialize(lobbyPlayer.frameId, lobbyPlayer.leftWeaponId, lobbyPlayer.rightWeaponId);
+            }
+            else
+            {
+                selectedCharacterRef = currentSelectedCharacter;
+                selectedLeftWeaponRef = currentSelectedLeft;
+                selectedRightWeaponRef = currentSelectedRight;
+                OnChangeSetting();
+            }
+
 
             LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
         }
 
         public void OnConfirmCharacter()
         {
-            //if (LobbyPlayerList._instance) {
-            lobbyPlayer = LobbyPlayerList._instance.FindLocalPlayer();
+            currentSelectedCharacter = selectedCharacterRef;
+            currentSelectedLeft = selectedLeftWeaponRef;
+            currentSelectedRight = selectedRightWeaponRef;
 
             OnChangeSetting();
-            if(lobbyPlayer.isServer)
+
+            if(LobbyPlayerList._instance == null)
             {
-                lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+                return;
             }
-            else
+
+            lobbyPlayer = LobbyPlayerList._instance.FindLocalPlayer();
+
+            if (lobbyPlayer != null)
             {
-                lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+                if (lobbyPlayer.isServer)
+                {
+                    lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+                }
+                else
+                {
+                    lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+                }
             }
-            //// Instantiate Gun Object and Player Object
-            //GameObject leftWeapon = Instantiate(selectedCharacter.leftWeaponPrefab);
-            //GameObject rightWeapon = Instantiate(selectedCharacter.rightWeaponPrefab);
-            //GameObject spawnPlayer = Instantiate(player, playerSpawnPosition, Quaternion.identity) as GameObject;
 
-            //// Set Child to Camera
-            //leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
-            //rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<Camera>().transform;
+            LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
+        }
 
-            //// VR
-            //leftWeapon.transform.parent = spawnPlayer.GetComponentInChildren<LeftController>().transform;
-            //rightWeapon.transform.parent = spawnPlayer.GetComponentInChildren<RightController>().transform;
+        public void OnConfirmCharacter(LobbyPlayer lobbyPlayer)
+        {
+            currentSelectedCharacter = selectedCharacterRef;
+            currentSelectedLeft = selectedLeftWeaponRef;
+            currentSelectedRight = selectedRightWeaponRef;
 
-            //// Set Local Position
-            //leftWeapon.transform.localPosition = new Vector3(-0.185f, -0.04f, 0.2f);
-            //rightWeapon.transform.localPosition = new Vector3(0.185f, -0.04f, 0.2f);
+            OnChangeSetting();
+       
+                if (lobbyPlayer.isServer)
+                {
+                    lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+                }
+                else
+                {
+                    lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+                }
 
-            //// Get Reference
-            //FrameWeapon frameWeapon = spawnPlayer.GetComponentInChildren<FrameWeapon>();
-            //PlayerBehaviorScript pbs = spawnPlayer.GetComponent<PlayerBehaviorScript>();
-            //FrameWeaponController fwc = spawnPlayer.GetComponent<FrameWeaponController>();
-
-            //// Initialize
-            //pbs.Initialize(selectedCharacter);
-            //fwc.Initialize(Instantiate(selectedCharacter.leftWeapon), leftWeapon, Instantiate(selectedCharacter.rightWeapon), rightWeapon);
-
-            //characterSelectPanel.SetActive(false);
-            //if (isServer)
-            //    lobbyManager.RpcSetCharacter(selectedCharacter);
-            //else
-            //    lobbyManager.CmdSetCharacter(selectedCharacter);
             LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
         }
 
