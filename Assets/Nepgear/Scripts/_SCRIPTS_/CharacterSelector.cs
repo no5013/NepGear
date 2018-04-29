@@ -117,7 +117,7 @@ namespace Prototype.NetworkLobby
             OnChangeSetting();
         }
 
-        private void OnChangeSetting()
+        public void OnChangeSetting()
         {
             if (mechBase != null)
             {
