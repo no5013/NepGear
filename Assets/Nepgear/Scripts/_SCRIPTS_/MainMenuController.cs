@@ -14,19 +14,22 @@ public class MainMenuController : MonoBehaviour {
 
     private float dimTime = 3f;
 
+    private AudioSource source;
+
     // Use this for initialization
 	void Start () {
 
         isLoadingScene = false;
-        ih = GetComponent<MonoInputHandler>();    
+        ih = GetComponent<MonoInputHandler>();
+        source = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(ih.any);
         if(ih.any && !isLoadingScene)
         {
             isLoadingScene = true;
+            source.Play();
             StartCoroutine(ChangeScene());
         }
         if(isLoadingScene)
