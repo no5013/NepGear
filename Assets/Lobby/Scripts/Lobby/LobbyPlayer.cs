@@ -93,7 +93,9 @@ namespace Prototype.NetworkLobby
             //if we return from a game, color of text can still be the one for "Ready"
             readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
 
-           SetupLocalPlayer();
+            SetupLocalPlayer();
+
+            LobbyManager.s_Singleton.characterPanel.GetComponent<CharacterSelector>().OnConfirmCharacter(this);
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -162,7 +164,6 @@ namespace Prototype.NetworkLobby
             if (LobbyManager.s_Singleton != null)
             {
                 LobbyManager.s_Singleton.OnPlayersNumberModified(0);
-                //LobbyManager.s_Singleton.characterPanel.GetComponent<CharacterSelector>().OnConfirmCharacter();
             }
         }
 

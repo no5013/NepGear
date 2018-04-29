@@ -24,8 +24,6 @@ public class OnSliderFull : MonoBehaviour
     // Invoked when the value of the slider changes.
     public void ValueChangeCheck()
     {
-        Debug.Log("FUCK");
-
         float value = mainSlider.value;
 
         if (value >= mainSlider.maxValue)
