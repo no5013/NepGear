@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Prototype.NetworkLobby;
 
 public class MechBase : MonoBehaviour {
 
@@ -19,7 +20,10 @@ public class MechBase : MonoBehaviour {
     // Use this for initialization
     void Start () {
         resourcesManager.Init();
-        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID); 
+        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID);
+
+        FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().mechBase = this;
+        FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().OnChangeSetting();
     }
 
     public void Initialize(string mechId, string leftWeaponId, string rightWeaponId)

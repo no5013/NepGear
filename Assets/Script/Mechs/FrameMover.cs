@@ -11,7 +11,7 @@ public class FrameMover : NetworkBehaviour
     public float maxSpeed = 10f;
     public float reachedSpeed = 10f;
 
-    private bool reached = false;
+    public bool reached = false;
 
     private Vector3 moveDir;
 

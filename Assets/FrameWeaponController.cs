@@ -21,9 +21,8 @@ public class FrameWeaponController : NetworkBehaviour {
     [SerializeField] private WeaponAbility rightHandAbility;
     private ProjectileShootTriggerable rightHandTrigger;
 
-    [SerializeField] private GameObject uniqueWeapon;
+    //[SerializeField] private GameObject uniqueWeapon;
     [SerializeField] private UniqueAbility uniqueAbility;
-
 
     public Transform eye;
     //public GameObjec unique
@@ -53,6 +52,11 @@ public class FrameWeaponController : NetworkBehaviour {
     private float uniqueNextReadyFire = 0;
     private float uniqueCoolDownTimeLeft = 0;
 
+    private float leftNextReadyReload = 0;
+    private float rightNextReadyReload = 0;
+
+    private float saveLeftCooldown = 0f;
+    private float saveRightCooldown = 0f;
 
 
     // Use this for initialization
@@ -68,6 +72,8 @@ public class FrameWeaponController : NetworkBehaviour {
         uiManager = GetComponent<PlayerBehaviorScript>().uiManager;
 
         Initialize(Instantiate(wrm.GetWeapon(leftWeaponID)), Instantiate(wrm.GetWeapon(rightWeaponID)));
+        //Initialize(Instantiate(wrm.GetCharacter(characterID)), Instantiate(wrm.GetWeapon(leftWeaponID)), Instantiate(wrm.GetWeapon(rightWeaponID)));
+
     }
 
 
@@ -85,7 +91,7 @@ public class FrameWeaponController : NetworkBehaviour {
     //    rightHandAbility.Initialize(rightHand);
     //}
 
-    public void Initialize(WeaponAbility selectedLeftHandAbility,WeaponAbility selectedRightHandAbility)
+    public void Initialize(WeaponAbility selectedLeftHandAbility, WeaponAbility selectedRightHandAbility)
     {
         //// Set Child to Camera
         GameObject leftWeapon = Instantiate(selectedLeftHandAbility.gunPrefab);
@@ -109,15 +115,17 @@ public class FrameWeaponController : NetworkBehaviour {
         leftCooldown = leftHandAbility.aFireDelay;
         rightCooldown = rightHandAbility.aFireDelay;
 
+        saveLeftCooldown = leftCooldown;
+        saveRightCooldown = rightCooldown;
+
 
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
 
         if(uniqueAbility != null)
         {
-            Debug.Log("Initializing UniqueAbility");
             uniqueCooldown = uniqueAbility.triggerDelay;
-            uniqueAbility.Initialize(uniqueWeapon);
+            uniqueAbility.Initialize(this.gameObject);
         }
 
         if(uiManager != null)
@@ -174,16 +182,29 @@ public class FrameWeaponController : NetworkBehaviour {
             }
         }
 
-        if (ih.fire2 > 0)
+        // Change to fire3 button
+        if (ih.fire3)
         {
             if (Time.time > uniqueNextReadyFire)
             {
                 UniqueButtonTriggered();
             }
         }
-        else
+
+        if (ih.reload1 > 0.9f)
         {
-            UniqueButtonDeTriggered();    
+            if (Time.time > leftNextReadyReload)
+            {
+                LeftButtonReload();
+            }
+        }
+
+        if (ih.reload2 > 0.9f)
+        {
+            if (Time.time > rightNextReadyReload)
+            {
+                RightButtonReload();
+            }
         }
 
     }
@@ -217,7 +238,30 @@ public class FrameWeaponController : NetworkBehaviour {
         leftHandAbility.TriggerAbility();
         animator.SetTrigger("RecoilLeft");
 
-        uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+        if (uiManager)
+        {
+            uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+        }
+    }
+
+    private void LeftButtonReload()
+    {
+        leftNextReadyReload = Time.time + leftHandTrigger.reloadTime;
+        leftHandAbility.TriggerReload();
+    }
+    private void RightButtonReload()
+    {
+        rightNextReadyReload = Time.time + rightHandTrigger.reloadTime;
+        rightHandAbility.TriggerReload();
+    }
+
+    public void ReloadSuccessful()
+    {
+        if(uiManager)
+        {
+            uiManager.SetLeftWeaponText(leftHandTrigger.bulletLeft + "/" + leftHandAbility.aMagazine);
+            uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
+        }
     }
 
     private void RightButtonTriggered()
@@ -232,7 +276,10 @@ public class FrameWeaponController : NetworkBehaviour {
         rightHandAbility.TriggerAbility();
         animator.SetTrigger("RecoilRight");
 
-        uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
+        if (uiManager)
+        {
+            uiManager.SetRightWeaponText(rightHandTrigger.bulletLeft + "/" + rightHandAbility.aMagazine);
+        }
     }
 
     [Command]
@@ -240,11 +287,6 @@ public class FrameWeaponController : NetworkBehaviour {
     {
         ProjectileAbility gun = (ProjectileAbility)Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
         Projectile projectile = gun.projectile;
-        float initialCharge = 0f;
-        if (charge <= 0f)
-        {
-            initialCharge = 1f;
-        }
         if (gun.isSpread)
         {
             GameObject pallet;
@@ -261,47 +303,21 @@ public class FrameWeaponController : NetworkBehaviour {
                 pallet = Instantiate(projectile.projectilePrefab, position, projectileRotation);
 
                 palletRigidBody = pallet.GetComponent<Rigidbody>();
-                palletRigidBody.velocity = pallet.transform.forward * (projectile.speed * charge + initialCharge);
+                palletRigidBody.velocity = pallet.transform.forward * Mathf.Max((projectile.speed * charge), 10f);
 
                 b = pallet.GetComponent<Bullet>();
-                b.damage = projectile.damage * charge + initialCharge;
+                b.damage = Mathf.Max(projectile.damage * charge, 1f);
                 b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force * charge + initialCharge;
-                b.staggerDamage = projectile.staggerDamage * charge + initialCharge;
+                b.force = Mathf.Max(projectile.force * charge, 1f);
+                b.staggerDamage = Mathf.Max(projectile.staggerDamage * charge, 1f);
 
                 NetworkServer.Spawn(palletRigidBody.gameObject);
             }
         }
         else
         {
-            GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
-
-            Rigidbody projectileRigidBody = projectileInstance.GetComponent<Rigidbody>();
-            projectileRigidBody.velocity = (forward) * (projectile.speed * charge + initialCharge);
-
-            Bullet b = projectileInstance.GetComponent<Bullet>();
-            if(b != null)
-            {
-                b.damage = projectile.damage * charge + initialCharge;
-                b.lifeTime = projectile.lifeTime;
-                b.force = projectile.force * charge + initialCharge;
-                b.staggerDamage = projectile.staggerDamage * charge + initialCharge;
-            }
-            GrenadeBullet g = projectileInstance.GetComponent<GrenadeBullet>();
-            if(g != null)
-            {
-                BlastRound blastRound = (BlastRound) projectile;
-                g.damage = blastRound.damage * charge + initialCharge;
-                g.lifeTime = blastRound.lifeTime;
-                g.impactForce = blastRound.force * charge + initialCharge;
-                g.blastDamage = blastRound.blastDamage * charge + initialCharge;
-                g.blastForce = blastRound.blastForce * charge + initialCharge;
-                g.blastRadius = blastRound.blastRadius * charge + initialCharge;
-                g.travelSpeed = blastRound.speed * charge + initialCharge;
-                g.staggerDamage = blastRound.staggerDamage * charge + initialCharge;
-            }
-         
-
+            //GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
+            Rigidbody projectileRigidBody = SpawnProjectile(projectile, charge, forward, position, rotation);
             NetworkServer.Spawn(projectileRigidBody.gameObject);
         }
         RpcMuzzleFlash(gunId, position, rotation);
@@ -310,51 +326,57 @@ public class FrameWeaponController : NetworkBehaviour {
     [Command]
     public void CmdActivateShield()
     {
-        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
-        //shield.isActivate = true;
-        //shield.RpcChangeStatus(true);
         RpcChangeShieldStatus(true);
     }
 
     [ClientRpc]
     public void RpcChangeShieldStatus(bool status)
     {
-        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
+        ShieldTriggerable shield = GetComponentInChildren<ShieldTriggerable>();
         shield.isActivate = status;
     }
 
+    [Command]
+    public void CmdFullBurst()
+    {
+        RpcFullBurst(true);
+    }
+    [Command]
+    public void CmdStopFullBurst()
+    {
+        RpcFullBurst(false);
+    }
+
+    [ClientRpc]
+    public void RpcFullBurst(bool status)
+    {
+        if (status)
+        {
+            leftCooldown = 0f;
+            rightCooldown = 0f;
+        }
+        else
+        {
+            leftCooldown = saveLeftCooldown;
+            rightCooldown = saveRightCooldown;
+        }
+    }
+
 
     [Command]
     public void CmdDeactivateShield()
     {
-        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
-        //shield.isActivate = true;
-        //shield.RpcChangeStatus(true);
         RpcChangeShieldStatus(false);
     }
-
-    /*[ClientRpc]
-    public void RpcChangeShieldStatus(bool status)
-    {
-        // Disable or Enable Exactly shield for every client.
-        
-        //uniqueWeapon.id
-    }
-
-    [Command]
-    public void CmdDeactivateShield()
-    {
-
-        //ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
-        //shield.isActivate = false;
-        ShieldTriggerable shield = uniqueWeapon.GetComponent<ShieldTriggerable>();
-        shield.RpcChangeStatus(false);
-    }*/
 
     [Command]
     public void CmdFireRocket(string gunId, Vector3 forward, Vector3 position, Quaternion rotation)
     {
         RocketAbility gun = (RocketAbility)uniqueAbility;
+        if (gun == null)
+        {
+            return;
+        }
         RaycastHit hit;
         if (Physics.Raycast(eye.position, eye.forward, out hit, gun.range))
         {
@@ -376,11 +398,8 @@ public class FrameWeaponController : NetworkBehaviour {
             r.hitZ = hit.point.z;
             r.lifeTime = rocket.lifeTime;
 
-            //RpcMuzzleFlash();
             NetworkServer.Spawn(rocketRigidBody.gameObject);
-        }
-
-         
+        }    
     }
 
     [ClientRpc]
@@ -411,6 +430,97 @@ public class FrameWeaponController : NetworkBehaviour {
                 r.AddForce(transform.forward * gun.force);
             }
         }   
+    }
+
+    [Command]
+    public void CmdFireSatelliteCannon(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        SatelliteCannonAbility satellite = (SatelliteCannonAbility) GetComponent<PlayerBehaviorScript>().ultimate;
+        if (satellite == null)
+        {
+            return;
+        }
+        Projectile projectile = satellite.projectile;
+
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdFireFullBurst(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        FullBurstAbility fullburst = (FullBurstAbility)GetComponent<PlayerBehaviorScript>().ultimate;
+        if(fullburst == null)
+        {
+            return;
+        }
+        Projectile projectile = fullburst.fullBurstProjectileAbility.projectile;
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdFireFunnel(Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        FunnelAbility funnel = (FunnelAbility)uniqueAbility;
+        if(funnel == null)
+        {
+            return;
+        }
+        Projectile projectile = funnel.projectile;
+        Rigidbody projectileRigidbody = SpawnProjectile(projectile, 1f, forward, position, rotation);
+        NetworkServer.Spawn(projectileRigidbody.gameObject);
+    }
+
+    [Command]
+    public void CmdActivateFunnel()
+    {
+        RpcChangeFunnelStatus(true);
+    }
+
+    [ClientRpc]
+    public void RpcChangeFunnelStatus(bool status)
+    {
+        FunnelTriggerable funnel = GetComponentInChildren<FunnelTriggerable>();
+        funnel.isActivate = status;
+    }
+    
+    [Command]
+    public void CmdDeactivateFunnel()
+    {
+        RpcChangeFunnelStatus(false);
+    }
+
+    private Rigidbody SpawnProjectile(Projectile projectile, float charge, Vector3 forward, Vector3 position, Quaternion rotation)
+    {
+        GameObject projectileInstance = Instantiate(projectile.projectilePrefab, position, rotation);
+
+        Rigidbody projectileRigidbody = projectileInstance.GetComponent<Rigidbody>();
+        projectileRigidbody.velocity = (forward) * Mathf.Max(projectile.speed * charge, 10f);
+
+        Bullet b = projectileInstance.GetComponent<Bullet>();
+        if (b != null)
+        {
+            b.damage = Mathf.Max(projectile.damage * charge, 1f);
+            b.lifeTime = projectile.lifeTime;
+            b.force = Mathf.Max(projectile.force * charge, 1f);
+            b.staggerDamage = Mathf.Max(projectile.staggerDamage * charge, 1f);
+        }
+        GrenadeBullet g = projectileInstance.GetComponent<GrenadeBullet>();
+        if (g != null)
+        {
+            BlastRound blastRound = (BlastRound)projectile;
+            g.damage = Mathf.Max(blastRound.damage * charge, 1f);
+            g.lifeTime = blastRound.lifeTime;
+            g.impactForce = Mathf.Max(blastRound.force * charge, 1f);
+            g.blastDamage = Mathf.Max(blastRound.blastDamage * charge, 1f);
+            g.blastForce = Mathf.Max(blastRound.blastForce * charge, 1f);
+            g.blastRadius = Mathf.Max(blastRound.blastRadius * charge, 1f);
+            g.travelSpeed = Mathf.Max(blastRound.speed * charge, 1f);
+            g.staggerDamage = Mathf.Max(blastRound.staggerDamage * charge, 1f);
+            g.timeBeforeDestroy = blastRound.timeBeforeDestroy;
+        }
+        return projectileRigidbody;
     }
 
 }

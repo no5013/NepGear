@@ -28,12 +28,14 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
-    [SyncVar]
+    public float maxLifeStock = 3f;
+
+    [SyncVar(hook = "OnChangeLife")]
     public float lifeStock;
 
     public bool enabledControl = false;
 
-    private float respawnTime = 5f;
+    private float respawnTime = 8f;
 
     [SyncVar(hook = "OnChangeHealth")]
     public float hitPoint;
@@ -41,8 +43,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [HideInInspector] public float maxHitPoint;
     [HideInInspector] public float stamina;
     [HideInInspector] public float maxStamina;
-    [HideInInspector] public float ultimateCharge;
-    private UltimateAbility ultimate;
+    public float ultimateCharge;
+    public UltimateAbility ultimate;
     private bool m_isDashing;
     private float lerpTime;
     private float currentLerpTime;
@@ -58,7 +60,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
 
     private float boostChargeTime;
 
-    private float ultimateActiveDuration;
+    //private float ultimateActiveDuration;
     private bool isUltimateActived;
 
     public RectTransform healthBar;
@@ -68,6 +70,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public UIManager uiManager;
     private InputHandler ih;
     private RagdollManager ragdollManager;
+    private Animator animator;
 
     [SyncVar]
     public string characterID;
@@ -84,6 +87,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField]
     private ParticleSystem explosionParticle;
     [SerializeField]
+    private ParticleSystem shockParticle;
+    [SerializeField]
     private AudioClip explosionSound;
     [SerializeField]
     private float timeBeforeExplode = 2f;
@@ -96,10 +101,22 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public bool isStaggering;
 
+    [SerializeField] private float dodgeForce;
+    [SerializeField] private float mass;
+
     public bool debug = false;
+    public bool shouldRegenStamina;
+    private bool isInvulnerable;
+
+    private Vector3 impact;
 
     protected void Start()
     {
+        if (isServer)
+        {
+            lifeStock = maxLifeStock;
+        }
+
         if (Prototype.NetworkLobby.LobbyManager.s_Singleton != null)
         {
             Character frame = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetCharacter(characterID);
@@ -111,12 +128,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
             SetFrame(basicFrame);
         }
 
-        lifeStock = 3;
-
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
+        rigidbody = GetComponent<Rigidbody>();
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
+        animator = GetComponent<Animator>();
+        impact = Vector3.zero;
 
         //Debug.Log("Can find ui?? " + GetComponentInChildren<UIManager>().ToString());
         //uiManager = GetComponentInChildren<UIManager>();
@@ -133,11 +151,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         walkSpeed = frame.startingSpeed;
         runSpeed = frame.boostSpeed;
-
+        dodgeForce = frame.dodgeForce;
         maxHitPoint = frame.maxHitPoint;
         maxStamina = frame.maxStamina;
         ultimateCharge = 0f;
         floatSpeed = frame.jumpForce;
+        mass = frame.mass;
         lerpTime = 0.25f;
         m_DashDistance = frame.startingSpeed;
         hitPoint = maxHitPoint;
@@ -152,6 +171,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
         timePressedKey = 0f;
         m_Float = false;
         isUltimateActived = false;
+        ultimate.Initialize(this.gameObject);
+        shouldRegenStamina = true;
+        isInvulnerable = false;
         //uiManager = FindObjectOfType<UIManager>();
         healthBar.sizeDelta = new Vector2(hitPoint, healthBar.sizeDelta.y);
     }
@@ -225,32 +247,64 @@ public class PlayerBehaviorScript : NetworkBehaviour
             timePressedKey += Time.deltaTime;
         }
 
-        if (m_isDashing)
-        {
-            Dash();
-        }
-        if (isUltimateActived)
-        {
-            ultimateActiveDuration += Time.deltaTime;
-            if (ultimateActiveDuration >= ultimate.duration)
-            {
-                ultimate.TriggerAbilityEnd();
-                ultimateActiveDuration = 0f;
-                ultimateCharge = 0f;
-                isUltimateActived = false;
+        //if (m_isDashing)
+        //{
+        //    Dash();
+        //}
+        //if (isUltimateActived)
+        //{
+        //    ultimateActiveDuration += Time.deltaTime;
+        //    if (ultimateActiveDuration >= ultimate.duration)
+        //    {
+        //        ultimate.TriggerAbilityEnd();
+        //        ultimateActiveDuration = 0f;
+        //        ultimateCharge = 0f;
+        //        isUltimateActived = false;
 
-            }
-        }
+        //    }
+        //}
 
         if (uiManager != null)
         {
             uiManager.SetStamina(stamina * 1.0f / maxStamina * 1.0f);
             uiManager.SetStagger(stagger * 1.0f / staggerLimit * 1.0f);
+            uiManager.SetUltimate(ultimateCharge * 1.0f / ultimate.maxCharge * 1.0f);
         }
 
     }
     private void FixedUpdate()
     {
+        
+        if (impact.magnitude > 0.2)
+        {
+            characterController.Move(impact);
+        }
+        else
+        {
+            m_isDashing = false;
+        }
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.fixedDeltaTime);
+        if (isServer)
+        {
+            if (stagger > 0f)
+            {
+                stagger -= staggerRecovery * Time.fixedDeltaTime;
+                if (isStaggering)
+                {
+                    stagger -= staggerRecovery * Time.fixedDeltaTime;
+                }
+                if (stagger < 0f)
+                {
+                    stagger = 0f;
+                    if (isStaggering)
+                    {
+                        RpcOnStaggerFinish();
+                        isStaggering = false;
+                    }
+                }
+            }
+        }
+
         if (!isLocalPlayer)
         {
             return;
@@ -258,7 +312,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         GetInput();
         if (characterController.isGrounded && !IsDashing() && !IsRunning())
         {
-            if (stamina < maxStamina && boostChargeTime < Time.time)
+            if (stamina < maxStamina && boostChargeTime < Time.time && shouldRegenStamina)
             {
                 stamina += Math.Abs(stamina+10) * Time.fixedDeltaTime;
                 if (stamina > maxStamina)
@@ -271,31 +325,21 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             boostChargeTime = Time.time + 1f;
         }
+
         if (HasUltimate())
         {
-            if (ultimateCharge <= ultimate.maxCharge)
+            if (ultimateCharge < ultimate.maxCharge)
             {
-                ultimateCharge += (ultimate.maxCharge) * Time.fixedDeltaTime;
-            }
-        }
-        if (stagger > 0f)
-        {
-            stagger -= staggerRecovery*Time.fixedDeltaTime;
-            if (isStaggering)
-            {
-                stagger -= staggerRecovery * Time.fixedDeltaTime;
-            }
-            if (stagger < 0f)
-            {
-                stagger = 0f;
-                if(isStaggering)
+                ultimateCharge += (ultimate.maxCharge/100f) * Time.fixedDeltaTime;
+                // For test purpose;
+                //ultimateCharge = ultimate.maxCharge;
+                if (ultimateCharge > ultimate.maxCharge)
                 {
-                    EnableControl();
-                    isStaggering = false;
+                    ultimateCharge = ultimate.maxCharge;
                 }
             }
         }
-
+       
     }
     private void GetInput()
     {
@@ -313,15 +357,23 @@ public class PlayerBehaviorScript : NetworkBehaviour
         if (!ih.dashing && 0.0f < timePressedKey && timePressedKey < 0.30f && !IsExhausted() && !IsDashing())
         {
             m_isDashing = true;
-            m_CharacterDashStartPos = characterController.transform.position;
+           
             Vector2 magnitude = new Vector2(horizontal, vertical);
             if (magnitude.sqrMagnitude > 1)
             {
                 magnitude.Normalize();
             }
-            Vector3 desiredMove = transform.forward * magnitude.y + transform.right * magnitude.x;
-            desiredMove *= m_DashDistance;
-            m_CharacterDashEndPos = characterController.transform.position + desiredMove;
+
+            Vector3 desiredMove = (transform.forward * magnitude.y + transform.right * magnitude.x);
+            CmdAddImpact(desiredMove, dodgeForce);
+            //rigidbody.AddForce(transform.forward * 1000);
+            //rigidbody.drag = 10f;
+            //characterController.Move(desiredMove);
+            //m_isDashing = true;
+            //m_CharacterDashStartPos = characterController.transform.position;
+     
+            //desiredMove *= m_DashDistance;
+            //m_CharacterDashEndPos = characterController.transform.position + desiredMove;
             staminaUsed += 10f;
             //           walking = false;
         }
@@ -344,11 +396,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             m_Float = false;
         }
-        if (CrossPlatformInputManager.GetButtonUp("Ultimate") && !isUltimateActived)
+        if (ih.ultimate && !isUltimateActived && IsUltimateAvailable())
         {
-            isUltimateActived = true;
-            ultimate.TriggerAbility();
-            ultimateCharge = 0f;
+            StartCoroutine(UltimateCoroutine());
             //uiManager.SetUltimate(ultimateCharge, ultimateCharge / ultimate.maxCharge);
         }
 
@@ -358,6 +408,16 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
 
         stamina -= staminaUsed;
+    }
+
+    IEnumerator UltimateCoroutine()
+    {
+        isUltimateActived = true;
+        ultimate.TriggerAbility();
+        ultimateCharge = 0f;
+        yield return new WaitForSeconds(ultimate.duration);
+        ultimate.TriggerAbilityEnd();
+        isUltimateActived = false;
     }
 
     private void Dash()
@@ -377,8 +437,6 @@ public class PlayerBehaviorScript : NetworkBehaviour
             m_isDashing = false;
             currentLerpTime = 0f;
         }
-
-        Debug.Log("DASH");
     }
 
     public bool IsDashing()
@@ -424,10 +482,32 @@ public class PlayerBehaviorScript : NetworkBehaviour
         return stamina <= 0;
     }
 
+    [Command]
+    public void CmdAddImpact(Vector3 dir, float force)
+    {
+        dir.Normalize();
+        if (dir.y < 0) dir.y = -dir.y; // reflect down force on the ground
+        //impact += dir.normalized * force / mass;
+        impact += dir.normalized * force / mass;
+        RpcAddImpact(dir, force);
+    }
+
+    [ClientRpc]
+    public void RpcAddImpact(Vector3 dir, float force)
+    {
+        dir.Normalize();
+        if (dir.y < 0) dir.y = -dir.y; // reflect down force on the ground
+        //impact += dir.normalized * force / mass;
+        impact += dir.normalized * force / mass;
+        Debug.Log("Impact magnitude" + impact.magnitude);
+    }
+
     [Server]
     public void TakeDamage(float damage)
     {
         if (dead)
+            return;
+        if (isInvulnerable)
             return;
 
         RpcTakeDamage(damage);
@@ -440,6 +520,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             Die();
         }
     }
+
     [Server]
     public void Staggering(float staggerDamage)
     {
@@ -447,6 +528,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
             return;
         if (isStaggering)
             return;
+        if (isInvulnerable)
+            return;
+
         RpcStaggering(staggerDamage);
         stagger += staggerDamage;
 
@@ -458,12 +542,72 @@ public class PlayerBehaviorScript : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdOverclock(float multiplier)
+    {
+        RpcOverclock(multiplier);
+    }
+    [Command]
+    public void CmdStopOverClock(float multiplier)
+    {
+        RpcStopOverclock(multiplier);
+    }
+    [Command]
+    public void CmdFullBurst()
+    {
+        isInvulnerable = true;
+
+        RpcChangeStatusFullBurst(true);
+    }
+    [Command]
+    public void CmdStopFullBurst()
+    {
+        isInvulnerable = false;
+
+        RpcChangeStatusFullBurst(false);
+    }
+
+    [ClientRpc]
+    public void RpcChangeStatusFullBurst(bool status)
+    {
+        isInvulnerable = status;
+    }
+
+    [ClientRpc]
+    public void RpcOverclock(float multiplier)
+    {
+        floatSpeed *= multiplier;
+        runSpeed *= multiplier;
+        walkSpeed *= multiplier;
+    }
+    [ClientRpc]
+    public void RpcStopOverclock(float multiplier)
+    {
+        floatSpeed /= multiplier;
+        runSpeed /= multiplier;
+        walkSpeed /= multiplier;
+    }
+
     [Server]
     public void Stagger()
     {
+        RpcOnStagger();
         isStaggering = true;
+    }
+
+    [ClientRpc]
+    private void RpcOnStagger()
+    {
         DisableControl();
-        Debug.Log("Staggering");
+        animator.SetTrigger("Stun");
+        if(shockParticle != null)
+            shockParticle.Play();
+    }
+
+    [ClientRpc]
+    private void RpcOnStaggerFinish()
+    {
+        EnableControl();
     }
 
     [Server]
@@ -471,11 +615,65 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         dead = true;
         lifeStock--;
+        //GameManager.instance.OnPlayerDie();
+
         RpcDie();
+
         if (!isOutOfStock())
         {
-            Invoke("Respawn", respawnTime);
+            StartCoroutine(Respawning());
         }
+    }
+
+    public void OnChangeLife(float lifeStock)
+    {
+        this.lifeStock = lifeStock;
+        GameManager.UpdateTeamScore();
+    }
+
+    private IEnumerator Respawning()
+    {
+        float remainingTime = respawnTime;
+        int floorTime = Mathf.FloorToInt(remainingTime);
+
+        while (remainingTime > 0)
+        {
+            yield return null;
+
+            remainingTime -= Time.deltaTime;
+            int newFloorTime = Mathf.FloorToInt(remainingTime);
+
+            if (newFloorTime != floorTime)
+            {
+                floorTime = newFloorTime;
+
+                if (floorTime > 0)
+                {
+                    RpcSetRespawningTime(floorTime);
+                }
+            }
+        }
+        Respawn();
+    }
+
+    [ClientRpc]
+    public void RpcSetRespawningTime(float respawnTime)
+    {
+        if(uiManager != null)
+        {
+            if(respawnTime > 0f)
+            {
+                uiManager.SetStateText("Respawn in " + respawnTime);
+            }
+        }
+
+        Debug.Log("Respawn in " + respawnTime);
+    }
+
+    [ClientRpc]
+    public void RpcClearStateText()
+    {
+        uiManager.SetStateText("");
     }
 
     [ClientRpc]
@@ -514,6 +712,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         catapult.SetupFrame(this.gameObject);
         EnablePlayer();
         DisableControl();
+        
+        if(uiManager != null)
+        {
+            uiManager.SetStateText("");
+        }
 
         catapult.launch();
     }
@@ -528,18 +731,22 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void FrameExplode()
     {
         Explode();
-        SetFrameActive(false);
-        DisablePlayer();
+        if(!isLocalPlayer)
+            SetFrameActive(false);
+        //DisablePlayer();
     }
 
     void ResetPlayerStatus()
     {
         hitPoint = maxHitPoint;
         stamina = maxStamina;
+        stagger = 0f;
+        isStaggering = false;
     }
 
     void OnChangeHealth (float currentHealth)
     {
+        hitPoint = currentHealth;
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
         if (isLocalPlayer)
         {
@@ -595,9 +802,14 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         Debug.Log("LOSE");
     }
-    
+
     private bool HasUltimate()
     {
         return ultimate != null;
+    }
+
+    private bool IsUltimateAvailable()
+    {
+        return ultimateCharge >= ultimate.maxCharge;
     }
 }

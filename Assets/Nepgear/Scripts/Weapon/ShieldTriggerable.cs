@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.UI;
+
 
 public class ShieldTriggerable : MonoBehaviour {
 
@@ -12,8 +13,8 @@ public class ShieldTriggerable : MonoBehaviour {
     private Renderer shieldRenderer;
     public bool isActivate;
     private bool isInitialize = false;
+    private Text shieldHealthText;
     //[SyncVar(hook = "OnChangeStatus")] public bool isActivate;
-
     private float shieldHealth;
 
     FrameWeaponController frm;
@@ -25,6 +26,7 @@ public class ShieldTriggerable : MonoBehaviour {
         shieldRenderer = GetComponentInChildren<Renderer>();
         frm = GetComponentInParent<FrameWeaponController>();
         shieldHealth = maxShieldHealth;
+        shieldHealthText = GetComponentInChildren<Text>();
         isActivate = false;
         isInitialize = true;
     }
@@ -34,7 +36,7 @@ public class ShieldTriggerable : MonoBehaviour {
         {
             return;
         }
-        if (shieldHealth <=0)
+        if (shieldHealth <= 0f)
         {
             shieldHealth = 0f;
             Deactivate();
@@ -43,12 +45,29 @@ public class ShieldTriggerable : MonoBehaviour {
         {
             ActivateMechanic();
             shieldHealth -= shieldDecayRate * Time.deltaTime;
+            shieldHealthText.text = (shieldHealth / maxShieldHealth * 100).ToString("#.##") + " %";
+            //if ((shieldHealth / maxShieldHealth * 100) < 30f)
+            //{
+            //    shieldHealthText.color = new Color(255, 62, 27, 1);
+            //} else
+            //{
+            //    shieldHealthText.color = new Color(255, 255, 255, 1);
+            //}
         }
         else
         {
             DeactivateMechanic();
-            shieldHealth += shieldRegenRate * Time.deltaTime;
+            if (shieldHealth < maxShieldHealth)
+            {
+                shieldHealth += shieldRegenRate * Time.deltaTime;
+                if (shieldHealth >= maxShieldHealth)
+                {
+                    shieldHealth = maxShieldHealth;
+                }
+            }
+            shieldHealthText.text = "";
         }
+        Debug.Log(shieldHealth);
     }
 
     public void TakeDamage(float damage)
