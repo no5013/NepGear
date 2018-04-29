@@ -136,7 +136,13 @@ public class GameManager : NetworkBehaviour {
         }
 
         if (toRemove != null)
+        {
             players.Remove(toRemove);
+            if (toRemove.team.Equals("A"))
+                players_A.Remove(toRemove);
+            else
+                players_B.Remove(toRemove);
+        }
     }
 
     /*public void TeamDie(PlayerBehaviorScript player)
