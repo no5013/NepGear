@@ -33,6 +33,7 @@ public class Bullet : NetworkBehaviour {
         if (shield != null)
         {
             shield.TakeDamage(damage);
+            Destroy(this.gameObject);
             return;
         }
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();

@@ -37,6 +37,13 @@ public class GrenadeBullet : NetworkBehaviour {
     private void OnCollisionEnter(Collision other)
     {
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
+        ShieldTriggerable shield = other.gameObject.GetComponent<ShieldTriggerable>();
+        if (shield != null)
+        {
+            shield.TakeDamage(damage);
+            Destroy(this.gameObject);
+            return;
+        }
         if (isPlayer != null && GetComponent<Collider>().enabled)
         {
             DisableCollision();
