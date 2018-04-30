@@ -4993,7 +4993,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6289,6 +6289,7 @@ MonoBehaviour:
   floatSpeed: 0
   healthBar: {fileID: 224299551080761902}
   uiManager: {fileID: 114030963680989970}
+  playerSpeaker: {fileID: 0}
   characterID: 
   team: 
   dead: 0
