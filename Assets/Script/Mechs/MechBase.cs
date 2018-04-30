@@ -23,7 +23,8 @@ public class MechBase : MonoBehaviour {
         Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID);
 
         FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().mechBase = this;
-        FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().OnChangeSetting();
+        if(FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().init)
+            FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().OnChangeSetting();
     }
 
     public void Initialize(string mechId, string leftWeaponId, string rightWeaponId)

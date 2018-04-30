@@ -40,6 +40,7 @@ namespace Prototype.NetworkLobby
 
         [SerializeField]
         private ResourcesManager resourcesManager;
+        public bool init = false;
 
         void Start()
         {
@@ -238,6 +239,8 @@ namespace Prototype.NetworkLobby
             characterText.text = characters[selectedCharacterRef].characterName;
             leftWeaponText.text = weapons[selectedLeftWeaponRef].aName;
             rightWeaponText.text = weapons[selectedRightWeaponRef].aName;
+
+            init = true;
             //Text[] texts = GetComponentsInChildren<Text>();
             //texts[0].text = characters[selectedCharacterRef].characterName;
             //texts[1].text = selectedCharacter.leftWeapon.aName;
