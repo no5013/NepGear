@@ -122,6 +122,8 @@ public class FrameWeaponController : NetworkBehaviour {
         leftHandAbility.Initialize(leftWeapon);
         rightHandAbility.Initialize(rightWeapon);
 
+        uniqueAbility = Instantiate(GetComponent<PlayerBehaviorScript>().charFrame.uniqueWeaponAbility);
+
         if(uniqueAbility != null)
         {
             uniqueCooldown = uniqueAbility.triggerDelay;

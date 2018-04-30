@@ -82,8 +82,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SyncVar]
     public bool dead = false;
 
-    [SerializeField]
-    private Character charFrame;
+    public Character charFrame;
 
     [SerializeField]
     private ParticleSystem explosionParticle;
@@ -166,7 +165,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         m_DashDistance = frame.startingSpeed;
         hitPoint = maxHitPoint;
         stamina = maxStamina;
-        ultimate = frame.ultimate;
+        ultimate = Instantiate(frame.ultimate);
         stagger = 0f;
         staggerLimit = frame.staggerLimit;
         staggerRecovery = frame.staggerRecovery;
