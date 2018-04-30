@@ -68,6 +68,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     private GameObject mainCamera;
 
     public UIManager uiManager;
+    public PlayerSpeaker playerSpeaker;
     private InputHandler ih;
     private RagdollManager ragdollManager;
     private Animator animator;
@@ -104,10 +105,12 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [SerializeField] private float dodgeForce;
     [SerializeField] private float mass;
     [SerializeField] private AudioClip staggerSound;
+    [SerializeField] private AudioClip ultimateSound;
 
     public bool debug = false;
     public bool shouldRegenStamina;
     private bool isInvulnerable;
+    private AudioSource audioSource;
 
     private Vector3 impact;
 
@@ -132,6 +135,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         characterController = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
         rigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
         animator = GetComponent<Animator>();
@@ -416,6 +420,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
         isUltimateActived = true;
         ultimate.TriggerAbility();
         ultimateCharge = 0f;
+        audioSource.clip = ultimateSound;
+        audioSource.Play();
         yield return new WaitForSeconds(ultimate.duration);
         ultimate.TriggerAbilityEnd();
         isUltimateActived = false;
@@ -601,6 +607,9 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         DisableControl();
         animator.SetTrigger("Stun");
+        audioSource.clip = staggerSound;
+        audioSource.loop = true;
+        audioSource.Play();
         if(shockParticle != null)
             shockParticle.Play();
     }
@@ -608,6 +617,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     private void RpcOnStaggerFinish()
     {
+        audioSource.Stop();
+        audioSource.loop = false;
         EnableControl();
     }
 
