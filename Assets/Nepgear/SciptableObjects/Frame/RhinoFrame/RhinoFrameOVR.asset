@@ -11,13 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8ea559571403c42b283dc8cc828f5e, type: 3}
   m_Name: RhinoFrameOVR
   m_EditorClassIdentifier: 
-  characterName: RhinoOVR
+  characterName: Rhino Frame
   characterID: OF2
   maxHitPoint: 500
   maxStamina: 300
-  startingSpeed: 20
+  startingSpeed: 7
   jumpForce: 10
-  boostSpeed: 10
+  boostSpeed: 13
   dodgeForce: 600
   mass: 1000
   staggerLimit: 1000
