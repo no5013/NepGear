@@ -770,6 +770,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: b9d2d20841610904da6dae882e56b075, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: countdownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3dc278f1adc86d0459e9febb5402a056, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: goSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d53053a416c413d40ae35d3b3d2c8277, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: winSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3dc278f1adc86d0459e9febb5402a056, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: loseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a77defcde1caaa40b6f7502547e0c4e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2ad748476c34a47b68bed0943d8ec0, type: 2}
   m_IsPrefabParent: 0
