@@ -7844,8 +7844,8 @@ MonoBehaviour:
   isStaggering: 0
   dodgeForce: 0
   mass: 0
-  staggerSound: {fileID: 0}
-  ultimateSound: {fileID: 0}
+  staggerSound: {fileID: 8300000, guid: d56578bb544571a4f91ec3a9df69a2c1, type: 3}
+  ultimateSound: {fileID: 8300000, guid: 81f94d97986850a4dbe28063eff5016a, type: 3}
   debug: 0
   shouldRegenStamina: 0
 --- !u!114 &114177983672831082

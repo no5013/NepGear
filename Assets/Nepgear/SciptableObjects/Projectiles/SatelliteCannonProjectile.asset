@@ -13,14 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileId: P7
   damage: 50
-  force: 200
+  force: 0
   lifeTime: 5
   speed: 600
   staggerDamage: 10
   projectilePrefab: {fileID: 1853589197864470, guid: 08429843fc3624042880c2951276361d,
     type: 2}
-  blastForce: 100
-  blastRadius: 500
+  blastForce: 0
+  blastRadius: 10
   blastDamage: 10
   timeBeforeDestroy: 2
   risingSpeed: 0

@@ -5823,6 +5823,7 @@ MonoBehaviour:
   rightWeaponText: {fileID: 804231330}
   mechBase: {fileID: 94204118}
   resourcesManager: {fileID: 11400000, guid: 017011b2f7fd86743aa30fe47906c994, type: 2}
+  init: 0
 --- !u!82 &302564391
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40575,7 +40576,7 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 588
+      value: 657
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
