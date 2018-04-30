@@ -6289,7 +6289,7 @@ MonoBehaviour:
   floatSpeed: 0
   healthBar: {fileID: 224299551080761902}
   uiManager: {fileID: 114030963680989970}
-  playerSpeaker: {fileID: 0}
+  playerSpeaker: {fileID: 114542103332893924}
   characterID: 
   team: 
   dead: 0
