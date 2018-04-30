@@ -370,11 +370,13 @@ public class GameManager : NetworkBehaviour {
             {
                 players[i].SetCatapult(spawnPoints_A[0]);
                 spawnPoints_A[0].SetupFrame(players[i].gameObject);
+                spawnPoints_A[0].Prepare();
             }
             else
             {
                 players[i].SetCatapult(spawnPoints_B[0]);
                 spawnPoints_B[0].SetupFrame(players[i].gameObject);
+                spawnPoints_B[0].Prepare();
             }
         }
     }
