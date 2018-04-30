@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
@@ -15,6 +16,7 @@ public class Map : ScriptableObject
     public AudioClip backgroundMusic;
     
     public SceneField mapScene;
+    public Texture mapTexture;
 }
 
 [System.Serializable]
