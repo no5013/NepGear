@@ -71,6 +71,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     public PlayerSpeaker playerSpeaker;
     private InputHandler ih;
     private RagdollManager ragdollManager;
+    private FrameWeaponController frameWeaponController;
     private Animator animator;
 
     [SyncVar]
@@ -138,6 +139,8 @@ public class PlayerBehaviorScript : NetworkBehaviour
         ih = GetComponent<InputHandler>();
         ragdollManager = GetComponent<RagdollManager>();
         animator = GetComponent<Animator>();
+        frameWeaponController = GetComponent<FrameWeaponController>();
+
         impact = Vector3.zero;
 
         //Debug.Log("Can find ui?? " + GetComponentInChildren<UIManager>().ToString());
@@ -708,6 +711,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
         Explode();
         DisableControl();
         ragdollManager.EnableRagdoll();
+        frameWeaponController.UniqueButtonDeTriggered();
         Invoke("FrameExplode", timeBeforeExplode);
     }
 

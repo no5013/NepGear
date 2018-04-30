@@ -13,7 +13,7 @@ public class FunnelAbility : UniqueAbility {
 
     public override void DeTriggerAbility()
     {
-        return;
+        funnel.Deactivate();
     }
 
     public override void Initialize(GameObject obj)

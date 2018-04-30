@@ -13,8 +13,7 @@ public class ShieldAbility : UniqueAbility {
 
     public override void DeTriggerAbility()
     {
-        return;
-        //shield.Deactivate();
+        shield.Deactivate();
     }
 
     public override void Initialize(GameObject obj)

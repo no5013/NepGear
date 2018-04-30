@@ -220,7 +220,7 @@ public class FrameWeaponController : NetworkBehaviour {
             uniqueAbility.TriggerAbility();
         }
     }
-    private void UniqueButtonDeTriggered()
+    public void UniqueButtonDeTriggered()
     {
         if (uniqueAbility != null)
         {
