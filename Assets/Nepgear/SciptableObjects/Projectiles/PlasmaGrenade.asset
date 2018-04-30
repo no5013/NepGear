@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: PlasmaGrenade
   m_EditorClassIdentifier: 
   projectileId: P5
-  damage: 20
+  damage: 50
   force: 2000
   lifeTime: 3
   speed: 25
@@ -21,6 +21,6 @@ MonoBehaviour:
     type: 2}
   blastForce: 200
   blastRadius: 5
-  blastDamage: 10
+  blastDamage: 20
   timeBeforeDestroy: 0
   risingSpeed: 0

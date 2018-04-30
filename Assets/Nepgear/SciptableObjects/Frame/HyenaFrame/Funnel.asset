@@ -17,4 +17,4 @@ MonoBehaviour:
   triggerDelay: 1
   projectile: {fileID: 11400000, guid: a655c2237890d8f42986e2fcba3fb12f, type: 2}
   fireDelay: 0.1
-  staminaDrain: 10
+  staminaDrain: 30

@@ -21,7 +21,7 @@ MonoBehaviour:
   dodgeForce: 600
   mass: 1000
   staggerLimit: 1000
-  staggerRecovery: 50
+  staggerRecovery: 200
   characterPrefab: {fileID: 1624428743771486, guid: 3fcd8cc7c7c38d74094315a89bfcc79f,
     type: 2}
   framePrefab: {fileID: 1635197861194840, guid: 5589b12c7bce0d14fb4b3c695006ccbc,

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: FullBurstBullet
   m_EditorClassIdentifier: 
   projectileId: P9
-  damage: 10
+  damage: 6
   force: 100
   lifeTime: 2
   speed: 100
-  staggerDamage: 10
+  staggerDamage: 0
   projectilePrefab: {fileID: 1074170991746498, guid: fda32d94495044a408d7f29116045396,
     type: 2}

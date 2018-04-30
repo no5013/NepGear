@@ -5501,9 +5501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae45dc531c057c4c8df1306ffc5d9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps:
-  - DevMap
-  - PracticeField
   currentMapText: {fileID: 114844414474234996}
   currentMapIndex: 0
   mapSelectionPanel: {fileID: 224442409085426806}
@@ -5589,6 +5586,9 @@ MonoBehaviour:
   characterText: {fileID: 114271272970201630}
   leftWeaponText: {fileID: 114508532520417450}
   rightWeaponText: {fileID: 114551879775759124}
+  mechBase: {fileID: 0}
+  resourcesManager: {fileID: 0}
+  init: 0
 --- !u!114 &114886477378213362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5805,7 +5805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae45dc531c057c4c8df1306ffc5d9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps: []
   currentMapText: {fileID: 114844414474234996}
   currentMapIndex: 0
   mapSelectionPanel: {fileID: 0}

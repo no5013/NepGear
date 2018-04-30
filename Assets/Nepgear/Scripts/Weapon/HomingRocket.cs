@@ -55,8 +55,7 @@ public class HomingRocket : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         GetComponent<CapsuleCollider>().enabled = false;
-        explosion.gameObject.GetComponent<destroyMe>().deathtimer = lifeTime + 2f;
-        explosion.gameObject.GetComponent<destroyMe>().enabled = true;
+        explosion.gameObject.GetComponent<destroyMe>().enabled = false;
         //cc.enabled = false;
         isActivated = false;
         hitY = 0f;
@@ -260,10 +259,10 @@ public class HomingRocket : NetworkBehaviour {
             }
         }
         Explode();
-        Explosion();
+        //Explosion();
        
         //RpcExplosion(other.contacts[0].point, Quaternion.identity);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
     private void Explode()
@@ -314,15 +313,27 @@ public class HomingRocket : NetworkBehaviour {
             // Deal this damage to the tank.
             targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
         }
+        NetworkServer.Destroy(this.gameObject);
     }
 
-    //[ClientRpc]
-    //public void RpcExplosion(Vector3 position, Quaternion rotation)
-    //{
-    //    Debug.Log("Instantiate Explosion Impact Prefab");
-    //    Instantiate(impactPrefab, position, rotation);
-    //}
-    
+    public override void OnNetworkDestroy()
+    {
+        //we spawn the explosion particle
+        Explosion();
+        //set the particle to be destroyed at the end of their lifetime
+        explosion.gameObject.GetComponent<destroyMe>().deathtimer = 2f;
+        explosion.gameObject.GetComponent<destroyMe>().enabled = true;
+        base.OnNetworkDestroy();
+    }
+
+    /*[ClientRpc]
+    public void RpcExplosion(Vector3 position, Quaternion rotation)
+    {
+        explosion.transform.parent = null;
+        //    explosion.Play();
+        //    explosion.gameObject.GetComponent<AudioSource>().Play();
+    }*/
+
     public void Explosion()
     {
         explosion.transform.parent = null;
