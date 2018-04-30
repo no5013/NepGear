@@ -172,9 +172,8 @@ namespace Prototype.NetworkLobby
                 {
                     lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
                 }
+                LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
             }
-
-            LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
         }
 
         public void OnConfirmCharacter(LobbyPlayer lobbyPlayer)
