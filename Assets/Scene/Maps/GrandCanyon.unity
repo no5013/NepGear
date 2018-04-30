@@ -1725,22 +1725,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1842886976054456, guid: 3cb9493f7924e194f837fe1ba35b823e,
     type: 2}
   m_PrefabInternal: {fileID: 209604011}
---- !u!114 &209604013 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114420320899228162, guid: 3cb9493f7924e194f837fe1ba35b823e,
-    type: 2}
-  m_PrefabInternal: {fileID: 209604011}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &209604014 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1230358055252418, guid: 3cb9493f7924e194f837fe1ba35b823e,
-    type: 2}
-  m_PrefabInternal: {fileID: 209604011}
---- !u!1 &209604015 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1048407569962342, guid: 3cb9493f7924e194f837fe1ba35b823e,
-    type: 2}
-  m_PrefabInternal: {fileID: 209604011}
 --- !u!114 &209604016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1752,9 +1736,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5401752aabbf745b56a5fa69871a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusUI: {fileID: 209604015}
-  ammoUI: {fileID: 209604014}
-  gameResultText: {fileID: 209604013}
+  healthImage: {fileID: 0}
+  healthText: {fileID: 0}
+  staminaImage: {fileID: 0}
+  staminaText: {fileID: 0}
+  staggerImage: {fileID: 0}
+  staggerText: {fileID: 0}
+  frontIndicator: {fileID: 0}
+  backIndicator: {fileID: 0}
+  leftIndicator: {fileID: 0}
+  rightIndicator: {fileID: 0}
+  gameStateText: {fileID: 0}
+  leftWeaponText: {fileID: 0}
+  rightWeaponText: {fileID: 0}
+  teamStockImage: {fileID: 0}
+  teamStockText: {fileID: 0}
+  enemyStockImage: {fileID: 0}
+  enemyStockText: {fileID: 0}
+  remainingTimeText: {fileID: 0}
+  ultimateSlider: {fileID: 0}
 --- !u!1001 &212745069
 Prefab:
   m_ObjectHideFlags: 0
@@ -7193,6 +7193,31 @@ Prefab:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: b9d2d20841610904da6dae882e56b075, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: countdownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 918ee1b51fd32d748a66d520586569ba, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: goSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 526033aedfcd8fa4893bd857ca331979, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: winSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f21ac54ede2fb1488c5719b33f0122d, type: 3}
+    - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
+        type: 2}
+      propertyPath: loseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 526033aedfcd8fa4893bd857ca331979, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2ad748476c34a47b68bed0943d8ec0, type: 2}
   m_IsPrefabParent: 0

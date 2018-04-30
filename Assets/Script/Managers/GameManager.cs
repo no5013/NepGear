@@ -425,6 +425,10 @@ public class GameManager : NetworkBehaviour {
     {
         for (int i = 0; i < players.Count; i++)
         {
+            if (!players[i].isLocalPlayer)
+            {
+                return;
+            }
             PlayerSpeaker playerSpeaker = players[i].playerSpeaker;
             if (playerSpeaker != null)
             {
