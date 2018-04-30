@@ -295,7 +295,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
             {
                 if (isStaggering)
                 {
-                    stagger -= staggerLimit * Time.fixedDeltaTime / 5f;
+                    stagger -= staggerLimit * Time.fixedDeltaTime;
                 }
                 else
                 {

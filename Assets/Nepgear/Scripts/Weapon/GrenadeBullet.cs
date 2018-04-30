@@ -29,7 +29,7 @@ public class GrenadeBullet : NetworkBehaviour {
 	
     IEnumerator EnableCollision()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         GetComponent<Collider>().enabled = true;
     }
 
