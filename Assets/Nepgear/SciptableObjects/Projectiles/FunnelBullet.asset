@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: FunnelBullet
   m_EditorClassIdentifier: 
   projectileId: P8
-  damage: 2
+  damage: 1
   force: 10
   lifeTime: 2
   speed: 80

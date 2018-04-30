@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BeamRifleBullet
   m_EditorClassIdentifier: 
   projectileId: P6
-  damage: 50
+  damage: 200
   force: 800
   lifeTime: 1
   speed: 200
@@ -21,6 +21,6 @@ MonoBehaviour:
     type: 2}
   blastForce: 400
   blastRadius: 2
-  blastDamage: 25
+  blastDamage: 50
   timeBeforeDestroy: 0
   risingSpeed: 0

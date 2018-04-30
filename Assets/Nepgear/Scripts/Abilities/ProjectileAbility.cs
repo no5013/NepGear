@@ -17,7 +17,7 @@ public class ProjectileAbility : WeaponAbility
     public float chargeRate;
     public float maxCharge;
 
-    public ProjectileShootTriggerable gun;
+    private ProjectileShootTriggerable gun;
 
     public override void Initialize(GameObject obj)
     {

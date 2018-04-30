@@ -15,8 +15,8 @@ MonoBehaviour:
   aID: W4
   aGunSound: {fileID: 8300000, guid: f59164772db507d44b2e5027faaed519, type: 3}
   aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
-  aMagazine: 100
-  aFireDelay: 0.25
+  aMagazine: 300
+  aFireDelay: 0.2
   maxRecoil: 3
   recoilRate: 0.5
   gunPrefab: {fileID: 1240602844059310, guid: aa4d8588ec5efcb4bb1c2317682b6d30, type: 2}

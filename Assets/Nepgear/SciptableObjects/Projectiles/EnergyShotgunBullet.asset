@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: EnergyShotgunBullet
   m_EditorClassIdentifier: 
   projectileId: P3
-  damage: 5
+  damage: 4
   force: 200
   lifeTime: 1
   speed: 50
-  staggerDamage: 30
+  staggerDamage: 15
   projectilePrefab: {fileID: 1594100239822256, guid: 18b59230064a4ae4faf5462cbacf5864,
     type: 2}

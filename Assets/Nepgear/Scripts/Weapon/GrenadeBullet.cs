@@ -66,8 +66,9 @@ public class GrenadeBullet : NetworkBehaviour {
             }
         }
         Explode();
-        Explosion();
-        Destroy(this.gameObject);
+        //Explosion();
+      
+        //Destroy(this.gameObject);
     }
     private void DisableCollision()
     {
@@ -125,12 +126,15 @@ public class GrenadeBullet : NetworkBehaviour {
             }
             // Deal this damage to the tank.
         }
+        NetworkServer.Destroy(this.gameObject);
     }
 
-    private void OnDestroy()
+    public override void OnNetworkDestroy()
     {
-        //Explode();
-        //Explosion();
+        //we spawn the explosion particle
+        Explosion();
+        //set the particle to be destroyed at the end of their lifetime
+        base.OnNetworkDestroy();
     }
 
     private void Explosion()
