@@ -104,7 +104,7 @@ public class Bullet : NetworkBehaviour {
     [ClientRpc]
     public void RpcImpactEffect()
     {
-        impactSound.Play();
+        //impactSound.Play();
     }
 
     //public void Impact()
