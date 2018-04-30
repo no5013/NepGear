@@ -409,6 +409,7 @@ public class FrameWeaponController : NetworkBehaviour {
     {
         //find the right muzzle flash
         WeaponAbility gun = Prototype.NetworkLobby.LobbyManager.s_Singleton.resourcesManager.GetWeapon(gunId);
+        AudioSource.PlayClipAtPoint(gun.aGunSound, position);
         Instantiate(gun.muzzleFlash, position, rotation);
     }
 

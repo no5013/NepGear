@@ -169,7 +169,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
                 Recoil();
                 recoilCooldown = 2.0f;
             }
-            soundSource.Play();
+            //soundSource.Play();
         }
         else
         {
