@@ -293,8 +293,11 @@ public class PlayerBehaviorScript : NetworkBehaviour
         {
             if (stagger > 0f)
             {
-                stagger -= staggerRecovery * Time.fixedDeltaTime;
                 if (isStaggering)
+                {
+                    stagger -= staggerLimit * Time.fixedDeltaTime / 5f;
+                }
+                else
                 {
                     stagger -= staggerRecovery * Time.fixedDeltaTime;
                 }
