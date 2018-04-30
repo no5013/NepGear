@@ -74,6 +74,12 @@ namespace Prototype.NetworkLobby
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
+
+            connectionConfig.NetworkDropThreshold = 45;
+            connectionConfig.OverflowDropThreshold = 45;
+            connectionConfig.AckDelay = 200;
+            connectionConfig.AcksType = ConnectionAcksType.Acks128;
+            connectionConfig.MaxSentMessageQueueSize = 300;
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)

@@ -544,9 +544,16 @@ public class GameManager : NetworkBehaviour {
     private void RpcRoundEnding()
     {
         gameWinner = GetRoundWinner();
-        gameWinner.playerSpeaker.Play(winSound, PlayerSpeaker.LOOP);
+        if (gameWinner)
+        {
+            gameWinner.playerSpeaker.Play(winSound, PlayerSpeaker.LOOP);
+        }
+
         PlayerBehaviorScript gameLoser = GetRoundLoser();
-        gameLoser.playerSpeaker.Play(loseSound, PlayerSpeaker.LOOP);
+        if (gameLoser)
+        {
+            gameLoser.playerSpeaker.Play(loseSound, PlayerSpeaker.LOOP);
+        }
         //DisablePlayerControl();
 
         RpcSetPlayerStateText("BATTLE OVER");

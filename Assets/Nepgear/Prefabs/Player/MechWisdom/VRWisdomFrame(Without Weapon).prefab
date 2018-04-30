@@ -2086,9 +2086,7 @@ GameObject:
   - component: {fileID: 114275332670583864}
   - component: {fileID: 114624407909116802}
   - component: {fileID: 114195509030773270}
-  - component: {fileID: 114003017088877442}
   - component: {fileID: 114492609279514060}
-  - component: {fileID: 114633093717396664}
   - component: {fileID: 114781448284526342}
   - component: {fileID: 114804667325701444}
   m_Layer: 9
@@ -5278,25 +5276,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114003017088877442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1831574219896470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4637137903165600}
-  m_ChildIndex: 2
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.5
-  m_InterpolateMovement: 0.5
 --- !u!114 &114022340611210394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5698,7 +5677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Target: {fileID: 4795027873686734}
   m_ChildIndex: 1
-  m_SendInterval: 0.1
+  m_SendInterval: 0.14285715
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_MovementThreshold: 0.001
@@ -6534,7 +6513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Target: {fileID: 4809298634918444}
   m_ChildIndex: 0
-  m_SendInterval: 0.11111111
+  m_SendInterval: 0.14285715
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_MovementThreshold: 0.001
@@ -6551,25 +6530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e67fee0240f474b92952eb8e0999e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114633093717396664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1831574219896470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4697420628256062}
-  m_ChildIndex: 3
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.5
-  m_InterpolateMovement: 0.5
 --- !u!114 &114636030855468380
 MonoBehaviour:
   m_ObjectHideFlags: 1
