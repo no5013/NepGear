@@ -51,6 +51,13 @@ public class GameManager : NetworkBehaviour {
     //Time limit
     private float timeLimit = 300f;
 
+    //Universal Sound
+    public AudioClip backgroundMusic;
+    public AudioClip countdownSound;
+    public AudioClip goSound;
+    public AudioClip winSound;
+    public AudioClip loseSound;
+
     private void Start()
     {
         MapSetup();
@@ -303,12 +310,14 @@ public class GameManager : NetworkBehaviour {
                 if(floorTime > 0)
                 {
                     RpcSetPlayerStateText((floorTime).ToString());
+                    RpcPlaySound("CountDown");
                 }
             }
         }
 
         //To change player ui to go
         RpcSetPlayerStateText(startText);
+        RpcPlaySound("Go");
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return null;
@@ -331,7 +340,7 @@ public class GameManager : NetworkBehaviour {
     {
         //notify clients that the round is now started, they should allow player to move.
         RpcRoundPlaying();
-
+        RpcPlaySound("Background");
         float remainingTime = timeLimit;
         int floorTime = Mathf.FloorToInt(remainingTime *10);
 
@@ -376,7 +385,6 @@ public class GameManager : NetworkBehaviour {
     void RpcRoundPlaying()
     {
         Debug.Log("START");
-
         launchFrames();
     }
 
@@ -396,6 +404,41 @@ public class GameManager : NetworkBehaviour {
         else
         {
             SetPlayerStateText(text);
+        }
+    }
+    [ClientRpc]
+    void RpcPlaySound(string state)
+    {
+        switch (state)
+        {
+            case "Countdown":
+                PlayPlayerSound(countdownSound, false);
+                break;
+            case "Background":
+                PlayPlayerSound(backgroundMusic, true);
+                break;
+            case "Go":
+                PlayPlayerSound(goSound, true);
+                break;
+        }
+    }
+
+    private void PlayPlayerSound(AudioClip clip, bool isLoop)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (!players[i].isLocalPlayer)
+            {
+                return;
+            }
+            PlayerSpeaker playerSpeaker = players[i].playerSpeaker;
+            if (playerSpeaker != null)
+            {
+                if (isLoop)
+                    playerSpeaker.Play(clip, PlayerSpeaker.LOOP);
+                else
+                    playerSpeaker.Play(clip, PlayerSpeaker.ONCE);
+            }
         }
     }
 
@@ -501,6 +544,9 @@ public class GameManager : NetworkBehaviour {
     private void RpcRoundEnding()
     {
         gameWinner = GetRoundWinner();
+        gameWinner.playerSpeaker.Play(winSound, PlayerSpeaker.LOOP);
+        PlayerBehaviorScript gameLoser = GetRoundLoser();
+        gameLoser.playerSpeaker.Play(loseSound, PlayerSpeaker.LOOP);
         //DisablePlayerControl();
 
         RpcSetPlayerStateText("BATTLE OVER");
@@ -605,6 +651,18 @@ public class GameManager : NetworkBehaviour {
         }
 
         // If none of the tanks are active it is a draw so return null.
+        return null;
+    }
+
+    private PlayerBehaviorScript GetRoundLoser()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            // ... and if one of them is active, it is the winner so return it.
+            if (players[i].isOutOfStock())
+                return players[i];
+        }
+
         return null;
     }
 

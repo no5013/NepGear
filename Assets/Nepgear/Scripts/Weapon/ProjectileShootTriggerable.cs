@@ -17,6 +17,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     [HideInInspector] public float recoilRate;
     [HideInInspector] public float chargeRate;
     [HideInInspector] public float maxCharge;
+    [HideInInspector] public AudioClip reloadSound;
     public bool isChargable;
 
     public ParticleSystem[] chargeParticleSystems;
@@ -191,6 +192,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
         {
             return;
         }
+        soundSource.clip = reloadSound;
         reloadDelay = 0f;
         StartCoroutine(Reloading());
     }
@@ -223,6 +225,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
         bulletLeft = magazine;
         isReloading = false;
+        soundSource.clip = gunSound;
         fwc.ReloadSuccessful();
         //m_BulletText.text = bulletLeft + "/" + magazine;
     }

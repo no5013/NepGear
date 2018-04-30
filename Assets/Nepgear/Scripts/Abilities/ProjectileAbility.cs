@@ -26,6 +26,7 @@ public class ProjectileAbility : WeaponAbility
         gun.projectile = projectile;
         gun.magazine = aMagazine;
         gun.gunSound = aGunSound;
+        gun.reloadSound = aReloadSound;
         gun.reloadTime = reloadTime;
         gun.gunId = aID;
         gun.maxRecoil = maxRecoil;

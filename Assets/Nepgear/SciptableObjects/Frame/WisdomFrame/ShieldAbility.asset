@@ -16,5 +16,5 @@ MonoBehaviour:
   aSound: {fileID: 0}
   triggerDelay: 0.15
   maxShieldHealth: 2000
-  shieldDecayRate: 100
+  shieldDecayRate: 300
   shieldRegenRate: 200
