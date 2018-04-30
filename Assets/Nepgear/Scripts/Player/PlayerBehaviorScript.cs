@@ -696,7 +696,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     [ClientRpc]
     public void RpcTakeDamage(float damage)
     {
-
+        ultimateCharge += (damage / charFrame.maxHitPoint) * 100f;
     }
 
     [ClientRpc]

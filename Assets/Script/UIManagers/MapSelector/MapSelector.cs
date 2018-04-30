@@ -10,7 +10,9 @@ public class MapSelector : MonoBehaviour {
     private Map[] maps;
 
     public Text currentMapText;
-    
+
+    public RawImage currentMapImage;
+
     public int currentMapIndex;
 
     public RectTransform mapSelectionPanel;
@@ -26,7 +28,11 @@ public class MapSelector : MonoBehaviour {
 	
 	public void SetShownMap(int mapIndex)
     {
-        currentMapText.text = maps[mapIndex].mapName;
+        Map selectedMap = maps[mapIndex];
+        currentMapText.text = selectedMap.mapName;
+        if(selectedMap.mapTexture != null)
+            currentMapImage.texture = selectedMap.mapTexture;
+
     }
 
     public void OnClickNextMap()

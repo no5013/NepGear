@@ -13,6 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: m2
   mapName: Mountain
+  backgroundMusic: {fileID: 0}
   mapScene:
     m_SceneAsset: {fileID: 102900000, guid: b86fcc7ac5ceb8e41b56d5a84ce083d2, type: 3}
     m_SceneName: Mountain
+  mapTexture: {fileID: 2800000, guid: 7ac7a76192ab4c84aa34870dd360a34a, type: 3}

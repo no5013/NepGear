@@ -75,8 +75,8 @@ namespace Prototype.NetworkLobby
 
             SetServerInfo("Offline", "None");
 
-            connectionConfig.NetworkDropThreshold = 45;
-            connectionConfig.OverflowDropThreshold = 45;
+            connectionConfig.NetworkDropThreshold = 90;
+            connectionConfig.OverflowDropThreshold = 90;
             connectionConfig.AckDelay = 200;
             connectionConfig.AcksType = ConnectionAcksType.Acks128;
             connectionConfig.MaxSentMessageQueueSize = 300;
