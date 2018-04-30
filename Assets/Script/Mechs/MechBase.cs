@@ -7,7 +7,7 @@ public class MechBase : MonoBehaviour {
 
     public Transform spawnPosition;
 
-    public float speed = 10f;
+    public float speed = 0f;
 
     public string mechId = "F1";
     public string leftWeaponId = "shotgunLvl1";
@@ -32,7 +32,7 @@ public class MechBase : MonoBehaviour {
         EquipLeftWeaponToMech(leftWeaponId);
         EquipRightWeaponToMech(rightWeaponId);
 
-        ResetPosition();
+        //ResetPosition();
     }
 
     public void InitializeMech(string mechId)
@@ -89,7 +89,7 @@ public class MechBase : MonoBehaviour {
 
     void ResetPosition()
     {
-        transform.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame
