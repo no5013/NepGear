@@ -14,6 +14,7 @@ MonoBehaviour:
   aName: HeavyMachineEnergyGun
   aID: W4
   aGunSound: {fileID: 8300000, guid: f59164772db507d44b2e5027faaed519, type: 3}
+  aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 100
   aFireDelay: 0.25
   maxRecoil: 3
@@ -27,3 +28,6 @@ MonoBehaviour:
   isSpread: 0
   palletCount: 0
   spreadFactor: 0
+  isChargable: 0
+  chargeRate: 0
+  maxCharge: 0

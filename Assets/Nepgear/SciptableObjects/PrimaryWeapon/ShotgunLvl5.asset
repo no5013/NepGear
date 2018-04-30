@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: ShotgunLvl5
   aID: shotgunLvl5
-  aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
+  aGunSound: {fileID: 8300000, guid: ee5bc7dbbcd533643b7994fe34f35991, type: 3}
+  aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 5
   aFireDelay: 1
   maxRecoil: 2
@@ -27,3 +28,6 @@ MonoBehaviour:
   isSpread: 1
   palletCount: 8
   spreadFactor: 2
+  isChargable: 0
+  chargeRate: 0
+  maxCharge: 0
