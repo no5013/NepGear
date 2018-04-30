@@ -127,6 +127,8 @@ namespace Prototype.NetworkLobby
             {
                 mechBase.Initialize(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
             }
+
+            OnConfirmCharacter();
         }
 
         public void OnCancelSelect()
@@ -153,7 +155,7 @@ namespace Prototype.NetworkLobby
             currentSelectedLeft = selectedLeftWeaponRef;
             currentSelectedRight = selectedRightWeaponRef;
 
-            OnChangeSetting();
+            //OnChangeSetting();
 
             if(LobbyPlayerList._instance == null)
             {
@@ -182,16 +184,16 @@ namespace Prototype.NetworkLobby
             currentSelectedLeft = selectedLeftWeaponRef;
             currentSelectedRight = selectedRightWeaponRef;
 
-            OnChangeSetting();
+            //OnChangeSetting();
        
-                if (lobbyPlayer.isServer)
-                {
-                    lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
-                }
-                else
-                {
-                    lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
-                }
+            if (lobbyPlayer.isServer)
+            {
+                lobbyPlayer.RpcSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+            }
+            else
+            {
+                lobbyPlayer.CmdSetCharacter(characters[selectedCharacterRef].characterID, weapons[selectedLeftWeaponRef].aID, weapons[selectedRightWeaponRef].aID);
+            }
 
             LobbyManager.s_Singleton.ChangeTo(lobbyPanel);
         }
