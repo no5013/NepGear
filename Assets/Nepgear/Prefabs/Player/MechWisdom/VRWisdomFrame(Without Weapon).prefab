@@ -5622,12 +5622,12 @@ MonoBehaviour:
   m_JumpBob:
     BobDuration: 0
     BobAmount: 0
-  m_StepInterval: 5
+  m_StepInterval: 9
   m_FootstepSounds:
-  - {fileID: 8300000, guid: 720cc2c3a3b644d1aa6891870080f54d, type: 3}
-  - {fileID: 8300000, guid: d85ddfa444bf743f590da47aa5877756, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 34f9d73bbb85b4d5f9be6f145c27f44b, type: 3}
-  m_LandSound: {fileID: 8300000, guid: c42cde09b87cc48158c51121e032953c, type: 3}
+  - {fileID: 8300000, guid: 75eefbd6424523646a9094cd6865dbec, type: 3}
+  - {fileID: 8300000, guid: 74489f7cfcb6efd4f9e368159d9f39ff, type: 3}
+  m_JumpSound: {fileID: 8300000, guid: 3914f9dc4bce78e4a96f3e6b4cffd387, type: 3}
+  m_LandSound: {fileID: 8300000, guid: 19d9a0112ccfabc468ed02e4fb962c84, type: 3}
 --- !u!114 &114185178541329898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6276,14 +6276,14 @@ MonoBehaviour:
   charFrame: {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
   explosionParticle: {fileID: 198144060732893540}
   shockParticle: {fileID: 198850545462338768}
-  explosionSound: {fileID: 8300000, guid: 5c27182a28a7eb942a362e6d198fe0e6, type: 3}
+  explosionSound: {fileID: 8300000, guid: 0292e900150b9214f9552e5e3a92c012, type: 3}
   timeBeforeExplode: 2
   stagger: 0
   isStaggering: 0
   dodgeForce: 0
   mass: 0
   staggerSound: {fileID: 8300000, guid: d56578bb544571a4f91ec3a9df69a2c1, type: 3}
-  ultimateSound: {fileID: 8300000, guid: 81f94d97986850a4dbe28063eff5016a, type: 3}
+  ultimateSound: {fileID: 8300000, guid: 88bc7bad512702742ade568ef3b68541, type: 3}
   debug: 0
   shouldRegenStamina: 0
 --- !u!114 &114439153420384948

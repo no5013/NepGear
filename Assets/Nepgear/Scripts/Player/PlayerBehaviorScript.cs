@@ -756,7 +756,7 @@ public class PlayerBehaviorScript : NetworkBehaviour
     void Explode()
     {
         explosionParticle.Play();
-        AudioSource.PlayClipAtPoint(explosionSound, transform.position, 10f);
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position);
 
     }
 

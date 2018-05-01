@@ -6771,7 +6771,8 @@ AudioSource:
   m_GameObject: {fileID: 1398333306038856}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243371501187186070, guid: 19308a6eb59a88a4c9d210911c775bbd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5c27182a28a7eb942a362e6d198fe0e6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -6830,7 +6831,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -7819,14 +7820,14 @@ MonoBehaviour:
   charFrame: {fileID: 11400000, guid: 8ed847575a69b7d41afbdb3be6a70496, type: 2}
   explosionParticle: {fileID: 198455870672012508}
   shockParticle: {fileID: 198957463822507450}
-  explosionSound: {fileID: 8300000, guid: 5c27182a28a7eb942a362e6d198fe0e6, type: 3}
+  explosionSound: {fileID: 8300000, guid: 0292e900150b9214f9552e5e3a92c012, type: 3}
   timeBeforeExplode: 2
   stagger: 0
   isStaggering: 0
   dodgeForce: 0
   mass: 0
   staggerSound: {fileID: 8300000, guid: d56578bb544571a4f91ec3a9df69a2c1, type: 3}
-  ultimateSound: {fileID: 8300000, guid: 81f94d97986850a4dbe28063eff5016a, type: 3}
+  ultimateSound: {fileID: 8300000, guid: 88bc7bad512702742ade568ef3b68541, type: 3}
   debug: 0
   shouldRegenStamina: 0
 --- !u!114 &114177983672831082
@@ -7925,12 +7926,12 @@ MonoBehaviour:
   m_JumpBob:
     BobDuration: 0
     BobAmount: 0
-  m_StepInterval: 5
+  m_StepInterval: 9
   m_FootstepSounds:
-  - {fileID: 8300000, guid: 720cc2c3a3b644d1aa6891870080f54d, type: 3}
-  - {fileID: 8300000, guid: d85ddfa444bf743f590da47aa5877756, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 34f9d73bbb85b4d5f9be6f145c27f44b, type: 3}
-  m_LandSound: {fileID: 8300000, guid: c42cde09b87cc48158c51121e032953c, type: 3}
+  - {fileID: 8300000, guid: 75eefbd6424523646a9094cd6865dbec, type: 3}
+  - {fileID: 8300000, guid: 74489f7cfcb6efd4f9e368159d9f39ff, type: 3}
+  m_JumpSound: {fileID: 8300000, guid: 3914f9dc4bce78e4a96f3e6b4cffd387, type: 3}
+  m_LandSound: {fileID: 8300000, guid: 19d9a0112ccfabc468ed02e4fb962c84, type: 3}
 --- !u!114 &114220002663158926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10539,7 +10540,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -638601586
+  randomSeed: -1817421158
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13939,7 +13940,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1551980094
+  randomSeed: -2133555244
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -20604,7 +20605,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -996728605
+  randomSeed: -220449038
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -24004,7 +24005,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 502414516
+  randomSeed: 1942208707
   InitialModule:
     serializedVersion: 3
     enabled: 1
