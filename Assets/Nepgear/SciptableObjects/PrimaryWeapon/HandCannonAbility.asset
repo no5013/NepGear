@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Hand Cannon
   aID: W1
-  aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
+  aGunSound: {fileID: 8300000, guid: 06766a1907a9c334d9bd11415003249e, type: 3}
   aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 12
   aFireDelay: 0.5
