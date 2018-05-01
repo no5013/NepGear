@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour {
 
     public Text startText;
     public Image darkScreen;
+    public RawImage logo;
     private MonoInputHandler ih;
     private bool isLoadingScene;
     public string lobbyScene;
@@ -21,7 +22,9 @@ public class MainMenuController : MonoBehaviour {
 
         isLoadingScene = false;
         ih = GetComponent<MonoInputHandler>();
+        startText.enabled = false;
         source = GetComponent<AudioSource>();
+        StartCoroutine(LogoFadeIn());
     }
 	
 	// Update is called once per frame
@@ -43,6 +46,15 @@ public class MainMenuController : MonoBehaviour {
     {
         yield return new WaitForSeconds(dimTime);
         SceneManager.LoadScene(lobbyScene);
+    }
+    IEnumerator LogoFadeIn()
+    {
+        while (logo.color.a < 1f)
+        {
+            logo.color = new Color(logo.color.r, logo.color.g, logo.color.b, logo.color.a + Time.deltaTime / dimTime);
+            yield return null;
+        }
+        startText.enabled = true;
     }
 
 }
