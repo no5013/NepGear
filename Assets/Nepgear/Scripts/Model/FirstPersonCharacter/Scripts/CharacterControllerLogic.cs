@@ -6,6 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class CharacterControllerLogic : NetworkBehaviour {
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource thrusterSource;
     [SerializeField] private float directionDampTime = 0.25f;
 
     private float speed = 0.0f;
@@ -92,6 +93,18 @@ public class CharacterControllerLogic : NetworkBehaviour {
             foreach(Thruster thruster in thrusters)
             {
                 thruster.Emit();
+            }
+
+            if(thrusterSource != null && !thrusterSource.isPlaying)
+            {
+                thrusterSource.Play();
+            }
+        }
+        else
+        {
+            if (thrusterSource != null && thrusterSource.isPlaying)
+            {
+                thrusterSource.Stop();
             }
         }
     }

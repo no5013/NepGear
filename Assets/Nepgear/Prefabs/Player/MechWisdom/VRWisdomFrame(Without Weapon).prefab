@@ -770,6 +770,7 @@ GameObject:
   - component: {fileID: 4039490395423230}
   - component: {fileID: 198038629788101158}
   - component: {fileID: 199510296760940902}
+  - component: {fileID: 114890359921238446}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (1)
   m_TagString: Untagged
@@ -1290,6 +1291,7 @@ GameObject:
   - component: {fileID: 4464245715585684}
   - component: {fileID: 198569613909934124}
   - component: {fileID: 199059978775079878}
+  - component: {fileID: 114306735333247470}
   m_Layer: 0
   m_Name: SimpleFlame(Blue)
   m_TagString: Untagged
@@ -1400,6 +1402,7 @@ GameObject:
   - component: {fileID: 4205597295697558}
   - component: {fileID: 198756195299622764}
   - component: {fileID: 199907316090107750}
+  - component: {fileID: 114113589738764066}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (1)
   m_TagString: Untagged
@@ -1562,6 +1565,7 @@ GameObject:
   - component: {fileID: 4157669005227998}
   - component: {fileID: 198840542415594958}
   - component: {fileID: 199103961503072568}
+  - component: {fileID: 114727484503843248}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (3)
   m_TagString: Untagged
@@ -1611,6 +1615,7 @@ GameObject:
   - component: {fileID: 4063790964845836}
   - component: {fileID: 198675544693537796}
   - component: {fileID: 199324363923223250}
+  - component: {fileID: 114510304362884786}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (2)
   m_TagString: Untagged
@@ -1768,6 +1773,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4048489060479464}
+  - component: {fileID: 82051020607513716}
   m_Layer: 0
   m_Name: OwlFrame
   m_TagString: Untagged
@@ -2014,6 +2020,7 @@ GameObject:
   - component: {fileID: 4281632274063916}
   - component: {fileID: 198758384403476692}
   - component: {fileID: 199500464177595624}
+  - component: {fileID: 114626012193669140}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (1)
   m_TagString: Untagged
@@ -2160,6 +2167,7 @@ GameObject:
   - component: {fileID: 4754866542444096}
   - component: {fileID: 198625446153730690}
   - component: {fileID: 199580133651988310}
+  - component: {fileID: 114795697302025434}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (4)
   m_TagString: Untagged
@@ -2274,6 +2282,7 @@ GameObject:
   - component: {fileID: 4109920420545816}
   - component: {fileID: 198131710054710892}
   - component: {fileID: 199152190987107712}
+  - component: {fileID: 114145309100533264}
   m_Layer: 0
   m_Name: SimpleFlame(Blue) (2)
   m_TagString: Untagged
@@ -5307,6 +5316,87 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!82 &82051020607513716
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1674036742926406}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243371501187186070, guid: 19308a6eb59a88a4c9d210911c775bbd,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 4127cc8c045b39147bc12ba3e9e91a80, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82333411179881130
 AudioSource:
   m_ObjectHideFlags: 1
@@ -5698,6 +5788,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114113589738764066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559003495392160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114118750970510122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5741,6 +5842,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114145309100533264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850306209382852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114169316286631016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6127,6 +6239,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114306735333247470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1527561669369260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114307085748569822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6638,6 +6761,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114510304362884786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1615031696397060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114542103332893924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6768,6 +6902,17 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.2
   m_InterpolateMovement: 0
+--- !u!114 &114626012193669140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770293494732660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114629154105445906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7047,6 +7192,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114727484503843248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603527477063534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114738467508088470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7231,6 +7387,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 100%
+--- !u!114 &114795697302025434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821559608412714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114800358838843846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7259,6 +7426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  thrusterSource: {fileID: 82051020607513716}
   directionDampTime: 0.25
   debugThruster: 0
 --- !u!114 &114816206567458236
@@ -7416,6 +7584,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114890359921238446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355230786023042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96ac6b942f0bd74f941d723d8f1e50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114906390876357334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8251,7 +8430,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000001243609, y: -0.5552499, z: 0.7175361}
+  m_ConnectedAnchor: {x: 0.00000012436091, y: -0.5552499, z: 0.7175369}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -8295,7 +8474,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.9696541, y: -0.0000001200726, z: 0.24049094}
+  m_ConnectedAnchor: {x: -0.96965456, y: -0.0000001200726, z: 0.24049094}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -8383,7 +8562,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 1.8645821, y: 0.5153311, z: -0.022480965}
+  m_ConnectedAnchor: {x: 1.8645821, y: 0.5153311, z: -0.022480011}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -8427,7 +8606,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.8645821, y: 0.5153311, z: -0.022480965}
+  m_ConnectedAnchor: {x: -1.8645821, y: 0.5153311, z: -0.022480011}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -8515,7 +8694,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000011920929, y: -0.5552499, z: 0.7175361}
+  m_ConnectedAnchor: {x: -0.00000011920929, y: -0.5552499, z: 0.7175369}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -8561,7 +8740,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -8609,7 +8788,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1311743272
+  randomSeed: 233228894
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -11910,7 +12089,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -25324,7 +25503,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -25372,7 +25551,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1967358302
+  randomSeed: -2006465105
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -28673,7 +28852,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -28721,7 +28900,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1812584560
+  randomSeed: -520620078
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -32022,7 +32201,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -32070,7 +32249,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 597502300
+  randomSeed: 408953773
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -38771,7 +38950,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -38819,7 +38998,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1727111087
+  randomSeed: 1443564033
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -42120,7 +42299,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -42168,7 +42347,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -432774210
+  randomSeed: 1733595617
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -45469,7 +45648,7 @@ ParticleSystem:
   stopAction: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -45517,7 +45696,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 292112725
+  randomSeed: 602909108
   InitialModule:
     serializedVersion: 3
     enabled: 1
