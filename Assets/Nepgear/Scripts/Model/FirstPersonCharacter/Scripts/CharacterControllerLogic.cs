@@ -76,8 +76,12 @@ public class CharacterControllerLogic : NetworkBehaviour {
 
           //  Debug.Log(dashing);
         }
-        EmitThrusters();
 	}
+
+    private void LateUpdate()
+    {
+        EmitThrusters();
+    }
 
     void UpdateState ()
     {
@@ -106,6 +110,19 @@ public class CharacterControllerLogic : NetworkBehaviour {
             {
                 thrusterSource.Stop();
             }
+        }
+    }
+
+    public void EmitThrustersForce()
+    {
+        foreach (Thruster thruster in thrusters)
+        {
+            thruster.Emit();
+        }
+
+        if (thrusterSource != null && !thrusterSource.isPlaying)
+        {
+            thrusterSource.Play();
         }
     }
 }

@@ -17,12 +17,14 @@ public class FrameMover : NetworkBehaviour
 
     private CharacterController character;
     private FirstPersonController firstPersonController;
+    public CharacterControllerLogic characterControllerLogic;
 
     // Use this for initialization
     void Start()
     {
         character = GetComponent<CharacterController>();
         firstPersonController = GetComponent<FirstPersonController>();
+        characterControllerLogic = GetComponent<CharacterControllerLogic>();
 
         Vector3 targetPostition = new Vector3(target.position.x, transform.position.y, target.position.z);
         moveDir = CalculateMoveDirection();
@@ -75,6 +77,11 @@ public class FrameMover : NetworkBehaviour
         {
             this.enabled = false;
             GetComponent<PlayerBehaviorScript>().EnableControl();
+        }
+
+        if(characterControllerLogic != null)
+        {
+            characterControllerLogic.EmitThrustersForce();
         }
 
         Vector3 moveVector = new Vector3(moveDir.x * CalculateCurrentSpeed(), 0f, moveDir.z * CalculateCurrentSpeed());
