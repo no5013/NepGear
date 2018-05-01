@@ -2462,16 +2462,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   persistOnLoad: 0
   autoManageScriptDefines: 1
-  activeScriptingDefineSymbolsWithoutSDKClasses:
-  - symbol: VRTK_DEFINE_SDK_OCULUS_AVATAR
-    buildTargetGroupName: Standalone
+  activeScriptingDefineSymbolsWithoutSDKClasses: []
   scriptAliasLeftController: {fileID: 224419276}
   scriptAliasRightController: {fileID: 686193188}
   autoManageVRSettings: 1
   autoLoadSetup: 1
   setups:
   - {fileID: 32233378}
-  - {fileID: 985644476}
   - {fileID: 104151658}
   - {fileID: 1602221814}
   - {fileID: 1271289994}

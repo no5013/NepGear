@@ -19,12 +19,16 @@ public class CharacterControllerLogic : NetworkBehaviour {
 
     private InputHandler inputHandler;
     private PlayerBehaviorScript playerBehaviorScript;
+    private Thruster[] thrusters;
+
+    public bool debugThruster;
 
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
         inputHandler = GetComponent<InputHandler>();
         playerBehaviorScript = GetComponent<PlayerBehaviorScript>();
+        thrusters = GetComponentsInChildren<Thruster>(true);
 
         if(animator.layerCount >= 2)
         {
@@ -71,6 +75,7 @@ public class CharacterControllerLogic : NetworkBehaviour {
 
           //  Debug.Log(dashing);
         }
+        EmitThrusters();
 	}
 
     void UpdateState ()
@@ -78,5 +83,16 @@ public class CharacterControllerLogic : NetworkBehaviour {
         dashing = playerBehaviorScript.IsRunning();
         dough = playerBehaviorScript.IsDashing();
         floating = playerBehaviorScript.Floating();
+    }
+
+    void EmitThrusters()
+    {
+        if(animator.GetBool("Dash") || animator.GetBool("Dough") || animator.GetBool("Float") || debugThruster)
+        {
+            foreach(Thruster thruster in thrusters)
+            {
+                thruster.Emit();
+            }
+        }
     }
 }
