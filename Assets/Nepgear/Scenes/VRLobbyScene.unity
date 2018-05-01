@@ -44851,7 +44851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMapText: {fileID: 490036787}
-  currentMapImage: {fileID: 0}
+  currentMapImage: {fileID: 110648513}
   currentMapIndex: 0
   mapSelectionPanel: {fileID: 1844052211}
 --- !u!114 &1519978422
@@ -44867,7 +44867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerListContentTransform: {fileID: 321196910}
-  warningDirectPlayServer: {fileID: 0}
+  warningDirectPlayServer: {fileID: 110648511}
   addButtonRow: {fileID: 1240431125}
 --- !u!114 &1519978423
 MonoBehaviour:
