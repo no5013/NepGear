@@ -424,11 +424,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         isUltimateActived = true;
         ultimate.TriggerAbility();
+        RpcPlayShockParticle(true);
         ultimateCharge = 0f;
         audioSource.clip = ultimateSound;
         audioSource.Play();
         yield return new WaitForSeconds(ultimate.duration);
         ultimate.TriggerAbilityEnd();
+        RpcPlayShockParticle(false);
         isUltimateActived = false;
     }
 
@@ -512,6 +514,18 @@ public class PlayerBehaviorScript : NetworkBehaviour
         //impact += dir.normalized * force / mass;
         impact += dir.normalized * force / mass;
         Debug.Log("Impact magnitude" + impact.magnitude);
+    }
+
+    [ClientRpc]
+    public void RpcPlayShockParticle(bool play)
+    {
+        if(shockParticle != null)
+        {
+            if (play)
+                shockParticle.Play();
+            else
+                shockParticle.Stop();
+        }
     }
 
     [Server]
