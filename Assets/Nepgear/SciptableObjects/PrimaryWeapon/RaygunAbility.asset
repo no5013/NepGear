@@ -14,9 +14,14 @@ MonoBehaviour:
   aName: Raygun
   aID: W2
   aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
+  aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 30
   aFireDelay: 0.1
+  maxRecoil: 0
+  recoilRate: 0
   gunPrefab: {fileID: 1400920246763924, guid: d3ffea812c3a512449f640d46a6a4610, type: 2}
+  muzzleFlash: {fileID: 0}
   damage: 10
   range: 5
   reloadTime: 1
+  force: 0

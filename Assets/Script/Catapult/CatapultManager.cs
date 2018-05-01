@@ -23,8 +23,11 @@ public class CatapultManager : MonoBehaviour {
 
     private Rigidbody rb;
     private CharacterController characterController;
+    public Animator animator;
 
     public GameObject player;
+
+    private float yOffset = 3f;
 
     // Use this for initialization
     void Start () {
@@ -40,8 +43,18 @@ public class CatapultManager : MonoBehaviour {
         ResetCatapult();
 
         frame.transform.parent = stand.transform;
-        frame.transform.localPosition = Vector3.zero;
+        Vector3 newPosition = Vector3.zero;
+        newPosition.y = yOffset;
+        frame.transform.localPosition = newPosition;
         frame.transform.localRotation = Quaternion.identity;
+    }
+
+    public void Prepare()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("launch");
+        }
     }
 	
 	// Update is called once per frame

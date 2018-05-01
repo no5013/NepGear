@@ -278,7 +278,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Reload
+    m_Name: Reload1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -290,8 +290,24 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 10
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Reload2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: r
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 11
     joyNum: 0
   - serializedVersion: 3
     m_Name: Oculus_GearVR_LThumbstickX
@@ -470,13 +486,29 @@ InputManager:
     axis: 4
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Ultimate
-    descriptiveName: Ultimate Actived Button
+    m_Name: UltimateHalfLeft
+    descriptiveName: Ultimate Half Left Active Button
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: q
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: joystick button 8
+    gravity: 0
+    dead: 0.001
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 4
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: UltimateHalfRight
+    descriptiveName: Ultimate Half Right Active Button
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: e
+    altNegativeButton: 
+    altPositiveButton: joystick button 9
     gravity: 0
     dead: 0.001
     sensitivity: 1

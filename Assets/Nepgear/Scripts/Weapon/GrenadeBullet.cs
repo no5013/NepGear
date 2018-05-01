@@ -14,14 +14,18 @@ public class GrenadeBullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float blastRadius;
     [SyncVar] [HideInInspector] public float blastForce;
     [SyncVar] [HideInInspector] public float staggerDamage;
+    [SyncVar] [HideInInspector] public float timeBeforeDestroy;
     public ParticleSystem explosion;
+
+    private bool isCollideAlready;
 
     // Use this for initialization
     void Start () {
-        GetComponent<Collider>().enabled = false;
+        DisableCollision();
         StartCoroutine(EnableCollision());
         Destroy(this.gameObject, lifeTime);
-	}
+        //isCollideAlready = false;
+    }
 	
     IEnumerator EnableCollision()
     {
@@ -33,12 +37,21 @@ public class GrenadeBullet : NetworkBehaviour {
     private void OnCollisionEnter(Collision other)
     {
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
-        if (isPlayer != null)
+        ShieldTriggerable shield = other.gameObject.GetComponentInParent<ShieldTriggerable>();
+        if (shield != null)
         {
+            shield.TakeDamage(damage);
+            Destroy(this.gameObject);
+            return;
+        }
+        if (isPlayer != null && GetComponent<Collider>().enabled)
+        {
+            DisableCollision();
             string dir = GetHitDir(other.transform);
             isPlayer.TakeDamage(damage);
             isPlayer.Staggering(staggerDamage);
             isPlayer.TickIndicator(dir);
+            
         }
         else
         {
@@ -49,12 +62,16 @@ public class GrenadeBullet : NetworkBehaviour {
                 target.TakeDamage(damage);
                 Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
                 r.AddForce(transform.forward * impactForce);
+                //DisableCollision();
             }
         }
         Explode();
         Explosion();
-
         Destroy(this.gameObject);
+    }
+    private void DisableCollision()
+    {
+        GetComponent<Collider>().enabled = false;
     }
 
     private void Explode()
@@ -69,7 +86,9 @@ public class GrenadeBullet : NetworkBehaviour {
 
             // If they don't have a rigidbody, go on to the next collider.
             if (!targetRigidbody)
+            {
                 continue;
+            }
 
             // Find the TankHealth script associated with the rigidbody.
             PlayerBehaviorScript targetHealth = targetRigidbody.GetComponent<PlayerBehaviorScript>();
@@ -88,7 +107,7 @@ public class GrenadeBullet : NetworkBehaviour {
             // Calculate damage as this proportion of the maximum possible damage.
             float damage = relativeDistance * blastDamage;
             float stagger = relativeDistance * staggerDamage;
-
+            float force = relativeDistance * blastForce;
             // Make sure that the minimum damage is always 0.
             damage = Mathf.Max(0f, damage);
             stagger = Mathf.Max(0f, stagger);
@@ -97,18 +116,21 @@ public class GrenadeBullet : NetworkBehaviour {
             {
                 targetHealth.TakeDamage(damage);
                 targetHealth.Staggering(stagger);
+                targetHealth.CmdAddImpact(explosionToTarget, force);
             }
             if (destructible)
+            {
                 destructible.TakeDamage(damage);
+                targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
+            }
             // Deal this damage to the tank.
-            targetRigidbody.AddExplosionForce(blastForce, transform.position, blastRadius);
         }
     }
 
     private void OnDestroy()
     {
-        Explode();
-        Explosion();
+        //Explode();
+        //Explosion();
     }
 
     private void Explosion()

@@ -17,6 +17,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
     [HideInInspector] public float recoilRate;
     [HideInInspector] public float chargeRate;
     [HideInInspector] public float maxCharge;
+    [HideInInspector] public AudioClip reloadSound;
     public bool isChargable;
 
     public ParticleSystem[] chargeParticleSystems;
@@ -79,14 +80,15 @@ public class ProjectileShootTriggerable : MonoBehaviour {
                 recoil = 0f;
             }
         }
-        if (bulletLeft < magazine && !isReloading)
-        {
-            reloadDelay += Time.deltaTime;
-            if (reloadDelay >= autoReloadDelay)
-            {
-                Reload();
-            }
-        }
+        //if (bulletLeft < magazine && !isReloading)
+        //{
+        //    reloadDelay += Time.deltaTime;
+        //    if (reloadDelay >= autoReloadDelay)
+        //    {
+        //        Debug.Log("AutoReload");
+        //        Reload();
+        //    }
+        //}
         if (isChargable)
         {
             if (charge < maxCharge)
@@ -149,6 +151,8 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             isFiring = true;
             for (int i = 0; i< bulletSpawns.Length; i++)
             {
+                if (bulletLeft <= 0)
+                    return;
                 bulletLeft--;
                 Transform bulletSpawn = bulletSpawns[i];
                 RandomBulletSpawnRotation(ref bulletSpawn);
@@ -172,6 +176,7 @@ public class ProjectileShootTriggerable : MonoBehaviour {
             Reload();
         }
     }
+
     private void Recoil()
     {
         recoil += recoilRate;
@@ -183,6 +188,11 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
     public void Reload()
     {
+        if(isReloading)
+        {
+            return;
+        }
+        soundSource.clip = reloadSound;
         reloadDelay = 0f;
         StartCoroutine(Reloading());
     }
@@ -215,6 +225,8 @@ public class ProjectileShootTriggerable : MonoBehaviour {
 
         bulletLeft = magazine;
         isReloading = false;
+        soundSource.clip = gunSound;
+        fwc.ReloadSuccessful();
         //m_BulletText.text = bulletLeft + "/" + magazine;
     }
 }

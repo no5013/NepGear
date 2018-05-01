@@ -8,5 +8,6 @@ public class BlastRound : Projectile {
     public float blastForce;
     public float blastRadius;
     public float blastDamage;
+    public float timeBeforeDestroy;
     public float risingSpeed = 0;
 }

@@ -9,13 +9,22 @@ public class Bullet : NetworkBehaviour {
     [SyncVar] [HideInInspector] public float force;
     [SyncVar] [HideInInspector] public float lifeTime;
     [SyncVar] [HideInInspector] public float staggerDamage;
+
+    private AudioSource impactSound;
     //public ParticleSystem impactPrefab;
 
 	// Use this for initialization
 	void Start () {
-       
+        impactSound = GetComponent<AudioSource>();
+        StartCoroutine(EnableCollision());
         Destroy(this.gameObject, lifeTime);
 	}
+
+    IEnumerator EnableCollision()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<Collider>().enabled = true;
+    }
 	
     [ServerCallback]
     void OnCollisionEnter(Collision other) {
@@ -23,6 +32,13 @@ public class Bullet : NetworkBehaviour {
         //Debug.Log("Points colliding: " + other.contacts.Length);
         //Debug.Log("First normal of the point that collide: " + other.contacts[0].normal);
         Debug.Log("Collision Bullet hit");
+        ShieldTriggerable shield = other.gameObject.GetComponentInParent<ShieldTriggerable>();
+        if (shield != null)
+        {
+            shield.TakeDamage(damage);
+            Destroy(this.gameObject);
+            return;
+        }
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
         if (isPlayer != null)
         {
@@ -51,7 +67,8 @@ public class Bullet : NetworkBehaviour {
             }
         }
         //Impact();
-        //RpcImpactEffect(other.contacts[0].point, Quaternion.identity);
+        impactSound.Play();
+        RpcImpactEffect();
         Destroy(this.gameObject);
     }
 
@@ -84,12 +101,11 @@ public class Bullet : NetworkBehaviour {
     //   Destroy(this.gameObject);
     //}
 
-    //[ClientRpc]
-    //public void RpcImpactEffect(Vector3 position, Quaternion rotation)
-    //{
-    //    Debug.Log("Instantiate Bullet Impact Prefab");
-    //    Instantiate(impactPrefab, position, rotation);
-    //}
+    [ClientRpc]
+    public void RpcImpactEffect()
+    {
+        impactSound.Play();
+    }
 
     //public void Impact()
     //{

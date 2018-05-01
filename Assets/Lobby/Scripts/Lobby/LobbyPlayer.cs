@@ -73,6 +73,9 @@ namespace Prototype.NetworkLobby
                 SetupOtherPlayer();
             }
 
+            //Reset local rotation of player
+            transform.localRotation = Quaternion.identity;
+
             //setup the player data on UI. The value are SyncVar so the player
             //will be created with the right value currently on server
             OnMyName(playerName);
@@ -81,7 +84,6 @@ namespace Prototype.NetworkLobby
             OnFrame(frameId);
             OnLeftWeapon(leftWeaponId);
             OnRightWeapon(rightWeaponId);
-
         }
 
         public override void OnStartAuthority()
@@ -91,7 +93,9 @@ namespace Prototype.NetworkLobby
             //if we return from a game, color of text can still be the one for "Ready"
             readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
 
-           SetupLocalPlayer();
+            SetupLocalPlayer();
+
+            LobbyManager.s_Singleton.characterPanel.GetComponent<CharacterSelector>().OnConfirmCharacter(this);
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -137,7 +141,6 @@ namespace Prototype.NetworkLobby
             if (playerName == "")
             {
                 CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
-                Debug.Log(SteamUser.GetSteamID().m_SteamID);
                 CmdSteamIDChanged(SteamUser.GetSteamID().m_SteamID);
             }
 
@@ -156,7 +159,12 @@ namespace Prototype.NetworkLobby
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
-            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
+            //StartCoroutine(FetchAvatar(new CSteamID(steamID)));
+
+            if (LobbyManager.s_Singleton != null)
+            {
+                LobbyManager.s_Singleton.OnPlayersNumberModified(0);
+            }
         }
 
         //This enable/disable the remove button depending on if that is the only local player or not
@@ -219,6 +227,8 @@ namespace Prototype.NetworkLobby
 
         public void OnSteamID(ulong newSteamID)
         {
+            if (!SteamManager.Initialized)
+                return;
             steamID = newSteamID;
             playerName = SteamFriends.GetFriendPersonaName(new CSteamID(steamID));
             OnMyName(playerName);
@@ -438,6 +448,7 @@ namespace Prototype.NetworkLobby
 
             if (avatarInt > 0)
             {
+                Debug.Log("FETCH FINISH");
                 SteamUtils.GetImageSize(avatarInt, out width, out height);
                 if (width > 0 && height > 0)
                 {

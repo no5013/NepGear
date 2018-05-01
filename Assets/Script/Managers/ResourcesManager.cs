@@ -44,6 +44,7 @@ public class ResourcesManager : ScriptableObject
             }
             else
             {
+                //ClientScene.RegisterPrefab(wa.gunPrefab);
                 w_dict.Add(wa.aID, i);
             }
         }

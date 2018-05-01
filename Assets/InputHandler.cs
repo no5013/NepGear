@@ -14,10 +14,17 @@ public class InputHandler : NetworkBehaviour {
 
     public float fire1;
     public float fire2;
-    public float fire3;
+    public bool fire3;
+
+    public float reload1;
+    public float reload2;
+
+    public bool ultimate;
 
     public bool jumping;
     public bool dashing;
+
+    public bool any;
 
     private Animator animator;
 
@@ -44,8 +51,6 @@ public class InputHandler : NetworkBehaviour {
         yRot = CrossPlatformInputManager.GetAxis("Mouse X");
         xRot = CrossPlatformInputManager.GetAxis("Mouse Y");
 
-        Debug.Log(yRot);
-
         fire1 = CrossPlatformInputManager.GetAxis("Fire1");
         if(fire1 <= 0)
         {
@@ -59,14 +64,18 @@ public class InputHandler : NetworkBehaviour {
             //fire2 = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
             fire2 = CrossPlatformInputManager.GetAxis("VRFire2");
         }
-        fire3 = CrossPlatformInputManager.GetAxis("Fire3");
-        if (fire3 <= 0)
-        {
-            //fire3 = CrossPlatformInputManager.GetAxis("VRFire3");
-        }
+        fire3 = CrossPlatformInputManager.GetButton("Fire3");
+        reload1 = CrossPlatformInputManager.GetAxis("Reload1");
+        reload2 = CrossPlatformInputManager.GetAxis("Reload2");
+        //if (fire3 <= 0)
+        //{
+        //    //fire3 = CrossPlatformInputManager.GetAxis("VRFire3");
+        //}
 
         jumping = CrossPlatformInputManager.GetButton("Ascending");
         dashing = CrossPlatformInputManager.GetButton("Dash");
+        ultimate = CrossPlatformInputManager.GetButton("UltimateHalfLeft") && CrossPlatformInputManager.GetButton("UltimateHalfRight");
+        any = fire1 > 0 || fire2 > 0 || fire3 || reload1 > 0 || reload2 > 0 || jumping || dashing || ultimate;
     }
 
     private void UpdateStates()

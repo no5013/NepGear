@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Name: Resources Manager
   m_EditorClassIdentifier: 
   projectiles:
+  - {fileID: 11400000, guid: 331fc01e437d4474fba25e34b29cfac2, type: 2}
+  - {fileID: 11400000, guid: 91bcb27dae1cd4b4fb899e9c582c0e11, type: 2}
+  - {fileID: 11400000, guid: 9bad8589e2a841645a2e449e64349aee, type: 2}
   - {fileID: 11400000, guid: 93f49df642b31574ab1c16d6524ad081, type: 2}
+  - {fileID: 11400000, guid: 42dbaaed5964ec343a47f5d3da725c26, type: 2}
+  - {fileID: 11400000, guid: e56a43e16689ce947a6ce792093baf41, type: 2}
+  - {fileID: 11400000, guid: 0adee95fbf902bf4fa44b75f774d1531, type: 2}
+  - {fileID: 11400000, guid: a655c2237890d8f42986e2fcba3fb12f, type: 2}
   weaponAbilities:
   - {fileID: 11400000, guid: 8be6f842e3064604899354d356056943, type: 2}
   - {fileID: 11400000, guid: 08b9bd97e9dcadd479fc67fb4e7be448, type: 2}
@@ -25,5 +32,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d153bbf95f5921246a5d04ca19fc390e, type: 2}
   - {fileID: 11400000, guid: 5daa5ce5c553ae04aa2db37236e770ce, type: 2}
   - {fileID: 11400000, guid: bcfe79a150b2f7749b0a725bbee6e289, type: 2}
+  - {fileID: 11400000, guid: 565e83b7e8b7b154fb245992ffe66f75, type: 2}
   maps:
   - {fileID: 11400000, guid: eaf79a8e75c63a741842010967137156, type: 2}
+  - {fileID: 11400000, guid: db8a15dd4a711cc4fb072c88368fc78f, type: 2}

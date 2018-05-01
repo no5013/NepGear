@@ -15,8 +15,11 @@ MonoBehaviour:
   characterID: F1
   maxHitPoint: 100
   maxStamina: 100
-  maxUltimate: 100
   startingSpeed: 15
+  jumpForce: 10
+  boostSpeed: 10
+  staggerLimit: 50
+  staggerRecovery: 50
   characterPrefab: {fileID: 1511154638448052, guid: c65451f247fabdc4cac9e6145264059e,
     type: 2}
   framePrefab: {fileID: 1635197861194840, guid: 5589b12c7bce0d14fb4b3c695006ccbc,

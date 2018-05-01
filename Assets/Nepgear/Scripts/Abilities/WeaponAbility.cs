@@ -8,6 +8,7 @@ public abstract class WeaponAbility : ScriptableObject {
     public string aID;
     //public Sprite aSprite;
     public AudioClip aGunSound;
+    public AudioClip aReloadSound;
     public int aMagazine;
     public float aFireDelay;
     public float maxRecoil;

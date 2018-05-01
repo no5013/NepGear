@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Prototype.NetworkLobby;
 
 public class MechBase : MonoBehaviour {
 
     public Transform spawnPosition;
 
-    public float speed = 10f;
+    public float speed = 0f;
 
     public string mechId = "F1";
     public string leftWeaponId = "shotgunLvl1";
@@ -19,7 +20,10 @@ public class MechBase : MonoBehaviour {
     // Use this for initialization
     void Start () {
         resourcesManager.Init();
-        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID); 
+        Initialize(resourcesManager.frames[0].characterID, resourcesManager.weaponAbilities[0].aID, resourcesManager.weaponAbilities[0].aID);
+
+        FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().mechBase = this;
+        FindObjectOfType<LobbyManager>().characterPanel.GetComponent<CharacterSelector>().OnChangeSetting();
     }
 
     public void Initialize(string mechId, string leftWeaponId, string rightWeaponId)
@@ -28,7 +32,7 @@ public class MechBase : MonoBehaviour {
         EquipLeftWeaponToMech(leftWeaponId);
         EquipRightWeaponToMech(rightWeaponId);
 
-        ResetPosition();
+        //ResetPosition();
     }
 
     public void InitializeMech(string mechId)
@@ -85,7 +89,7 @@ public class MechBase : MonoBehaviour {
 
     void ResetPosition()
     {
-        transform.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame

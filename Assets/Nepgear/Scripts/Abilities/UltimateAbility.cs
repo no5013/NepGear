@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class UltimateAbility : ScriptableObject {
 
     public string uName = "New Ultimate";
+    public string uID;
     //public Sprite aSprite;
     //public AudioClip aSound;
     public float duration;

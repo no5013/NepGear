@@ -14,6 +14,7 @@ MonoBehaviour:
   aName: Hand Cannon
   aID: W1
   aGunSound: {fileID: 8300000, guid: f6cb1f581b7444b23a05b613a16420d5, type: 3}
+  aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 12
   aFireDelay: 0.5
   maxRecoil: 1.5

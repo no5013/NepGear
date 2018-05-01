@@ -57,6 +57,7 @@ public class FrameManager : MonoBehaviour {
         {
             animator.SetTrigger("Equip");
             leftWeapon = Instantiate(weaponAbility.gunPrefab, mountGadgetL);
+            leftWeapon.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -67,6 +68,7 @@ public class FrameManager : MonoBehaviour {
         {
             animator.SetTrigger("Equip");
             rightWeapon = Instantiate(weaponAbility.gunPrefab, mountGadgetR);
+            rightWeapon.transform.localPosition = Vector3.zero; 
         }
     }
 }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1a3db733a0ed249b78e56d3c536bd2, type: 3}
+  m_Name: FullBurstBullet
+  m_EditorClassIdentifier: 
+  projectileId: P9
+  damage: 10
+  force: 100
+  lifeTime: 2
+  speed: 100
+  staggerDamage: 10
+  projectilePrefab: {fileID: 1074170991746498, guid: fda32d94495044a408d7f29116045396,
+    type: 2}
