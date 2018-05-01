@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: PlasmaGrenadeLuncher
   aID: W5
-  aGunSound: {fileID: 8300000, guid: 160ef49e55f03eb4bbea9848c26494bb, type: 3}
+  aGunSound: {fileID: 8300000, guid: f743da022bde0e04da757b2f1f099458, type: 3}
   aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 6
   aFireDelay: 0.8

@@ -757,14 +757,13 @@ public class PlayerBehaviorScript : NetworkBehaviour
     {
         explosionParticle.Play();
         AudioSource.PlayClipAtPoint(explosionSound, transform.position);
-
     }
 
     void FrameExplode()
     {
         Explode();
-        if(!isLocalPlayer)
-            SetFrameActive(false);
+        /*if(!isLocalPlayer)
+            SetFrameActive(false);*/
         //DisablePlayer();
     }
 

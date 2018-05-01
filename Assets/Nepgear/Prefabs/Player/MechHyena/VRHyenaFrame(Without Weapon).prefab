@@ -8993,7 +8993,7 @@ MonoBehaviour:
   m_JumpBob:
     BobDuration: 0
     BobAmount: 0
-  m_StepInterval: 5
+  m_StepInterval: 9
   m_FootstepSounds:
   - {fileID: 8300000, guid: 75eefbd6424523646a9094cd6865dbec, type: 3}
   - {fileID: 8300000, guid: 74489f7cfcb6efd4f9e368159d9f39ff, type: 3}

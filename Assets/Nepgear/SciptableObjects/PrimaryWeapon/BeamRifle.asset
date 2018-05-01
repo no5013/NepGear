@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Beam Rifle
   aID: W6
-  aGunSound: {fileID: 8300000, guid: 10f18cc8e08a47f4aafe4e53db4f276c, type: 3}
+  aGunSound: {fileID: 8300000, guid: 3486b6cbbd2bb4d42a985eb9a730899f, type: 3}
   aReloadSound: {fileID: 8300000, guid: c6dc4a0116138544c87bea0325713793, type: 3}
   aMagazine: 12
   aFireDelay: 1
