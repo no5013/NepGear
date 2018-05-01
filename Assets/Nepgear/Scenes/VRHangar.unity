@@ -27600,7 +27600,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1511154638448052, guid: c65451f247fabdc4cac9e6145264059e,
     type: 2}
   m_LobbyScene: VRHangar
-  m_PlayScene: 
+  m_PlayScene: Mountain
   lobbySlots: []
   prematchCountdown: 3
   topPanel: {fileID: 1500865655}

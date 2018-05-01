@@ -164,6 +164,6 @@ public class UIManager : MonoBehaviour {
 
     public void SetTime(float sec, float dec)
     {
-        remainingTimeText.text = sec + "\"" + dec;
+        remainingTimeText.text = Mathf.Max(sec,0) + "\"" + Mathf.Max(dec,0);
     }
 }

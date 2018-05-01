@@ -228,7 +228,7 @@ public class GameManager : NetworkBehaviour {
             yield return null;
 
         //wait to be sure that all are ready to start
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
 
         //yield return StartCoroutine(RoundSetup());
 
@@ -290,6 +290,8 @@ public class GameManager : NetworkBehaviour {
         //we notify all clients that the round is starting
         RpcRoundStarting();
 
+        RpcPlaySound("Background");
+
         RpcSetPlayerStateText(readyText);
 
         float remainingTime = matchCountdown;
@@ -310,14 +312,14 @@ public class GameManager : NetworkBehaviour {
                 if(floorTime > 0)
                 {
                     RpcSetPlayerStateText((floorTime).ToString());
-                    RpcPlaySound("CountDown");
+                    //RpcPlaySound("CountDown");
                 }
             }
         }
 
         //To change player ui to go
         RpcSetPlayerStateText(startText);
-        RpcPlaySound("Go");
+        //RpcPlaySound("Go");
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return null;
@@ -340,7 +342,6 @@ public class GameManager : NetworkBehaviour {
     {
         //notify clients that the round is now started, they should allow player to move.
         RpcRoundPlaying();
-        RpcPlaySound("Background");
         float remainingTime = timeLimit;
         int floorTime = Mathf.FloorToInt(remainingTime *10);
 
@@ -536,6 +537,8 @@ public class GameManager : NetworkBehaviour {
         RpcSetTimeScale(1f);
         //RpcSetFixedDeltaTime(1f);
 
+        RpcDeclareResult();
+
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_EndWait;
     }
@@ -557,7 +560,6 @@ public class GameManager : NetworkBehaviour {
         //DisablePlayerControl();
 
         RpcSetPlayerStateText("BATTLE OVER");
-        Debug.Log("BATTLE OVER");
     }
 
     [ClientRpc]
@@ -581,12 +583,19 @@ public class GameManager : NetworkBehaviour {
     [ClientRpc]
     private void RpcDeclareResult()
     {
-        for (int i = 0; i < players.Count; i++)
+        if(!OnePlayerLeft())
         {
-            if (gameWinner == players[i])
-                players[i].WinGame();
-            else
-                players[i].LoseGame();
+            SetPlayerStateText("DRAW");
+        }
+        else
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (gameWinner == players[i])
+                    players[i].uiManager.SetStateText("WIN");
+                else
+                    players[i].uiManager.SetStateText("LOSE");
+            }
         }
     }
 
