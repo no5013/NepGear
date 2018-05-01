@@ -17,4 +17,4 @@ MonoBehaviour:
   mapScene:
     m_SceneAsset: {fileID: 102900000, guid: 71ab1274af18ec748ae204fa20a6968d, type: 3}
     m_SceneName: Sand
-  mapTexture: {fileID: 0}
+  mapTexture: {fileID: 2800000, guid: e29a8b00d282e83498361cf5b19b498a, type: 3}
