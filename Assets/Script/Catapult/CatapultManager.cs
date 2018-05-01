@@ -125,5 +125,10 @@ public class CatapultManager : MonoBehaviour {
     {
         this.enabled = true;
         launching = true;
+
+        if(stand.GetComponent<AudioSource>() != null)
+        {
+            stand.GetComponent<AudioSource>().Play();
+        }
     }
 }
