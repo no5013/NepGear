@@ -36,7 +36,8 @@ public class Bullet : NetworkBehaviour {
         if (shield != null)
         {
             shield.TakeDamage(damage);
-            Destroy(this.gameObject);
+            //RpcImpactEffect();
+            NetworkServer.Destroy(this.gameObject);
             return;
         }
         PlayerBehaviorScript isPlayer = other.gameObject.GetComponentInParent<PlayerBehaviorScript>();
@@ -67,11 +68,17 @@ public class Bullet : NetworkBehaviour {
             }
         }
         //Impact();
-        impactSound.Play();
-        RpcImpactEffect();
-        Destroy(this.gameObject);
+        //impactSound.Play();
+        NetworkServer.Destroy(this.gameObject);
+
+        //RpcImpactEffect();
+        //Destroy(this.gameObject);
     }
 
+    public override void OnNetworkDestroy()
+    {
+        AudioSource.PlayClipAtPoint(impactSound.clip, this.transform.position, 1);
+    }
 
 
     //[ServerCallback]
@@ -105,6 +112,8 @@ public class Bullet : NetworkBehaviour {
     public void RpcImpactEffect()
     {
         //impactSound.Play();
+        AudioSource.PlayClipAtPoint(impactSound.clip, this.transform.position, 1);
+        Debug.Log("PLAY IMPACT");
     }
 
     //public void Impact()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.4841131, g: 0.7354376, b: 0.3077819, a: 1}
+  m_IndirectSpecularColor: {r: 19.331366, g: 9.367102, b: 3.4397335, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ Prefab:
         type: 2}
       propertyPath: backgroundMusic
       value: 
-      objectReference: {fileID: 8300000, guid: b9d2d20841610904da6dae882e56b075, type: 3}
+      objectReference: {fileID: 8300000, guid: f99d26bb783e9874fa88aed1acab25c8, type: 3}
     - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
         type: 2}
       propertyPath: countdownSound
@@ -442,12 +442,12 @@ Prefab:
         type: 2}
       propertyPath: winSound
       value: 
-      objectReference: {fileID: 8300000, guid: 3dc278f1adc86d0459e9febb5402a056, type: 3}
+      objectReference: {fileID: 8300000, guid: 00bb75b1775c23a488f3f7670a5a476c, type: 3}
     - target: {fileID: 114796345606079484, guid: ac2ad748476c34a47b68bed0943d8ec0,
         type: 2}
       propertyPath: loseSound
       value: 
-      objectReference: {fileID: 8300000, guid: 3a77defcde1caaa40b6f7502547e0c4e, type: 3}
+      objectReference: {fileID: 8300000, guid: f0b47dd6653cd4b44a42e3360f84f7cf, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2ad748476c34a47b68bed0943d8ec0, type: 2}
   m_IsPrefabParent: 0
