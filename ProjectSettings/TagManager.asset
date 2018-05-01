@@ -12,6 +12,8 @@ TagManager:
   - Spawn_A
   - Spawn_B
   - Camera Wheel
+  - FX
+  - Thruster
   layers:
   - Default
   - TransparentFX
