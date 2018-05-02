@@ -29,5 +29,5 @@ MonoBehaviour:
   palletCount: 0
   spreadFactor: 0
   isChargable: 1
-  chargeRate: 10
+  chargeRate: 7.5
   maxCharge: 100
