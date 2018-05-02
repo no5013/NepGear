@@ -430,7 +430,7 @@ public class GameManager : NetworkBehaviour {
         {
             if (!players[i].isLocalPlayer)
             {
-                return;
+                continue;
             }
             PlayerSpeaker playerSpeaker = players[i].playerSpeaker;
             if (playerSpeaker != null)
