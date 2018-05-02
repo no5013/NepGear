@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Name: BeamRifleBullet
   m_EditorClassIdentifier: 
   projectileId: P6
-  damage: 150
+  damage: 125
   force: 800
   lifeTime: 1
-  speed: 170
+  speed: 160
   staggerDamage: 700
   projectilePrefab: {fileID: 1318930004973286, guid: 15d1f109a4b1c58489001dbfbb95dbc5,
     type: 2}
   blastForce: 400
   blastRadius: 2
-  blastDamage: 50
+  blastDamage: 35
   timeBeforeDestroy: 0
   risingSpeed: 0
