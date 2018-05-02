@@ -15,9 +15,9 @@ MonoBehaviour:
   characterID: OF2
   maxHitPoint: 500
   maxStamina: 300
-  startingSpeed: 7
+  startingSpeed: 10
   jumpForce: 10
-  boostSpeed: 13
+  boostSpeed: 16
   dodgeForce: 600
   mass: 1000
   staggerLimit: 1000
