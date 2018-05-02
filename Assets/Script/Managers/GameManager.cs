@@ -591,7 +591,7 @@ public class GameManager : NetworkBehaviour {
         {
             for (int i = 0; i < players.Count; i++)
             {
-                if (gameWinner == players[i])
+                if (gameWinner == players[i] || !players[i].isOutOfStock())
                     players[i].uiManager.SetStateText("WIN");
                 else
                     players[i].uiManager.SetStateText("LOSE");
