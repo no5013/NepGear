@@ -15,9 +15,9 @@ MonoBehaviour:
   characterID: OF3
   maxHitPoint: 300
   maxStamina: 200
-  startingSpeed: 7
+  startingSpeed: 10
   jumpForce: 12
-  boostSpeed: 14
+  boostSpeed: 17
   dodgeForce: 700
   mass: 1000
   staggerLimit: 800
